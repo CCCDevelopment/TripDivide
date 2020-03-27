@@ -11,6 +11,7 @@
 		4446A36E242E775100F22D90 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446A36D242E775100F22D90 /* SceneDelegate.swift */; };
 		4446A375242E775400F22D90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4446A374242E775400F22D90 /* Assets.xcassets */; };
 		4446A378242E775400F22D90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4446A376242E775400F22D90 /* LaunchScreen.storyboard */; };
+		4446A38B242EBE5A00F22D90 /* TripSplitr.mov in Resources */ = {isa = PBXBuildFile; fileRef = 4446A38A242EBE5900F22D90 /* TripSplitr.mov */; };
 		84A0506868C4B3290DB9BCF3 /* Pods_CCCTripSpiltr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */; };
 		D1BB610F242E84C700B90E29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1BB610E242E84C700B90E29 /* GoogleService-Info.plist */; };
 		D1BB6111242E855D00B90E29 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6110242E855D00B90E29 /* Utilities.swift */; };
@@ -33,6 +34,8 @@
 		4446A377242E775400F22D90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4446A379242E775400F22D90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4446A380242E77C300F22D90 /* CCCTripSpiltr */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CCCTripSpiltr; sourceTree = "<group>"; };
+		4446A389242EBDD100F22D90 /* TripSplitr.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TripSplitr.mp4; sourceTree = "<group>"; };
+		4446A38A242EBE5900F22D90 /* TripSplitr.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = TripSplitr.mov; sourceTree = "<group>"; };
 		755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCCTripSpiltr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F57F70D23EE51C97C50C70 /* Pods-CCCTripSpiltr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCCTripSpiltr.debug.xcconfig"; path = "Target Support Files/Pods-CCCTripSpiltr/Pods-CCCTripSpiltr.debug.xcconfig"; sourceTree = "<group>"; };
 		D1BB610E242E84C700B90E29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 			isa = PBXGroup;
 			children = (
 				D1D01CFC242EBC6600B606C1 /* loginbg.mp4 */,
+				4446A38A242EBE5900F22D90 /* TripSplitr.mov */,
+				4446A389242EBDD100F22D90 /* TripSplitr.mp4 */,
 			);
 			name = Media;
 			path = CCCTripSpiltr/Media;
@@ -203,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1D01CFD242EBC6600B606C1 /* loginbg.mp4 in Resources */,
+				4446A38B242EBE5A00F22D90 /* TripSplitr.mov in Resources */,
 				D1D01CFF242EBD2000B606C1 /* Main.storyboard in Resources */,
 				4446A378242E775400F22D90 /* LaunchScreen.storyboard in Resources */,
 				D1BB610F242E84C700B90E29 /* GoogleService-Info.plist in Resources */,

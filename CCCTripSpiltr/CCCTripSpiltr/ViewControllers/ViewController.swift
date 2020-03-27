@@ -43,7 +43,7 @@ class ViewController: UIViewController {
     func setUpVideo() {
         
         // Get the path to the resource in the bundle
-        let bundlePath = Bundle.main.path(forResource: "loginbg", ofType: "mp4")
+        let bundlePath = Bundle.main.path(forResource: "TripSplitr", ofType: "mov")
         
         guard bundlePath != nil else {
             return
@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         view.layer.insertSublayer(videoPlayerLayer!, at: 0)
         
         // Add it to the view and play it
-        videoPlayer?.playImmediately(atRate: 0.3)
+        videoPlayer?.playImmediately(atRate: 0.7)
     }
 
 
