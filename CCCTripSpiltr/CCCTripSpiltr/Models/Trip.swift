@@ -27,16 +27,5 @@ class Trip {
     }
 }
 
-class User {
-    let id: UUID
-    var username: String
-    var fullName: String
-    var avatar: UIImage
-    
-    init(id: UUID = UUID(), username: String, fullName: String, avatar: UIImage) {
-        self.id = id
-        self.username = username
-        self.fullName = fullName
-        self.avatar = avatar
-    }
-}
+
+

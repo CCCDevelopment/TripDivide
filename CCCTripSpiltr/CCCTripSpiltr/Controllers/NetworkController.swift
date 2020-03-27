@@ -45,5 +45,10 @@ class NetworkController {
             }
         }
     }
+    
+    
+    func createTrip() {
+        
+    }
 
 }

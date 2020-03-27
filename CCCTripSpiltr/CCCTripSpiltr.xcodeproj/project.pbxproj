@@ -24,6 +24,7 @@
 		D1D01CFD242EBC6600B606C1 /* loginbg.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D1D01CFC242EBC6600B606C1 /* loginbg.mp4 */; };
 		D1D01CFF242EBD2000B606C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1D01CFE242EBD2000B606C1 /* Main.storyboard */; };
 		D1D01D02242EC09400B606C1 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D01D01242EC09400B606C1 /* NetworkController.swift */; };
+		D1D01D04242EC54700B606C1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D01D03242EC54700B606C1 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		D1D01CFC242EBC6600B606C1 /* loginbg.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginbg.mp4; sourceTree = "<group>"; };
 		D1D01CFE242EBD2000B606C1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D1D01D01242EC09400B606C1 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		D1D01D03242EC54700B606C1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		4446A36A242E775100F22D90 /* CCCTripSpiltr */ = {
 			isa = PBXGroup;
 			children = (
+				D1D01CFB242EBC6600B606C1 /* Media */,
 				D1D01D00242EC07000B606C1 /* Controllers */,
 				4446A36B242E775100F22D90 /* AppDelegate.swift */,
 				4446A36D242E775100F22D90 /* SceneDelegate.swift */,
@@ -126,7 +129,6 @@
 				D1BB6116242E858200B90E29 /* HomeViewController.swift */,
 				D1BB6117242E858200B90E29 /* ViewController.swift */,
 				D1BB6114242E857A00B90E29 /* SignUpViewController.swift */,
-				D1D01CFB242EBC6600B606C1 /* Media */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				D1D01CF6242EB45A00B606C1 /* Trip.swift */,
+				D1D01D03242EC54700B606C1 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				D1BB611A242E858300B90E29 /* ViewController.swift in Sources */,
 				D1BB6115242E857A00B90E29 /* SignUpViewController.swift in Sources */,
 				D1BB6119242E858300B90E29 /* HomeViewController.swift in Sources */,
+				D1D01D04242EC54700B606C1 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
