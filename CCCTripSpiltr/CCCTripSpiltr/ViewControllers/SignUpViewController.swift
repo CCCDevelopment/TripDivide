@@ -78,7 +78,7 @@ class SignUpViewController: UIViewController {
         if error != nil {
             
             // There's something wrong with the fields, show error message
-            showError(error!)
+//            showError(error!)
         }
         else {
             
@@ -89,44 +89,17 @@ class SignUpViewController: UIViewController {
             let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             
             // Create the user
-            Auth.auth().createUser(withEmail: email, password: password) { (result, err) in
-                
-                // Check for errors
-                if err != nil {
-                    
-                    // There was an error creating the user
-                    self.showError("Error creating user")
-                }
-                else {
-                    
-                    // User was created successfully, now store the first name and last name
-                    let db = Firestore.firestore()
-                    
-                    db.collection("users").addDocument(data: ["fullName":fullName, "username":username, "uid": result!.user.uid ]) { (error) in
-                        
-                        
-                        if error != nil {
-                            // Show error message
-                            self.showError("Error saving user data")
-                        }
-                    }
-
-                    self.transitionToHome()
-                    
+            NetworkController.shared.createUser(email: email, password: password, fullName: fullName, username: username) { error in
+                if let error = error {
+                    NSLog("\(error)")
                 }
                 
+                self.transitionToHome()
             }
-            
-            
-            
         }
     }
     
-    func showError(_ message:String) {
-        
-        errorLabel.text = message
-        errorLabel.alpha = 1
-    }
+
     
     func transitionToHome() {
         
