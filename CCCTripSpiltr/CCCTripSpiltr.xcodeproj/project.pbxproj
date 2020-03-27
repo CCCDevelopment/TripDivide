@@ -3,17 +3,24 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4446A36C242E775100F22D90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446A36B242E775100F22D90 /* AppDelegate.swift */; };
 		4446A36E242E775100F22D90 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446A36D242E775100F22D90 /* SceneDelegate.swift */; };
-		4446A370242E775100F22D90 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446A36F242E775100F22D90 /* ViewController.swift */; };
-		4446A373242E775100F22D90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4446A371242E775100F22D90 /* Main.storyboard */; };
 		4446A375242E775400F22D90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4446A374242E775400F22D90 /* Assets.xcassets */; };
 		4446A378242E775400F22D90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4446A376242E775400F22D90 /* LaunchScreen.storyboard */; };
 		84A0506868C4B3290DB9BCF3 /* Pods_CCCTripSpiltr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */; };
+		D1BB610F242E84C700B90E29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1BB610E242E84C700B90E29 /* GoogleService-Info.plist */; };
+		D1BB6111242E855D00B90E29 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6110242E855D00B90E29 /* Utilities.swift */; };
+		D1BB6113242E856100B90E29 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6112242E856100B90E29 /* Constants.swift */; };
+		D1BB6115242E857A00B90E29 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6114242E857A00B90E29 /* SignUpViewController.swift */; };
+		D1BB6119242E858300B90E29 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6116242E858200B90E29 /* HomeViewController.swift */; };
+		D1BB611A242E858300B90E29 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6117242E858200B90E29 /* ViewController.swift */; };
+		D1BB611B242E858300B90E29 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6118242E858300B90E29 /* LoginViewController.swift */; };
+		D1BB611E242E858C00B90E29 /* loginbg.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D1BB611D242E858C00B90E29 /* loginbg.mp4 */; };
+		D1BB6120242E859A00B90E29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1BB611F242E859900B90E29 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +28,21 @@
 		4446A368242E775100F22D90 /* CCCTripSpiltr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCCTripSpiltr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4446A36B242E775100F22D90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4446A36D242E775100F22D90 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4446A36F242E775100F22D90 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4446A372242E775100F22D90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4446A374242E775400F22D90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4446A377242E775400F22D90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4446A379242E775400F22D90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4446A380242E77C300F22D90 /* CCCTripSpiltr */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CCCTripSpiltr; sourceTree = "<group>"; };
+		4446A380242E77C300F22D90 /* CCCTripSpiltr */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CCCTripSpiltr; sourceTree = "<group>"; };
 		755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCCTripSpiltr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F57F70D23EE51C97C50C70 /* Pods-CCCTripSpiltr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCCTripSpiltr.debug.xcconfig"; path = "Target Support Files/Pods-CCCTripSpiltr/Pods-CCCTripSpiltr.debug.xcconfig"; sourceTree = "<group>"; };
+		D1BB610E242E84C700B90E29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D1BB6110242E855D00B90E29 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		D1BB6112242E856100B90E29 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D1BB6114242E857A00B90E29 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		D1BB6116242E858200B90E29 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D1BB6117242E858200B90E29 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D1BB6118242E858300B90E29 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D1BB611D242E858C00B90E29 /* loginbg.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginbg.mp4; sourceTree = "<group>"; };
+		D1BB611F242E859900B90E29 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,11 +80,18 @@
 			children = (
 				4446A36B242E775100F22D90 /* AppDelegate.swift */,
 				4446A36D242E775100F22D90 /* SceneDelegate.swift */,
-				4446A36F242E775100F22D90 /* ViewController.swift */,
-				4446A371242E775100F22D90 /* Main.storyboard */,
+				D1BB6110242E855D00B90E29 /* Utilities.swift */,
+				D1BB6114242E857A00B90E29 /* SignUpViewController.swift */,
+				D1BB6118242E858300B90E29 /* LoginViewController.swift */,
+				D1BB6116242E858200B90E29 /* HomeViewController.swift */,
+				D1BB6117242E858200B90E29 /* ViewController.swift */,
+				D1BB611F242E859900B90E29 /* Main.storyboard */,
 				4446A374242E775400F22D90 /* Assets.xcassets */,
 				4446A376242E775400F22D90 /* LaunchScreen.storyboard */,
 				4446A379242E775400F22D90 /* Info.plist */,
+				D1BB6112242E856100B90E29 /* Constants.swift */,
+				D1BB610E242E84C700B90E29 /* GoogleService-Info.plist */,
+				D1BB611C242E858C00B90E29 /* Media */,
 			);
 			path = CCCTripSpiltr;
 			sourceTree = "<group>";
@@ -90,8 +111,16 @@
 				77F57F70D23EE51C97C50C70 /* Pods-CCCTripSpiltr.debug.xcconfig */,
 				211F170669F28666354D42AC /* Pods-CCCTripSpiltr.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		D1BB611C242E858C00B90E29 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				D1BB611D242E858C00B90E29 /* loginbg.mp4 */,
+			);
+			name = Media;
+			path = ../../../../../../Downloads/CustomLoginDemo/CustomLoginDemo/Media;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,9 +183,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1BB611E242E858C00B90E29 /* loginbg.mp4 in Resources */,
+				D1BB6120242E859A00B90E29 /* Main.storyboard in Resources */,
 				4446A378242E775400F22D90 /* LaunchScreen.storyboard in Resources */,
+				D1BB610F242E84C700B90E29 /* GoogleService-Info.plist in Resources */,
 				4446A375242E775400F22D90 /* Assets.xcassets in Resources */,
-				4446A373242E775100F22D90 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,23 +240,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4446A370242E775100F22D90 /* ViewController.swift in Sources */,
+				D1BB6113242E856100B90E29 /* Constants.swift in Sources */,
 				4446A36C242E775100F22D90 /* AppDelegate.swift in Sources */,
+				D1BB6111242E855D00B90E29 /* Utilities.swift in Sources */,
 				4446A36E242E775100F22D90 /* SceneDelegate.swift in Sources */,
+				D1BB611B242E858300B90E29 /* LoginViewController.swift in Sources */,
+				D1BB611A242E858300B90E29 /* ViewController.swift in Sources */,
+				D1BB6115242E857A00B90E29 /* SignUpViewController.swift in Sources */,
+				D1BB6119242E858300B90E29 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4446A371242E775100F22D90 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4446A372242E775100F22D90 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4446A376242E775400F22D90 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -357,13 +385,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MRFGYP27L5;
+				DEVELOPMENT_TEAM = F2KHAE3YT5;
 				INFOPLIST_FILE = CCCTripSpiltr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.extremeconch.CCCTripSpiltr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonathanferrer95.CCCTripSpiltr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -376,13 +404,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MRFGYP27L5;
+				DEVELOPMENT_TEAM = F2KHAE3YT5;
 				INFOPLIST_FILE = CCCTripSpiltr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.extremeconch.CCCTripSpiltr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonathanferrer95.CCCTripSpiltr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
