@@ -21,6 +21,7 @@
 		D1BB611B242E858300B90E29 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6118242E858300B90E29 /* LoginViewController.swift */; };
 		D1BB611E242E858C00B90E29 /* loginbg.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D1BB611D242E858C00B90E29 /* loginbg.mp4 */; };
 		D1BB6120242E859A00B90E29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1BB611F242E859900B90E29 /* Main.storyboard */; };
+		D1D01CF7242EB45A00B606C1 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D01CF6242EB45A00B606C1 /* Trip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		D1BB6118242E858300B90E29 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D1BB611D242E858C00B90E29 /* loginbg.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginbg.mp4; sourceTree = "<group>"; };
 		D1BB611F242E859900B90E29 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		D1D01CF6242EB45A00B606C1 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,15 +83,13 @@
 				4446A36B242E775100F22D90 /* AppDelegate.swift */,
 				4446A36D242E775100F22D90 /* SceneDelegate.swift */,
 				D1BB6110242E855D00B90E29 /* Utilities.swift */,
-				D1BB6114242E857A00B90E29 /* SignUpViewController.swift */,
-				D1BB6118242E858300B90E29 /* LoginViewController.swift */,
-				D1BB6116242E858200B90E29 /* HomeViewController.swift */,
-				D1BB6117242E858200B90E29 /* ViewController.swift */,
+				D1BB6112242E856100B90E29 /* Constants.swift */,
+				D1D01CF5242EB43F00B606C1 /* Models */,
+				D1D01CF4242E9D5900B606C1 /* ViewControllers */,
 				D1BB611F242E859900B90E29 /* Main.storyboard */,
 				4446A374242E775400F22D90 /* Assets.xcassets */,
 				4446A376242E775400F22D90 /* LaunchScreen.storyboard */,
 				4446A379242E775400F22D90 /* Info.plist */,
-				D1BB6112242E856100B90E29 /* Constants.swift */,
 				D1BB610E242E84C700B90E29 /* GoogleService-Info.plist */,
 				D1BB611C242E858C00B90E29 /* Media */,
 			);
@@ -121,6 +121,25 @@
 			);
 			name = Media;
 			path = ../../../../../../Downloads/CustomLoginDemo/CustomLoginDemo/Media;
+			sourceTree = "<group>";
+		};
+		D1D01CF4242E9D5900B606C1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D1BB6118242E858300B90E29 /* LoginViewController.swift */,
+				D1BB6116242E858200B90E29 /* HomeViewController.swift */,
+				D1BB6117242E858200B90E29 /* ViewController.swift */,
+				D1BB6114242E857A00B90E29 /* SignUpViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D1D01CF5242EB43F00B606C1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D1D01CF6242EB45A00B606C1 /* Trip.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +262,7 @@
 				D1BB6113242E856100B90E29 /* Constants.swift in Sources */,
 				4446A36C242E775100F22D90 /* AppDelegate.swift in Sources */,
 				D1BB6111242E855D00B90E29 /* Utilities.swift in Sources */,
+				D1D01CF7242EB45A00B606C1 /* Trip.swift in Sources */,
 				4446A36E242E775100F22D90 /* SceneDelegate.swift in Sources */,
 				D1BB611B242E858300B90E29 /* LoginViewController.swift in Sources */,
 				D1BB611A242E858300B90E29 /* ViewController.swift in Sources */,
