@@ -10,27 +10,24 @@ import UIKit
 import Firebase
 
 class HomeViewController: UIViewController {
-
+    
+    @IBOutlet weak var createTripButton: UIButton!
+    @IBOutlet weak var nameTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let user = Auth.auth().currentUser?.uid else { return }
         print(user)
-        NetworkController.shared.createTrip(with: "Italy") { (error) in
+        Utilities.styleFilledButton(createTripButton, fillColor: .systemRed)
+    }
+    
+    @IBAction func createTripTapped(_ sender: UIButton) {
+        NetworkController.shared.createTrip(with: nameTextField?.text ?? "Italy") { (error) in
             if let error = error {
                 NSLog("\(error.rawValue)")
             }
+            self.nameTextField.text = "Created"
         }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
