@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     
+    @IBOutlet weak var logoImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -35,8 +36,9 @@ class ViewController: UIViewController {
     
     func setUpElements() {
         
-        Utilities.styleFilledButton(signUpButton)
-        Utilities.styleHollowButton(loginButton)
+        Utilities.styleFilledButton(signUpButton, fillColor: .systemGreen)
+        Utilities.styleFilledButton(loginButton, fillColor: .tertiarySystemBackground)
+        Utilities.styleLogoImageView(logoImageView)
         
     }
     

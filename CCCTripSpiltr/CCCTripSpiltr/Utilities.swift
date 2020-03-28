@@ -28,19 +28,24 @@ class Utilities {
         
     }
     
-    static func styleFilledButton(_ button:UIButton) {
+    static func styleLogoImageView(_ imageView: UIImageView) {
+        imageView.layer.cornerRadius = 18
+    }
+    
+    static func styleFilledButton(_ button:UIButton, fillColor: UIColor) {
         
         // Filled rounded corner style
-        button.backgroundColor = UIColor.systemGreen
+        button.backgroundColor = fillColor
         button.layer.cornerRadius = 18
         button.tintColor = UIColor.white
+        button.setTitleColor(.label, for: .normal)
     }
     
     static func styleHollowButton(_ button:UIButton) {
         
         // Hollow rounded corner style
         button.layer.borderWidth = 2
-        button.backgroundColor = UIColor.white
+        button.backgroundColor = UIColor.clear
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.cornerRadius = 18
         button.tintColor = UIColor.black
@@ -51,5 +56,7 @@ class Utilities {
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
         return passwordTest.evaluate(with: password)
     }
+    
+
     
 }

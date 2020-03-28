@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
         // Style the elements
         Utilities.styleTextField(emailTextField)
         Utilities.styleTextField(passwordTextField)
-        Utilities.styleFilledButton(loginButton)
+        Utilities.styleFilledButton(loginButton, fillColor: .systemGreen)
         
     }
     
