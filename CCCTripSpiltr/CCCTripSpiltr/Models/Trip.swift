@@ -9,21 +9,25 @@
 import UIKit
 
 class Trip {
-    let id: UUID
-    var users: [User]
+    let id: String
+    var users: [String]
     var isComplete: Bool
     var name: String
-    var image: UIImage
+//    var image: UIImage
     let startDate: Date
     var endDate: Date?
 
-    init(id: UUID = UUID(), users: [User] = [], isComplete: Bool = false, name: String, image: UIImage = Constants.Images.defaultTrip!, startDate: Date = Date()) {
+    init(id: String = UUID().uuidString, users: [String], isComplete: Bool = false, name: String, startDate: Date = Date()) {
         self.id = id
         self.users = users
         self.isComplete = isComplete
         self.name = name
-        self.image = image
+//        self.image = image
         self.startDate = startDate
+    }
+    
+    func dictionaryRep() -> [String : Any] {
+        return ["id": id, "users" : users, "isComplete" : isComplete, "name" : name, "startDate": startDate]
     }
 }
 

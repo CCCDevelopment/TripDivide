@@ -18,5 +18,4 @@ enum Constants {
         static let defaultTrip = UIImage(named: "DefaultTrip")
     }
     
-    
 }

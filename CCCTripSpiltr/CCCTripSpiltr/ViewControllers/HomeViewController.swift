@@ -13,10 +13,13 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-      let user =  Auth.auth().currentUser
-        print(user?.displayName ?? "njil")
-        print(user?.email ?? "njil")
+        guard let user = Auth.auth().currentUser?.uid else { return }
+        print(user)
+        NetworkController.shared.createTrip(with: "Italy") { (error) in
+            if let error = error {
+                NSLog("\(error.rawValue)")
+            }
+        }
     }
     
 
