@@ -207,58 +207,6 @@ RnVsbCAQTmFtZQ
             </objects>
             <point key="canvasLocation" x="1709" y="-99"/>
         </scene>
-        <!--Home View Controller-->
-        <scene sceneID="wDc-Jp-zVI">
-            <objects>
-                <viewController storyboardIdentifier="HomeVC" id="MJ4-kS-XxA" customClass="HomeViewController" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="PNx-Nd-TAi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jia-Xq-yQz">
-                                <rect key="frame" x="167.5" y="437.5" width="79" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cmi-Ye-k2i">
-                                <rect key="frame" x="20" y="527" width="374" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHt-q6-aDw">
-                                <rect key="frame" x="20" y="607" width="374" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="jQZ-iu-gdF"/>
-                                </constraints>
-                                <state key="normal" title="Create a Trip"/>
-                                <connections>
-                                    <action selector="createTripTapped:" destination="MJ4-kS-XxA" eventType="touchUpInside" id="0dE-MF-K7G"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="Jia-Xq-yQz" firstAttribute="centerX" secondItem="PNx-Nd-TAi" secondAttribute="centerX" id="00s-hK-cMx"/>
-                            <constraint firstItem="cmi-Ye-k2i" firstAttribute="leading" secondItem="Pya-hN-kNE" secondAttribute="leading" constant="20" id="2L0-3v-Eyi"/>
-                            <constraint firstItem="KHt-q6-aDw" firstAttribute="top" secondItem="cmi-Ye-k2i" secondAttribute="bottom" constant="46" id="LQH-x7-WY4"/>
-                            <constraint firstItem="Jia-Xq-yQz" firstAttribute="centerY" secondItem="PNx-Nd-TAi" secondAttribute="centerY" id="N4N-1L-gdG"/>
-                            <constraint firstItem="cmi-Ye-k2i" firstAttribute="top" secondItem="Jia-Xq-yQz" secondAttribute="bottom" constant="68.5" id="Pjk-XF-jI9"/>
-                            <constraint firstItem="Pya-hN-kNE" firstAttribute="trailing" secondItem="KHt-q6-aDw" secondAttribute="trailing" constant="20" id="bmp-jJ-Mpu"/>
-                            <constraint firstItem="Pya-hN-kNE" firstAttribute="trailing" secondItem="cmi-Ye-k2i" secondAttribute="trailing" constant="20" id="fEn-sG-3hB"/>
-                            <constraint firstItem="KHt-q6-aDw" firstAttribute="leading" secondItem="Pya-hN-kNE" secondAttribute="leading" constant="20" id="q0t-dA-Tkx"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Pya-hN-kNE"/>
-                    </view>
-                    <connections>
-                        <outlet property="createTripButton" destination="KHt-q6-aDw" id="YbU-H3-K5s"/>
-                        <outlet property="nameTextField" destination="cmi-Ye-k2i" id="yjO-2m-hf5"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fX7-dn-cHV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2710" y="219"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="ewl-h1-nOx">
             <objects>

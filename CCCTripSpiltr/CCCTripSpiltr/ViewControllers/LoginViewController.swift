@@ -59,8 +59,10 @@ class LoginViewController: UIViewController {
             }
             else {
                 
-                let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
-                
+                guard let homeViewController = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? UITabBarController else {
+                    NSLog("Not found")
+                    return
+                }
                 self.view.window?.rootViewController = homeViewController
                 self.view.window?.makeKeyAndVisible()
             }

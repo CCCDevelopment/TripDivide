@@ -11,22 +11,19 @@ import Firebase
 
 class HomeViewController: UIViewController {
     
-    @IBOutlet weak var createTripButton: UIButton!
-    @IBOutlet weak var nameTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let user = Auth.auth().currentUser?.uid else { return }
         print(user)
-        Utilities.styleFilledButton(createTripButton, fillColor: .systemRed)
     }
     
     @IBAction func createTripTapped(_ sender: UIButton) {
-        NetworkController.shared.createTrip(with: nameTextField?.text ?? "Italy") { (error) in
+        NetworkController.shared.createTrip(with: "Italy") { (error) in
             if let error = error {
                 NSLog("\(error.rawValue)")
             }
-            self.nameTextField.text = "Created"
+           
         }
     }
     
