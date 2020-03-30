@@ -20,9 +20,13 @@ enum CCCError: String {
 }
 
 class NetworkController {
+    
+    
+    
     var trips: [Trip] = []
     let db = Firestore.firestore()
     static let shared = NetworkController()
+   
     
     func createUser(email: String, password: String, fullName: String, username: String, completion: @escaping (CCCError?) -> Void) {
         
@@ -88,6 +92,44 @@ class NetworkController {
                 completion(nil, .noData)
             }
         }
+    }
+    
+    func getUser(for id: String, completion: @escaping (User?, CCCError?) -> Void) {
+        let usersRef = db.collection("users")
+        
+        let userDocument = usersRef.document(id)
+        
+        userDocument.getDocument { (document, _) in
+            if let document = document, document.exists {
+                guard let data = document.data() else { return }
+                let user = User(from: data)
+                completion(user, nil)
+            } else {
+                completion(nil, .noData)
+            }
+        }
+        
+    }
+    func search(for email: String, completion: @escaping (User?, CCCError?) -> Void) {
+        let usersRef = db.collection("users")
+        
+        let query = usersRef.whereField("email", isEqualTo: email)
+        
+        query.getDocuments() { (querySnapshot, err) in
+        if let _ = err {
+            completion(nil, .noData)
+        } else {
+            guard let snapshot = querySnapshot,
+                let document = snapshot.documents.first else { return }
+            
+            let user = User(from: document.data())
+            completion(user, nil)
+            
+        }
+        
+        }
+        
+        
     }
     
 }

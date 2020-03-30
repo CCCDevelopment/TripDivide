@@ -20,6 +20,7 @@ enum Constants {
     
     enum Images {
         static let defaultTrip = UIImage(named: "DefaultTrip")
+        static let placeholderImage = UIImage(named: "avatar-placeholder")
     }
     
 }
