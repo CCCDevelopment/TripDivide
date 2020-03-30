@@ -94,20 +94,12 @@ class SignUpViewController: UIViewController {
                     NSLog("\(error)")
                 }
                 
-                self.transitionToHome()
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }
     
 
-    
-    func transitionToHome() {
-        
-        let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
-        
-        view.window?.rootViewController = homeViewController
-        view.window?.makeKeyAndVisible()
-        
-    }
+ 
     
 }

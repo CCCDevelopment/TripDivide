@@ -10,6 +10,10 @@ import UIKit
 
 enum Constants {
     
+    enum Segues {
+        static let showAuthenticate = "ShowAuthenticate"
+    }
+    
     enum Storyboard {
         static let homeViewController = "HomeVC"
     }

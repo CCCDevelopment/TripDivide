@@ -9,7 +9,8 @@
 import UIKit
 import AVKit
 import Firebase
-class ViewController: UIViewController {
+
+class AuthenticationViewController: UIViewController {
 
     var videoPlayer:AVPlayer?
     
@@ -22,16 +23,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var logoImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
         setUpElements()
-        print("\(Auth.auth().currentUser?.displayName ?? "Not Saved") is currently logged in ")
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        // Set up video in the background
+
         setUpVideo()
     }
     
