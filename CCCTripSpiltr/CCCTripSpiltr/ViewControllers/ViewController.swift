@@ -62,7 +62,6 @@ class ViewController: UIViewController {
         
         // Create the layer
         videoPlayerLayer = AVPlayerLayer(player: videoPlayer!)
-        
         // Adjust the size and frame
         videoPlayerLayer?.frame = CGRect(x: -self.view.frame.size.width*1.5, y: 0, width: self.view.frame.size.width*4, height: self.view.frame.size.height)
         
