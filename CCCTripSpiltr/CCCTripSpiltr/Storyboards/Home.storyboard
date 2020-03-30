@@ -47,7 +47,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="Iks-qK-gY3" kind="presentation" identifier="ShowAuthenticate" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="r03-Gl-G4D"/>
+                        <segue destination="Iks-qK-gY3" kind="presentation" identifier="ShowAuthenticate" modalPresentationStyle="fullScreen" id="r03-Gl-G4D"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7R-nz-GW3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

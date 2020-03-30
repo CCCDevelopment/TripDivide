@@ -92,17 +92,15 @@
 			children = (
 				D1D01CFB242EBC6600B606C1 /* Media */,
 				D1D01D00242EC07000B606C1 /* Controllers */,
-				4446A36B242E775100F22D90 /* AppDelegate.swift */,
-				4446A36D242E775100F22D90 /* SceneDelegate.swift */,
 				D1BB6110242E855D00B90E29 /* Utilities.swift */,
 				D1BB6112242E856100B90E29 /* Constants.swift */,
 				D1D01CF5242EB43F00B606C1 /* Models */,
 				D1D01CF4242E9D5900B606C1 /* ViewControllers */,
 				D127F83B2432723F000721F9 /* Storyboards */,
-				4446A374242E775400F22D90 /* Assets.xcassets */,
 				4446A376242E775400F22D90 /* LaunchScreen.storyboard */,
 				4446A379242E775400F22D90 /* Info.plist */,
 				D1BB610E242E84C700B90E29 /* GoogleService-Info.plist */,
+				D134EF0924328E8A0000EDF0 /* Resources */,
 			);
 			path = CCCTripSpiltr;
 			sourceTree = "<group>";
@@ -134,6 +132,16 @@
 				D127F83924327239000721F9 /* Friends.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		D134EF0924328E8A0000EDF0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4446A36B242E775100F22D90 /* AppDelegate.swift */,
+				4446A36D242E775100F22D90 /* SceneDelegate.swift */,
+				4446A374242E775400F22D90 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		D1D01CF4242E9D5900B606C1 /* ViewControllers */ = {

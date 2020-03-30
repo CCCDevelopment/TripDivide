@@ -35,10 +35,10 @@ class NetworkController {
                 completion(.creatingUserError)
             }
             else {
-                
+                guard let id = Auth.auth().currentUser?.uid else { return }
                 // User was created successfully, now store the first name and last name
-                
-                self.db.collection("users").document(result!.user.uid).setData(["fullName":fullName, "username":username, "uid": result!.user.uid ]) { (error) in
+                let user = User(id: id, username: username, fullName: fullName, avatar: nil, email: email)
+                self.db.collection("users").document(result!.user.uid).setData(user.dictionaryRep()) { (error) in
                     if error != nil {
                         completion(.savingError)
                     }
