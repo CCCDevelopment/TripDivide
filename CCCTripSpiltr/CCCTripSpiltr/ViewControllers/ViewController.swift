@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         setUpElements()
+        print("\(Auth.auth().currentUser?.displayName ?? "Not Saved") is currently logged in ")
         
     }
     
