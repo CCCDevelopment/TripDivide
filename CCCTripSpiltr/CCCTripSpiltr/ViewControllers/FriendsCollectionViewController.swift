@@ -10,17 +10,19 @@ import UIKit
 
 class FriendsCollectionViewController: UIViewController {
     
-    let collectionView = UICollectionView(frame: .zero)
+    var collectionView: UICollectionView!
     var user: User!
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.delegate = self
         
         configure()
     }
     
-    
+
     
     private func configure() {
+        
         
         NetworkController.shared.getCurrentUser { (user, error) in
             if let error = error {
@@ -33,21 +35,29 @@ class FriendsCollectionViewController: UIViewController {
         
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout(in: view))
+        collectionView.backgroundColor = .systemBackground
+        collectionView.register(FriendCell.self, forCellWithReuseIdentifier: FriendCell.reuseID)
     }
     
-    
+    func createThreeColumnFlowLayout(in view: UIView) -> UICollectionViewFlowLayout {
+        let width = view.bounds.width
+        let padding: CGFloat = 12
+        let minimumItemSpacing: CGFloat = 10
+        let availableWidth = width - (padding * 2) - (minimumItemSpacing * 2)
+        let itemWidth = availableWidth / 3
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
+        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
+        
+        return flowLayout
+    }
     
 }
 
 
-extension FriendsCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension FriendsCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return user.friends.count
     }
