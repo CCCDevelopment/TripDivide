@@ -12,18 +12,24 @@ class FriendsCollectionViewController: UIViewController {
     
     var collectionView: UICollectionView!
     var friends = [String]()
+    
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         configureCollectionView()
         configureViewController()
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        getFollowers()
-        
     }
     
-    func getFollowers() {
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getFriends()
+    }
+    
+    func getFriends() {
         NetworkController.shared.getCurrentUser { [weak self] (user, error) in
             guard let self = self else { return }
             

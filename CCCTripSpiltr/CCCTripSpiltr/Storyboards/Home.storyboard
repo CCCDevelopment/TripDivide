@@ -37,7 +37,7 @@
                             <outlet property="delegate" destination="mZp-ur-OqI" id="oGC-vu-KRY"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Home" id="eSy-Sa-iJd"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="eSy-Sa-iJd"/>
                     <navigationItem key="navigationItem" title="Root View Controller" id="neR-B0-q8K">
                         <barButtonItem key="rightBarButtonItem" title="Sign Out" id="bC9-w0-HbL">
                             <connections>
@@ -74,4 +74,7 @@
             <point key="canvasLocation" x="4168.115942028986" y="105.80357142857143"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="house.fill" catalog="system" width="128" height="106"/>
+    </resources>
 </document>

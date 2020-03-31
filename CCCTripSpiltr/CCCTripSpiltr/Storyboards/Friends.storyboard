@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Friends Collection View Controller-->
+        <!--Friends-->
         <scene sceneID="8r1-u9-bFl">
             <objects>
                 <viewController id="VsK-F1-dcj" customClass="FriendsCollectionViewController" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,7 +17,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="ib4-I8-oaO"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Friends" image="person.3.fill" catalog="system" id="441-St-jOg"/>
                     <navigationItem key="navigationItem" id="uTJ-ku-SSV"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kd2-4A-Ps6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -42,4 +44,7 @@
             <point key="canvasLocation" x="-529" y="-5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="person.3.fill" catalog="system" width="128" height="61"/>
+    </resources>
 </document>
