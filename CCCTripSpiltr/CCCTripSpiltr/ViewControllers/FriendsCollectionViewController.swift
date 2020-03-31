@@ -11,70 +11,68 @@ import UIKit
 class FriendsCollectionViewController: UIViewController {
     
     var collectionView: UICollectionView!
-    var user: User!
+    var friends = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureCollectionView()
+        configureViewController()
         collectionView.delegate = self
+        collectionView.dataSource = self
         
-        configure()
+        getFollowers()
+        
     }
     
-
-    
-    private func configure() {
-        
-        
-        NetworkController.shared.getCurrentUser { (user, error) in
+    func getFollowers() {
+        NetworkController.shared.getCurrentUser { [weak self] (user, error) in
+            guard let self = self else { return }
+            
             if let error = error {
                 NSLog(error.rawValue)
             }
+            guard let user = user else { return }
             
-            guard let user = user else { return}
-            self.user = user
+            self.friends = user.friends
+            
+            self.collectionView.reloadData()
         }
+    }
+    
+  
+    
+    func configureViewController() {
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
         
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
+    func configureCollectionView() {
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: Utilities.createThreeColumnFlowLayout(in: view))
         view.addSubview(collectionView)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout(in: view))
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FriendCell.self, forCellWithReuseIdentifier: FriendCell.reuseID)
     }
     
-    func createThreeColumnFlowLayout(in view: UIView) -> UICollectionViewFlowLayout {
-        let width = view.bounds.width
-        let padding: CGFloat = 12
-        let minimumItemSpacing: CGFloat = 10
-        let availableWidth = width - (padding * 2) - (minimumItemSpacing * 2)
-        let itemWidth = availableWidth / 3
-        
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
-        
-        return flowLayout
+    @objc func addButtonTapped() {
+        print("tapped")
     }
     
 }
 
 
-extension FriendsCollectionViewController: UICollectionViewDelegate {
+extension FriendsCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return user.friends.count
+        return friends.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCell.reuseID, for: indexPath) as? FriendCell else {
             return UICollectionViewCell() }
-        let friendID = user.friends[indexPath.row]
+        let friendID = friends[indexPath.row]
         
-        NetworkController.shared.getUser(for: friendID) { (user, error) in
-            if let error = error {
-                NSLog("\(error)")
-            }
-            
-            guard let user = user else { return }
-            cell.set(user: user)
-        }
+        cell.set(userID: friendID)
         
         return cell
     }

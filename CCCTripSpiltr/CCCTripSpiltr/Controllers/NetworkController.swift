@@ -21,8 +21,7 @@ enum CCCError: String {
 
 class NetworkController {
     
-    
-    
+    var currentUser: User!
     var trips: [Trip] = []
     let db = Firestore.firestore()
     static let shared = NetworkController()
@@ -87,6 +86,7 @@ class NetworkController {
             if let document = document, document.exists {
                 guard let data = document.data() else { return }
                 let user = User(from: data)
+                self.currentUser = user
                 completion(user, nil)
             } else {
                 completion(nil, .noData)

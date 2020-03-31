@@ -31,6 +31,7 @@
 		D1E33DF52432A4890077D4C6 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E33DF42432A4890077D4C6 /* FriendCell.swift */; };
 		D1E33DF82432A7090077D4C6 /* CCCAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E33DF72432A7090077D4C6 /* CCCAvatarImageView.swift */; };
 		D1E33DFA2432A8140077D4C6 /* CCCTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */; };
+		D1F5E6132432C4EF008F3E72 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F5E6122432C4EF008F3E72 /* UIView+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		D1E33DF42432A4890077D4C6 /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		D1E33DF72432A7090077D4C6 /* CCCAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCAvatarImageView.swift; sourceTree = "<group>"; };
 		D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCTitleLabel.swift; sourceTree = "<group>"; };
+		D1F5E6122432C4EF008F3E72 /* UIView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 		4446A36A242E775100F22D90 /* CCCTripSpiltr */ = {
 			isa = PBXGroup;
 			children = (
+				D1F5E6142432C4F9008F3E72 /* Extensions */,
 				D1D01CFB242EBC6600B606C1 /* Media */,
 				D1D01D00242EC07000B606C1 /* Controllers */,
 				D1BB6110242E855D00B90E29 /* Utilities.swift */,
@@ -199,6 +202,14 @@
 				D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D1F5E6142432C4F9008F3E72 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D1F5E6122432C4EF008F3E72 /* UIView+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1F5E6132432C4EF008F3E72 /* UIView+Ext.swift in Sources */,
 				D1D01D02242EC09400B606C1 /* NetworkController.swift in Sources */,
 				D1BB6113242E856100B90E29 /* Constants.swift in Sources */,
 				D1B83BB02432979300BC9BB6 /* FriendsCollectionViewController.swift in Sources */,

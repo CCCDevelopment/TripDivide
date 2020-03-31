@@ -13,7 +13,7 @@ class FriendCell: UICollectionViewCell {
     static let reuseID = "FriendCell"
     let imageView = CCCAvatarImageView(frame: .zero)
     let nameLabel = CCCTitleLabel(textAlignment: .center, fontSize: 16)
-    var user: User!
+
     
     
     override init(frame: CGRect) {
@@ -26,14 +26,22 @@ class FriendCell: UICollectionViewCell {
     }
     
     
-    func set(user: User) {
-        nameLabel.text = user.fullName
+    func set(userID: String) {
+        nameLabel.text = "test"
+//        NetworkController.shared.getUser(for: userID) { (user, error) in
+//            if let error = error {
+//                NSLog("\(error)")
+//            }
+//            print(user?.email)
+//            guard let user = user else { return }
+//            self.nameLabel.text = user.fullName
+//            
+//        }
         
     }
     
     private func configure() {
-        addSubview(imageView)
-        addSubview(nameLabel)
+        addSubviews(imageView, nameLabel)
         
         
         let padding: CGFloat = 8
