@@ -62,7 +62,10 @@ class FriendsCollectionViewController: UIViewController {
     }
     
     @objc func addButtonTapped() {
-        present(AddFriendVC(), animated: true, completion: nil)
+        let vc = AddFriendVC()
+        vc.delegate = self
+        
+        present(vc, animated: true, completion: nil)
         
     }
     
@@ -83,10 +86,16 @@ extension FriendsCollectionViewController: UICollectionViewDelegate, UICollectio
         
         return cell
     }
+}
+
+
+extension FriendsCollectionViewController: AddFriendVCDelegate {
+    func friendAdded() {
+        getFriends()
+    }
     
     
 }
-
 
 
 

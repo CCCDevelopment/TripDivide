@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol AddFriendVCDelegate {
+    func friendAdded()
+}
+
 class AddFriendVC: UIViewController {
     
     let containerView = UIView()
@@ -17,11 +21,12 @@ class AddFriendVC: UIViewController {
     let closeActionButton = UIButton()
     let avatarImageView = CCCAvatarImageView(frame: .zero)
     let nameLabel = UILabel()
-    
+    var searchedUser: User?
     var alertTitle: String = "Search For Friends"
     var message: String = " Enter Email Address"
     var buttonTitle: String = "Close"
     var addButtonTitle: String = "Add"
+    var delegate: AddFriendVCDelegate?
     
     let padding: CGFloat = 20
     
@@ -105,35 +110,44 @@ class AddFriendVC: UIViewController {
             
         ])
     }
-        func configureSearchResultViews() {
-            containerView.addSubview(avatarImageView)
-            nameLabel.text = "asdf"
-            containerView.addSubview(nameLabel)
-            nameLabel.translatesAutoresizingMaskIntoConstraints = false
-            nameLabel.textAlignment = .center
-            NSLayoutConstraint.activate([
-                
-                nameLabel.bottomAnchor.constraint(equalTo: addActionButton.topAnchor, constant: -12),
-                nameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: padding),
-                nameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -padding),
-                nameLabel.heightAnchor.constraint(equalToConstant: 20),
-                
-                avatarImageView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 8),
-                avatarImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-                avatarImageView.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -8),
-                avatarImageView.widthAnchor.constraint(equalTo: avatarImageView.heightAnchor)
-                
-            ])
+    func configureSearchResultViews() {
+        containerView.addSubview(avatarImageView)
+        nameLabel.text = "asdf"
+        containerView.addSubview(nameLabel)
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.textAlignment = .center
+        NSLayoutConstraint.activate([
             
-        }
-        
-        @objc func dismissVC() {
-            dismiss(animated: true)
-        }
-        
-        @objc func addAction() {
+            nameLabel.bottomAnchor.constraint(equalTo: addActionButton.topAnchor, constant: -12),
+            nameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: padding),
+            nameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -padding),
+            nameLabel.heightAnchor.constraint(equalToConstant: 20),
             
+            avatarImageView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 8),
+            avatarImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            avatarImageView.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -8),
+            avatarImageView.widthAnchor.constraint(equalTo: avatarImageView.heightAnchor)
+            
+        ])
+        
+    }
+    
+    @objc func dismissVC() {
+        dismiss(animated: true)
+    }
+    
+    @objc func addAction() {
+        guard let searchedUser = searchedUser else { return }
+        NetworkController.shared.add(friend: searchedUser.id) {  [weak self] (error) in
+            guard let self = self else { return }
+            if let error = error {
+                NSLog(error.rawValue)
+            }
+            
+            self.dismiss(animated: true)
+            self.delegate?.friendAdded()
         }
+    }
 }
 
 extension AddFriendVC: UITextFieldDelegate {
@@ -154,6 +168,7 @@ extension AddFriendVC: UITextFieldDelegate {
             }
             
             guard let user = user else { return }
+            self.searchedUser = user
             self.nameLabel.text = user.fullName
         }
     }

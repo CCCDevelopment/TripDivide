@@ -17,6 +17,7 @@ enum CCCError: String {
     case savingError = "Error saving user data"
     case noData = "Document does not exist"
     case creatingTripError = "Error creating trip"
+    case addingFriendError = "Error adding friend"
 }
 
 class NetworkController {
@@ -25,10 +26,10 @@ class NetworkController {
     var trips: [Trip] = []
     let db = Firestore.firestore()
     static let shared = NetworkController()
-   
+    
     
     func createUser(email: String, password: String, fullName: String, username: String, completion: @escaping (CCCError?) -> Void) {
-        
+        let email = email.lowercased()
         Auth.auth().createUser(withEmail: email, password: password) { (result, err) in
             
             // Check for errors
@@ -53,8 +54,6 @@ class NetworkController {
     
     
     func createTrip(with name: String, completion: @escaping (CCCError?) -> Void) {
-       
-        
         
         getCurrentUser { (user, error) in
             if let _ = error {
@@ -70,10 +69,7 @@ class NetworkController {
                 }
                 completion(nil)
             }
-            
         }
-        
-        
     }
     
     func getCurrentUser(completion: @escaping (User?, CCCError?) -> Void) {
@@ -110,23 +106,39 @@ class NetworkController {
         }
         
     }
+    
+    func add(friend: String, completion: @escaping (CCCError?) -> Void) {
+        
+        guard let userID = Auth.auth().currentUser?.uid else {
+            completion( CCCError.addingFriendError)
+            return
+        }
+        
+        db.collection("users").document(userID).updateData(["friends": FieldValue.arrayUnion([friend])]) { (error) in
+            if let _ = error {
+                completion(CCCError.addingFriendError)
+            }
+            completion(nil)
+        }
+    }
+    
     func search(email: String, completion: @escaping (User?, CCCError?) -> Void) {
         let usersRef = db.collection("users")
         
         let query = usersRef.whereField("email", isEqualTo: email)
         
         query.getDocuments() { (querySnapshot, err) in
-        if let _ = err {
-            completion(nil, .noData)
-        } else {
-            guard let snapshot = querySnapshot,
-                let document = snapshot.documents.first else { return }
+            if let _ = err {
+                completion(nil, .noData)
+            } else {
+                guard let snapshot = querySnapshot,
+                    let document = snapshot.documents.first else { return }
+                
+                let user = User(from: document.data())
+                completion(user, nil)
+                
+            }
             
-            let user = User(from: document.data())
-            completion(user, nil)
-            
-        }
-        
         }
         
         
