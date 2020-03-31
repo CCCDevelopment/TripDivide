@@ -34,6 +34,7 @@
 		D1E33DF82432A7090077D4C6 /* CCCAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E33DF72432A7090077D4C6 /* CCCAvatarImageView.swift */; };
 		D1E33DFA2432A8140077D4C6 /* CCCTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */; };
 		D1F5E6132432C4EF008F3E72 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F5E6122432C4EF008F3E72 /* UIView+Ext.swift */; };
+		D1F5E6182433CDAC008F3E72 /* CCCTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F5E6172433CDAC008F3E72 /* CCCTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		D1E33DF72432A7090077D4C6 /* CCCAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCAvatarImageView.swift; sourceTree = "<group>"; };
 		D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCTitleLabel.swift; sourceTree = "<group>"; };
 		D1F5E6122432C4EF008F3E72 /* UIView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		D1F5E6172433CDAC008F3E72 /* CCCTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 				D1E33DF72432A7090077D4C6 /* CCCAvatarImageView.swift */,
 				D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */,
 				44697CD52433AB4600252764 /* CCCBodyLabel.swift */,
+				D1F5E6172433CDAC008F3E72 /* CCCTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				D1D01CF7242EB45A00B606C1 /* Trip.swift in Sources */,
 				4446A36E242E775100F22D90 /* SceneDelegate.swift in Sources */,
 				D1E33DF82432A7090077D4C6 /* CCCAvatarImageView.swift in Sources */,
+				D1F5E6182433CDAC008F3E72 /* CCCTextView.swift in Sources */,
 				D1BB611B242E858300B90E29 /* LoginViewController.swift in Sources */,
 				D1BB611A242E858300B90E29 /* AuthenticationViewController.swift in Sources */,
 				D1E33DFA2432A8140077D4C6 /* CCCTitleLabel.swift in Sources */,

@@ -12,7 +12,7 @@ class AddFriendVC: UIViewController {
     
     let containerView = UIView()
     let titleLabel = CCCTitleLabel(textAlignment: .center, fontSize: 20)
-    let emailTextField = UITextField()
+    let emailTextField = CCCTextField()
     let addActionButton = UIButton()
     let closeActionButton = UIButton()
     let avatarImageView = CCCAvatarImageView(frame: .zero)
@@ -28,6 +28,7 @@ class AddFriendVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
+        emailTextField.delegate = self
         configureContainerView()
         configureTitleLabel()
         configureActionButtons()
@@ -37,10 +38,11 @@ class AddFriendVC: UIViewController {
     
     func configureContainerView() {
         view.addSubview(containerView)
+        
         containerView.backgroundColor = .systemBackground
         containerView.layer.cornerRadius = 16
-        containerView.layer.borderWidth = 2
-        containerView.layer.borderColor = UIColor.white.cgColor
+        containerView.layer.borderWidth = 0.5
+        containerView.layer.borderColor = UIColor.systemGray.cgColor
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -55,7 +57,7 @@ class AddFriendVC: UIViewController {
     func configureTitleLabel() {
         containerView.addSubview(titleLabel)
         titleLabel.text = alertTitle
-        
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: padding),
             titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: padding),
@@ -94,16 +96,6 @@ class AddFriendVC: UIViewController {
     func configureEmailTextField() {
         
         containerView.addSubview(emailTextField)
-        Utilities.styleTextField(emailTextField)
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        emailTextField.placeholder = message
-        emailTextField.keyboardType = .emailAddress
-        emailTextField.returnKeyType = .search
-        emailTextField.autocorrectionType = .no
-        emailTextField.layer.borderWidth = 0.2
-        emailTextField.layer.borderColor = UIColor.systemGray.cgColor
-        emailTextField.layer.cornerRadius = 10
-        
         
         NSLayoutConstraint.activate([
             emailTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding),
@@ -140,7 +132,29 @@ class AddFriendVC: UIViewController {
         }
         
         @objc func addAction() {
-            dismiss(animated: true)
+            
         }
+}
+
+extension AddFriendVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        emailTextField.resignFirstResponder()
+        performSearchAction()
+        return true
+    }
     
+    func performSearchAction() {
+        guard let searchEmail = emailTextField.text?.lowercased(),
+            !searchEmail.isEmpty else { return }
+        NetworkController.shared.search(email: searchEmail) { [weak self] user, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                NSLog(error.rawValue)
+            }
+            
+            guard let user = user else { return }
+            self.nameLabel.text = user.fullName
+        }
+    }
 }

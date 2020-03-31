@@ -110,7 +110,7 @@ class NetworkController {
         }
         
     }
-    func search(for email: String, completion: @escaping (User?, CCCError?) -> Void) {
+    func search(email: String, completion: @escaping (User?, CCCError?) -> Void) {
         let usersRef = db.collection("users")
         
         let query = usersRef.whereField("email", isEqualTo: email)
