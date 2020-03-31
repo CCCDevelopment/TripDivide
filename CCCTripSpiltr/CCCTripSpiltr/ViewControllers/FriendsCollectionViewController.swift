@@ -62,7 +62,8 @@ class FriendsCollectionViewController: UIViewController {
     }
     
     @objc func addButtonTapped() {
-        print("tapped")
+        present(AddFriendVC(), animated: true, completion: nil)
+        
     }
     
 }
