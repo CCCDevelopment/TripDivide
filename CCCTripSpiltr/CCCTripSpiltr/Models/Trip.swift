@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class Trip {
     let id: String
@@ -20,7 +21,7 @@ class Trip {
 
     init(id: String = UUID().uuidString, users: [String] = [], isComplete: Bool = false, name: String, totalCost: Double = 0.00, createdBy: String, startDate: Date = Date()) {
         self.id = id
-        self.users = users
+        self.users = [createdBy]
         self.isComplete = isComplete
         self.name = name
         self.totalCost = totalCost
@@ -37,11 +38,14 @@ class Trip {
         self.totalCost = dictionary["totalCost"] as! Double
         self.createdBy = dictionary["createdBy"] as! String
         //        self.image = image
-        self.startDate = dictionary["startDate"] as! Date
+        
+//        let date = postTimestamp.dateValue()
+        let date = dictionary["startDate"] as! Timestamp
+        self.startDate = date.dateValue()
     }
     
     func dictionaryRep() -> [String : Any] {
-        let dictionary: [String : Any] = ["id": id, "users" : users, "isComplete" : isComplete, "name" : name, "totalCost" : totalCost  , "createdBy": createdBy, "startDate": startDate]
+        let dictionary: [String : Any] = ["id": id, "users" : users, "isComplete" : isComplete, "name" : name, "totalCost" : totalCost , "createdBy": createdBy, "startDate": startDate]
         return dictionary
     }
 }

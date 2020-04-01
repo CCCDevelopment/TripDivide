@@ -18,6 +18,7 @@ enum CCCError: String {
     case noData = "Document does not exist"
     case creatingTripError = "Error creating trip"
     case addingFriendError = "Error adding friend"
+    case addingTripError = "Error adding trip"
 }
 
 class NetworkController {
@@ -41,8 +42,22 @@ class NetworkController {
             if let _ = error {
                 completion(.creatingTripError)
             }
-            completion(nil)
+            
+            
+            self.addTrip(to: userID, tripID: trip.id) { (error) in
+                if let _ = error {
+                    completion(.addingTripError)
+                }
+                
+                completion(nil)
+                
+            }
+            
+            
+            
         }
+        
+        
     }
     
     func getTrip(for id: String, completion: @escaping (Trip?, CCCError?) -> Void) {
@@ -61,7 +76,16 @@ class NetworkController {
         }
         
     }
-
+    
+    func addTrip(to userID: String, tripID: String, completion: @escaping (CCCError?) -> Void) {
+        let userRef = db.collection("users").document(userID)
+        
+        userRef.updateData(["trips": FieldValue.arrayUnion([tripID])]) { (error) in
+            completion(.addingTripError)
+        }
+        completion(nil)
+        
+    }
     
     
     func createUser(email: String, password: String, fullName: String, username: String, completion: @escaping (CCCError?) -> Void) {

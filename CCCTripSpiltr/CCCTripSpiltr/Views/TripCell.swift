@@ -31,6 +31,9 @@ class TripCell: UITableViewCell {
             self.friendsCountLabel?.text = String(trip.users.count)
             self.tripCostLabel?.text = String(trip.totalCost)
             
+            self.tripNameLabel.adjustsFontSizeToFitWidth = true
+            self.tripNameLabel.minimumScaleFactor = 0.5
+
             
         }
         
