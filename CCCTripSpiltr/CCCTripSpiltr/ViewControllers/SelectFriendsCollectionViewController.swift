@@ -68,10 +68,10 @@ class SelectFriendsCollectionViewController: UIViewController {
     }
     
     @objc func createButtonPressed() {
-        guard let tripName = tripName else { return}
+        guard let tripName = tripName,
+            let image = image else { return}
         
-        NetworkController.shared.createTrip(with: tripName, friendIds: selectedFriends) { [weak self] (error) in
-            guard let self = self else { return }
+        NetworkController.shared.uploadTrip(image: image, name: tripName, friendIds: selectedFriends) { (error) in
             if let error = error {
                 NSLog(error.rawValue)
             }

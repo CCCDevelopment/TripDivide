@@ -37,15 +37,20 @@ class NetworkController {
             return
         }
         let storageRef = storage.reference()
-        let imagesRef = storageRef.child("images").child("tripImages")
-        let imageRef = imagesRef.child("\(UUID().uuidString).jpg")
-        imageRef.putData( imageData, metadata: nil) { (metadata, error) in
+        let imagesFolderRef = storageRef.child("images").child("tripImages")
+        let imageURLRef = imagesFolderRef.child("\(UUID().uuidString).jpg")
+        imageURLRef.putData( imageData, metadata: nil) { (metadata, error) in
             guard let _ = metadata else {
                 completion(.uploadingImageError)
                 return
             }
             
-            imagesRef.downloadURL { (url, error) in
+            imageURLRef.downloadURL { (url, error) in
+                
+                if let error = error {
+                    NSLog("\(error)")
+                }
+                
                 guard let downloadURL = url else {
                     completion(.uploadingImageError)
                     return
@@ -67,7 +72,7 @@ class NetworkController {
                 completion(.creatingTripError)
                 return
             }
-            let trip = Trip( users: [userID], isComplete: false, name: name, createdBy: userID, startDate: Date())
+        let trip = Trip(users: [userID], name: name, createdBy: userID, image: imageURL)
             trip.users.append(contentsOf: friendIds)
             let ref = self.db.collection("trips")
             
