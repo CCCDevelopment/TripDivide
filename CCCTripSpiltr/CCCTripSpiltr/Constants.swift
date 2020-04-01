@@ -12,6 +12,7 @@ enum Constants {
     
     enum Segues {
         static let showAuthenticate = "ShowAuthenticate"
+        static let createTripSegue = "CreateTripSegue"
     }
     
     enum Storyboard {

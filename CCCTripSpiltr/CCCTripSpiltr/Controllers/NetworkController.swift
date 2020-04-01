@@ -28,14 +28,14 @@ class NetworkController {
     let db = Firestore.firestore()
     static let shared = NetworkController()
     
-    func createTrip(with name: String, completion: @escaping (CCCError?) -> Void) {
+    func createTrip(with name: String, friendIds: [String] , completion: @escaping (CCCError?) -> Void) {
         
         guard let userID = Auth.auth().currentUser?.uid else {
             completion(.creatingTripError)
             return
         }
-        
-        let trip = Trip( users: [userID], isComplete: false, name: "Italy", totalCost: 12.40, createdBy: userID, startDate: Date())
+        let trip = Trip( users: [userID], isComplete: false, name: name, createdBy: userID, startDate: Date())
+        trip.users.append(contentsOf: friendIds)
         let ref = self.db.collection("trips")
         
         ref.document(trip.id).setData(trip.dictionaryRep()) { (error) in
@@ -50,14 +50,8 @@ class NetworkController {
                 }
                 
                 completion(nil)
-                
             }
-            
-            
-            
-        }
-        
-        
+        }    
     }
     
     func getTrip(for id: String, completion: @escaping (Trip?, CCCError?) -> Void) {

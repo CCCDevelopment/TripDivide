@@ -1,18 +1,21 @@
 //
-//  FriendsCollectionViewController.swift
+//  SelectFriendsCollectionViewController.swift
 //  CCCTripSpiltr
 //
-//  Created by jonathan ferrer on 3/30/20.
+//  Created by jonathan ferrer on 4/1/20.
 //  Copyright © 2020 Ryan Murphy. All rights reserved.
 //
 
 import UIKit
 
-class FriendsCollectionViewController: UIViewController {
+class SelectFriendsCollectionViewController: UIViewController {
+    
+    
     
     var collectionView: UICollectionView!
     var friends = [String]()
-    
+    var selectedFriends = [String]()
+    var tripName: String?
     
     override func viewDidLoad() {
         
@@ -23,7 +26,7 @@ class FriendsCollectionViewController: UIViewController {
         collectionView.dataSource = self
     }
     
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getFriends()
@@ -44,14 +47,14 @@ class FriendsCollectionViewController: UIViewController {
         }
     }
     
-  
+    
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
-        navigationItem.rightBarButtonItem = addButton
+        let createButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(createButtonPressed))
+        navigationItem.rightBarButtonItem = createButton
     }
     
     func configureCollectionView() {
@@ -59,20 +62,28 @@ class FriendsCollectionViewController: UIViewController {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FriendCell.self, forCellWithReuseIdentifier: FriendCell.reuseID)
+        collectionView.allowsMultipleSelection = true
+        
     }
     
-    @objc func addButtonTapped() {
-        let vc = AddFriendVC()
-        vc.delegate = self
+    @objc func createButtonPressed() {
+        guard let tripName = tripName else { return}
+
         
-        present(vc, animated: true, completion: nil)
+        NetworkController.shared.createTrip(with: tripName, friendIds: selectedFriends) { [weak self] (error) in
+            guard let self = self else { return }
+            if let error = error {
+                NSLog(error.rawValue)
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
         
     }
     
 }
 
 
-extension FriendsCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return friends.count
     }
@@ -86,13 +97,30 @@ extension FriendsCollectionViewController: UICollectionViewDelegate, UICollectio
         
         return cell
     }
-}
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let userID = friends[indexPath.item]
+        let cell = collectionView.cellForItem(at: indexPath)
+        if selectedFriends.contains(userID) {
+            return
+        }
+        cell?.contentView.backgroundColor = .systemTeal
+        selectedFriends.append(userID)
+        print(selectedFriends.count)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let userID = friends[indexPath.item]
+        let cell = collectionView.cellForItem(at: indexPath)
 
-extension FriendsCollectionViewController: AddFriendVCDelegate {
-    func friendAdded() {
-        getFriends()
+        if selectedFriends.contains(userID) {
+            selectedFriends.remove(at: selectedFriends.firstIndex(of: userID)!)
+        }
+        cell?.contentView.backgroundColor = nil
+        print(selectedFriends.count)
+
     }
 }
-
 
 

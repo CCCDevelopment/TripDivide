@@ -29,9 +29,9 @@ class HomeTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if Auth.auth().currentUser != nil {
+
             getTrips()
-        }
+
     }
     
     func getTrips() {
@@ -51,15 +51,7 @@ class HomeTableViewController: UITableViewController {
     
     @IBAction func addTripButtonPressed(_ sender: Any) {
         
-        NetworkController.shared.createTrip(with: "Italy") { (error) in
-
-            if let error = error {
-                NSLog(error.rawValue)
-                return
-            }
-            
-            self.getTrips()
-        }
+        
     }
     
     @IBAction func signOutPressed(_ sender: UIBarButtonItem) {

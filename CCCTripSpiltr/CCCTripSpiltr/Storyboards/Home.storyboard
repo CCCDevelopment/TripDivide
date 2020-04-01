@@ -3,16 +3,93 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Create Trip View Controller-->
+        <scene sceneID="e9W-Ws-ZB3">
+            <objects>
+                <viewController id="sSI-2F-kmA" customClass="CreateTripViewController" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nJI-4u-RnD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Mq-oN-X3E">
+                                <rect key="frame" x="87" y="390" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="5ma-fq-CK5"/>
+                                    <constraint firstAttribute="width" constant="240" id="iwe-Qp-cWu"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Trip Name: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dV-fQ-4fo">
+                                <rect key="frame" x="40" y="128" width="334" height="21"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Trip Photo: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGW-gD-nPr">
+                                <rect key="frame" x="40" y="329" width="334" height="21"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ex: Carribean Cruise" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mdX-db-EJe">
+                                <rect key="frame" x="40" y="189" width="334" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="wa1-Zv-tdE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4o-pv-8UW">
+                                <rect key="frame" x="163" y="637" width="88" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Select Photo"/>
+                                <connections>
+                                    <action selector="addPhotoPressed:" destination="sSI-2F-kmA" eventType="touchUpInside" id="2hk-uK-jzp"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="sfM-ka-uMa" firstAttribute="trailing" secondItem="mdX-db-EJe" secondAttribute="trailing" constant="40" id="9e8-sR-weU"/>
+                            <constraint firstItem="mdX-db-EJe" firstAttribute="top" secondItem="6dV-fQ-4fo" secondAttribute="bottom" constant="40" id="Bpa-56-TQK"/>
+                            <constraint firstItem="6dV-fQ-4fo" firstAttribute="leading" secondItem="sfM-ka-uMa" secondAttribute="leading" constant="40" id="NDj-aP-nry"/>
+                            <constraint firstItem="sfM-ka-uMa" firstAttribute="trailing" secondItem="aGW-gD-nPr" secondAttribute="trailing" constant="40" id="OTB-lE-fXX"/>
+                            <constraint firstItem="aGW-gD-nPr" firstAttribute="top" secondItem="mdX-db-EJe" secondAttribute="bottom" constant="100" id="PmM-N5-zSY"/>
+                            <constraint firstItem="sfM-ka-uMa" firstAttribute="trailing" secondItem="6dV-fQ-4fo" secondAttribute="trailing" constant="40" id="apf-0i-rDg"/>
+                            <constraint firstItem="mdX-db-EJe" firstAttribute="leading" secondItem="sfM-ka-uMa" secondAttribute="leading" constant="40" id="mok-1s-kkf"/>
+                            <constraint firstItem="aGW-gD-nPr" firstAttribute="leading" secondItem="sfM-ka-uMa" secondAttribute="leading" constant="40" id="nT7-Av-R69"/>
+                            <constraint firstItem="1Mq-oN-X3E" firstAttribute="top" secondItem="aGW-gD-nPr" secondAttribute="bottom" constant="40" id="o6V-L8-jMA"/>
+                            <constraint firstItem="6dV-fQ-4fo" firstAttribute="top" secondItem="sfM-ka-uMa" secondAttribute="top" constant="40" id="s8C-cq-iFa"/>
+                            <constraint firstItem="1Mq-oN-X3E" firstAttribute="centerX" secondItem="nJI-4u-RnD" secondAttribute="centerX" id="ugJ-OI-2YL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="sfM-ka-uMa"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Rj6-85-XDs">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="iYm-ly-o67">
+                            <connections>
+                                <action selector="nextButtonPressed:" destination="sSI-2F-kmA" id="Rlh-sY-sHr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tripImageView" destination="1Mq-oN-X3E" id="HKY-JZ-t15"/>
+                        <outlet property="tripNameTextField" destination="mdX-db-EJe" id="cZi-Ye-eah"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aii-MU-urh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5994.202898550725" y="-564.50892857142856"/>
+        </scene>
         <!--Authenticate-->
         <scene sceneID="rfe-xI-K6Z">
             <objects>
                 <viewControllerPlaceholder storyboardName="Authenticate" id="Iks-qK-gY3" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GyW-Nc-oVH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6355" y="-400"/>
+            <point key="canvasLocation" x="7263.7681159420299" y="-400.44642857142856"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="Z2u-jK-EnF">
@@ -113,6 +190,7 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="cN3-4d-YYy">
                             <connections>
                                 <action selector="addTripButtonPressed:" destination="mZp-ur-OqI" id="tPI-Pf-ahM"/>
+                                <segue destination="QBU-BL-OZ2" kind="presentation" identifier="CreateTripSegue" modalPresentationStyle="fullScreen" id="qli-DD-lfI"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Sign Out" id="bC9-w0-HbL">
@@ -148,6 +226,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Td9-2D-e3H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4168.115942028986" y="105.80357142857143"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xff-AG-kS1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QBU-BL-OZ2" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Afi-O8-fCI">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sSI-2F-kmA" kind="relationship" relationship="rootViewController" id="Yib-3b-EI2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oLs-xA-eux" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5084.057971014493" y="-564.50892857142856"/>
         </scene>
     </scenes>
     <resources>

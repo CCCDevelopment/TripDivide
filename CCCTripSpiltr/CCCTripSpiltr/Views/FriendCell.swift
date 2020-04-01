@@ -42,7 +42,7 @@ class FriendCell: UICollectionViewCell {
     
     private func configure() {
         addSubviews(avatarImageView, nameLabel)
-        
+        contentView.layer.cornerRadius = 10
         
         let padding: CGFloat = 8
         
