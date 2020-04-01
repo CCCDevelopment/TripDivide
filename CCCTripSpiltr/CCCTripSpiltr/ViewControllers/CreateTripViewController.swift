@@ -12,6 +12,7 @@ import Photos
 class CreateTripViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var imagePicker: ImagePicker!
+    var image: UIImage!
     
     @IBOutlet weak var tripNameTextField: UITextField!
     @IBOutlet weak var tripImageView: UIImageView!
@@ -29,7 +30,14 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             !tripName.isEmpty else { return }
         let selectFriendsVC = SelectFriendsCollectionViewController()
         selectFriendsVC.tripName = tripName
+        
+        if let image = image {
+            selectFriendsVC.image = image
+        }
+        
         navigationController?.pushViewController(selectFriendsVC, animated: true)
+        
+        
     }
     
     
@@ -43,6 +51,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
 extension CreateTripViewController: ImagePickerDelegate {
 
     func didSelect(image: UIImage?) {
+        self.image = image
         self.tripImageView.image = image
     }
 }

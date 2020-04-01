@@ -16,6 +16,7 @@ class SelectFriendsCollectionViewController: UIViewController {
     var friends = [String]()
     var selectedFriends = [String]()
     var tripName: String?
+    var image: UIImage?
     
     override func viewDidLoad() {
         
@@ -68,7 +69,6 @@ class SelectFriendsCollectionViewController: UIViewController {
     
     @objc func createButtonPressed() {
         guard let tripName = tripName else { return}
-
         
         NetworkController.shared.createTrip(with: tripName, friendIds: selectedFriends) { [weak self] (error) in
             guard let self = self else { return }
