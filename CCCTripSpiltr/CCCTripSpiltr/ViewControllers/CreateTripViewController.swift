@@ -11,14 +11,14 @@ import Photos
 
 class CreateTripViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-
+    var imagePicker: ImagePicker!
     
     @IBOutlet weak var tripNameTextField: UITextField!
     @IBOutlet weak var tripImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
     
     
@@ -35,130 +35,14 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func addPhotoPressed(_ sender: Any) {
         
-        let authorizationStatus = PHPhotoLibrary.authorizationStatus()
+        self.imagePicker.present(from: self.view)
         
-        switch authorizationStatus {
-        case .authorized:
-            presentImagePickerController()
-            
-        case .notDetermined:
-            
-            PHPhotoLibrary.requestAuthorization { (status) in
-                
-                guard status == .authorized else { NSLog("User did not authorize access to the photo library"); return }
-                
-                self.presentImagePickerController()
-            }
-            
-        default:
-            break
-        }
-    }
-    
-    private func presentImagePickerController() {
-        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
-        
-        
-        
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.delegate = self
-        
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-         guard let image = info[.editedImage] as? UIImage else {
-                    return self.pickerController(picker, didSelect: nil)
-                }
-                self.pickerController(picker, didSelect: image)
     }
 }
+    
+extension CreateTripViewController: ImagePickerDelegate {
 
-//private let pickerController: UIImagePickerController
-//private weak var presentationController: UIViewController?
-//private weak var delegate: ImagePickerDelegate?
-//
-//public protocol ImagePickerDelegate: class {
-//    func didSelect(image: UIImage?)
-//}
-//
-//open class ImagePicker: NSObject {
-//
-//    private let pickerController: UIImagePickerController
-//    private weak var presentationController: UIViewController?
-//    private weak var delegate: ImagePickerDelegate?
-//
-//    public init(presentationController: UIViewController, delegate: ImagePickerDelegate) {
-//        self.pickerController = UIImagePickerController()
-//
-//        super.init()
-//
-//        self.presentationController = presentationController
-//        self.delegate = delegate
-//
-//        self.pickerController.delegate = self
-//        self.pickerController.allowsEditing = true
-//        self.pickerController.mediaTypes = ["public.image"]
-//    }
-//
-//    private func action(for type: UIImagePickerController.SourceType, title: String) -> UIAlertAction? {
-//        guard UIImagePickerController.isSourceTypeAvailable(type) else {
-//            return nil
-//        }
-//
-//        return UIAlertAction(title: title, style: .default) { [unowned self] _ in
-//            self.pickerController.sourceType = type
-//            self.presentationController?.present(self.pickerController, animated: true)
-//        }
-//    }
-//
-//    public func present(from sourceView: UIView) {
-//
-//        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//
-//        if let action = self.action(for: .camera, title: "Take photo") {
-//            alertController.addAction(action)
-//        }
-//        if let action = self.action(for: .savedPhotosAlbum, title: "Camera roll") {
-//            alertController.addAction(action)
-//        }
-//        if let action = self.action(for: .photoLibrary, title: "Photo library") {
-//            alertController.addAction(action)
-//        }
-//
-//        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//
-//        if UIDevice.current.userInterfaceIdiom == .pad {
-//            alertController.popoverPresentationController?.sourceView = sourceView
-//            alertController.popoverPresentationController?.sourceRect = sourceView.bounds
-//            alertController.popoverPresentationController?.permittedArrowDirections = [.down, .up]
-//        }
-//
-//        self.presentationController?.present(alertController, animated: true)
-//    }
-//
-//    private func pickerController(_ controller: UIImagePickerController, didSelect image: UIImage?) {
-//        controller.dismiss(animated: true, completion: nil)
-//
-//        self.delegate?.didSelect(image: image)
-//    }
-//}
-//
-//extension ImagePicker: UIImagePickerControllerDelegate {
-//
-//    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-//        self.pickerController(picker, didSelect: nil)
-//    }
-//
-//    public func imagePickerController(_ picker: UIImagePickerController,
-//                                      didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-//        guard let image = info[.editedImage] as? UIImage else {
-//            return self.pickerController(picker, didSelect: nil)
-//        }
-//        self.pickerController(picker, didSelect: image)
-//    }
-//}
-//
-//extension ImagePicker: UINavigationControllerDelegate {
-//
-//}
+    func didSelect(image: UIImage?) {
+        self.tripImageView.image = image
+    }
+}

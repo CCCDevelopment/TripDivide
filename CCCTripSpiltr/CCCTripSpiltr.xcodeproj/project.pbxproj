@@ -12,6 +12,7 @@
 		4446A375242E775400F22D90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4446A374242E775400F22D90 /* Assets.xcassets */; };
 		4446A378242E775400F22D90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4446A376242E775400F22D90 /* LaunchScreen.storyboard */; };
 		4446A38B242EBE5A00F22D90 /* TripSplitr.mov in Resources */ = {isa = PBXBuildFile; fileRef = 4446A38A242EBE5900F22D90 /* TripSplitr.mov */; };
+		444C6144243528960021D9F8 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C6143243528960021D9F8 /* ImagePickerController.swift */; };
 		44697CD42433AA3600252764 /* AddFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44697CD32433AA3600252764 /* AddFriendVC.swift */; };
 		44697CD62433AB4600252764 /* CCCBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44697CD52433AB4600252764 /* CCCBodyLabel.swift */; };
 		84A0506868C4B3290DB9BCF3 /* Pods_CCCTripSpiltr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */; };
@@ -50,6 +51,7 @@
 		4446A379242E775400F22D90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4446A380242E77C300F22D90 /* CCCTripSpiltr */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CCCTripSpiltr; sourceTree = "<group>"; };
 		4446A38A242EBE5900F22D90 /* TripSplitr.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = TripSplitr.mov; sourceTree = "<group>"; };
+		444C6143243528960021D9F8 /* ImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
 		44697CD32433AA3600252764 /* AddFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendVC.swift; sourceTree = "<group>"; };
 		44697CD52433AB4600252764 /* CCCBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCBodyLabel.swift; sourceTree = "<group>"; };
 		755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCCTripSpiltr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +181,7 @@
 				D1254B5A2435197A00B9CB53 /* SelectFriendsCollectionViewController.swift */,
 				44697CD32433AA3600252764 /* AddFriendVC.swift */,
 				D1254B582435131C00B9CB53 /* CreateTripViewController.swift */,
+				444C6143243528960021D9F8 /* ImagePickerController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				D1D01D02242EC09400B606C1 /* NetworkController.swift in Sources */,
 				D1BB6113242E856100B90E29 /* Constants.swift in Sources */,
 				D1B83BB02432979300BC9BB6 /* FriendsCollectionViewController.swift in Sources */,
+				444C6144243528960021D9F8 /* ImagePickerController.swift in Sources */,
 				D1254B592435131C00B9CB53 /* CreateTripViewController.swift in Sources */,
 				4446A36C242E775100F22D90 /* AppDelegate.swift in Sources */,
 				D1BB6111242E855D00B90E29 /* Utilities.swift in Sources */,
