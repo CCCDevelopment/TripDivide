@@ -55,20 +55,19 @@ class NetworkController {
     
     func createTrip(with name: String, completion: @escaping (CCCError?) -> Void) {
         
-        getCurrentUser { (user, error) in
+        guard let userID = Auth.auth().currentUser?.uid else {
+            completion(.creatingTripError)
+            return
+        }
+        
+        let trip = Trip(name: name, createdBy: userID)
+        let ref = self.db.collection("trips")
+        
+        ref.document(trip.id).setData(trip.dictionaryRep()) { (error) in
             if let _ = error {
                 completion(.creatingTripError)
             }
-            guard let user = user else { return }
-            let trip = Trip(users: [user.id], name: name)
-            let ref = self.db.collection("trips")
-            
-            ref.document(trip.id).setData(trip.dictionaryRep()) { (error) in
-                if let _ = error {
-                    completion(.creatingTripError)
-                }
-                completion(nil)
-            }
+            completion(nil)
         }
     }
     
@@ -136,12 +135,7 @@ class NetworkController {
                 
                 let user = User(from: document.data())
                 completion(user, nil)
-                
             }
-            
         }
-        
-        
     }
-    
 }

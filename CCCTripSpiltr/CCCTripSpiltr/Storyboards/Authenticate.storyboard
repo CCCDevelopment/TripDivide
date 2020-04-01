@@ -40,14 +40,19 @@
                                     <constraint firstItem="G10-3l-jXV" firstAttribute="height" secondItem="KTT-9E-3Do" secondAttribute="height" id="hkf-Ro-3lm"/>
                                 </constraints>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="VNl-As-5nQ">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="VNl-As-5nQ">
                                 <rect key="frame" x="40" y="124" width="334" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="jLY-hE-H51"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="VNl-As-5nQ" firstAttribute="leading" secondItem="pk9-AP-BIE" secondAttribute="leading" constant="40" id="66Z-tk-0LX"/>
                             <constraint firstItem="pk9-AP-BIE" firstAttribute="trailing" secondItem="ojc-CA-iyk" secondAttribute="trailing" constant="40" id="SlK-Se-hwH"/>
+                            <constraint firstItem="pk9-AP-BIE" firstAttribute="trailing" secondItem="VNl-As-5nQ" secondAttribute="trailing" constant="40" id="VM7-ew-3gg"/>
+                            <constraint firstItem="VNl-As-5nQ" firstAttribute="top" secondItem="pk9-AP-BIE" secondAttribute="top" constant="80" id="dLO-gA-j3G"/>
                             <constraint firstItem="pk9-AP-BIE" firstAttribute="bottom" secondItem="ojc-CA-iyk" secondAttribute="bottom" constant="40" id="u3y-Bz-Q1Y"/>
                             <constraint firstItem="ojc-CA-iyk" firstAttribute="leading" secondItem="pk9-AP-BIE" secondAttribute="leading" constant="40" id="ufW-EQ-JGY"/>
                         </constraints>

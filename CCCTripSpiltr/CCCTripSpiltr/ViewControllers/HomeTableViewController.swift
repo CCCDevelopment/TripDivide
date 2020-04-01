@@ -21,6 +21,14 @@ class HomeTableViewController: UITableViewController {
         
     }
     
+    @IBAction func addTripButtonPressed(_ sender: Any) {
+        
+        let vc = AddFriendVC()
+        
+        
+        present(vc, animated: true, completion: nil)
+        
+    }
     
     @IBAction func signOutPressed(_ sender: UIBarButtonItem) {
         do {
