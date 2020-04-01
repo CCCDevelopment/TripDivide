@@ -30,7 +30,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="111"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultTrip" translatesAutoresizingMaskIntoConstraints="NO" id="8HV-tk-PMf">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultTrip" translatesAutoresizingMaskIntoConstraints="NO" id="8HV-tk-PMf" customClass="CCCAvatarImageView" customModule="CCCTripSpiltr" customModuleProvider="target">
                                             <rect key="frame" x="20" y="11" width="90" height="90"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="90" id="Esg-eA-TgM"/>
@@ -67,7 +67,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyX-5O-9dM">
-                                            <rect key="frame" x="169" y="60" width="41" height="40"/>
+                                            <rect key="frame" x="169" y="60" width="40.5" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="iX7-cF-bIg"/>
                                             </constraints>
@@ -94,6 +94,12 @@
                                         <constraint firstItem="x4G-lq-QtW" firstAttribute="leading" secondItem="8HV-tk-PMf" secondAttribute="trailing" constant="8" id="yp1-fs-t7Y"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="friendsCountLabel" destination="tyX-5O-9dM" id="8au-P6-wIJ"/>
+                                    <outlet property="tripCostLabel" destination="cvt-P4-5e1" id="FJU-DV-Ddv"/>
+                                    <outlet property="tripImageView" destination="8HV-tk-PMf" id="wyg-nv-mPk"/>
+                                    <outlet property="tripNameLabel" destination="x4G-lq-QtW" id="J9o-9o-hwE"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

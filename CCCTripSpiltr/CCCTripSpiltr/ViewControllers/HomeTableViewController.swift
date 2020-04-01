@@ -12,6 +12,9 @@ import FirebaseAuth
 
 class HomeTableViewController: UITableViewController {
     
+    
+    var trips: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,15 +22,44 @@ class HomeTableViewController: UITableViewController {
             performSegue(withIdentifier: Constants.Segues.showAuthenticate, sender: nil)
         }
         
+        getTrips()
+        
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if Auth.auth().currentUser != nil {
+            getTrips()
+        }
+    }
+    
+    func getTrips() {
+        NetworkController.shared.getCurrentUser { [weak self] (user, error) in
+            guard let self = self else { return }
+            
+            if let error = error {
+                NSLog(error.rawValue)
+            }
+            guard let user = user else { return }
+            
+            self.trips = user.trips
+            
+            self.tableView.reloadData()
+        }
     }
     
     @IBAction func addTripButtonPressed(_ sender: Any) {
         
-        let vc = AddFriendVC()
-        
-        
-        present(vc, animated: true, completion: nil)
-        
+        NetworkController.shared.createTrip(with: "Italy") { (error) in
+
+            if let error = error {
+                NSLog(error.rawValue)
+                return
+            }
+            
+            self.getTrips()
+        }
     }
     
     @IBAction func signOutPressed(_ sender: UIBarButtonItem) {
@@ -37,6 +69,16 @@ class HomeTableViewController: UITableViewController {
         } catch {
             NSLog("Error signing out")
         }
+    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        trips.count
+    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripCell
+        
+        let tripID = trips[indexPath.row]
+        cell.set(tripID: tripID)
+        return cell
     }
     
     

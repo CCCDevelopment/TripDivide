@@ -27,7 +27,8 @@ class FriendCell: UICollectionViewCell {
     
     
     func set(userID: String) {
-        NetworkController.shared.getUser(for: userID) { (user, error) in
+        NetworkController.shared.getUser(for: userID) { [weak self] (user, error) in
+            guard let self = self else { return }
             if let error = error {
                 NSLog("\(error)")
             }

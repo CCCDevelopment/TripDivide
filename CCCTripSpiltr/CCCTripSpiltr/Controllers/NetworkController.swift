@@ -27,6 +27,42 @@ class NetworkController {
     let db = Firestore.firestore()
     static let shared = NetworkController()
     
+    func createTrip(with name: String, completion: @escaping (CCCError?) -> Void) {
+        
+        guard let userID = Auth.auth().currentUser?.uid else {
+            completion(.creatingTripError)
+            return
+        }
+        
+        let trip = Trip(name: name, createdBy: userID)
+        let ref = self.db.collection("trips")
+        
+        ref.document(trip.id).setData(trip.dictionaryRep()) { (error) in
+            if let _ = error {
+                completion(.creatingTripError)
+            }
+            completion(nil)
+        }
+    }
+    
+    func getTrip(for id: String, completion: @escaping (Trip?, CCCError?) -> Void) {
+        let tripsRef = db.collection("trips")
+        
+        let tripDocumentRef = tripsRef.document(id)
+        
+        tripDocumentRef.getDocument { (document, _) in
+            if let document = document, document.exists {
+                guard let data = document.data() else { return }
+                let trip = Trip(from: data)
+                completion(trip, nil)
+            } else {
+                completion(nil, .noData)
+            }
+        }
+        
+    }
+
+    
     
     func createUser(email: String, password: String, fullName: String, username: String, completion: @escaping (CCCError?) -> Void) {
         let email = email.lowercased()
@@ -53,23 +89,6 @@ class NetworkController {
     }
     
     
-    func createTrip(with name: String, completion: @escaping (CCCError?) -> Void) {
-        
-        guard let userID = Auth.auth().currentUser?.uid else {
-            completion(.creatingTripError)
-            return
-        }
-        
-        let trip = Trip(name: name, createdBy: userID)
-        let ref = self.db.collection("trips")
-        
-        ref.document(trip.id).setData(trip.dictionaryRep()) { (error) in
-            if let _ = error {
-                completion(.creatingTripError)
-            }
-            completion(nil)
-        }
-    }
     
     func getCurrentUser(completion: @escaping (User?, CCCError?) -> Void) {
         let ref = db.collection("users")
