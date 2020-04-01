@@ -17,11 +17,10 @@ class Trip {
     let createdBy: String
 //    var image: UIImage
     let startDate: Date
-    var endDate: Date?
 
-    init(id: String = UUID().uuidString, isComplete: Bool = false, name: String, totalCost: Double = 0.00, createdBy: String, startDate: Date = Date()) {
+    init(id: String = UUID().uuidString, users: [String] = [], isComplete: Bool = false, name: String, totalCost: Double = 0.00, createdBy: String, startDate: Date = Date()) {
         self.id = id
-        self.users = [createdBy]
+        self.users = users
         self.isComplete = isComplete
         self.name = name
         self.totalCost = totalCost
@@ -31,7 +30,7 @@ class Trip {
     }
     
     init(from dictionary: [String: Any]) {
-        self.id = dictionary["uid"] as! String
+        self.id = dictionary["id"] as! String
         self.users = dictionary["users"] as! [String]
         self.isComplete = dictionary["isComplete"] as! Bool
         self.name  = dictionary["name"] as! String
@@ -42,7 +41,8 @@ class Trip {
     }
     
     func dictionaryRep() -> [String : Any] {
-        return ["uid": id, "users" : users, "isComplete" : isComplete, "name" : name, "totalCost" : totalCost , "users" : users , "createdBy": createdBy, "startDate": startDate]
+        let dictionary: [String : Any] = ["id": id, "users" : users, "isComplete" : isComplete, "name" : name, "totalCost" : totalCost  , "createdBy": createdBy, "startDate": startDate]
+        return dictionary
     }
 }
 

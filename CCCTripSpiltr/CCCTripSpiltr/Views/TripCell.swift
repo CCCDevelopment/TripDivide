@@ -11,7 +11,7 @@ import UIKit
 class TripCell: UITableViewCell {
 
 
-    @IBOutlet weak var tripImageView: CCCAvatarImageView!
+    @IBOutlet weak var tripImageView: UIImageView!
     @IBOutlet weak var tripNameLabel: UILabel!
     @IBOutlet weak var friendsCountLabel: UILabel!
     @IBOutlet weak var tripCostLabel: UILabel!

@@ -30,7 +30,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="111"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultTrip" translatesAutoresizingMaskIntoConstraints="NO" id="8HV-tk-PMf" customClass="CCCAvatarImageView" customModule="CCCTripSpiltr" customModuleProvider="target">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultTrip" translatesAutoresizingMaskIntoConstraints="NO" id="8HV-tk-PMf">
                                             <rect key="frame" x="20" y="11" width="90" height="90"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="90" id="Esg-eA-TgM"/>
@@ -77,6 +77,7 @@
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="8HV-tk-PMf" secondAttribute="bottom" constant="10" id="9eJ-8E-Phy"/>
                                         <constraint firstItem="cvt-P4-5e1" firstAttribute="leading" secondItem="Dq3-Sv-ZTW" secondAttribute="trailing" constant="19" id="IHP-Yu-4tf"/>
                                         <constraint firstItem="tyX-5O-9dM" firstAttribute="top" secondItem="x4G-lq-QtW" secondAttribute="bottom" constant="8" id="Jf1-cB-xKI"/>
                                         <constraint firstItem="8HV-tk-PMf" firstAttribute="leading" secondItem="H6c-zB-fja" secondAttribute="leading" constant="20" id="Jfu-7O-S7F"/>

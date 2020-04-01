@@ -34,7 +34,7 @@ class NetworkController {
             return
         }
         
-        let trip = Trip(name: name, createdBy: userID)
+        let trip = Trip( users: [userID], isComplete: false, name: "Italy", totalCost: 12.40, createdBy: userID, startDate: Date())
         let ref = self.db.collection("trips")
         
         ref.document(trip.id).setData(trip.dictionaryRep()) { (error) in
