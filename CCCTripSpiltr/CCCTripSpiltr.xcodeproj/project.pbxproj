@@ -22,6 +22,8 @@
 		D127F838243270A8000721F9 /* Authenticate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D127F837243270A8000721F9 /* Authenticate.storyboard */; };
 		D127F83A24327239000721F9 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D127F83924327239000721F9 /* Friends.storyboard */; };
 		D167703B24354BDD00D041DE /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167703A24354BDD00D041DE /* UIImage+Ext.swift */; };
+		D167703D24355E9800D041DE /* TripDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167703C24355E9800D041DE /* TripDetailTableViewController.swift */; };
+		D1677042243562F200D041DE /* UserAvatarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1677041243562F200D041DE /* UserAvatarCollectionView.swift */; };
 		D196AA0F24341D1F00E5B156 /* TripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D196AA0E24341D1F00E5B156 /* TripCell.swift */; };
 		D1B83BB02432979300BC9BB6 /* FriendsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B83BAF2432979300BC9BB6 /* FriendsCollectionViewController.swift */; };
 		D1BB610F242E84C700B90E29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1BB610E242E84C700B90E29 /* GoogleService-Info.plist */; };
@@ -63,6 +65,8 @@
 		D127F837243270A8000721F9 /* Authenticate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authenticate.storyboard; sourceTree = "<group>"; };
 		D127F83924327239000721F9 /* Friends.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
 		D167703A24354BDD00D041DE /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
+		D167703C24355E9800D041DE /* TripDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailTableViewController.swift; sourceTree = "<group>"; };
+		D1677041243562F200D041DE /* UserAvatarCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarCollectionView.swift; sourceTree = "<group>"; };
 		D196AA0E24341D1F00E5B156 /* TripCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCell.swift; sourceTree = "<group>"; };
 		D1B83BAF2432979300BC9BB6 /* FriendsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewController.swift; sourceTree = "<group>"; };
 		D1BB610E242E84C700B90E29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -172,9 +176,18 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		D167703E2435623400D041DE /* Collection View */ = {
+			isa = PBXGroup;
+			children = (
+				D1677041243562F200D041DE /* UserAvatarCollectionView.swift */,
+			);
+			path = "Collection View";
+			sourceTree = "<group>";
+		};
 		D1D01CF4242E9D5900B606C1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D167703E2435623400D041DE /* Collection View */,
 				D1BB6118242E858300B90E29 /* LoginViewController.swift */,
 				D1BB6116242E858200B90E29 /* HomeTableViewController.swift */,
 				D1BB6117242E858200B90E29 /* AuthenticationViewController.swift */,
@@ -184,6 +197,7 @@
 				44697CD32433AA3600252764 /* AddFriendVC.swift */,
 				D1254B582435131C00B9CB53 /* CreateTripViewController.swift */,
 				444C6143243528960021D9F8 /* ImagePickerController.swift */,
+				D167703C24355E9800D041DE /* TripDetailTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -356,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1677042243562F200D041DE /* UserAvatarCollectionView.swift in Sources */,
 				44697CD62433AB4600252764 /* CCCBodyLabel.swift in Sources */,
 				D1F5E6132432C4EF008F3E72 /* UIView+Ext.swift in Sources */,
 				D1D01D02242EC09400B606C1 /* NetworkController.swift in Sources */,
@@ -377,6 +392,7 @@
 				D1E33DFA2432A8140077D4C6 /* CCCTitleLabel.swift in Sources */,
 				D1BB6115242E857A00B90E29 /* SignUpViewController.swift in Sources */,
 				44697CD42433AA3600252764 /* AddFriendVC.swift in Sources */,
+				D167703D24355E9800D041DE /* TripDetailTableViewController.swift in Sources */,
 				D1BB6119242E858300B90E29 /* HomeTableViewController.swift in Sources */,
 				D1E33DF52432A4890077D4C6 /* FriendCell.swift in Sources */,
 				D1D01D04242EC54700B606C1 /* User.swift in Sources */,

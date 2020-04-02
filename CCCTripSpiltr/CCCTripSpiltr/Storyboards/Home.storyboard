@@ -182,7 +182,7 @@
                                     <outlet property="tripCostLabel" destination="cvt-P4-5e1" id="FJU-DV-Ddv"/>
                                     <outlet property="tripImageView" destination="8HV-tk-PMf" id="wyg-nv-mPk"/>
                                     <outlet property="tripNameLabel" destination="x4G-lq-QtW" id="J9o-9o-hwE"/>
-                                    <segue destination="AB8-ru-iWg" kind="show" id="RBj-8N-ghw"/>
+                                    <segue destination="AB8-ru-iWg" kind="show" identifier="TripDetailSegue" id="RBj-8N-ghw"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -214,10 +214,10 @@
             </objects>
             <point key="canvasLocation" x="5078.2608695652179" y="105.80357142857143"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Trip Detail Table View Controller-->
         <scene sceneID="to8-9F-oQM">
             <objects>
-                <tableViewController id="AB8-ru-iWg" sceneMemberID="viewController">
+                <tableViewController id="AB8-ru-iWg" customClass="TripDetailTableViewController" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="b9A-rd-dxj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -285,7 +285,7 @@
                                         </stackView>
                                     </subviews>
                                 </stackView>
-                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Jf1-Wu-XGE">
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Jf1-Wu-XGE" customClass="UserAvatarCollectionView" customModule="CCCTripSpiltr" customModuleProvider="target">
                                     <rect key="frame" x="8" y="144" width="398" height="41"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
@@ -351,6 +351,13 @@
                     <navigationItem key="navigationItem" id="yMB-gk-AUz">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Qar-gX-tba"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="borrowedLabel" destination="6td-vX-Tvh" id="ED4-L2-AwR"/>
+                        <outlet property="costLabel" destination="tAD-jJ-5bl" id="dNe-GD-NL9"/>
+                        <outlet property="owedLabel" destination="8fb-KW-vBb" id="JA3-WL-64H"/>
+                        <outlet property="tripImageView" destination="l0z-Gx-ema" id="8dz-AX-XRQ"/>
+                        <outlet property="userAvatarCollectionView" destination="Jf1-Wu-XGE" id="aqb-XZ-hXW"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AJH-GE-ooT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
