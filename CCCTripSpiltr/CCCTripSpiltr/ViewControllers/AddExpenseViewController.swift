@@ -64,7 +64,7 @@ class AddExpenseViewController: UIViewController {
         let name = nameTextField.text ?? ""
         
         
-        let cost = Double(Int(costTextField.text ?? "0") ?? 0)
+        let cost = costTextField.text?.convertCurrencyToDouble() ?? 0.0
         
         expense.name = name
         expense.cost = cost
@@ -131,5 +131,11 @@ extension String {
         return formatter.string(from: number)!
     }
     
-    
+    func convertCurrencyToDouble() -> Double? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        numberFormatter.locale = Locale.current
+        
+        return numberFormatter.number(from: self)?.doubleValue
+    }
 }
