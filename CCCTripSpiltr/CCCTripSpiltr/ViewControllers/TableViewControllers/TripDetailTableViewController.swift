@@ -99,6 +99,12 @@ class TripDetailTableViewController: UITableViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddExpenseSegue" {
+            let destinationVC = segue.destination as? AddExpenseViewController
+            
+            destinationVC?.trip = trip
+        }
+        
         
     }
     

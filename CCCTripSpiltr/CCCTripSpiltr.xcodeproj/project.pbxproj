@@ -13,7 +13,9 @@
 		4446A378242E775400F22D90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4446A376242E775400F22D90 /* LaunchScreen.storyboard */; };
 		4446A38B242EBE5A00F22D90 /* TripSplitr.mov in Resources */ = {isa = PBXBuildFile; fileRef = 4446A38A242EBE5900F22D90 /* TripSplitr.mov */; };
 		444C6144243528960021D9F8 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C6143243528960021D9F8 /* ImagePickerController.swift */; };
-		44697CD42433AA3600252764 /* AddFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44697CD32433AA3600252764 /* AddFriendVC.swift */; };
+		444C6148243667CE0021D9F8 /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C6147243667CE0021D9F8 /* AddExpenseViewController.swift */; };
+		444C614C24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C614B24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift */; };
+		44697CD42433AA3600252764 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44697CD32433AA3600252764 /* AddFriendViewController.swift */; };
 		44697CD62433AB4600252764 /* CCCBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44697CD52433AB4600252764 /* CCCBodyLabel.swift */; };
 		84A0506868C4B3290DB9BCF3 /* Pods_CCCTripSpiltr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */; };
 		D11847BC243656C600E6949B /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11847BB243656C600E6949B /* Expense.swift */; };
@@ -31,7 +33,7 @@
 		D1BB6111242E855D00B90E29 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6110242E855D00B90E29 /* Utilities.swift */; };
 		D1BB6113242E856100B90E29 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6112242E856100B90E29 /* Constants.swift */; };
 		D1BB6115242E857A00B90E29 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6114242E857A00B90E29 /* SignUpViewController.swift */; };
-		D1BB6119242E858300B90E29 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6116242E858200B90E29 /* HomeTableViewController.swift */; };
+		D1BB6119242E858300B90E29 /* TripsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6116242E858200B90E29 /* TripsTableViewController.swift */; };
 		D1BB611A242E858300B90E29 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6117242E858200B90E29 /* AuthenticationViewController.swift */; };
 		D1BB611B242E858300B90E29 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB6118242E858300B90E29 /* LoginViewController.swift */; };
 		D1D01CF7242EB45A00B606C1 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D01CF6242EB45A00B606C1 /* Trip.swift */; };
@@ -56,7 +58,9 @@
 		4446A380242E77C300F22D90 /* CCCTripSpiltr */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CCCTripSpiltr; sourceTree = "<group>"; };
 		4446A38A242EBE5900F22D90 /* TripSplitr.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = TripSplitr.mov; sourceTree = "<group>"; };
 		444C6143243528960021D9F8 /* ImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
-		44697CD32433AA3600252764 /* AddFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendVC.swift; sourceTree = "<group>"; };
+		444C6147243667CE0021D9F8 /* AddExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
+		444C614B24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendsForExpenseVC.swift; sourceTree = "<group>"; };
+		44697CD32433AA3600252764 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		44697CD52433AB4600252764 /* CCCBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCBodyLabel.swift; sourceTree = "<group>"; };
 		755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCCTripSpiltr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F57F70D23EE51C97C50C70 /* Pods-CCCTripSpiltr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCCTripSpiltr.debug.xcconfig"; path = "Target Support Files/Pods-CCCTripSpiltr/Pods-CCCTripSpiltr.debug.xcconfig"; sourceTree = "<group>"; };
@@ -75,7 +79,7 @@
 		D1BB6110242E855D00B90E29 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		D1BB6112242E856100B90E29 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D1BB6114242E857A00B90E29 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		D1BB6116242E858200B90E29 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		D1BB6116242E858200B90E29 /* TripsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripsTableViewController.swift; sourceTree = "<group>"; };
 		D1BB6117242E858200B90E29 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		D1BB6118242E858300B90E29 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D1D01CF6242EB45A00B606C1 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
@@ -148,6 +152,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		444C6149243675AE0021D9F8 /* AuthViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D1BB6118242E858300B90E29 /* LoginViewController.swift */,
+				D1BB6117242E858200B90E29 /* AuthenticationViewController.swift */,
+				D1BB6114242E857A00B90E29 /* SignUpViewController.swift */,
+			);
+			path = AuthViewControllers;
+			sourceTree = "<group>";
+		};
+		444C614A2436760D0021D9F8 /* TableViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D1BB6116242E858200B90E29 /* TripsTableViewController.swift */,
+				D167703C24355E9800D041DE /* TripDetailTableViewController.swift */,
+			);
+			path = TableViewControllers;
+			sourceTree = "<group>";
+		};
 		835A32BF941CAAFDB6B73A85 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,28 +201,27 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		D167703E2435623400D041DE /* Collection View */ = {
+		D167703E2435623400D041DE /* CollectionViews */ = {
 			isa = PBXGroup;
 			children = (
+				D1254B5A2435197A00B9CB53 /* SelectFriendsCollectionViewController.swift */,
+				444C614B24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift */,
+				D1B83BAF2432979300BC9BB6 /* FriendsCollectionViewController.swift */,
 				D1677041243562F200D041DE /* UserAvatarCollectionView.swift */,
 			);
-			path = "Collection View";
+			path = CollectionViews;
 			sourceTree = "<group>";
 		};
 		D1D01CF4242E9D5900B606C1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D167703E2435623400D041DE /* Collection View */,
-				D1BB6118242E858300B90E29 /* LoginViewController.swift */,
-				D1BB6116242E858200B90E29 /* HomeTableViewController.swift */,
-				D1BB6117242E858200B90E29 /* AuthenticationViewController.swift */,
-				D1BB6114242E857A00B90E29 /* SignUpViewController.swift */,
-				D1B83BAF2432979300BC9BB6 /* FriendsCollectionViewController.swift */,
-				D1254B5A2435197A00B9CB53 /* SelectFriendsCollectionViewController.swift */,
-				44697CD32433AA3600252764 /* AddFriendVC.swift */,
+				D167703E2435623400D041DE /* CollectionViews */,
+				444C6149243675AE0021D9F8 /* AuthViewControllers */,
+				444C614A2436760D0021D9F8 /* TableViewControllers */,
+				44697CD32433AA3600252764 /* AddFriendViewController.swift */,
 				D1254B582435131C00B9CB53 /* CreateTripViewController.swift */,
 				444C6143243528960021D9F8 /* ImagePickerController.swift */,
-				D167703C24355E9800D041DE /* TripDetailTableViewController.swift */,
+				444C6147243667CE0021D9F8 /* AddExpenseViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -386,17 +408,19 @@
 				D167703B24354BDD00D041DE /* UIImage+Ext.swift in Sources */,
 				D1254B5B2435197A00B9CB53 /* SelectFriendsCollectionViewController.swift in Sources */,
 				D1D01CF7242EB45A00B606C1 /* Trip.swift in Sources */,
+				444C6148243667CE0021D9F8 /* AddExpenseViewController.swift in Sources */,
 				4446A36E242E775100F22D90 /* SceneDelegate.swift in Sources */,
 				D1E33DF82432A7090077D4C6 /* CCCAvatarImageView.swift in Sources */,
+				444C614C24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift in Sources */,
 				D1F5E6182433CDAC008F3E72 /* CCCTextView.swift in Sources */,
 				D1BB611B242E858300B90E29 /* LoginViewController.swift in Sources */,
 				D1BB611A242E858300B90E29 /* AuthenticationViewController.swift in Sources */,
 				D196AA0F24341D1F00E5B156 /* TripCell.swift in Sources */,
 				D1E33DFA2432A8140077D4C6 /* CCCTitleLabel.swift in Sources */,
 				D1BB6115242E857A00B90E29 /* SignUpViewController.swift in Sources */,
-				44697CD42433AA3600252764 /* AddFriendVC.swift in Sources */,
+				44697CD42433AA3600252764 /* AddFriendViewController.swift in Sources */,
 				D167703D24355E9800D041DE /* TripDetailTableViewController.swift in Sources */,
-				D1BB6119242E858300B90E29 /* HomeTableViewController.swift in Sources */,
+				D1BB6119242E858300B90E29 /* TripsTableViewController.swift in Sources */,
 				D11847BC243656C600E6949B /* Expense.swift in Sources */,
 				D1E33DF52432A4890077D4C6 /* FriendCell.swift in Sources */,
 				D1D01D04242EC54700B606C1 /* User.swift in Sources */,

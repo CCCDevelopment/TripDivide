@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class HomeTableViewController: UITableViewController {
+class TripsTableViewController: UITableViewController {
     
     
     var trips: [String] = []
