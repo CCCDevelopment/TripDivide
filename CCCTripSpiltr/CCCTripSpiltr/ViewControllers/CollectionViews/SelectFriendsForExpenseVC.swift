@@ -90,7 +90,7 @@ class SelectFriendsForExpenseVC: UIViewController {
             for user in selectedFriends {
                 dictionary[user] = expense?.cost ?? 0.0 / Double(selectedFriends.count)
             }
-            expense?.usedBy = dictionary
+            expense?.usedBy = dictionaryhu
         }
 
     }
