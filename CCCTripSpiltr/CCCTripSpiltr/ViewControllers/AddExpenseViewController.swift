@@ -26,7 +26,7 @@ class AddExpenseViewController: UIViewController {
     override func viewDidLoad() {
          super.viewDidLoad()
          
-         configure()
+        configure()
         nameTextField.delegate = self
         costTextField.delegate = self
      }
@@ -34,6 +34,14 @@ class AddExpenseViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         print("Paid by \(expense.paidBy.count) people")
         print("Used by \(expense.usedBy.count) people")
+        
+        for this in expense.paidBy {
+            print("\(this.key) pays \(this.value)")
+        }
+        
+        for this in expense.usedBy {
+            print("\(this.key) used \(this.value)")
+        }
     }
     
     func configure() {
@@ -43,7 +51,9 @@ class AddExpenseViewController: UIViewController {
 
     func updateExpense() {
         let name = nameTextField.text ?? ""
-        let cost = Double(costTextField.text ?? "0.0") ?? 0.0
+        
+        
+        let cost = Double(Int(costTextField.text ?? "0") ?? 0)
         
         expense.name = name
         expense.cost = cost

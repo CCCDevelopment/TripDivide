@@ -79,19 +79,21 @@ class SelectFriendsForExpenseVC: UIViewController {
     }
     
     @objc func createButtonPressed() {
-        guard let selectType = selectType else { return }
+        guard let selectType = selectType,
+        let expense = expense else { return }
+        
         var dictionary = [String: Double]()
         switch selectType {
         case .paidBy:
             for user in selectedFriends {
-                dictionary[user] = expense?.cost ?? 0.0 / Double(selectedFriends.count)
+                dictionary[user] = expense.cost / Double(selectedFriends.count)
             }
-            expense?.paidBy = dictionary
+            expense.paidBy = dictionary
         case .usedBy:
             for user in selectedFriends {
-                dictionary[user] = expense?.cost ?? 0.0 / Double(selectedFriends.count)
+                dictionary[user] = expense.cost / Double(selectedFriends.count)
             }
-            expense?.usedBy = dictionary
+            expense.usedBy = dictionary
         }
         navigationController?.popViewController(animated: true)
     }
