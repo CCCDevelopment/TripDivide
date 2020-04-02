@@ -48,6 +48,7 @@ class SelectFriendsForExpenseVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getFriends()
+        
     }
     
     func getFriends() {
@@ -90,9 +91,9 @@ class SelectFriendsForExpenseVC: UIViewController {
             for user in selectedFriends {
                 dictionary[user] = expense?.cost ?? 0.0 / Double(selectedFriends.count)
             }
-            expense?.usedBy = dictionaryhu
+            expense?.usedBy = dictionary
         }
-
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -121,7 +122,7 @@ extension SelectFriendsForExpenseVC: UICollectionViewDelegate, UICollectionViewD
         }
         cell?.contentView.backgroundColor = .systemTeal
         selectedFriends.append(userID)
-        print(selectedFriends.count)
+
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

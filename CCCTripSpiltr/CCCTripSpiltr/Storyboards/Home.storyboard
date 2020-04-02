@@ -513,7 +513,7 @@
                                             <constraint firstAttribute="width" constant="250" id="53h-17-Zbh"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -552,8 +552,9 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="foS-kw-HCe"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="addExpenseTextField" destination="SZ4-wO-DNu" id="au3-4L-cTx"/>
                         <outlet property="addRecieptImageView" destination="NMo-zR-Fz6" id="UEg-Ha-zY5"/>
+                        <outlet property="costTextField" destination="gkH-Z5-ZlU" id="KMC-ku-gKO"/>
+                        <outlet property="nameTextField" destination="SZ4-wO-DNu" id="au3-4L-cTx"/>
                         <outlet property="paidByButton" destination="Dg9-Gi-XXQ" id="JM6-kt-XWm"/>
                         <outlet property="paidByCollectionView" destination="NX8-rh-8O5" id="25L-LF-N16"/>
                         <outlet property="usedByButton" destination="oMG-eN-jnQ" id="I3L-vT-1xB"/>

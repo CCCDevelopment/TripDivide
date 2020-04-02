@@ -18,29 +18,40 @@ class AddExpenseViewController: UIViewController {
     @IBOutlet weak var paidByCollectionView: UserAvatarCollectionView!
     @IBOutlet weak var usedByButton: UIButton!
     @IBOutlet weak var paidByButton: UIButton!
-    @IBOutlet weak var addExpenseTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addRecieptImageView: UIImageView!
+    @IBOutlet weak var costTextField: UITextField!
     
 
     override func viewDidLoad() {
          super.viewDidLoad()
          
          configure()
-         
+        nameTextField.delegate = self
+        costTextField.delegate = self
      }
-     
     
-    func configure() {
-    
-        
-        
+    override func viewWillAppear(_ animated: Bool) {
+        print("Paid by \(expense.paidBy.count) people")
+        print("Used by \(expense.usedBy.count) people")
     }
     
+    func configure() {
+   
+    }
     
+
+    func updateExpense() {
+        let name = nameTextField.text ?? ""
+        let cost = Double(costTextField.text ?? "0.0") ?? 0.0
+        
+        expense.name = name
+        expense.cost = cost
+    }
     
-    
-    
+
     @IBAction func splitOptionsButtonTapped(_ sender: Any) {
+        
     }
     @IBAction func paidByButtonTapped(_ sender: Any) {
         
@@ -55,5 +66,14 @@ class AddExpenseViewController: UIViewController {
         vc.trip = trip
         vc.expense = expense
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+
+extension AddExpenseViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        updateExpense()
+        textField.resignFirstResponder()
+        return true
     }
 }
