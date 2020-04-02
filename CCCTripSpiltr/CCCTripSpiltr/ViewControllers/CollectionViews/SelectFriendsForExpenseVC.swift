@@ -1,24 +1,42 @@
 //
-//  SelectFriendsCollectionViewController.swift
+//  SelectFriendsForExpenseVC.swift
 //  CCCTripSpiltr
 //
-//  Created by jonathan ferrer on 4/1/20.
+//  Created by Ryan Murphy on 4/2/20.
 //  Copyright © 2020 Ryan Murphy. All rights reserved.
 //
 
 import UIKit
+import Firebase
 
-class SelectFriendsCollectionViewController: UIViewController {
+enum SelectFriendsType {
+    case paidBy
+    case usedBy
+}
+
+
+class SelectFriendsForExpenseVC: UIViewController {
     
     
-    
-    var collectionView: UICollectionView!
     var friends = [String]()
+    var collectionView: UICollectionView!
     var selectedFriends = [String]()
-    var tripName: String?
+
+    var image: UIImage?
+    var selectType: SelectFriendsType?
+    var trip: Trip?
+    var expense: Expense?
+    
+    init(selectType: SelectFriendsType) {
+        super.init(nibName: nil, bundle: nil)
+        self.selectType = selectType
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         configureCollectionView()
         configureViewController()
@@ -30,21 +48,15 @@ class SelectFriendsCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getFriends()
+        
     }
     
     func getFriends() {
-        NetworkController.shared.getCurrentUser { [weak self] (user, error) in
-            guard let self = self else { return }
-            
-            if let error = error {
-                NSLog(error.rawValue)
-            }
-            guard let user = user else { return }
-            
-            self.friends = user.friends
-            
-            self.collectionView.reloadData()
-        }
+        guard let trip = trip else { return }
+        
+        friends = trip.users
+
+        
     }
     
     
@@ -53,7 +65,7 @@ class SelectFriendsCollectionViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let createButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(createButtonPressed))
+        let createButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createButtonPressed))
         navigationItem.rightBarButtonItem = createButton
     }
     
@@ -67,23 +79,28 @@ class SelectFriendsCollectionViewController: UIViewController {
     }
     
     @objc func createButtonPressed() {
-        guard let tripName = tripName else { return}
-
+        guard let selectType = selectType,
+        let expense = expense else { return }
         
-        NetworkController.shared.createTrip(with: tripName, friendIds: selectedFriends) { [weak self] (error) in
-            guard let self = self else { return }
-            if let error = error {
-                NSLog(error.rawValue)
+        var dictionary = [String: Double]()
+        switch selectType {
+        case .paidBy:
+            for user in selectedFriends {
+                dictionary[user] = expense.cost / Double(selectedFriends.count)
             }
-            self.dismiss(animated: true, completion: nil)
+            expense.paidBy = dictionary
+        case .usedBy:
+            for user in selectedFriends {
+                dictionary[user] = expense.cost / Double(selectedFriends.count)
+            }
+            expense.usedBy = dictionary
         }
-        
+        navigationController?.popViewController(animated: true)
     }
-    
 }
 
 
-extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension SelectFriendsForExpenseVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return friends.count
     }
@@ -107,7 +124,7 @@ extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICol
         }
         cell?.contentView.backgroundColor = .systemTeal
         selectedFriends.append(userID)
-        print(selectedFriends.count)
+
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -122,5 +139,3 @@ extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICol
 
     }
 }
-
-

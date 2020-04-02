@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class HomeTableViewController: UITableViewController {
+class TripsTableViewController: UITableViewController {
     
     
     var trips: [String] = []
@@ -49,11 +49,6 @@ class HomeTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func addTripButtonPressed(_ sender: Any) {
-        
-        
-    }
-    
     @IBAction func signOutPressed(_ sender: UIBarButtonItem) {
         do {
             try Auth.auth().signOut()
@@ -73,5 +68,15 @@ class HomeTableViewController: UITableViewController {
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        let trip = trips[indexPath.row]
+        
+        if segue.identifier == "TripDetailSegue" {
+            let destinatioVC = segue.destination as? TripDetailTableViewController
+            destinatioVC?.tripID = trip
+        }
+        
+    }
     
 }
