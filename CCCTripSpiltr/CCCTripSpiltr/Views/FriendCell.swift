@@ -13,7 +13,7 @@ class FriendCell: UICollectionViewCell {
     static let reuseID = "FriendCell"
     let avatarImageView = CCCAvatarImageView(frame: .zero)
     let nameLabel = CCCTitleLabel(textAlignment: .center, fontSize: 14)
-
+    var userID: String?
     
     
     override init(frame: CGRect) {
@@ -27,6 +27,8 @@ class FriendCell: UICollectionViewCell {
     
     
     func set(userID: String) {
+        self.userID = userID
+        
         NetworkController.shared.getUser(for: userID) { [weak self] (user, error) in
             guard let self = self else { return }
             if let error = error {

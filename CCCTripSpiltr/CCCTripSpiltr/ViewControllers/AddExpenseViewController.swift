@@ -25,8 +25,6 @@ class AddExpenseViewController: UIViewController {
 
     override func viewDidLoad() {
          super.viewDidLoad()
-         
-        configure()
         nameTextField.delegate = self
         costTextField.delegate = self
     
@@ -55,10 +53,6 @@ class AddExpenseViewController: UIViewController {
         }
     }
     
-    func configure() {
-   
-    }
-    
 
     func updateExpense() {
         let name = nameTextField.text ?? ""
@@ -68,6 +62,10 @@ class AddExpenseViewController: UIViewController {
         
         expense.name = name
         expense.cost = cost
+    }
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        
+        
     }
     
 
@@ -88,6 +86,9 @@ class AddExpenseViewController: UIViewController {
         vc.expense = expense
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    
+    
 }
 
 

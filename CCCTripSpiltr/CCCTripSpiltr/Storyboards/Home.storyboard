@@ -550,7 +550,11 @@
                         <viewLayoutGuide key="safeArea" id="uaY-z1-aNZ"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Expense" id="mey-nk-D4Z">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="foS-kw-HCe"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="foS-kw-HCe">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="EYH-y3-Ja7" id="emC-Db-Whr"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addRecieptImageView" destination="NMo-zR-Fz6" id="UEg-Ha-zY5"/>
@@ -618,7 +622,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Gzx-I7-OUj">
-                                                    <rect key="frame" x="126" y="17" width="121.5" height="49"/>
+                                                    <rect key="frame" x="126.5" y="17" width="121.5" height="49"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jonathan Ferrer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAS-8c-dB5">
                                                             <rect key="frame" x="0.0" y="0.0" width="121.5" height="20.5"/>
