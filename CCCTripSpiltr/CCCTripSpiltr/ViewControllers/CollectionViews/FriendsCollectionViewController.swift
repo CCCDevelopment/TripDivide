@@ -53,6 +53,15 @@ class FriendsCollectionViewController: UIViewController {
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
+        
+       
+        
+    }
+    
+    @IBAction func editUserbuttonPressed(_ sender: Any) {
+        
+        let vc = UserInfoViewController()
+        present(vc, animated: true, completion: nil)
     }
     
     func configureCollectionView() {

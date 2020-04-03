@@ -10,12 +10,35 @@ import UIKit
 
 class UserAvatarCollectionView: UICollectionView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    var selectType: SelectFriendsType?
+    
+    
+    
+    
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+        super.init(frame: frame, collectionViewLayout: layout)
     }
-    */
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    
+    func set(selectType: SelectFriendsType) {
+        self.selectType = selectType
+        register(ExpenseAvatarCell.self, forCellWithReuseIdentifier: ExpenseAvatarCell.reuseID)
+    }
+    
+    override func numberOfItems(inSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func cellForItem(at indexPath: IndexPath) -> UICollectionViewCell? {
+        return FriendCell()
+    }
+    
+    
+    
 
 }

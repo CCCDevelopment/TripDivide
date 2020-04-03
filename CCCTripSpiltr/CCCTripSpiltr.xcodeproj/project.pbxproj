@@ -40,6 +40,8 @@
 		D1D01CFF242EBD2000B606C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1D01CFE242EBD2000B606C1 /* Main.storyboard */; };
 		D1D01D02242EC09400B606C1 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D01D01242EC09400B606C1 /* NetworkController.swift */; };
 		D1D01D04242EC54700B606C1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D01D03242EC54700B606C1 /* User.swift */; };
+		D1D14D8B2437D5F70091092E /* ExpenseAvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D14D8A2437D5F70091092E /* ExpenseAvatarCell.swift */; };
+		D1D14D8D2437D82C0091092E /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D14D8C2437D82C0091092E /* UserInfoViewController.swift */; };
 		D1E33DF52432A4890077D4C6 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E33DF42432A4890077D4C6 /* FriendCell.swift */; };
 		D1E33DF82432A7090077D4C6 /* CCCAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E33DF72432A7090077D4C6 /* CCCAvatarImageView.swift */; };
 		D1E33DFA2432A8140077D4C6 /* CCCTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */; };
@@ -86,6 +88,8 @@
 		D1D01CFE242EBD2000B606C1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D1D01D01242EC09400B606C1 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		D1D01D03242EC54700B606C1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D1D14D8A2437D5F70091092E /* ExpenseAvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseAvatarCell.swift; sourceTree = "<group>"; };
+		D1D14D8C2437D82C0091092E /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		D1E33DF42432A4890077D4C6 /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		D1E33DF72432A7090077D4C6 /* CCCAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCAvatarImageView.swift; sourceTree = "<group>"; };
 		D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCTitleLabel.swift; sourceTree = "<group>"; };
@@ -219,6 +223,7 @@
 				444C6149243675AE0021D9F8 /* AuthViewControllers */,
 				444C614A2436760D0021D9F8 /* TableViewControllers */,
 				44697CD32433AA3600252764 /* AddFriendViewController.swift */,
+				D1D14D8C2437D82C0091092E /* UserInfoViewController.swift */,
 				D1254B582435131C00B9CB53 /* CreateTripViewController.swift */,
 				444C6143243528960021D9F8 /* ImagePickerController.swift */,
 				444C6147243667CE0021D9F8 /* AddExpenseViewController.swift */,
@@ -262,6 +267,7 @@
 				D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */,
 				44697CD52433AB4600252764 /* CCCBodyLabel.swift */,
 				D1F5E6172433CDAC008F3E72 /* CCCTextView.swift */,
+				D1D14D8A2437D5F70091092E /* ExpenseAvatarCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -409,6 +415,7 @@
 				D1254B5B2435197A00B9CB53 /* SelectFriendsCollectionViewController.swift in Sources */,
 				D1D01CF7242EB45A00B606C1 /* Trip.swift in Sources */,
 				444C6148243667CE0021D9F8 /* AddExpenseViewController.swift in Sources */,
+				D1D14D8D2437D82C0091092E /* UserInfoViewController.swift in Sources */,
 				4446A36E242E775100F22D90 /* SceneDelegate.swift in Sources */,
 				D1E33DF82432A7090077D4C6 /* CCCAvatarImageView.swift in Sources */,
 				444C614C24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift in Sources */,
@@ -418,6 +425,7 @@
 				D196AA0F24341D1F00E5B156 /* TripCell.swift in Sources */,
 				D1E33DFA2432A8140077D4C6 /* CCCTitleLabel.swift in Sources */,
 				D1BB6115242E857A00B90E29 /* SignUpViewController.swift in Sources */,
+				D1D14D8B2437D5F70091092E /* ExpenseAvatarCell.swift in Sources */,
 				44697CD42433AA3600252764 /* AddFriendViewController.swift in Sources */,
 				D167703D24355E9800D041DE /* TripDetailTableViewController.swift in Sources */,
 				D1BB6119242E858300B90E29 /* TripsTableViewController.swift in Sources */,

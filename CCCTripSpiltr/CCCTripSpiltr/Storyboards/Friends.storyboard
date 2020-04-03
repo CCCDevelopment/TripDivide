@@ -18,7 +18,13 @@
                         <viewLayoutGuide key="safeArea" id="ib4-I8-oaO"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Friends" image="person.3.fill" catalog="system" id="441-St-jOg"/>
-                    <navigationItem key="navigationItem" id="uTJ-ku-SSV"/>
+                    <navigationItem key="navigationItem" id="uTJ-ku-SSV">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="person.fill" catalog="system" id="rqE-ez-Wea">
+                            <connections>
+                                <action selector="editUserbuttonPressed:" destination="VsK-F1-dcj" id="jmI-nh-Kt2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kd2-4A-Ps6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -46,5 +52,6 @@
     </scenes>
     <resources>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
     </resources>
 </document>
