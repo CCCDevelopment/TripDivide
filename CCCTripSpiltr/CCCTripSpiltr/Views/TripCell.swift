@@ -33,11 +33,9 @@ class TripCell: UITableViewCell {
 
     func set(tripID: String) {
         
-        
-
-        
         NetworkController.shared.getTrip(for: tripID) { [weak self] (trip, error) in
             guard let self = self else { return }
+            
             if let error = error {
                 NSLog(error.rawValue)
                 return

@@ -14,6 +14,7 @@ class TripDetailTableViewController: UITableViewController {
     var tripID: String?
     var trip: Trip?
     
+    @IBOutlet weak var containerView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,11 +45,14 @@ class TripDetailTableViewController: UITableViewController {
     
     func configureViews () {
         guard let trip = trip else { return }
+        containerView.showLoadingView()
         UIImage().downloadImage(from: trip.imageURL) { [weak self] (image) in
             
          guard let image = image,
             let self = self else { return }
+            
             DispatchQueue.main.async {
+                self.containerView.dismissLoadingView()
                 self.tripImageView.image = image
             }
             

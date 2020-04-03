@@ -30,9 +30,10 @@ class FriendsCollectionViewController: UIViewController {
     }
     
     func getFriends() {
+        view.showLoadingView()
         NetworkController.shared.getCurrentUser { [weak self] (user, error) in
             guard let self = self else { return }
-            
+            self.view.dismissLoadingView()
             if let error = error {
                 NSLog(error.rawValue)
             }

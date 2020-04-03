@@ -34,6 +34,7 @@ class SelectFriendsCollectionViewController: UIViewController {
     }
     
     func getFriends() {
+        
         NetworkController.shared.getCurrentUser { [weak self] (user, error) in
             guard let self = self else { return }
             
@@ -70,8 +71,10 @@ class SelectFriendsCollectionViewController: UIViewController {
     @objc func createButtonPressed() {
         guard let tripName = tripName,
             let image = image else { return}
-        
-        NetworkController.shared.uploadTrip(image: image, name: tripName, friendIds: selectedFriends) { (error) in
+        view.showLoadingView()
+        NetworkController.shared.uploadTrip(image: image, name: tripName, friendIds: selectedFriends) { [weak self](error) in
+            guard let self = self else { return }
+            self.view.dismissLoadingView()
             if let error = error {
                 NSLog(error.rawValue)
             }

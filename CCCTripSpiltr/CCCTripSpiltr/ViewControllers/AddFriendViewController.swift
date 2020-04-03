@@ -112,7 +112,6 @@ class AddFriendVC: UIViewController {
     }
     func configureSearchResultViews() {
         containerView.addSubview(avatarImageView)
-        nameLabel.text = "asdf"
         containerView.addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.textAlignment = .center
@@ -138,8 +137,10 @@ class AddFriendVC: UIViewController {
     
     @objc func addAction() {
         guard let searchedUser = searchedUser else { return }
+        view.showLoadingView()
         NetworkController.shared.add(friend: searchedUser.id) {  [weak self] (error) in
             guard let self = self else { return }
+            self.view.dismissLoadingView()
             if let error = error {
                 NSLog(error.rawValue)
             }
@@ -153,6 +154,7 @@ class AddFriendVC: UIViewController {
 extension AddFriendVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         emailTextField.resignFirstResponder()
+        
         performSearchAction()
         return true
     }
@@ -160,16 +162,22 @@ extension AddFriendVC: UITextFieldDelegate {
     func performSearchAction() {
         guard let searchEmail = emailTextField.text?.lowercased(),
             !searchEmail.isEmpty else { return }
+        view.showLoadingView()
         NetworkController.shared.search(email: searchEmail) { [weak self] user, error in
             guard let self = self else { return }
             
+            
+            self.view.dismissLoadingView()
             if let error = error {
                 NSLog(error.rawValue)
+                self.nameLabel.text = "User does not exist."
+                self.nameLabel.textColor = .systemRed
             }
             
             guard let user = user else { return }
             self.searchedUser = user
             self.nameLabel.text = user.fullName
+            self.nameLabel.textColor = .label
         }
     }
 }

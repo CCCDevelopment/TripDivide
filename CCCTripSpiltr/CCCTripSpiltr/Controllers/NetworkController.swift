@@ -30,9 +30,10 @@ class NetworkController {
     let storage = Storage.storage()
     static let shared = NetworkController()
     
-    func uploadTrip(image: UIImage,name: String, friendIds: [String], completion: @escaping (CCCError?) -> Void) {
+    func uploadTrip(image: UIImage?,name: String, friendIds: [String], completion: @escaping (CCCError?) -> Void) {
         
-        guard let imageData = image.jpegData(compressionQuality: 0.75) else {
+        guard let image = image,
+            let imageData = image.jpegData(compressionQuality: 0.75) else {
             completion(.uploadingImageError)
             return
         }
@@ -90,7 +91,7 @@ class NetworkController {
                     completion(nil)
                 }
             }
-        }
+    }
         
         func getTrip(for id: String, completion: @escaping (Trip?, CCCError?) -> Void) {
             let tripsRef = db.collection("trips")
@@ -149,12 +150,18 @@ class NetworkController {
         func getCurrentUser(completion: @escaping (User?, CCCError?) -> Void) {
             let ref = db.collection("users")
             
-            guard let currentAuthUser = Auth.auth().currentUser else { return }
+            guard let currentAuthUser = Auth.auth().currentUser else {
+                completion(nil, .noData)
+                return }
             let userREf = ref.document(currentAuthUser.uid)
             
-            userREf.getDocument { (document, _) in
+            userREf.getDocument { (document, error) in
                 if let document = document, document.exists {
-                    guard let data = document.data() else { return }
+                    guard let data = document.data() else {
+                        completion(nil, .noData)
+                        return
+                        
+                    }
                     let user = User(from: data)
                     self.currentUser = user
                     completion(user, nil)
@@ -162,6 +169,7 @@ class NetworkController {
                     completion(nil, .noData)
                 }
             }
+            
         }
         
         func getUser(for id: String, completion: @escaping (User?, CCCError?) -> Void) {
@@ -171,7 +179,9 @@ class NetworkController {
             
             userDocument.getDocument { (document, _) in
                 if let document = document, document.exists {
-                    guard let data = document.data() else { return }
+                    guard let data = document.data() else {
+                        completion(nil, .noData)
+                        return }
                     let user = User(from: data)
                     completion(user, nil)
                 } else {
@@ -206,7 +216,10 @@ class NetworkController {
                     completion(nil, .noData)
                 } else {
                     guard let snapshot = querySnapshot,
-                        let document = snapshot.documents.first else { return }
+                        let document = snapshot.documents.first else {
+                            completion(nil, .noData)
+                            return
+                    }
                     
                     let user = User(from: document.data())
                     completion(user, nil)
