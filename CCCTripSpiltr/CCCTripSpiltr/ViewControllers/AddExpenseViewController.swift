@@ -64,8 +64,17 @@ class AddExpenseViewController: UIViewController {
         expense.cost = cost
     }
     @IBAction func saveButtonPressed(_ sender: Any) {
-        
-        
+        guard let tripID = trip?.id else { return }
+        view.showLoadingView()
+        NetworkController.shared.createExpense(expense: expense, tripID: tripID) { [weak self ](error) in
+            guard let self = self else { return }
+            self.view.dismissLoadingView()
+            if let error = error {
+                NSLog(error.rawValue)
+            }
+            
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
 
@@ -94,13 +103,20 @@ class AddExpenseViewController: UIViewController {
 
 extension AddExpenseViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        updateExpense()
         
         textField.resignFirstResponder()
         if textField == costTextField {
             textField.text = textField.text?.currencyInputFormatting()
         }
+        updateExpense()
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == costTextField {
+            textField.text = textField.text?.currencyInputFormatting()
+        }
+        updateExpense()
     }
 }
 

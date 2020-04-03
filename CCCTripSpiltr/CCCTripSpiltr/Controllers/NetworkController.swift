@@ -20,6 +20,7 @@ enum CCCError: String {
     case addingFriendError = "Error adding friend"
     case addingTripError = "Error adding trip"
     case uploadingImageError = "Error uploading image"
+    case creatingExpenseError = "Error creating expense"
 }
 
 class NetworkController {
@@ -29,6 +30,28 @@ class NetworkController {
     let db = Firestore.firestore()
     let storage = Storage.storage()
     static let shared = NetworkController()
+    
+    
+    func createExpense(expense: Expense, tripID: String, completion: @escaping (CCCError?) -> Void) {
+        
+        let ref = self.db.collection("trips").document(tripID)
+            
+        ref.updateData(["expenses": FieldValue.arrayUnion([expense.dictionaryRep()])]) { (error) in
+            
+            if let _ = error {
+                completion(CCCError.creatingExpenseError)
+                return
+            }
+            
+            completion(nil)
+            
+        }
+        
+        
+        
+    }
+    
+    
     
     func uploadTrip(image: UIImage?,name: String, friendIds: [String], completion: @escaping (CCCError?) -> Void) {
         
