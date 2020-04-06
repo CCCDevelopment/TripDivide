@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerDelegate{
 
@@ -20,9 +21,9 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     let avatarImageView = CCCAvatarImageView(frame: .zero)
     let addPhotoButton = UIButton()
     var imagePicker: ImagePicker!
-    
+    var currentUser: User!
     let stackView = UIStackView()
-    
+    var avatarImage: UIImage!
     var buttonTitle = "Close"
     var addButtonTitle = "Update"
     var viewTitle = "Update Your Info"
@@ -36,12 +37,53 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         configureAddPhotoButton()
         configureImageView()
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        
+        updateViews()
     }
     
     
     func didSelect(image: UIImage?) {
+        self.avatarImage = image
         self.avatarImageView.image = image
     }
+    
+    
+    func updateViews() {
+        
+        NetworkController.shared.getCurrentUser { (user, error) in
+            if let error = error {
+                NSLog(error.rawValue)
+                return
+            }
+            
+            self.currentUser = user
+            
+            self.nameTextField.text = user?.fullName
+            self.usernameTextField.text = user?.username
+            
+            if let imageURL = user?.avatar {
+                self.setImage(imageURL: imageURL)
+            }
+            
+        }
+        
+        
+        
+    }
+    
+    func setImage(imageURL: String) {
+        avatarImage = UIImage()
+        avatarImage.downloadImage(from: imageURL) { (image) in
+            if let image = image {
+                DispatchQueue.main.async {
+                    self.avatarImageView.image = image
+                }
+            } else {
+                self.avatarImage = nil
+            }
+        }
+    }
+    
     
     func configureStackView() {
         
@@ -180,10 +222,40 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     
     
     @objc func dismissVC() {
+        self.dismiss(animated: true, completion: nil)
+        
+        
         
     }
     
     @objc func updateUser() {
+        guard let currentUser = currentUser,
+            let name = nameTextField.text,
+            !name.isEmpty, let username = usernameTextField.text,
+            !username.isEmpty else { return }
+        
+        currentUser.fullName = name
+        currentUser.username = username
+        
+        if let avatarImage = avatarImage {
+            NetworkController.shared.updateUser(with: avatarImage, user: currentUser) { (error) in
+                if let error = error {
+                NSLog(error.rawValue)
+                return
+            }
+                self.dismissVC()
+            }
+        } else {
+            NetworkController.shared.updateUser(with: nil, user: currentUser) { (error) in
+                if let error = error {
+                    NSLog(error.rawValue)
+                    return
+                }
+                self.dismissVC()
+            }
+        }
+        
+        
         
     }
 

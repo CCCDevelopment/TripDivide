@@ -21,6 +21,7 @@ enum CCCError: String {
     case addingTripError = "Error adding trip"
     case uploadingImageError = "Error uploading image"
     case creatingExpenseError = "Error creating expense"
+    case updatingUserError = "Error updating user"
 }
 
 class NetworkController {
@@ -68,13 +69,7 @@ class NetworkController {
             completion(.uploadingImageError)
             return
         }
-        
-        
-        
-        
-        
-        
-        
+
         let storageRef = storage.reference()
         let imagesFolderRef = storageRef.child("images").child("tripImages")
         let imageURLRef = imagesFolderRef.child("\(UUID().uuidString).jpg")
@@ -86,8 +81,8 @@ class NetworkController {
             
             imageURLRef.downloadURL { (url, error) in
                 
-                if let error = error {
-                    NSLog("\(error)")
+                if let _ = error {
+                    completion(.uploadingImageError)
                 }
                 
                 guard let downloadURL = url else {
@@ -98,7 +93,7 @@ class NetworkController {
                 
                 self.createTrip(with: name, friendIds: friendIds, imageURL: downloadURL.absoluteString) { (error) in
                     if let _ = error {
-                        completion(.creatingTripError)
+                        completion(.uploadingImageError)
                     }
                 }
             }
@@ -182,8 +177,71 @@ class NetworkController {
                 }
             }
         }
+    
+    func updateUser(with image: UIImage?, user: User, completion: @escaping (CCCError?) -> Void) {
+        
+        guard let image = image,
+            let imageData = image.jpegData(compressionQuality: 0.75) else {
+                
+                
+                self.updateUser(user: user) { (error) in
+                    if let error = error {
+                        NSLog(error.rawValue)
+                    }
+                }
+                
+            completion(.uploadingImageError)
+            return
+        }
+
+        let storageRef = storage.reference()
+        let imagesFolderRef = storageRef.child("images").child("avatarImages")
+        let imageURLRef = imagesFolderRef.child("\(UUID().uuidString).jpg")
+        imageURLRef.putData( imageData, metadata: nil) { (metadata, error) in
+            guard let _ = metadata else {
+                completion(.uploadingImageError)
+                return
+            }
+            
+            imageURLRef.downloadURL { (url, error) in
+                
+                if let _ = error {
+                    completion(.updatingUserError)
+                    return
+                }
+                
+                guard let downloadURL = url else {
+                    completion(.uploadingImageError)
+                    return
+                }
+                
+                user.avatar = downloadURL.absoluteString
+                
+                self.updateUser(user: user) { (error) in
+                    completion(.updatingUserError)
+                    return
+                }
+                completion(nil)
+            }
+        }
+    }
+    
+    
+        
+    func updateUser(user: User, completion: @escaping (CCCError?) -> Void) {
+        let ref = db.collection("users")
+        ref.document(user.id).setData(user.dictionaryRep(), completion: { (error) in
+            if let _ = error {
+                completion(CCCError.updatingUserError)
+                return
+            }
+            completion(nil)
+        })
+
+
         
         
+    }
         
         func getCurrentUser(completion: @escaping (User?, CCCError?) -> Void) {
             let ref = db.collection("users")

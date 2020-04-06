@@ -12,11 +12,11 @@ class User {
     let id: String
     var username: String
     var fullName: String
-    var avatar: UIImage?
+    var avatar: String?
     var email: String
     var friends: [String]
     var trips: [String]
-    init(id: String = UUID().uuidString, username: String, fullName: String, avatar: UIImage?, email: String, friends: [String] = [], trips: [String] = []) {
+    init(id: String = UUID().uuidString, username: String, fullName: String, avatar: String?, email: String, friends: [String] = [], trips: [String] = []) {
         self.id = id
         self.username = username
         self.fullName = fullName
@@ -34,9 +34,10 @@ class User {
         self.email = dictionary["email"] as! String
         self.friends = dictionary["friends"] as! [String]
         self.trips = dictionary["trips"] as! [String]
+        self.avatar = dictionary["avatar"] as? String
     }
     
     func dictionaryRep() -> [String : Any] {
-        return ["id": id, "username": username, "fullName": fullName, "email": email, "friends": friends, "trips": trips]
+        return ["id": id, "username": username, "fullName": fullName, "email": email, "friends": friends, "trips": trips, "avatar": avatar as Any]
     }
 }
