@@ -46,17 +46,23 @@ class TripDetailTableViewController: UITableViewController {
     func configureViews () {
         guard let trip = trip else { return }
         containerView.showLoadingView()
-        UIImage().downloadImage(from: trip.imageURL) { [weak self] (image) in
-            
-         guard let image = image,
-            let self = self else { return }
-            
-            DispatchQueue.main.async {
-                self.containerView.dismissLoadingView()
-                self.tripImageView.image = image
+   
+        if let image = trip.imageURL {
+            UIImage().downloadImage(from: image) { (tripImage) in
+                guard let tripImage = tripImage else { return }
+                
+                DispatchQueue.main.async {
+                    self.containerView.dismissLoadingView()
+                    self.tripImageView.image = tripImage
+                }
             }
-            
+        } else {
+            self.containerView.dismissLoadingView()
+            self.tripImageView.image = Constants.Images.defaultTrip
         }
+        
+        
+        
         self.title = trip.name
     }
     

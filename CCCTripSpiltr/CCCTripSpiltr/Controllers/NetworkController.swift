@@ -57,9 +57,24 @@ class NetworkController {
         
         guard let image = image,
             let imageData = image.jpegData(compressionQuality: 0.75) else {
+                
+                
+                self.createTrip(with: name, friendIds: friendIds, imageURL: nil) { (error) in
+                    if let _ = error {
+                        completion(.creatingTripError)
+                    }
+                }
+                
             completion(.uploadingImageError)
             return
         }
+        
+        
+        
+        
+        
+        
+        
         let storageRef = storage.reference()
         let imagesFolderRef = storageRef.child("images").child("tripImages")
         let imageURLRef = imagesFolderRef.child("\(UUID().uuidString).jpg")
@@ -90,7 +105,7 @@ class NetworkController {
         }
     }
         
-    func createTrip(with name: String, friendIds: [String], imageURL: String , completion: @escaping (CCCError?) -> Void) {
+    func createTrip(with name: String, friendIds: [String], imageURL: String? , completion: @escaping (CCCError?) -> Void) {
             
             guard let userID = Auth.auth().currentUser?.uid else {
                 completion(.creatingTripError)

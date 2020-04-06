@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserInfoViewController: UIViewController {
+class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerDelegate{
 
     let containerView = UIView()
     let padding: CGFloat = 20
@@ -19,7 +19,7 @@ class UserInfoViewController: UIViewController {
     let usernameTextField = UITextField()
     let avatarImageView = CCCAvatarImageView(frame: .zero)
     let addPhotoButton = UIButton()
-    
+    var imagePicker: ImagePicker!
     
     let stackView = UIStackView()
     
@@ -35,6 +35,12 @@ class UserInfoViewController: UIViewController {
         configureStackView()
         configureAddPhotoButton()
         configureImageView()
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+    }
+    
+    
+    func didSelect(image: UIImage?) {
+        self.avatarImageView.image = image
     }
     
     func configureStackView() {
@@ -106,7 +112,7 @@ class UserInfoViewController: UIViewController {
     }
     
     @objc func addPhotoButtonTapped() {
-        
+        self.imagePicker.present(from: self.view)
     }
     
     
@@ -169,6 +175,8 @@ class UserInfoViewController: UIViewController {
             
         ])
     }
+    
+    
     
     
     @objc func dismissVC() {

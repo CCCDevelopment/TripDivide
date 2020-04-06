@@ -34,8 +34,7 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         if let image = image {
             selectFriendsVC.image = image
         } else {
-            let image = Constants.Images.defaultTrip
-            selectFriendsVC.image = image
+            selectFriendsVC.image = nil
         }
         
         navigationController?.pushViewController(selectFriendsVC, animated: true)

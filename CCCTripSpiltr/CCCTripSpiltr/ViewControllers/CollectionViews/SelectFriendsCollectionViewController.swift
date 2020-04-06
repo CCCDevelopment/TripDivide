@@ -69,8 +69,7 @@ class SelectFriendsCollectionViewController: UIViewController {
     }
     
     @objc func createButtonPressed() {
-        guard let tripName = tripName,
-            let image = image else { return}
+        guard let tripName = tripName else { return}
         view.showLoadingView()
         NetworkController.shared.uploadTrip(image: image, name: tripName, friendIds: selectedFriends) { [weak self](error) in
             guard let self = self else { return }

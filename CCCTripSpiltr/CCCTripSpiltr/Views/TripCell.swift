@@ -50,18 +50,19 @@ class TripCell: UITableViewCell {
             self.tripNameLabel.adjustsFontSizeToFitWidth = true
             self.tripNameLabel.minimumScaleFactor = 0.5
             
-            UIImage().downloadImage(from: trip.imageURL) { (tripImage) in
-                guard let tripImage = tripImage else { return }
-                
-                DispatchQueue.main.async {
-                    self.tripImageView.image = tripImage
+            if let image = trip.imageURL {
+                UIImage().downloadImage(from: image) { (tripImage) in
+                    guard let tripImage = tripImage else { return }
                     
+                    DispatchQueue.main.async {
+                        self.tripImageView.image = tripImage
+                        
+                    }
                 }
                 
+            } else {
+                self.tripImageView.image = Constants.Images.defaultTrip
             }
-            
-            
-            
         }
         
     }

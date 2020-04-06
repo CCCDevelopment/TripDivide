@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 protocol AddFriendVCDelegate {
     func friendAdded()
@@ -174,10 +175,20 @@ extension AddFriendVC: UITextFieldDelegate {
                 self.nameLabel.textColor = .systemRed
             }
             
-            guard let user = user else { return }
-            self.searchedUser = user
-            self.nameLabel.text = user.fullName
-            self.nameLabel.textColor = .label
+            guard let user = user,
+                let currentUserID = Auth.auth().currentUser?.uid else { return }
+                
+            if user.id != currentUserID {
+                self.searchedUser = user
+                    self.nameLabel.text = user.fullName
+                    self.nameLabel.textColor = .label
+                
+        } else {
+            
+            self.nameLabel.text = "Cannot add yourself."
+            self.nameLabel.textColor = .systemRed
+            
+            }
         }
     }
 }
