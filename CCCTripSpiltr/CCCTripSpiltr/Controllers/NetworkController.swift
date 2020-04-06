@@ -62,13 +62,11 @@ class NetworkController {
                 
                 self.createTrip(with: name, friendIds: friendIds, imageURL: nil) { (error) in
                     if let _ = error {
-                        completion(.creatingExpenseError)
+                        completion(.creatingTripError)
                         return
                     }
                     completion(nil)
                 }
-                
-            
             return
         }
 
@@ -130,9 +128,7 @@ class NetworkController {
                     
                     completion(nil)
                 }
-                completion(nil)
             }
-        completion(nil)
     }
         
         func getTrip(for id: String, completion: @escaping (Trip?, CCCError?) -> Void) {
@@ -275,7 +271,7 @@ class NetworkController {
                 }
             }
             
-        }
+    }
         
         func getUser(for id: String, completion: @escaping (User?, CCCError?) -> Void) {
             let usersRef = db.collection("users")

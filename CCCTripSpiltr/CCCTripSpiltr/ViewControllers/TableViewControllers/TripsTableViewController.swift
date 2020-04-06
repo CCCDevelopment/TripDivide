@@ -31,7 +31,7 @@ class TripsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
 
             getTrips()
-
+        
     }
     
     func getTrips() {
@@ -45,8 +45,9 @@ class TripsTableViewController: UITableViewController {
             
             self.trips = user.trips
             
-            self.tableView.reloadData()
+           self.tableView.reloadData()
         }
+//        self.tableView.reloadData()
     }
     
     @IBAction func signOutPressed(_ sender: UIBarButtonItem) {
