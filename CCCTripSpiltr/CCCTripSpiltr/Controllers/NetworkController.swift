@@ -62,11 +62,13 @@ class NetworkController {
                 
                 self.createTrip(with: name, friendIds: friendIds, imageURL: nil) { (error) in
                     if let _ = error {
-                        completion(.creatingTripError)
+                        completion(.creatingExpenseError)
+                        return
                     }
+                    completion(nil)
                 }
                 
-            completion(.uploadingImageError)
+            
             return
         }
 
@@ -83,6 +85,7 @@ class NetworkController {
                 
                 if let _ = error {
                     completion(.uploadingImageError)
+                    return
                 }
                 
                 guard let downloadURL = url else {
@@ -90,11 +93,13 @@ class NetworkController {
                     return
                 }
                 
-                
+
                 self.createTrip(with: name, friendIds: friendIds, imageURL: downloadURL.absoluteString) { (error) in
                     if let _ = error {
                         completion(.uploadingImageError)
+                       
                     }
+                    completion(nil)
                 }
             }
         }
@@ -113,17 +118,21 @@ class NetworkController {
             ref.document(trip.id).setData(trip.dictionaryRep()) { (error) in
                 if let _ = error {
                     completion(.creatingTripError)
+                    return
                 }
                 
                 
                 self.addTrip(to: userID, tripID: trip.id) { (error) in
                     if let _ = error {
                         completion(.addingTripError)
+                        return
                     }
                     
                     completion(nil)
                 }
+                completion(nil)
             }
+        completion(nil)
     }
         
         func getTrip(for id: String, completion: @escaping (Trip?, CCCError?) -> Void) {
@@ -181,22 +190,22 @@ class NetworkController {
     func updateUser(with image: UIImage?, user: User, completion: @escaping (CCCError?) -> Void) {
         
         guard let image = image,
-            let imageData = image.jpegData(compressionQuality: 0.75) else {
+            let imageData = image.jpegData(compressionQuality: 0.50) else {
                 
                 
                 self.updateUser(user: user) { (error) in
                     if let error = error {
                         NSLog(error.rawValue)
+                        completion(.uploadingImageError)
                     }
                 }
-                
-            completion(.uploadingImageError)
+                completion(nil)
             return
         }
 
         let storageRef = storage.reference()
         let imagesFolderRef = storageRef.child("images").child("avatarImages")
-        let imageURLRef = imagesFolderRef.child("\(UUID().uuidString).jpg")
+        let imageURLRef = imagesFolderRef.child("\(user.id).jpg")
         imageURLRef.putData( imageData, metadata: nil) { (metadata, error) in
             guard let _ = metadata else {
                 completion(.uploadingImageError)

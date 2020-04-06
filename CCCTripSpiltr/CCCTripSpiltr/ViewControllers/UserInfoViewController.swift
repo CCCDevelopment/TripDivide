@@ -238,7 +238,10 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         currentUser.username = username
         
         if let avatarImage = avatarImage {
-            NetworkController.shared.updateUser(with: avatarImage, user: currentUser) { (error) in
+            view.showLoadingView()
+            NetworkController.shared.updateUser(with: avatarImage, user: currentUser) { [weak self](error) in
+                guard let self = self else { return }
+                self.view.dismissLoadingView()
                 if let error = error {
                 NSLog(error.rawValue)
                 return
@@ -246,7 +249,9 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                 self.dismissVC()
             }
         } else {
-            NetworkController.shared.updateUser(with: nil, user: currentUser) { (error) in
+            NetworkController.shared.updateUser(with: nil, user: currentUser) { [weak self] (error) in
+                guard let self = self else { return }
+                self.view.dismissLoadingView()
                 if let error = error {
                     NSLog(error.rawValue)
                     return

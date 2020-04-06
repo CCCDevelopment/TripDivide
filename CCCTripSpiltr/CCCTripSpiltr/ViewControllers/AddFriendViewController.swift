@@ -21,6 +21,7 @@ class AddFriendVC: UIViewController {
     let addActionButton = UIButton()
     let closeActionButton = UIButton()
     let avatarImageView = CCCAvatarImageView(frame: .zero)
+    
     let nameLabel = UILabel()
     var searchedUser: User?
     var alertTitle: String = "Search For Friends"
@@ -28,6 +29,7 @@ class AddFriendVC: UIViewController {
     var buttonTitle: String = "Close"
     var addButtonTitle: String = "Add"
     var delegate: AddFriendVCDelegate?
+    var avatarImage: UIImage!
     
     let padding: CGFloat = 20
     
@@ -160,6 +162,23 @@ extension AddFriendVC: UITextFieldDelegate {
         return true
     }
     
+    func updateImageView(imageURL: String) {
+        avatarImage = UIImage()
+        avatarImage.downloadImage(from: imageURL) { [weak self] (image) in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+            if let image = image {
+                
+                self.avatarImageView.image = image
+                
+                
+            } else {
+                self.avatarImageView.image = Constants.Images.placeholderImage
+            }
+        }
+        }
+    }
+    
     func performSearchAction() {
         guard let searchEmail = emailTextField.text?.lowercased(),
             !searchEmail.isEmpty else { return }
@@ -179,9 +198,13 @@ extension AddFriendVC: UITextFieldDelegate {
                 let currentUserID = Auth.auth().currentUser?.uid else { return }
                 
             if user.id != currentUserID {
-                self.searchedUser = user
+                    self.searchedUser = user
                     self.nameLabel.text = user.fullName
                     self.nameLabel.textColor = .label
+                    
+                if let avatarURL = user.avatar {
+                    self.updateImageView(imageURL: avatarURL)
+                }
                 
         } else {
             

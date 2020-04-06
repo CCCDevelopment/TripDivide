@@ -11,10 +11,11 @@ import UIKit
 class FriendCell: UICollectionViewCell {
     
     static let reuseID = "FriendCell"
+    
     let avatarImageView = CCCAvatarImageView(frame: .zero)
     let nameLabel = CCCTitleLabel(textAlignment: .center, fontSize: 14)
     var userID: String?
-    
+    var avatarImage: UIImage!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,8 +39,30 @@ class FriendCell: UICollectionViewCell {
             guard let user = user else { return }
             self.nameLabel.text = user.fullName
             
+            if let avatarURL = user.avatar {
+                self.updateImageView(imageURL: avatarURL)
+            }
+            
         }
         
+    }
+    
+    
+    func updateImageView(imageURL: String) {
+        avatarImage = UIImage()
+        avatarImage.downloadImage(from: imageURL) { [weak self] (image) in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+            if let image = image {
+                
+                self.avatarImageView.image = image
+                
+                
+            } else {
+                self.avatarImageView.image = Constants.Images.placeholderImage
+            }
+        }
+        }
     }
     
     private func configure() {

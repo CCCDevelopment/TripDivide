@@ -79,7 +79,7 @@ class SelectFriendsForExpenseVC: UIViewController {
         case .paidBy:
             if expense.paidBy.keys.contains(userID) {
                 selectedFriends.append(userID)
-                cell.isSelected = true
+    
                 collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
                 cell.contentView.backgroundColor = .systemTeal
             }
@@ -87,7 +87,7 @@ class SelectFriendsForExpenseVC: UIViewController {
         case .usedBy:
             if expense.usedBy.keys.contains(userID) {
                 selectedFriends.append(userID)
-                cell.isSelected = true
+
                 collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
                 cell.contentView.backgroundColor = .systemTeal
             }
