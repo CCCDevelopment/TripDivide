@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sll-Ne-CBb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sll-Ne-CBb">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -334,13 +334,80 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpenseCell" id="y1C-Af-Dbw">
-                                <rect key="frame" x="0.0" y="220" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpenseCell" rowHeight="80" id="y1C-Af-Dbw" customClass="DetailExpenceTableViewCell" customModule="CCCTripSpiltr" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="220" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y1C-Af-Dbw" id="pKo-sZ-cr2">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="0hF-Tp-4Lx">
+                                            <rect key="frame" x="20" y="11" width="374" height="58"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nZC-DW-CO2">
+                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="58"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expence Name: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vwg-b4-tGv">
+                                                            <rect key="frame" x="0.0" y="0.0" width="124" height="26"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expence" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGT-gn-ELf">
+                                                            <rect key="frame" x="0.0" y="34" width="75" height="24"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wKO-FT-xmV">
+                                                    <rect key="frame" x="162" y="0.0" width="117" height="58"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Cost: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lx9-yh-w41">
+                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="29"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$444444.55" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aov-6r-pja">
+                                                            <rect key="frame" x="0.0" y="34" width="117" height="24"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Qd-3Q-iZy">
+                                                    <rect key="frame" x="316" y="0.0" width="58" height="58"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V5T-SF-yGn">
+                                                            <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="V5T-SF-yGn" firstAttribute="top" secondItem="4Qd-3Q-iZy" secondAttribute="top" id="6Zq-Em-pG0"/>
+                                                        <constraint firstAttribute="trailing" secondItem="V5T-SF-yGn" secondAttribute="trailing" id="GMr-z8-5zF"/>
+                                                        <constraint firstItem="V5T-SF-yGn" firstAttribute="leading" secondItem="4Qd-3Q-iZy" secondAttribute="leading" id="NdJ-dZ-BCI"/>
+                                                        <constraint firstAttribute="bottom" secondItem="V5T-SF-yGn" secondAttribute="bottom" id="SEB-0u-ALk"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="0hF-Tp-4Lx" secondAttribute="trailing" id="70U-Ej-nFh"/>
+                                        <constraint firstItem="0hF-Tp-4Lx" firstAttribute="leading" secondItem="pKo-sZ-cr2" secondAttribute="leadingMargin" id="dQr-Oc-PRz"/>
+                                        <constraint firstItem="0hF-Tp-4Lx" firstAttribute="top" secondItem="pKo-sZ-cr2" secondAttribute="topMargin" id="gna-et-g4Y"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="experienceCostLabel" destination="Aov-6r-pja" id="Pzp-Rr-KQD"/>
+                                    <outlet property="experienceNameLabel" destination="EGT-gn-ELf" id="OA4-o4-bYV"/>
+                                    <outlet property="recipetImageView" destination="V5T-SF-yGn" id="Tpz-Ue-tAs"/>
+                                    <segue destination="jA9-eU-9er" kind="show" identifier="ViewExpenseDetailSegue" id="PSi-W9-ZaB"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -551,6 +618,22 @@
             </objects>
             <point key="canvasLocation" x="6817.3913043478269" y="521.65178571428567"/>
         </scene>
+        <!--Expense Detail View Controller-->
+        <scene sceneID="pnS-QO-2zz">
+            <objects>
+                <viewController id="jA9-eU-9er" customClass="ExpenseDetailViewController" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xmh-0O-cFH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="PsO-rp-OJs"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="i4t-gS-dhv"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T8A-XG-prx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6817" y="1236"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="gw8-cv-M7P">
             <objects>
@@ -603,16 +686,16 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Gzx-I7-OUj">
-                                                    <rect key="frame" x="126.5" y="17" width="121.5" height="49"/>
+                                                    <rect key="frame" x="-61" y="17" width="122" height="49"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jonathan Ferrer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAS-8c-dB5">
-                                                            <rect key="frame" x="0.0" y="0.0" width="121.5" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="122" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDR-24-yI6">
-                                                            <rect key="frame" x="44" y="28.5" width="33" height="20.5"/>
+                                                            <rect key="frame" x="44.5" y="28.5" width="33" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -679,9 +762,9 @@
     </scenes>
     <resources>
         <image name="DefaultTrip" width="3024" height="4032"/>
-        <image name="arrow.right.circle" catalog="system" width="128" height="121"/>
-        <image name="dollarsign.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="house.fill" catalog="system" width="128" height="106"/>
-        <image name="person.3.fill" catalog="system" width="128" height="61"/>
+        <image name="arrow.right.circle" catalog="system" width="64" height="60"/>
+        <image name="dollarsign.circle.fill" catalog="system" width="64" height="60"/>
+        <image name="house.fill" catalog="system" width="64" height="52"/>
+        <image name="person.3.fill" catalog="system" width="71" height="34"/>
     </resources>
 </document>

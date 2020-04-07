@@ -17,6 +17,8 @@
 		444C614C24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C614B24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift */; };
 		44697CD42433AA3600252764 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44697CD32433AA3600252764 /* AddFriendViewController.swift */; };
 		44697CD62433AB4600252764 /* CCCBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44697CD52433AB4600252764 /* CCCBodyLabel.swift */; };
+		44C579AD243D4393006FA3CC /* DetailExpenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C579AC243D4393006FA3CC /* DetailExpenceTableViewCell.swift */; };
+		44C579AF243D4898006FA3CC /* ExpenseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C579AE243D4898006FA3CC /* ExpenseDetailViewController.swift */; };
 		84A0506868C4B3290DB9BCF3 /* Pods_CCCTripSpiltr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */; };
 		D11847BC243656C600E6949B /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11847BB243656C600E6949B /* Expense.swift */; };
 		D1254B592435131C00B9CB53 /* CreateTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1254B582435131C00B9CB53 /* CreateTripViewController.swift */; };
@@ -63,6 +65,8 @@
 		444C614B24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendsForExpenseVC.swift; sourceTree = "<group>"; };
 		44697CD32433AA3600252764 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		44697CD52433AB4600252764 /* CCCBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCBodyLabel.swift; sourceTree = "<group>"; };
+		44C579AC243D4393006FA3CC /* DetailExpenceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailExpenceTableViewCell.swift; sourceTree = "<group>"; };
+		44C579AE243D4898006FA3CC /* ExpenseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewController.swift; sourceTree = "<group>"; };
 		755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCCTripSpiltr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F57F70D23EE51C97C50C70 /* Pods-CCCTripSpiltr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCCTripSpiltr.debug.xcconfig"; path = "Target Support Files/Pods-CCCTripSpiltr/Pods-CCCTripSpiltr.debug.xcconfig"; sourceTree = "<group>"; };
 		D11847BB243656C600E6949B /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 			children = (
 				D1BB6116242E858200B90E29 /* TripsTableViewController.swift */,
 				D167703C24355E9800D041DE /* TripDetailTableViewController.swift */,
+				44C579AE243D4898006FA3CC /* ExpenseDetailViewController.swift */,
 			);
 			path = TableViewControllers;
 			sourceTree = "<group>";
@@ -265,6 +270,7 @@
 				44697CD52433AB4600252764 /* CCCBodyLabel.swift */,
 				D1F5E6172433CDAC008F3E72 /* CCCTextView.swift */,
 				D1D14D8A2437D5F70091092E /* ExpenseAvatarCell.swift */,
+				44C579AC243D4393006FA3CC /* DetailExpenceTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -413,8 +419,10 @@
 				444C6148243667CE0021D9F8 /* AddExpenseViewController.swift in Sources */,
 				D1D14D8D2437D82C0091092E /* UserInfoViewController.swift in Sources */,
 				4446A36E242E775100F22D90 /* SceneDelegate.swift in Sources */,
+				44C579AD243D4393006FA3CC /* DetailExpenceTableViewCell.swift in Sources */,
 				D1E33DF82432A7090077D4C6 /* CCCAvatarImageView.swift in Sources */,
 				444C614C24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift in Sources */,
+				44C579AF243D4898006FA3CC /* ExpenseDetailViewController.swift in Sources */,
 				D1F5E6182433CDAC008F3E72 /* CCCTextView.swift in Sources */,
 				D1BB611B242E858300B90E29 /* LoginViewController.swift in Sources */,
 				D1BB611A242E858300B90E29 /* AuthenticationViewController.swift in Sources */,

@@ -13,6 +13,7 @@ class TripDetailTableViewController: UITableViewController {
     
     var tripID: String?
     var trip: Trip?
+    var tripTotal: Double = 0.0
     
     @IBOutlet weak var containerView: UIView!
     override func viewDidLoad() {
@@ -46,10 +47,14 @@ class TripDetailTableViewController: UITableViewController {
     func configureViews () {
         guard let trip = trip else { return }
         containerView.showLoadingView()
+        
+        costLabel.text = String(trip.totalCost)
+        
    
         if let image = trip.imageURL {
             UIImage().downloadImage(from: image) { (tripImage) in
-                guard let tripImage = tripImage else { return }
+                guard let tripImage = tripImage
+                    else { return }
                 
                 DispatchQueue.main.async {
                     self.containerView.dismissLoadingView()
@@ -70,13 +75,13 @@ class TripDetailTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 0
+        guard let currentTrip = trip else { return 0 }
+        return currentTrip.expenses.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath)
         
         // Configure the cell...
         
