@@ -47,7 +47,6 @@ class TripsTableViewController: UITableViewController {
             
            self.tableView.reloadData()
         }
-//        self.tableView.reloadData()
     }
     
     @IBAction func signOutPressed(_ sender: UIBarButtonItem) {

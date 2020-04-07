@@ -73,11 +73,7 @@ class NetworkController {
         let storageRef = storage.reference()
         let imagesFolderRef = storageRef.child("images").child("tripImages")
         let imageURLRef = imagesFolderRef.child("\(UUID().uuidString).jpg")
-        imageURLRef.putData( imageData, metadata: nil) { (metadata, error) in
-            guard let _ = metadata else {
-                completion(.uploadingImageError)
-                return
-            }
+        imageURLRef.putData( imageData, metadata: nil) { (_, error) in
             
             imageURLRef.downloadURL { (url, error) in
                 
@@ -93,8 +89,10 @@ class NetworkController {
                 
 
                 self.createTrip(with: name, friendIds: friendIds, imageURL: downloadURL.absoluteString) { (error) in
-                    if let _ = error {
-                        completion(.uploadingImageError)
+                    if let error = error {
+                        print(error)
+                        
+                        completion(error)
                        
                     }
                     completion(nil)
@@ -152,7 +150,9 @@ class NetworkController {
             let userRef = db.collection("users").document(userID)
             
             userRef.updateData(["trips": FieldValue.arrayUnion([tripID])]) { (error) in
+                if let _ = error {
                 completion(.addingTripError)
+                }
             }
             completion(nil)
             
