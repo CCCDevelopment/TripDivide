@@ -29,8 +29,6 @@ class AddExpenseViewController: UIViewController {
         costTextField.delegate = self
         paidByCollectionView.delegate = self
         paidByCollectionView.dataSource = self
-
-        
         costTextField.addTarget(self, action: #selector(myTextFieldDidChange), for: .editingChanged)
         
     }
@@ -156,11 +154,8 @@ extension String {
 
 extension AddExpenseViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == paidByCollectionView {
-            return Array(expense.paidBy.keys).count
-        } else {
-            return 1
-        }
+            return Array(expense.paidBy).count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
