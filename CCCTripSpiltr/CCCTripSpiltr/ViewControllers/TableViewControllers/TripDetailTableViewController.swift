@@ -26,7 +26,7 @@ class TripDetailTableViewController: UITableViewController {
     @IBOutlet weak var costLabel: UILabel!
     @IBOutlet weak var borrowedLabel: UILabel!
     @IBOutlet weak var owedLabel: UILabel!
-    @IBOutlet weak var userAvatarCollectionView: UserAvatarCollectionView!
+    @IBOutlet weak var userAvatarCollectionView: UICollectionView!
     
     func getTrip() {
         guard let tripID = tripID else { return }

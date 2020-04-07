@@ -14,46 +14,43 @@ class AddExpenseViewController: UIViewController {
     var expense = Expense(name: "", cost: 0.0, paidBy: [:], usedBy: [:], recipet: nil)
     
     
-    @IBOutlet weak var usedByCollectionView: UserAvatarCollectionView!
-    @IBOutlet weak var paidByCollectionView: UserAvatarCollectionView!
+    @IBOutlet weak var usedByCollectionView: UICollectionView!
+    @IBOutlet weak var paidByCollectionView: UICollectionView!
     @IBOutlet weak var usedByButton: UIButton!
     @IBOutlet weak var paidByButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addRecieptImageView: UIImageView!
     @IBOutlet weak var costTextField: UITextField!
     
-
+    
     override func viewDidLoad() {
-         super.viewDidLoad()
+        super.viewDidLoad()
         nameTextField.delegate = self
         costTextField.delegate = self
-    
-    
-    costTextField.addTarget(self, action: #selector(myTextFieldDidChange), for: .editingChanged)
-           }
+        paidByCollectionView.delegate = self
+        paidByCollectionView.dataSource = self
 
-           @objc func myTextFieldDidChange(_ textField: UITextField) {
-
-               if let amountString = textField.text?.currencyInputFormatting() {
-                   textField.text = amountString
-               }
-           }
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-        print("Paid by \(expense.paidBy.count) people")
-        print("Used by \(expense.usedBy.count) people")
         
-        for this in expense.paidBy {
-            print("\(this.key) pays \(this.value)")
-        }
+        costTextField.addTarget(self, action: #selector(myTextFieldDidChange), for: .editingChanged)
         
-        for this in expense.usedBy {
-            print("\(this.key) used \(this.value)")
+    }
+    
+    
+    
+    
+    @objc func myTextFieldDidChange(_ textField: UITextField) {
+        
+        if let amountString = textField.text?.currencyInputFormatting() {
+            textField.text = amountString
         }
     }
     
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        paidByCollectionView.reloadData()
+    }
+    
+    
     func updateExpense() {
         let name = nameTextField.text ?? ""
         
@@ -77,7 +74,7 @@ class AddExpenseViewController: UIViewController {
         }
     }
     
-
+    
     @IBAction func splitOptionsButtonTapped(_ sender: Any) {
         
     }
@@ -121,30 +118,30 @@ extension AddExpenseViewController: UITextFieldDelegate {
 }
 
 extension String {
-
+    
     // formatting text for currency textField
     func currencyInputFormatting() -> String {
-
+        
         var number: NSNumber!
         let formatter = NumberFormatter()
         formatter.numberStyle = .currencyAccounting
         formatter.currencySymbol = "$"
         formatter.maximumFractionDigits = 2
         formatter.minimumFractionDigits = 2
-
+        
         var amountWithPrefix = self
-
+        
         // remove from String: "$", ".", ","
         let regex = try! NSRegularExpression(pattern: "[^0-9]", options: .caseInsensitive)
         amountWithPrefix = regex.stringByReplacingMatches(in: amountWithPrefix, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.count), withTemplate: "")
-
+        
         let double = (amountWithPrefix as NSString).doubleValue
-
+        
         number = NSNumber(value: (double / 100))
         guard number != 0 as NSNumber else {
             return ""
         }
-
+        
         return formatter.string(from: number)!
     }
     
@@ -157,5 +154,45 @@ extension String {
     }
 }
 
+extension AddExpenseViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == paidByCollectionView {
+            return Array(expense.paidBy.keys).count
+        } else {
+            return 1
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseAvatarCell", for: indexPath) as! ExpenseAvatarCell
+        if collectionView == paidByCollectionView {
+            
+            
+            let userIDArray = Array(expense.paidBy.keys)
+            let userID = userIDArray[indexPath.item]
+            
+            NetworkController.shared.getUser(for: userID) { (user, error) in
+                      if let error = error {
+                          NSLog(error.rawValue)
+                          return
+                      }
+                      
+                if let user = user {
+            
+            cell.updateImageView(user: user)
+                }
+                
+            }
+            return cell
+        } else {
+            return UICollectionViewCell()
+        }
+    }
+    
+    
+    
+    
+    
+}
 
 

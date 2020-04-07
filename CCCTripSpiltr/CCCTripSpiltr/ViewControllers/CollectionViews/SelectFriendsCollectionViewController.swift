@@ -81,9 +81,7 @@ class SelectFriendsCollectionViewController: UIViewController {
             }
             self.dismiss(animated: true, completion: nil)
         }
-        
     }
-    
 }
 
 
