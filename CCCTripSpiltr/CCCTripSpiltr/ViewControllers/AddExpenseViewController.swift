@@ -22,6 +22,7 @@ class AddExpenseViewController: UIViewController {
     @IBOutlet weak var addRecieptImageView: UIImageView!
     @IBOutlet weak var costTextField: UITextField!
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,13 +73,29 @@ class AddExpenseViewController: UIViewController {
         }
     }
     
+    @IBAction func segmentedControlChanged(_ sender: Any) {
+        
+        paidByCollectionView.reloadData()
+        
+    }
     
     @IBAction func splitOptionsButtonTapped(_ sender: Any) {
         
     }
     @IBAction func paidByButtonTapped(_ sender: Any) {
         
-        let vc = SelectFriendsForExpenseVC(selectType: .paidBy)
+        var vc = SelectFriendsForExpenseVC(selectType: .paidBy)
+        
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            vc = SelectFriendsForExpenseVC(selectType: .paidBy)
+        case 1:
+            vc = SelectFriendsForExpenseVC(selectType: .usedBy)
+            
+        default:
+            break
+        }
+        
         vc.trip = trip
         vc.expense = expense
         navigationController?.pushViewController(vc, animated: true)
@@ -154,27 +171,49 @@ extension String {
 
 extension AddExpenseViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
             return Array(expense.paidBy).count
+        case 1:
+            return Array(expense.usedBy).count
+        default:
+            return 0
+            
+        }
+        
         
     }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseAvatarCell", for: indexPath) as! ExpenseAvatarCell
         if collectionView == paidByCollectionView {
             
             
-            let userIDArray = Array(expense.paidBy.keys)
+            var userIDArray = [String]()
+            
+            switch segmentedControl.selectedSegmentIndex {
+            case 0:
+                userIDArray = Array(expense.paidBy.keys).sorted()
+            case 1:
+                userIDArray = Array(expense.usedBy.keys).sorted()
+            default:
+                break
+                
+            }
             let userID = userIDArray[indexPath.item]
             
             NetworkController.shared.getUser(for: userID) { (user, error) in
-                      if let error = error {
-                          NSLog(error.rawValue)
-                          return
-                      }
-                      
+                if let error = error {
+                    NSLog(error.rawValue)
+                    return
+                }
+                
                 if let user = user {
-            
-            cell.updateImageView(user: user)
+                    
+                    cell.updateImageView(user: user)
                 }
                 
             }
@@ -184,10 +223,4 @@ extension AddExpenseViewController: UICollectionViewDelegate, UICollectionViewDa
         }
     }
     
-    
-    
-    
-    
 }
-
-

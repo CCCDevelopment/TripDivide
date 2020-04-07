@@ -405,9 +405,12 @@
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yOA-Rg-sDB">
                                                 <rect key="frame" x="0.0" y="0.5" width="306" height="32"/>
                                                 <segments>
-                                                    <segment title="First"/>
-                                                    <segment title="Second"/>
+                                                    <segment title="Paid By"/>
+                                                    <segment title="Used By"/>
                                                 </segments>
+                                                <connections>
+                                                    <action selector="segmentedControlChanged:" destination="EYH-y3-Ja7" eventType="valueChanged" id="55D-re-rli"/>
+                                                </connections>
                                             </segmentedControl>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dg9-Gi-XXQ">
                                                 <rect key="frame" x="314" y="0.0" width="20" height="32"/>
@@ -541,6 +544,7 @@
                         <outlet property="nameTextField" destination="SZ4-wO-DNu" id="au3-4L-cTx"/>
                         <outlet property="paidByButton" destination="Dg9-Gi-XXQ" id="JM6-kt-XWm"/>
                         <outlet property="paidByCollectionView" destination="NX8-rh-8O5" id="25L-LF-N16"/>
+                        <outlet property="segmentedControl" destination="yOA-Rg-sDB" id="sJs-Gw-6oN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7tU-5F-vRd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -93,6 +93,7 @@ extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCell.reuseID, for: indexPath) as? FriendCell else {
             return UICollectionViewCell() }
+        
         let friendID = friends[indexPath.row]
 
         cell.set(userID: friendID)
