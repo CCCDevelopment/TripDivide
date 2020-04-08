@@ -23,6 +23,11 @@ class TripDetailTableViewController: UITableViewController {
         getTrip()
         
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
     
     @IBOutlet weak var tripImageView: UIImageView!
     @IBOutlet weak var costLabel: UILabel!
@@ -70,6 +75,7 @@ class TripDetailTableViewController: UITableViewController {
         
         
         self.title = trip.name
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source

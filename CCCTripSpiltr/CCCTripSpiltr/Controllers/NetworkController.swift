@@ -36,7 +36,6 @@ class NetworkController {
     func createExpense(expense: Expense, tripID: String, completion: @escaping (CCCError?) -> Void) {
         
         let ref = self.db.collection("trips").document(tripID)
-            
         ref.updateData(["expenses": FieldValue.arrayUnion([expense.dictionaryRep()])]) { (error) in
             
             if let _ = error {
@@ -47,10 +46,10 @@ class NetworkController {
             completion(nil)
             
         }
-        
-        
+
         
     }
+    
     
     
     

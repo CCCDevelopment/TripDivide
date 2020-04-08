@@ -11,7 +11,7 @@ import UIKit
 class AddExpenseViewController: UIViewController {
     
     var trip: Trip?
-    var expense = Expense(name: "", cost: 0.0, paidBy: [:], usedBy: [:], recipet: nil)
+    var expense = Expense(name: "", cost: 0.0, paidBy: [:], usedBy: [:])
     
     
     @IBOutlet weak var usedByCollectionView: UICollectionView!

@@ -43,7 +43,14 @@ class Trip {
         
         let date = dictionary["startDate"] as! Timestamp
         self.startDate = date.dateValue()
-        self.expenses = dictionary["expenses"] as! [Expense]
+        let dictArray = dictionary["expenses"] as! [[String: Any]]
+        var expenseArray = [Expense]()
+        for dict in dictArray {
+            let expense = Expense(from: dict)
+            expenseArray.append(expense)
+        }
+
+        self.expenses = expenseArray
     }
     
     func dictionaryRep() -> [String : Any] {
