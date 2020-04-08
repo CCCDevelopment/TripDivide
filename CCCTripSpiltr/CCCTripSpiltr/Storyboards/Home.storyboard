@@ -344,16 +344,16 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="0hF-Tp-4Lx">
                                             <rect key="frame" x="20" y="11" width="374" height="58"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nZC-DW-CO2">
+                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nZC-DW-CO2">
                                                     <rect key="frame" x="0.0" y="0.0" width="125" height="58"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expence Name: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vwg-b4-tGv">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Expence Name: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vwg-b4-tGv">
                                                             <rect key="frame" x="0.0" y="0.0" width="124" height="26"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expence" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGT-gn-ELf">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Expence" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGT-gn-ELf">
                                                             <rect key="frame" x="0.0" y="34" width="75" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
@@ -361,7 +361,7 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wKO-FT-xmV">
+                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wKO-FT-xmV">
                                                     <rect key="frame" x="162" y="0.0" width="117" height="58"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Cost: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lx9-yh-w41">
@@ -391,6 +391,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="V5T-SF-yGn" secondAttribute="trailing" id="GMr-z8-5zF"/>
                                                         <constraint firstItem="V5T-SF-yGn" firstAttribute="leading" secondItem="4Qd-3Q-iZy" secondAttribute="leading" id="NdJ-dZ-BCI"/>
                                                         <constraint firstAttribute="bottom" secondItem="V5T-SF-yGn" secondAttribute="bottom" id="SEB-0u-ALk"/>
+                                                        <constraint firstAttribute="width" secondItem="V5T-SF-yGn" secondAttribute="height" multiplier="1:1" id="v3i-5P-0Qh"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -398,6 +399,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="0hF-Tp-4Lx" secondAttribute="trailing" id="70U-Ej-nFh"/>
+                                        <constraint firstItem="0hF-Tp-4Lx" firstAttribute="bottom" secondItem="pKo-sZ-cr2" secondAttribute="bottomMargin" id="P0I-Ft-bEB"/>
                                         <constraint firstItem="0hF-Tp-4Lx" firstAttribute="leading" secondItem="pKo-sZ-cr2" secondAttribute="leadingMargin" id="dQr-Oc-PRz"/>
                                         <constraint firstItem="0hF-Tp-4Lx" firstAttribute="top" secondItem="pKo-sZ-cr2" secondAttribute="topMargin" id="gna-et-g4Y"/>
                                     </constraints>
