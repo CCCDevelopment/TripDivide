@@ -14,11 +14,12 @@ class TripDetailTableViewController: UITableViewController {
     var tripID: String?
     var trip: Trip?
     var tripTotal: Double = 0.0
+    var expenses: [Expense] = []
     
     @IBOutlet weak var containerView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.reloadData()
         getTrip()
         
     }
@@ -75,15 +76,20 @@ class TripDetailTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let currentTrip = trip else { return 0 }
-        return currentTrip.expenses.count
+        guard let trip = trip else { return 1 }
+        return trip.expenses.count
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath) as! DetailExpenceTableViewCell
         
-        // Configure the cell...
+        guard let trip = trip else {
+            return DetailExpenceTableViewCell()
+        }
+        
+        let tripExpenses = trip.expenses[indexPath.row]
+        cell.experienceNameLabel.text = tripExpenses.name
+        cell.experienceCostLabel.text = String(tripExpenses.cost)
         
         return cell
     }
