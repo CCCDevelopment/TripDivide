@@ -23,7 +23,7 @@ class TripCell: UITableViewCell {
         contentView.layer.cornerRadius = 10
         contentView.layer.borderWidth = 0.5
         contentView.layer.borderColor = UIColor.systemGray4.cgColor
-        contentView.backgroundColor = UIColor.systemGray2
+        contentView.backgroundColor = UIColor.systemGray6
         
         tripImageView.layer.cornerRadius = 10
         tripImageView.layer.borderWidth = 0.5
