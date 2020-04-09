@@ -21,11 +21,13 @@ class TripDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.reloadData()
         getTrip()
+    
         
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         tableView.reloadData()
     }
     
@@ -54,7 +56,7 @@ class TripDetailTableViewController: UITableViewController {
         guard let trip = trip else { return }
         containerView.showLoadingView()
         
-        costLabel.text = String(trip.totalCost)
+        costLabel.text = String(self.tripTotal)
         
    
         if let image = trip.imageURL {
