@@ -9,6 +9,8 @@
 import UIKit
 
 class ExpenseDetailViewController: UIViewController {
+    
+    var trip: Trip?
 
     override func viewDidLoad() {
         super.viewDidLoad()

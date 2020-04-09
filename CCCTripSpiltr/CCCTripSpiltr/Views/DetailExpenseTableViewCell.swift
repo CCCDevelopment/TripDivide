@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailExpenceTableViewCell: UITableViewCell {
+class DetailExpenseTableViewCell: UITableViewCell {
 
 
    

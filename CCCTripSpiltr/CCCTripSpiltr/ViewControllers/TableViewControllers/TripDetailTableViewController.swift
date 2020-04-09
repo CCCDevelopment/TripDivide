@@ -17,17 +17,15 @@ class TripDetailTableViewController: UITableViewController {
     var expenses: [Expense] = []
     
     @IBOutlet weak var containerView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.reloadData()
         getTrip()
-    
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         tableView.reloadData()
     }
     
@@ -55,33 +53,24 @@ class TripDetailTableViewController: UITableViewController {
     func configureViews () {
         guard let trip = trip else { return }
         containerView.showLoadingView()
-        
-       
-        
-   
         if let image = trip.imageURL {
             UIImage().downloadImage(from: image) { (tripImage) in
                 guard let tripImage = tripImage
                     else { return }
                 
-                DispatchQueue.main.async {
-                    self.containerView.dismissLoadingView()
-                    self.tripImageView.image = tripImage
+            DispatchQueue.main.async {
+                self.containerView.dismissLoadingView()
+                self.tripImageView.image = tripImage
                 }
             }
         } else {
             self.containerView.dismissLoadingView()
             self.tripImageView.image = Constants.Images.defaultTrip
         }
-        
-        
-            
-        
-        
+      
         for expense in trip.expenses {
             self.tripTotal += expense.cost
             }
-        
         
         if trip.expenses.count == 0 {
             costLabel.text = String("$0.00")
@@ -102,10 +91,10 @@ class TripDetailTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath) as! DetailExpenceTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath) as! DetailExpenseTableViewCell
         
         guard let trip = trip else {
-            return DetailExpenceTableViewCell()
+            return DetailExpenseTableViewCell()
         }
         
         let tripExpenses = trip.expenses[indexPath.row]
@@ -143,7 +132,9 @@ class TripDetailTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddExpenseSegue" {
             let destinationVC = segue.destination as? AddExpenseViewController
-            
+            destinationVC?.trip = trip
+        } else if segue.identifier == "ViewExpenseDetailSegue" {
+            let destinationVC = segue.destination as? ExpenseDetailViewController
             destinationVC?.trip = trip
         }
         
