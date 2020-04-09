@@ -56,7 +56,7 @@ class TripDetailTableViewController: UITableViewController {
         guard let trip = trip else { return }
         containerView.showLoadingView()
         
-        costLabel.text = String(self.tripTotal)
+       
         
    
         if let image = trip.imageURL {
@@ -75,6 +75,19 @@ class TripDetailTableViewController: UITableViewController {
         }
         
         
+            
+        
+        
+        for expense in trip.expenses {
+            self.tripTotal += expense.cost
+            }
+        
+        
+        if trip.expenses.count == 0 {
+            costLabel.text = String("$0.00")
+        } else {
+        costLabel.text = String(self.tripTotal).currencyInputFormatting()
+        }
         
         self.title = trip.name
         tableView.reloadData()
