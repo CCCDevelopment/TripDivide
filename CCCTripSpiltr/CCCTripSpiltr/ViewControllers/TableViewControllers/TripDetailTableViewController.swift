@@ -97,7 +97,7 @@ class TripDetailTableViewController: UITableViewController {
         
         let tripExpenses = trip.expenses[indexPath.row]
         cell.experienceNameLabel.text = tripExpenses.name
-        cell.experienceCostLabel.text = String(tripExpenses.cost)
+        cell.experienceCostLabel.text = String(tripExpenses.cost).currencyInputFormatting()
         
         return cell
     }
