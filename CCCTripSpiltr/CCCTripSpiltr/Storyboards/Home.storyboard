@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sll-Ne-CBb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sll-Ne-CBb">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -471,8 +471,11 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="G1j-Cq-Ycd">
                                         <rect key="frame" x="20" y="28.5" width="334" height="32"/>
                                         <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yOA-Rg-sDB">
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yOA-Rg-sDB">
                                                 <rect key="frame" x="0.0" y="0.5" width="306" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="31" id="xRz-9s-luN"/>
+                                                </constraints>
                                                 <segments>
                                                     <segment title="Paid By"/>
                                                     <segment title="Used By"/>
@@ -481,7 +484,7 @@
                                                     <action selector="segmentedControlChanged:" destination="EYH-y3-Ja7" eventType="valueChanged" id="55D-re-rli"/>
                                                 </connections>
                                             </segmentedControl>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dg9-Gi-XXQ">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dg9-Gi-XXQ">
                                                 <rect key="frame" x="314" y="0.0" width="20" height="32"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                                 <state key="normal" image="arrow.right.circle" catalog="system"/>
@@ -495,6 +498,7 @@
                                 <constraints>
                                     <constraint firstItem="G1j-Cq-Ycd" firstAttribute="leading" secondItem="kj6-LU-VAp" secondAttribute="leading" constant="20" id="MPL-ga-3QB"/>
                                     <constraint firstAttribute="trailing" secondItem="G1j-Cq-Ycd" secondAttribute="trailing" constant="20" id="NUX-bd-geM"/>
+                                    <constraint firstItem="yOA-Rg-sDB" firstAttribute="top" secondItem="uED-kH-0hF" secondAttribute="bottom" constant="8.5" id="f0l-FI-95c"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhf-5S-jys">
@@ -505,9 +509,6 @@
                                     <segue destination="Qzp-qu-lxA" kind="show" id="deh-4k-ow0"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NMo-zR-Fz6">
-                                <rect key="frame" x="20" y="491" width="374" height="314"/>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cpt-rh-I2r">
                                 <rect key="frame" x="20" y="182" width="374" height="62.5"/>
                                 <subviews>
@@ -532,6 +533,7 @@
                                 <rect key="frame" x="20" y="347" width="374" height="104"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="104" id="Zfz-dJ-rAL"/>
                                     <constraint firstAttribute="width" secondItem="NX8-rh-8O5" secondAttribute="height" multiplier="187:52" id="ucP-Qc-sQu"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WbZ-sC-Xvi">
@@ -582,7 +584,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="uaY-z1-aNZ" firstAttribute="trailing" secondItem="kj6-LU-VAp" secondAttribute="trailing" constant="20" id="2R6-MM-olZ"/>
-                            <constraint firstItem="NMo-zR-Fz6" firstAttribute="top" secondItem="fhf-5S-jys" secondAttribute="bottom" constant="2" id="8nM-Nn-8x6"/>
                             <constraint firstItem="fhf-5S-jys" firstAttribute="top" secondItem="NX8-rh-8O5" secondAttribute="bottom" constant="8" id="AbZ-8F-4I2"/>
                             <constraint firstItem="cpt-rh-I2r" firstAttribute="leading" secondItem="uaY-z1-aNZ" secondAttribute="leading" constant="20" id="B3K-iX-F2r"/>
                             <constraint firstItem="uaY-z1-aNZ" firstAttribute="trailing" secondItem="cpt-rh-I2r" secondAttribute="trailing" constant="20" id="GOf-jX-TYa"/>
@@ -596,7 +597,7 @@
                             <constraint firstItem="kj6-LU-VAp" firstAttribute="leading" secondItem="uaY-z1-aNZ" secondAttribute="leading" constant="20" id="fsz-DZ-0T7"/>
                             <constraint firstAttribute="bottom" secondItem="fhf-5S-jys" secondAttribute="bottom" constant="407" id="hVd-FI-vGo"/>
                             <constraint firstItem="MFk-xi-cEN" firstAttribute="top" secondItem="uaY-z1-aNZ" secondAttribute="top" id="osh-Zt-q3e"/>
-                            <constraint firstItem="fhf-5S-jys" firstAttribute="centerX" secondItem="NMo-zR-Fz6" secondAttribute="centerX" id="uqb-H1-y3x"/>
+                            <constraint firstItem="NX8-rh-8O5" firstAttribute="top" secondItem="yOA-Rg-sDB" secondAttribute="bottom" constant="34.5" id="ppD-fb-vgg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uaY-z1-aNZ"/>
                     </view>
@@ -608,7 +609,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addRecieptImageView" destination="NMo-zR-Fz6" id="UEg-Ha-zY5"/>
                         <outlet property="costTextField" destination="gkH-Z5-ZlU" id="KMC-ku-gKO"/>
                         <outlet property="nameTextField" destination="SZ4-wO-DNu" id="au3-4L-cTx"/>
                         <outlet property="paidByButton" destination="Dg9-Gi-XXQ" id="JM6-kt-XWm"/>
@@ -688,16 +688,16 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Gzx-I7-OUj">
-                                                    <rect key="frame" x="-61" y="17" width="122" height="49"/>
+                                                    <rect key="frame" x="126.5" y="17" width="121.5" height="49"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jonathan Ferrer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAS-8c-dB5">
-                                                            <rect key="frame" x="0.0" y="0.0" width="122" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="121.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDR-24-yI6">
-                                                            <rect key="frame" x="44.5" y="28.5" width="33" height="20.5"/>
+                                                            <rect key="frame" x="44" y="28.5" width="33" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -764,9 +764,9 @@
     </scenes>
     <resources>
         <image name="DefaultTrip" width="3024" height="4032"/>
-        <image name="arrow.right.circle" catalog="system" width="64" height="60"/>
-        <image name="dollarsign.circle.fill" catalog="system" width="64" height="60"/>
-        <image name="house.fill" catalog="system" width="64" height="52"/>
-        <image name="person.3.fill" catalog="system" width="71" height="34"/>
+        <image name="arrow.right.circle" catalog="system" width="128" height="121"/>
+        <image name="dollarsign.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="person.3.fill" catalog="system" width="128" height="61"/>
     </resources>
 </document>
