@@ -42,6 +42,9 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         
     }
     
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func addPhotoPressed(_ sender: Any) {
         

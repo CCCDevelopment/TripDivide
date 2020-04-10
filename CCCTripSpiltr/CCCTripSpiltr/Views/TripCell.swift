@@ -62,6 +62,7 @@ class TripCell: UITableViewCell {
                 UIImage().downloadImage(from: image) { (tripImage) in
                     guard let tripImage = tripImage else { return }
                     self.cache.setObject(tripImage, forKey: cacheKey)
+                    print("Cache Money")
                     DispatchQueue.main.async {
                         self.tripImageView.image = tripImage
                         

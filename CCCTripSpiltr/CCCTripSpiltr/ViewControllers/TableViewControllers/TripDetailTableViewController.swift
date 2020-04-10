@@ -18,7 +18,6 @@ class TripDetailTableViewController: UITableViewController {
     }
     var trip: Trip? {
         didSet {
-            print("GotDAtRip")
             
             userAvatarCollectionView.reloadData()
             
@@ -29,6 +28,10 @@ class TripDetailTableViewController: UITableViewController {
     var tripTotal: Double = 0.0
     
     @IBOutlet weak var containerView: UIView!
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,13 +44,14 @@ class TripDetailTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+         self.tripTotal = 0.0
         userAvatarCollectionView.register(ExpenseAvatarCell.self, forCellWithReuseIdentifier: "ExpenseAvatarCell")
         getTrip()
         //        tableView.reloadData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        self.tripTotal = 0.0
+       
     }
     
     @IBOutlet weak var tripImageView: UIImageView!
@@ -94,11 +98,13 @@ class TripDetailTableViewController: UITableViewController {
             self.tripTotal += expense.cost
         }
         
+        
         if trip.expenses.count == 0 {
             costLabel.text = String("$0.00")
         } else {
             costLabel.text = String(self.tripTotal).currencyInputFormatting()
         }
+        
         
         self.title = trip.name
         tableView.reloadData()
@@ -120,9 +126,10 @@ class TripDetailTableViewController: UITableViewController {
             return DetailExpenseTableViewCell()
         }
         
-        let tripExpenses = trip.expenses[indexPath.row]
-        cell.experienceNameLabel.text = tripExpenses.name
-        cell.experienceCostLabel.text = String(tripExpenses.cost).currencyInputFormatting()
+        let tripExpense = trip.expenses[indexPath.row]
+        cell.experienceNameLabel.text = tripExpense.name
+        print(tripExpense.cost)
+        cell.experienceCostLabel.text = String(tripExpense.cost).currencyInputFormatting()
         
         return cell
     }

@@ -70,6 +70,11 @@
                         <viewLayoutGuide key="safeArea" id="sfM-ka-uMa"/>
                     </view>
                     <navigationItem key="navigationItem" id="Rj6-85-XDs">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="37a-fp-DCa">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="sSI-2F-kmA" id="V5z-OU-cvR"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Next" id="iYm-ly-o67">
                             <connections>
                                 <action selector="nextButtonPressed:" destination="sSI-2F-kmA" id="Rlh-sY-sHr"/>

@@ -44,7 +44,8 @@ class ExpenseAvatarCell: UICollectionViewCell {
                
                 
                 if let image = self.cache.object(forKey: cacheKey) {
-                    self.avatarImageView.image = image
+                    self.avatarImageView?.image = image
+                    
                     return
                 }
                 
