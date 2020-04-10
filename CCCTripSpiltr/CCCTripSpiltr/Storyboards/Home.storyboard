@@ -288,7 +288,7 @@
                                         <constraint firstItem="wp4-AR-2aC" firstAttribute="leading" secondItem="L36-Vg-DWQ" secondAttribute="leading" constant="142.5" id="69O-kU-yZJ"/>
                                     </constraints>
                                 </stackView>
-                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Jf1-Wu-XGE" customClass="UserAvatarCollectionView" customModule="CCCTripSpiltr" customModuleProvider="target">
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Jf1-Wu-XGE">
                                     <rect key="frame" x="8" y="144" width="398" height="41"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
@@ -301,7 +301,7 @@
                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </collectionViewFlowLayout>
                                     <cells>
-                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TripUserAvatarCell" id="RAE-jA-JNR">
+                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TripUserAvatarCell" id="RAE-jA-JNR" customClass="TripUserAvatarCell" customModule="CCCTripSpiltr" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wqm-c8-NeJ">
@@ -320,6 +320,9 @@
                                                 </constraints>
                                             </collectionViewCellContentView>
                                             <size key="customSize" width="40" height="40"/>
+                                            <connections>
+                                                <outlet property="avatarImagetwoView" destination="pLq-om-coE" id="vjm-SW-YuV"/>
+                                            </connections>
                                         </collectionViewCell>
                                     </cells>
                                 </collectionView>

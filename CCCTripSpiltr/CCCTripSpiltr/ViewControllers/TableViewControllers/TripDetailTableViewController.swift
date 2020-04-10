@@ -11,22 +11,39 @@ import UIKit
 class TripDetailTableViewController: UITableViewController {
     
     
-    var tripID: String?
-    var trip: Trip?
+    var tripID: String? {
+        didSet {
+            getTrip()
+        }
+    }
+    var trip: Trip? {
+        didSet {
+            print("GotDAtRip")
+            
+            userAvatarCollectionView.reloadData()
+            
+        }
+        
+        
+    }
     var tripTotal: Double = 0.0
-    var expenses: [Expense] = []
     
     @IBOutlet weak var containerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.reloadData()
-        getTrip()
+        userAvatarCollectionView.delegate = self
+        userAvatarCollectionView.dataSource = self
+        
+        //        tableView.reloadData()
+        
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        userAvatarCollectionView.register(TripUserAvatarCell.self, forCellWithReuseIdentifier: "TripUserAvatarCell")
+        getTrip()
+        //        tableView.reloadData()
     }
     
     @IBOutlet weak var tripImageView: UIImageView!
@@ -50,36 +67,38 @@ class TripDetailTableViewController: UITableViewController {
         }
     }
     
+    
+    
     func configureViews () {
         guard let trip = trip else { return }
-        containerView.showLoadingView()
+        
         if let image = trip.imageURL {
             UIImage().downloadImage(from: image) { (tripImage) in
+
                 guard let tripImage = tripImage
                     else { return }
                 
-            DispatchQueue.main.async {
-                self.containerView.dismissLoadingView()
-                self.tripImageView.image = tripImage
+                DispatchQueue.main.async {
+                    self.tripImageView.image = tripImage
                 }
             }
         } else {
-            self.containerView.dismissLoadingView()
             self.tripImageView.image = Constants.Images.defaultTrip
         }
-      
+        
         for expense in trip.expenses {
             self.tripTotal += expense.cost
-            }
+        }
         
         if trip.expenses.count == 0 {
             costLabel.text = String("$0.00")
         } else {
-        costLabel.text = String(self.tripTotal).currencyInputFormatting()
+            costLabel.text = String(self.tripTotal).currencyInputFormatting()
         }
         
         self.title = trip.name
         tableView.reloadData()
+        
     }
     
     // MARK: - Table view data source
@@ -142,4 +161,37 @@ class TripDetailTableViewController: UITableViewController {
     }
     
     
+}
+
+extension TripDetailTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        trip?.users.count ?? 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TripUserAvatarCell", for: indexPath) as! TripUserAvatarCell
+        
+        guard let trip = trip else {
+            print("NotGettingATrip")
+            return cell
+        }
+        
+        //How can I get userID's from here?
+        
+        let userID = trip.users[indexPath.item]
+        
+        NetworkController.shared.getUser(for: userID) { (user, error) in
+            if let error = error {
+                NSLog(error.rawValue)
+                return
+            }
+            
+            if let user = user {
+                
+                cell.updateImageView(user: user)
+            }
+            
+        }
+        return cell
+    }
 }
