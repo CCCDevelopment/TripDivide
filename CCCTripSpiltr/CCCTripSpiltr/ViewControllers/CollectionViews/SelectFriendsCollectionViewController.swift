@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SelectFriendsCollectionViewController: UIViewController {
     
@@ -34,15 +35,16 @@ class SelectFriendsCollectionViewController: UIViewController {
     }
     
     func getFriends() {
+        
         NetworkController.shared.getCurrentUser { [weak self] (user, error) in
             guard let self = self else { return }
-            
             if let error = error {
                 NSLog(error.rawValue)
             }
             guard let user = user else { return }
             
             self.friends = user.friends
+            
             
             self.collectionView.reloadData()
         }
@@ -68,18 +70,18 @@ class SelectFriendsCollectionViewController: UIViewController {
     }
     
     @objc func createButtonPressed() {
-        guard let tripName = tripName,
-            let image = image else { return}
-        
-        NetworkController.shared.uploadTrip(image: image, name: tripName, friendIds: selectedFriends) { (error) in
+        guard let tripName = tripName else { return}
+        view.showLoadingView()
+        NetworkController.shared.uploadTrip(image: image, name: tripName, friendIds: selectedFriends) { [weak self](error) in
+            guard let self = self else { return }
+            self.view.dismissLoadingView()
             if let error = error {
                 NSLog(error.rawValue)
+                return
             }
             self.dismiss(animated: true, completion: nil)
         }
-        
     }
-    
 }
 
 
@@ -91,8 +93,9 @@ extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCell.reuseID, for: indexPath) as? FriendCell else {
             return UICollectionViewCell() }
-        let friendID = friends[indexPath.row]
         
+        let friendID = friends[indexPath.row]
+
         cell.set(userID: friendID)
         
         return cell
@@ -107,7 +110,7 @@ extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICol
         }
         cell?.contentView.backgroundColor = .systemTeal
         selectedFriends.append(userID)
-        print(selectedFriends.count)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -118,7 +121,7 @@ extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICol
             selectedFriends.remove(at: selectedFriends.firstIndex(of: userID)!)
         }
         cell?.contentView.backgroundColor = nil
-        print(selectedFriends.count)
+        
 
     }
 }

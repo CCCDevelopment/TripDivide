@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 protocol AddFriendVCDelegate {
     func friendAdded()
@@ -20,6 +21,7 @@ class AddFriendVC: UIViewController {
     let addActionButton = UIButton()
     let closeActionButton = UIButton()
     let avatarImageView = CCCAvatarImageView(frame: .zero)
+    
     let nameLabel = UILabel()
     var searchedUser: User?
     var alertTitle: String = "Search For Friends"
@@ -27,6 +29,7 @@ class AddFriendVC: UIViewController {
     var buttonTitle: String = "Close"
     var addButtonTitle: String = "Add"
     var delegate: AddFriendVCDelegate?
+    var avatarImage: UIImage!
     
     let padding: CGFloat = 20
     
@@ -112,7 +115,6 @@ class AddFriendVC: UIViewController {
     }
     func configureSearchResultViews() {
         containerView.addSubview(avatarImageView)
-        nameLabel.text = "asdf"
         containerView.addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.textAlignment = .center
@@ -138,8 +140,10 @@ class AddFriendVC: UIViewController {
     
     @objc func addAction() {
         guard let searchedUser = searchedUser else { return }
+        view.showLoadingView()
         NetworkController.shared.add(friend: searchedUser.id) {  [weak self] (error) in
             guard let self = self else { return }
+            self.view.dismissLoadingView()
             if let error = error {
                 NSLog(error.rawValue)
             }
@@ -153,23 +157,61 @@ class AddFriendVC: UIViewController {
 extension AddFriendVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         emailTextField.resignFirstResponder()
+        
         performSearchAction()
         return true
+    }
+    
+    func updateImageView(imageURL: String) {
+        avatarImage = UIImage()
+        avatarImage.downloadImage(from: imageURL) { [weak self] (image) in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+            if let image = image {
+                
+                self.avatarImageView.image = image
+                
+                
+            } else {
+                self.avatarImageView.image = Constants.Images.placeholderImage
+            }
+        }
+        }
     }
     
     func performSearchAction() {
         guard let searchEmail = emailTextField.text?.lowercased(),
             !searchEmail.isEmpty else { return }
+        view.showLoadingView()
         NetworkController.shared.search(email: searchEmail) { [weak self] user, error in
             guard let self = self else { return }
             
+            
+            self.view.dismissLoadingView()
             if let error = error {
                 NSLog(error.rawValue)
+                self.nameLabel.text = "User does not exist."
+                self.nameLabel.textColor = .systemRed
             }
             
-            guard let user = user else { return }
-            self.searchedUser = user
-            self.nameLabel.text = user.fullName
+            guard let user = user,
+                let currentUserID = Auth.auth().currentUser?.uid else { return }
+                
+            if user.id != currentUserID {
+                    self.searchedUser = user
+                    self.nameLabel.text = user.fullName
+                    self.nameLabel.textColor = .label
+                    
+                if let avatarURL = user.avatar {
+                    self.updateImageView(imageURL: avatarURL)
+                }
+                
+        } else {
+            
+            self.nameLabel.text = "Cannot add yourself."
+            self.nameLabel.textColor = .systemRed
+            
+            }
         }
     }
 }

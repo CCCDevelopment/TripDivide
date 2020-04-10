@@ -30,9 +30,10 @@ class FriendsCollectionViewController: UIViewController {
     }
     
     func getFriends() {
+        view.showLoadingView()
         NetworkController.shared.getCurrentUser { [weak self] (user, error) in
             guard let self = self else { return }
-            
+            self.view.dismissLoadingView()
             if let error = error {
                 NSLog(error.rawValue)
             }
@@ -52,6 +53,15 @@ class FriendsCollectionViewController: UIViewController {
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
+        
+       
+        
+    }
+    
+    @IBAction func editUserbuttonPressed(_ sender: Any) {
+        
+        let vc = UserInfoViewController()
+        present(vc, animated: true, completion: nil)
     }
     
     func configureCollectionView() {
@@ -80,7 +90,8 @@ extension FriendsCollectionViewController: UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCell.reuseID, for: indexPath) as? FriendCell else {
             return UICollectionViewCell() }
-        let friendID = friends[indexPath.row]
+        let sortedFriends = friends.sorted()
+        let friendID = sortedFriends[indexPath.row]
         
         cell.set(userID: friendID)
         

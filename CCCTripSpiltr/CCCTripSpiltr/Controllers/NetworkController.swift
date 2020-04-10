@@ -20,6 +20,8 @@ enum CCCError: String {
     case addingFriendError = "Error adding friend"
     case addingTripError = "Error adding trip"
     case uploadingImageError = "Error uploading image"
+    case creatingExpenseError = "Error creating expense"
+    case updatingUserError = "Error updating user"
 }
 
 class NetworkController {
@@ -30,25 +32,53 @@ class NetworkController {
     let storage = Storage.storage()
     static let shared = NetworkController()
     
-    func uploadTrip(image: UIImage,name: String, friendIds: [String], completion: @escaping (CCCError?) -> Void) {
+    
+    func createExpense(expense: Expense, tripID: String, completion: @escaping (CCCError?) -> Void) {
         
-        guard let imageData = image.jpegData(compressionQuality: 0.75) else {
-            completion(.uploadingImageError)
-            return
-        }
-        let storageRef = storage.reference()
-        let imagesFolderRef = storageRef.child("images").child("tripImages")
-        let imageURLRef = imagesFolderRef.child("\(UUID().uuidString).jpg")
-        imageURLRef.putData( imageData, metadata: nil) { (metadata, error) in
-            guard let _ = metadata else {
-                completion(.uploadingImageError)
+        let ref = self.db.collection("trips").document(tripID)
+        ref.updateData(["expenses": FieldValue.arrayUnion([expense.dictionaryRep()])]) { (error) in
+            
+            if let _ = error {
+                completion(CCCError.creatingExpenseError)
                 return
             }
             
+            completion(nil)
+            
+        }
+
+        
+    }
+    
+    
+    
+    
+    func uploadTrip(image: UIImage?,name: String, friendIds: [String], completion: @escaping (CCCError?) -> Void) {
+        
+        guard let image = image,
+            let imageData = image.jpegData(compressionQuality: 0.75) else {
+                
+                
+                self.createTrip(with: name, friendIds: friendIds, imageURL: nil) { (error) in
+                    if let _ = error {
+                        completion(.creatingTripError)
+                        return
+                    }
+                    completion(nil)
+                }
+            return
+        }
+
+        let storageRef = storage.reference()
+        let imagesFolderRef = storageRef.child("images").child("tripImages")
+        let imageURLRef = imagesFolderRef.child("\(UUID().uuidString).jpg")
+        imageURLRef.putData( imageData, metadata: nil) { (_, error) in
+            
             imageURLRef.downloadURL { (url, error) in
                 
-                if let error = error {
-                    NSLog("\(error)")
+                if let _ = error {
+                    completion(.uploadingImageError)
+                    return
                 }
                 
                 guard let downloadURL = url else {
@@ -56,17 +86,21 @@ class NetworkController {
                     return
                 }
                 
-                
+
                 self.createTrip(with: name, friendIds: friendIds, imageURL: downloadURL.absoluteString) { (error) in
-                    if let _ = error {
-                        completion(.creatingTripError)
+                    if let error = error {
+                        print(error)
+                        
+                        completion(error)
+                       
                     }
+                    completion(nil)
                 }
             }
         }
     }
         
-    func createTrip(with name: String, friendIds: [String], imageURL: String , completion: @escaping (CCCError?) -> Void) {
+    func createTrip(with name: String, friendIds: [String], imageURL: String? , completion: @escaping (CCCError?) -> Void) {
             
             guard let userID = Auth.auth().currentUser?.uid else {
                 completion(.creatingTripError)
@@ -79,18 +113,20 @@ class NetworkController {
             ref.document(trip.id).setData(trip.dictionaryRep()) { (error) in
                 if let _ = error {
                     completion(.creatingTripError)
+                    return
                 }
                 
                 
                 self.addTrip(to: userID, tripID: trip.id) { (error) in
                     if let _ = error {
                         completion(.addingTripError)
+                        return
                     }
                     
                     completion(nil)
                 }
             }
-        }
+    }
         
         func getTrip(for id: String, completion: @escaping (Trip?, CCCError?) -> Void) {
             let tripsRef = db.collection("trips")
@@ -113,7 +149,9 @@ class NetworkController {
             let userRef = db.collection("users").document(userID)
             
             userRef.updateData(["trips": FieldValue.arrayUnion([tripID])]) { (error) in
+                if let _ = error {
                 completion(.addingTripError)
+                }
             }
             completion(nil)
             
@@ -143,18 +181,87 @@ class NetworkController {
                 }
             }
         }
+    
+    func updateUser(with image: UIImage?, user: User, completion: @escaping (CCCError?) -> Void) {
+        
+        guard let image = image,
+            let imageData = image.jpegData(compressionQuality: 0.50) else {
+                
+                
+                self.updateUser(user: user) { (error) in
+                    if let error = error {
+                        NSLog(error.rawValue)
+                        completion(.uploadingImageError)
+                    }
+                }
+                completion(nil)
+            return
+        }
+
+        let storageRef = storage.reference()
+        let imagesFolderRef = storageRef.child("images").child("avatarImages")
+        let imageURLRef = imagesFolderRef.child("\(user.id).jpg")
+        imageURLRef.putData( imageData, metadata: nil) { (metadata, error) in
+            guard let _ = metadata else {
+                completion(.uploadingImageError)
+                return
+            }
+            
+            imageURLRef.downloadURL { (url, error) in
+                
+                if let _ = error {
+                    completion(.updatingUserError)
+                    return
+                }
+                
+                guard let downloadURL = url else {
+                    completion(.uploadingImageError)
+                    return
+                }
+                
+                user.avatar = downloadURL.absoluteString
+                
+                self.updateUser(user: user) { (error) in
+                    completion(.updatingUserError)
+                    return
+                }
+                completion(nil)
+            }
+        }
+    }
+    
+    
+        
+    func updateUser(user: User, completion: @escaping (CCCError?) -> Void) {
+        let ref = db.collection("users")
+        ref.document(user.id).setData(user.dictionaryRep(), completion: { (error) in
+            if let _ = error {
+                completion(CCCError.updatingUserError)
+                return
+            }
+            completion(nil)
+        })
+
+
         
         
+    }
         
         func getCurrentUser(completion: @escaping (User?, CCCError?) -> Void) {
             let ref = db.collection("users")
             
-            guard let currentAuthUser = Auth.auth().currentUser else { return }
+            guard let currentAuthUser = Auth.auth().currentUser else {
+                completion(nil, .noData)
+                return }
             let userREf = ref.document(currentAuthUser.uid)
             
-            userREf.getDocument { (document, _) in
+            userREf.getDocument { (document, error) in
                 if let document = document, document.exists {
-                    guard let data = document.data() else { return }
+                    guard let data = document.data() else {
+                        completion(nil, .noData)
+                        return
+                        
+                    }
                     let user = User(from: data)
                     self.currentUser = user
                     completion(user, nil)
@@ -162,7 +269,8 @@ class NetworkController {
                     completion(nil, .noData)
                 }
             }
-        }
+            
+    }
         
         func getUser(for id: String, completion: @escaping (User?, CCCError?) -> Void) {
             let usersRef = db.collection("users")
@@ -171,7 +279,9 @@ class NetworkController {
             
             userDocument.getDocument { (document, _) in
                 if let document = document, document.exists {
-                    guard let data = document.data() else { return }
+                    guard let data = document.data() else {
+                        completion(nil, .noData)
+                        return }
                     let user = User(from: data)
                     completion(user, nil)
                 } else {
@@ -206,7 +316,10 @@ class NetworkController {
                     completion(nil, .noData)
                 } else {
                     guard let snapshot = querySnapshot,
-                        let document = snapshot.documents.first else { return }
+                        let document = snapshot.documents.first else {
+                            completion(nil, .noData)
+                            return
+                    }
                     
                     let user = User(from: document.data())
                     completion(user, nil)

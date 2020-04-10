@@ -21,7 +21,7 @@ class SelectFriendsForExpenseVC: UIViewController {
     var friends = [String]()
     var collectionView: UICollectionView!
     var selectedFriends = [String]()
-
+    
     var image: UIImage?
     var selectType: SelectFriendsType?
     var trip: Trip?
@@ -30,6 +30,14 @@ class SelectFriendsForExpenseVC: UIViewController {
     init(selectType: SelectFriendsType) {
         super.init(nibName: nil, bundle: nil)
         self.selectType = selectType
+        
+        switch selectType {
+            
+        case .paidBy:
+            title = "Paid By"
+        case .usedBy:
+            title = "Used By"
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -38,10 +46,13 @@ class SelectFriendsForExpenseVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         configureCollectionView()
         configureViewController()
         collectionView.delegate = self
         collectionView.dataSource = self
+        
     }
     
     
@@ -55,87 +66,114 @@ class SelectFriendsForExpenseVC: UIViewController {
         guard let trip = trip else { return }
         
         friends = trip.users
-
+        
         
     }
     
-    
-    
-    func configureViewController() {
-        view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
+    func configureSelectedFriends(cell: FriendCell, indexPath: IndexPath) {
+        guard let expense = expense,
+            let selectType = selectType,
+            let userID = cell.userID else { return }
         
-        let createButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createButtonPressed))
-        navigationItem.rightBarButtonItem = createButton
-    }
-    
-    func configureCollectionView() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: Utilities.createThreeColumnFlowLayout(in: view))
-        view.addSubview(collectionView)
-        collectionView.backgroundColor = .systemBackground
-        collectionView.register(FriendCell.self, forCellWithReuseIdentifier: FriendCell.reuseID)
-        collectionView.allowsMultipleSelection = true
-        
-    }
-    
-    @objc func createButtonPressed() {
-        guard let selectType = selectType,
-        let expense = expense else { return }
-        
-        var dictionary = [String: Double]()
         switch selectType {
         case .paidBy:
-            for user in selectedFriends {
-                dictionary[user] = expense.cost / Double(selectedFriends.count)
+            if expense.paidBy.keys.contains(userID) {
+                selectedFriends.append(userID)
+    
+                collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+                cell.contentView.backgroundColor = .systemTeal
             }
-            expense.paidBy = dictionary
+            
         case .usedBy:
-            for user in selectedFriends {
-                dictionary[user] = expense.cost / Double(selectedFriends.count)
+            if expense.usedBy.keys.contains(userID) {
+                selectedFriends.append(userID)
+
+                collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+                cell.contentView.backgroundColor = .systemTeal
             }
-            expense.usedBy = dictionary
         }
-        navigationController?.popViewController(animated: true)
-    }
-}
-
-
-extension SelectFriendsForExpenseVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return friends.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCell.reuseID, for: indexPath) as? FriendCell else {
-            return UICollectionViewCell() }
-        let friendID = friends[indexPath.row]
         
-        cell.set(userID: friendID)
+    }
         
-        return cell
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let userID = friends[indexPath.item]
-        let cell = collectionView.cellForItem(at: indexPath)
-        if selectedFriends.contains(userID) {
-            return
+        func configureViewController() {
+            
+            view.backgroundColor = .systemBackground
+            navigationController?.navigationBar.prefersLargeTitles = true
+            
+            let createButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createButtonPressed))
+            navigationItem.rightBarButtonItem = createButton
         }
-        cell?.contentView.backgroundColor = .systemTeal
-        selectedFriends.append(userID)
-
+        
+        func configureCollectionView() {
+            collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: Utilities.createThreeColumnFlowLayout(in: view))
+            view.addSubview(collectionView)
+            collectionView.backgroundColor = .systemBackground
+            collectionView.register(FriendCell.self, forCellWithReuseIdentifier: FriendCell.reuseID)
+            collectionView.allowsMultipleSelection = true
+            
+        }
+        
+        @objc func createButtonPressed() {
+            guard let selectType = selectType,
+                let expense = expense else { return }
+            
+            var dictionary = [String: Double]()
+            switch selectType {
+            case .paidBy:
+                for user in selectedFriends {
+                    dictionary[user] = expense.cost / Double(selectedFriends.count)
+                }
+                expense.paidBy = dictionary
+            case .usedBy:
+                for user in selectedFriends {
+                    dictionary[user] = expense.cost / Double(selectedFriends.count)
+                }
+                expense.usedBy = dictionary
+            }
+            navigationController?.popViewController(animated: true)
+        }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let userID = friends[indexPath.item]
-        let cell = collectionView.cellForItem(at: indexPath)
-
-        if selectedFriends.contains(userID) {
-            selectedFriends.remove(at: selectedFriends.firstIndex(of: userID)!)
+    
+    extension SelectFriendsForExpenseVC: UICollectionViewDelegate, UICollectionViewDataSource {
+        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            return friends.count
         }
-        cell?.contentView.backgroundColor = nil
-        print(selectedFriends.count)
-
-    }
+        
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCell.reuseID, for: indexPath) as? FriendCell else {
+                return UICollectionViewCell() }
+            let friendID = friends[indexPath.row]
+            cell.set(userID: friendID)
+            configureSelectedFriends(cell: cell, indexPath: indexPath)
+            
+            return cell
+        }
+        
+        
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let userID = friends[indexPath.item]
+            let cell = collectionView.cellForItem(at: indexPath)
+            cell?.isSelected = true
+            if selectedFriends.contains(userID) {
+                return
+            }
+            cell?.contentView.backgroundColor = .systemTeal
+            selectedFriends.append(userID)
+            
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+            let userID = friends[indexPath.item]
+            let cell = collectionView.cellForItem(at: indexPath)
+            cell?.isSelected = false
+            if selectedFriends.contains(userID) {
+                selectedFriends.remove(at: selectedFriends.firstIndex(of: userID)!)
+            }
+            cell?.contentView.backgroundColor = nil
+            print(selectedFriends.count)
+            
+        }
+        
+        
 }

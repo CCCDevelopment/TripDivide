@@ -17,6 +17,8 @@
 		444C614C24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C614B24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift */; };
 		44697CD42433AA3600252764 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44697CD32433AA3600252764 /* AddFriendViewController.swift */; };
 		44697CD62433AB4600252764 /* CCCBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44697CD52433AB4600252764 /* CCCBodyLabel.swift */; };
+		44C579AD243D4393006FA3CC /* DetailExpenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C579AC243D4393006FA3CC /* DetailExpenceTableViewCell.swift */; };
+		44C579AF243D4898006FA3CC /* ExpenseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C579AE243D4898006FA3CC /* ExpenseDetailViewController.swift */; };
 		84A0506868C4B3290DB9BCF3 /* Pods_CCCTripSpiltr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */; };
 		D11847BC243656C600E6949B /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11847BB243656C600E6949B /* Expense.swift */; };
 		D1254B592435131C00B9CB53 /* CreateTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1254B582435131C00B9CB53 /* CreateTripViewController.swift */; };
@@ -26,7 +28,6 @@
 		D127F83A24327239000721F9 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D127F83924327239000721F9 /* Friends.storyboard */; };
 		D167703B24354BDD00D041DE /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167703A24354BDD00D041DE /* UIImage+Ext.swift */; };
 		D167703D24355E9800D041DE /* TripDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167703C24355E9800D041DE /* TripDetailTableViewController.swift */; };
-		D1677042243562F200D041DE /* UserAvatarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1677041243562F200D041DE /* UserAvatarCollectionView.swift */; };
 		D196AA0F24341D1F00E5B156 /* TripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D196AA0E24341D1F00E5B156 /* TripCell.swift */; };
 		D1B83BB02432979300BC9BB6 /* FriendsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B83BAF2432979300BC9BB6 /* FriendsCollectionViewController.swift */; };
 		D1BB610F242E84C700B90E29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1BB610E242E84C700B90E29 /* GoogleService-Info.plist */; };
@@ -40,6 +41,8 @@
 		D1D01CFF242EBD2000B606C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1D01CFE242EBD2000B606C1 /* Main.storyboard */; };
 		D1D01D02242EC09400B606C1 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D01D01242EC09400B606C1 /* NetworkController.swift */; };
 		D1D01D04242EC54700B606C1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D01D03242EC54700B606C1 /* User.swift */; };
+		D1D14D8B2437D5F70091092E /* ExpenseAvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D14D8A2437D5F70091092E /* ExpenseAvatarCell.swift */; };
+		D1D14D8D2437D82C0091092E /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D14D8C2437D82C0091092E /* UserInfoViewController.swift */; };
 		D1E33DF52432A4890077D4C6 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E33DF42432A4890077D4C6 /* FriendCell.swift */; };
 		D1E33DF82432A7090077D4C6 /* CCCAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E33DF72432A7090077D4C6 /* CCCAvatarImageView.swift */; };
 		D1E33DFA2432A8140077D4C6 /* CCCTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */; };
@@ -62,6 +65,8 @@
 		444C614B24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendsForExpenseVC.swift; sourceTree = "<group>"; };
 		44697CD32433AA3600252764 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		44697CD52433AB4600252764 /* CCCBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCBodyLabel.swift; sourceTree = "<group>"; };
+		44C579AC243D4393006FA3CC /* DetailExpenceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailExpenceTableViewCell.swift; sourceTree = "<group>"; };
+		44C579AE243D4898006FA3CC /* ExpenseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewController.swift; sourceTree = "<group>"; };
 		755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCCTripSpiltr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F57F70D23EE51C97C50C70 /* Pods-CCCTripSpiltr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCCTripSpiltr.debug.xcconfig"; path = "Target Support Files/Pods-CCCTripSpiltr/Pods-CCCTripSpiltr.debug.xcconfig"; sourceTree = "<group>"; };
 		D11847BB243656C600E6949B /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
@@ -72,7 +77,6 @@
 		D127F83924327239000721F9 /* Friends.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
 		D167703A24354BDD00D041DE /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		D167703C24355E9800D041DE /* TripDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailTableViewController.swift; sourceTree = "<group>"; };
-		D1677041243562F200D041DE /* UserAvatarCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarCollectionView.swift; sourceTree = "<group>"; };
 		D196AA0E24341D1F00E5B156 /* TripCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCell.swift; sourceTree = "<group>"; };
 		D1B83BAF2432979300BC9BB6 /* FriendsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewController.swift; sourceTree = "<group>"; };
 		D1BB610E242E84C700B90E29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -86,6 +90,8 @@
 		D1D01CFE242EBD2000B606C1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D1D01D01242EC09400B606C1 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		D1D01D03242EC54700B606C1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D1D14D8A2437D5F70091092E /* ExpenseAvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseAvatarCell.swift; sourceTree = "<group>"; };
+		D1D14D8C2437D82C0091092E /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		D1E33DF42432A4890077D4C6 /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		D1E33DF72432A7090077D4C6 /* CCCAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCAvatarImageView.swift; sourceTree = "<group>"; };
 		D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCTitleLabel.swift; sourceTree = "<group>"; };
@@ -167,6 +173,7 @@
 			children = (
 				D1BB6116242E858200B90E29 /* TripsTableViewController.swift */,
 				D167703C24355E9800D041DE /* TripDetailTableViewController.swift */,
+				44C579AE243D4898006FA3CC /* ExpenseDetailViewController.swift */,
 			);
 			path = TableViewControllers;
 			sourceTree = "<group>";
@@ -207,7 +214,6 @@
 				D1254B5A2435197A00B9CB53 /* SelectFriendsCollectionViewController.swift */,
 				444C614B24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift */,
 				D1B83BAF2432979300BC9BB6 /* FriendsCollectionViewController.swift */,
-				D1677041243562F200D041DE /* UserAvatarCollectionView.swift */,
 			);
 			path = CollectionViews;
 			sourceTree = "<group>";
@@ -219,6 +225,7 @@
 				444C6149243675AE0021D9F8 /* AuthViewControllers */,
 				444C614A2436760D0021D9F8 /* TableViewControllers */,
 				44697CD32433AA3600252764 /* AddFriendViewController.swift */,
+				D1D14D8C2437D82C0091092E /* UserInfoViewController.swift */,
 				D1254B582435131C00B9CB53 /* CreateTripViewController.swift */,
 				444C6143243528960021D9F8 /* ImagePickerController.swift */,
 				444C6147243667CE0021D9F8 /* AddExpenseViewController.swift */,
@@ -262,6 +269,8 @@
 				D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */,
 				44697CD52433AB4600252764 /* CCCBodyLabel.swift */,
 				D1F5E6172433CDAC008F3E72 /* CCCTextView.swift */,
+				D1D14D8A2437D5F70091092E /* ExpenseAvatarCell.swift */,
+				44C579AC243D4393006FA3CC /* DetailExpenceTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -395,7 +404,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1677042243562F200D041DE /* UserAvatarCollectionView.swift in Sources */,
 				44697CD62433AB4600252764 /* CCCBodyLabel.swift in Sources */,
 				D1F5E6132432C4EF008F3E72 /* UIView+Ext.swift in Sources */,
 				D1D01D02242EC09400B606C1 /* NetworkController.swift in Sources */,
@@ -409,15 +417,19 @@
 				D1254B5B2435197A00B9CB53 /* SelectFriendsCollectionViewController.swift in Sources */,
 				D1D01CF7242EB45A00B606C1 /* Trip.swift in Sources */,
 				444C6148243667CE0021D9F8 /* AddExpenseViewController.swift in Sources */,
+				D1D14D8D2437D82C0091092E /* UserInfoViewController.swift in Sources */,
 				4446A36E242E775100F22D90 /* SceneDelegate.swift in Sources */,
+				44C579AD243D4393006FA3CC /* DetailExpenceTableViewCell.swift in Sources */,
 				D1E33DF82432A7090077D4C6 /* CCCAvatarImageView.swift in Sources */,
 				444C614C24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift in Sources */,
+				44C579AF243D4898006FA3CC /* ExpenseDetailViewController.swift in Sources */,
 				D1F5E6182433CDAC008F3E72 /* CCCTextView.swift in Sources */,
 				D1BB611B242E858300B90E29 /* LoginViewController.swift in Sources */,
 				D1BB611A242E858300B90E29 /* AuthenticationViewController.swift in Sources */,
 				D196AA0F24341D1F00E5B156 /* TripCell.swift in Sources */,
 				D1E33DFA2432A8140077D4C6 /* CCCTitleLabel.swift in Sources */,
 				D1BB6115242E857A00B90E29 /* SignUpViewController.swift in Sources */,
+				D1D14D8B2437D5F70091092E /* ExpenseAvatarCell.swift in Sources */,
 				44697CD42433AA3600252764 /* AddFriendViewController.swift in Sources */,
 				D167703D24355E9800D041DE /* TripDetailTableViewController.swift in Sources */,
 				D1BB6119242E858300B90E29 /* TripsTableViewController.swift in Sources */,

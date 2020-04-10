@@ -23,7 +23,7 @@ class TripCell: UITableViewCell {
         contentView.layer.cornerRadius = 10
         contentView.layer.borderWidth = 0.5
         contentView.layer.borderColor = UIColor.systemGray4.cgColor
-        contentView.backgroundColor = UIColor.systemGray2
+        contentView.backgroundColor = UIColor.systemGray6
         
         tripImageView.layer.cornerRadius = 10
         tripImageView.layer.borderWidth = 0.5
@@ -33,11 +33,9 @@ class TripCell: UITableViewCell {
 
     func set(tripID: String) {
         
-        
-
-        
         NetworkController.shared.getTrip(for: tripID) { [weak self] (trip, error) in
             guard let self = self else { return }
+            
             if let error = error {
                 NSLog(error.rawValue)
                 return
@@ -52,18 +50,19 @@ class TripCell: UITableViewCell {
             self.tripNameLabel.adjustsFontSizeToFitWidth = true
             self.tripNameLabel.minimumScaleFactor = 0.5
             
-            UIImage().downloadImage(from: trip.imageURL) { (tripImage) in
-                guard let tripImage = tripImage else { return }
-                
-                DispatchQueue.main.async {
-                    self.tripImageView.image = tripImage
+            if let image = trip.imageURL {
+                UIImage().downloadImage(from: image) { (tripImage) in
+                    guard let tripImage = tripImage else { return }
                     
+                    DispatchQueue.main.async {
+                        self.tripImageView.image = tripImage
+                        
+                    }
                 }
                 
+            } else {
+                self.tripImageView.image = Constants.Images.defaultTrip
             }
-            
-            
-            
         }
         
     }

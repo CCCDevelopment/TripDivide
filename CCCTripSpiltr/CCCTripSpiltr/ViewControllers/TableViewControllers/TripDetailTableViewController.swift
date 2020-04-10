@@ -13,19 +13,27 @@ class TripDetailTableViewController: UITableViewController {
     
     var tripID: String?
     var trip: Trip?
+    var tripTotal: Double = 0.0
+    var expenses: [Expense] = []
+    
+    @IBOutlet weak var containerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.reloadData()
         getTrip()
-        
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     @IBOutlet weak var tripImageView: UIImageView!
     @IBOutlet weak var costLabel: UILabel!
     @IBOutlet weak var borrowedLabel: UILabel!
     @IBOutlet weak var owedLabel: UILabel!
-    @IBOutlet weak var userAvatarCollectionView: UserAvatarCollectionView!
+    @IBOutlet weak var userAvatarCollectionView: UICollectionView!
     
     func getTrip() {
         guard let tripID = tripID else { return }
@@ -44,31 +52,54 @@ class TripDetailTableViewController: UITableViewController {
     
     func configureViews () {
         guard let trip = trip else { return }
-        UIImage().downloadImage(from: trip.imageURL) { [weak self] (image) in
-            
-         guard let image = image,
-            let self = self else { return }
+        containerView.showLoadingView()
+        if let image = trip.imageURL {
+            UIImage().downloadImage(from: image) { (tripImage) in
+                guard let tripImage = tripImage
+                    else { return }
+                
             DispatchQueue.main.async {
-                self.tripImageView.image = image
+                self.containerView.dismissLoadingView()
+                self.tripImageView.image = tripImage
+                }
             }
-            
+        } else {
+            self.containerView.dismissLoadingView()
+            self.tripImageView.image = Constants.Images.defaultTrip
         }
+      
+        for expense in trip.expenses {
+            self.tripTotal += expense.cost
+            }
+        
+        if trip.expenses.count == 0 {
+            costLabel.text = String("$0.00")
+        } else {
+        costLabel.text = String(self.tripTotal).currencyInputFormatting()
+        }
+        
         self.title = trip.name
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 0
+        guard let trip = trip else { return 1 }
+        return trip.expenses.count
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath) as! DetailExpenseTableViewCell
         
-        // Configure the cell...
+        guard let trip = trip else {
+            return DetailExpenseTableViewCell()
+        }
+        
+        let tripExpenses = trip.expenses[indexPath.row]
+        cell.experienceNameLabel.text = tripExpenses.name
+        cell.experienceCostLabel.text = String(tripExpenses.cost).currencyInputFormatting()
         
         return cell
     }
@@ -101,7 +132,9 @@ class TripDetailTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddExpenseSegue" {
             let destinationVC = segue.destination as? AddExpenseViewController
-            
+            destinationVC?.trip = trip
+        } else if segue.identifier == "ViewExpenseDetailSegue" {
+            let destinationVC = segue.destination as? ExpenseDetailViewController
             destinationVC?.trip = trip
         }
         
