@@ -11,8 +11,13 @@ import UIKit
 class FriendsCollectionViewController: UIViewController {
     
     var collectionView: UICollectionView!
-    var friends = [String]()
+    var dataSource: UICollectionViewDiffableDataSource<Section, String>!
+
     
+    
+    enum Section {
+        case main
+    }
     
     override func viewDidLoad() {
         
@@ -20,7 +25,9 @@ class FriendsCollectionViewController: UIViewController {
         configureCollectionView()
         configureViewController()
         collectionView.delegate = self
-        collectionView.dataSource = self
+//        collectionView.dataSource =
+        configureDataSource()
+        getFriends()
     }
     
 
@@ -30,21 +37,37 @@ class FriendsCollectionViewController: UIViewController {
     }
     
     func getFriends() {
-        view.showLoadingView()
+
         NetworkController.shared.getCurrentUser { [weak self] (user, error) in
             guard let self = self else { return }
-            self.view.dismissLoadingView()
             if let error = error {
                 NSLog(error.rawValue)
             }
             guard let user = user else { return }
+
             
-            self.friends = user.friends
-            
-            self.collectionView.reloadData()
+            self.updateData(on: user.friends)
         }
     }
     
+    func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: collectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendCell", for: indexpath) as! FriendCell
+            cell.set(userID: userID)
+            return cell
+      
+        })
+    }
+    
+    
+    func updateData(on friendIDs: [String]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(friendIDs)
+        DispatchQueue.main.async {
+            self.dataSource.apply(snapshot, animatingDifferences: true)
+        }
+    }
   
     
     func configureViewController() {
@@ -82,21 +105,21 @@ class FriendsCollectionViewController: UIViewController {
 }
 
 
-extension FriendsCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return friends.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCell.reuseID, for: indexPath) as? FriendCell else {
-            return UICollectionViewCell() }
-        let sortedFriends = friends.sorted()
-        let friendID = sortedFriends[indexPath.row]
-        
-        cell.set(userID: friendID)
-        
-        return cell
-    }
+extension FriendsCollectionViewController: UICollectionViewDelegate {
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return friends.count
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCell.reuseID, for: indexPath) as? FriendCell else {
+//            return UICollectionViewCell() }
+//        let sortedFriends = friends.sorted()
+//        let friendID = sortedFriends[indexPath.row]
+//
+//        cell.set(userID: friendID)
+//
+//        return cell
+//    }
 }
 
 extension FriendsCollectionViewController: AddFriendVCDelegate {

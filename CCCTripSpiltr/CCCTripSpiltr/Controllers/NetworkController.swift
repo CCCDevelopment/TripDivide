@@ -11,6 +11,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 
+ 
 
 enum CCCError: String {
     case creatingUserError = "Error creating user"
@@ -31,7 +32,7 @@ class NetworkController {
     let db = Firestore.firestore()
     let storage = Storage.storage()
     static let shared = NetworkController()
-    
+    let cache = NSCache<NSString, UIImage>()
     
     func createExpense(expense: Expense, tripID: String, completion: @escaping (CCCError?) -> Void) {
         

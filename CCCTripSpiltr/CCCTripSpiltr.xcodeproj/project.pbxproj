@@ -267,8 +267,8 @@
 			children = (
 				D1E33DF42432A4890077D4C6 /* FriendCell.swift */,
 				D196AA0E24341D1F00E5B156 /* TripCell.swift */,
-				D1E33DF72432A7090077D4C6 /* CCCAvatarImageView.swift */,
 				D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */,
+				D1E33DF72432A7090077D4C6 /* CCCAvatarImageView.swift */,
 				44697CD52433AB4600252764 /* CCCBodyLabel.swift */,
 				D1F5E6172433CDAC008F3E72 /* CCCTextView.swift */,
 				D1D14D8A2437D5F70091092E /* ExpenseAvatarCell.swift */,

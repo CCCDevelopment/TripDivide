@@ -28,7 +28,7 @@ class ExpenseAvatarCell: UICollectionViewCell {
                     DispatchQueue.main.async {
                         if let image = image {
                             
-                            self.avatarImageView.image = image
+                            self.avatarImageView?.image = image
                         }
                     }
                 }
@@ -38,7 +38,7 @@ class ExpenseAvatarCell: UICollectionViewCell {
                 print(string)
                 
                 
-                self.avatarImageView.image = UIImage(systemName: "\(string.lowercased()).circle")
+                self.avatarImageView?.image = UIImage(systemName: "\(string.lowercased()).circle")
             }
             
             

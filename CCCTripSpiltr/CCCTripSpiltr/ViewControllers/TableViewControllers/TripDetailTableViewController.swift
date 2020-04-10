@@ -41,9 +41,13 @@ class TripDetailTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userAvatarCollectionView.register(TripUserAvatarCell.self, forCellWithReuseIdentifier: "TripUserAvatarCell")
+        userAvatarCollectionView.register(ExpenseAvatarCell.self, forCellWithReuseIdentifier: "ExpenseAvatarCell")
         getTrip()
         //        tableView.reloadData()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.tripTotal = 0.0
     }
     
     @IBOutlet weak var tripImageView: UIImageView!
@@ -169,7 +173,7 @@ extension TripDetailTableViewController: UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TripUserAvatarCell", for: indexPath) as! TripUserAvatarCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseAvatarCell", for: indexPath) as! ExpenseAvatarCell
         
         guard let trip = trip else {
             print("NotGettingATrip")

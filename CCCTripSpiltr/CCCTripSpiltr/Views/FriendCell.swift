@@ -11,7 +11,7 @@ import UIKit
 class FriendCell: UICollectionViewCell {
     
     static let reuseID = "FriendCell"
-    
+    let cache = NetworkController.shared.cache
     let avatarImageView = CCCAvatarImageView(frame: .zero)
     let nameLabel = CCCTitleLabel(textAlignment: .center, fontSize: 14)
     var userID: String?
@@ -35,7 +35,7 @@ class FriendCell: UICollectionViewCell {
             if let error = error {
                 NSLog("\(error)")
             }
-
+            
             guard let user = user else { return }
             self.nameLabel.text = user.fullName
             
@@ -50,20 +50,28 @@ class FriendCell: UICollectionViewCell {
     
     func updateImageView(imageURL: String) {
         avatarImage = UIImage()
-        avatarImage.downloadImage(from: imageURL) { [weak self] (image) in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-            if let image = image {
-                
-                self.avatarImageView.image = image
-                
-                
-            } else {
-                self.avatarImageView.image = Constants.Images.placeholderImage
+        let cacheKey = NSString(string: imageURL)
+        
+        if let image = self.cache.object(forKey: cacheKey) {
+            self.avatarImageView.image = image
+            return
+        }
+                avatarImage.downloadImage(from: imageURL) { [weak self] (image) in
+                    guard let self = self else { return }
+                        if let image = image {
+                            DispatchQueue.main.async {
+                            self.cache.setObject(image, forKey: cacheKey)
+                            self.avatarImageView.image = image
+                    }
+               
+                    } else {
+                        self.avatarImageView.image = Constants.Images.placeholderImage
+                    }
             }
         }
-        }
-    }
+    
+    
+    
     
     private func configure() {
         addSubviews(avatarImageView, nameLabel)
@@ -71,17 +79,17 @@ class FriendCell: UICollectionViewCell {
         
         let padding: CGFloat = 8
         
-            NSLayoutConstraint.activate([
-                avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-                avatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-                avatarImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-                avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
-                
-                nameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 12),
-                nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-                nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-                nameLabel.heightAnchor.constraint(equalToConstant: 20)
-            ])
+        NSLayoutConstraint.activate([
+            avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
+            avatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            avatarImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
+            
+            nameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 12),
+            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            nameLabel.heightAnchor.constraint(equalToConstant: 20)
+        ])
     }
     
 }
