@@ -11,22 +11,75 @@ import UIKit
 class ExpenseDetailViewController: UIViewController {
     
     var trip: Trip?
+    
+    var dataSource: UICollectionViewDiffableDataSource<Section, String>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        paidByCollectionView.delegate = self
+        
+        
+        configurePaidByDataSource()
+     
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.updateData(on: trip!.users)
     }
-    */
+    
+    enum Section {
+        case main
+    }
+    
+    @IBOutlet weak var paidByCollectionView: UICollectionView!
+    @IBOutlet weak var usedByCollectionView: UICollectionView!
+    @IBOutlet weak var receiptImageView: UIImageView!
+    @IBOutlet weak var expenseCostLabel: UILabel!
+    @IBOutlet weak var receiptLabel: UILabel!
+    
+    
+    
+    func configurePaidByDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: paidByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailExpneseCell", for: indexpath) as! CollectionViewDetailExpneseCell
 
+            
+            cell.getUser(for: userID)
+            return cell
+      
+        })
+    
+    }
+    
+    func updateData(on friendIDs: [String]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(friendIDs)
+        DispatchQueue.main.async {
+            self.dataSource.apply(snapshot, animatingDifferences: true)
+        }
+    }
+    
+//    func configureUsedByDataSource() {
+//          dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: usedByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
+//              let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailExpneseCell", for: indexpath) as! CollectionViewDetailExpneseCell
+//
+//
+//              cell.getUser(for: userID)
+//
+//
+//
+//              return cell
+//
+//          })
+//
+//      }
+    
+    
+}
+
+extension ExpenseDetailViewController: UICollectionViewDelegate {
+    
 }

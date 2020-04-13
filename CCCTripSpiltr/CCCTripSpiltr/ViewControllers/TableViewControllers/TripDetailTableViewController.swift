@@ -27,6 +27,8 @@ class TripDetailTableViewController: UITableViewController {
     }
     var tripTotal: Double = 0.0
     
+    
+    
     @IBOutlet weak var containerView: UIView!
     
     

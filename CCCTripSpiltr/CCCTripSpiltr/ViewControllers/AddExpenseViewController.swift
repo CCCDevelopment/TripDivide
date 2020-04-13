@@ -220,57 +220,6 @@ extension String {
 }
 
 extension AddExpenseViewController: UICollectionViewDelegate {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//
-//        switch segmentedControl.selectedSegmentIndex {
-//        case 0:
-//            return Array(expense.paidBy).count
-//        case 1:
-//            return Array(expense.usedBy).count
-//        default:
-//            return 0
-//
-//        }
-//
-//
-//    }
-//
-//
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseAvatarCell", for: indexPath) as! ExpenseAvatarCell
-//        if collectionView == paidByCollectionView {
-//
-//
-//            var userIDArray = [String]()
-//
-//            switch segmentedControl.selectedSegmentIndex {
-//            case 0:
-//                userIDArray = Array(expense.paidBy.keys).sorted()
-//            case 1:
-//                userIDArray = Array(expense.usedBy.keys).sorted()
-//            default:
-//                break
-//
-//            }
-//            let userID = userIDArray[indexPath.item]
-//
-//            NetworkController.shared.getUser(for: userID) { (user, error) in
-//                if let error = error {
-//                    NSLog(error.rawValue)
-//                    return
-//                }
-//
-//                if let user = user {
-//
-//                    cell.updateImageView(user: user)
-//                }
-//
-//            }
-//            return cell
-//        } else {
-//            return UICollectionViewCell()
-//        }
-//    }
+
     
 }
