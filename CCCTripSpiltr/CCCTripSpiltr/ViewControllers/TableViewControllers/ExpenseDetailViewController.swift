@@ -10,15 +10,15 @@ import UIKit
 
 class ExpenseDetailViewController: UIViewController {
     
-    var trip: Trip?
+    var expense: Expense?
+    var paidBy: [String] = []
     
     var dataSource: UICollectionViewDiffableDataSource<Section, String>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         paidByCollectionView.delegate = self
-        
-        
+        getPaidByUsers()
         configurePaidByDataSource()
      
         
@@ -26,7 +26,7 @@ class ExpenseDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.updateData(on: trip!.users)
+        self.updateData(on: paidBy)
     }
     
     enum Section {
@@ -39,7 +39,14 @@ class ExpenseDetailViewController: UIViewController {
     @IBOutlet weak var expenseCostLabel: UILabel!
     @IBOutlet weak var receiptLabel: UILabel!
     
-    
+    func getPaidByUsers() {
+        
+        for user in (expense?.paidBy.keys)! {
+            paidBy.append(user)
+        }
+        
+        
+    }
     
     func configurePaidByDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: paidByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in

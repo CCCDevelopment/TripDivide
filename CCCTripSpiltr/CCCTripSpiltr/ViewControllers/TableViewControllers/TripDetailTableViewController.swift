@@ -155,7 +155,9 @@ class TripDetailTableViewController: UITableViewController {
         }    
     }
     
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+    }
     
     
     // MARK: - Navigation
@@ -167,11 +169,15 @@ class TripDetailTableViewController: UITableViewController {
             destinationVC?.trip = trip
         } else if segue.identifier == "ViewExpenseDetailSegue" {
             let destinationVC = segue.destination as? ExpenseDetailViewController
-            destinationVC?.trip = trip
+            if let indexPath = tableView.indexPathForSelectedRow {
+                destinationVC?.expense = trip?.expenses[indexPath.row]
+            }
+            
+            }
         }
         
         
-    }
+    
     
     
 }
