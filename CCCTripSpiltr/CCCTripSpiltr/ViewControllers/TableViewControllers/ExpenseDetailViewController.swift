@@ -12,21 +12,24 @@ class ExpenseDetailViewController: UIViewController {
     
     var expense: Expense?
     var paidBy: [String] = []
-    
+    var usedBy: [String] = []
     var dataSource: UICollectionViewDiffableDataSource<Section, String>!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         paidByCollectionView.delegate = self
+//        usedByCollectionView.delegate = self
         getPaidByUsers()
         configurePaidByDataSource()
+//        configureUsedByDataSource()
         configureUI()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.updateData(on: paidBy)
+      
+        updateData(on: paidBy)
     }
     
     enum Section {
@@ -45,19 +48,40 @@ class ExpenseDetailViewController: UIViewController {
             paidBy.append(user)
         }
         
+       
+    }
+    
+    func getUsedByUsers() {
+        
+        for user in (expense?.usedBy.keys)! {
+            usedBy.append(user)
+        }
+                  
+       
         
     }
     
     func configurePaidByDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: paidByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailExpneseCell", for: indexpath) as! CollectionViewDetailExpneseCell
-
+            
             
             cell.getUser(for: userID)
             return cell
-      
+            
         })
+        
+    }
     
+    func configureUsedByDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: usedByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailExpneseCell", for: indexpath) as! CollectionViewDetailExpneseCell
+            
+            
+            cell.getUser(for: userID)
+            return cell
+            
+        })
     }
     
     func updateData(on friendIDs: [String]) {
@@ -81,20 +105,20 @@ class ExpenseDetailViewController: UIViewController {
         
     }
     
-//    func configureUsedByDataSource() {
-//          dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: usedByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
-//              let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailExpneseCell", for: indexpath) as! CollectionViewDetailExpneseCell
-//
-//
-//              cell.getUser(for: userID)
-//
-//
-//
-//              return cell
-//
-//          })
-//
-//      }
+    //    func configureUsedByDataSource() {
+    //          dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: usedByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
+    //              let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailExpneseCell", for: indexpath) as! CollectionViewDetailExpneseCell
+    //
+    //
+    //              cell.getUser(for: userID)
+    //
+    //
+    //
+    //              return cell
+    //
+    //          })
+    //
+    //      }
     
     
 }
