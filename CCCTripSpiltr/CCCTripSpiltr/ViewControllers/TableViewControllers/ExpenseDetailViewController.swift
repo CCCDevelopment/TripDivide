@@ -20,7 +20,7 @@ class ExpenseDetailViewController: UIViewController {
         paidByCollectionView.delegate = self
         getPaidByUsers()
         configurePaidByDataSource()
-     
+        configureUI()
         
     }
     
@@ -67,6 +67,18 @@ class ExpenseDetailViewController: UIViewController {
         DispatchQueue.main.async {
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
+    }
+    
+    func configureUI() {
+        guard let expense = expense else { return }
+        
+        let cost = String(expense.cost).currencyInputFormatting()
+        
+        self.expenseCostLabel?.text = cost
+        
+        self.title = "\(expense.name)"
+        
+        
     }
     
 //    func configureUsedByDataSource() {

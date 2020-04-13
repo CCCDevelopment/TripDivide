@@ -44,7 +44,7 @@ class CollectionViewDetailExpneseCell: UICollectionViewCell {
             if let image = self.cache.object(forKey: cacheKey) {
                 self.userImageView?.image = image
                 self.userNameLabel?.text = user.fullName
-                print("\(user.fullName)")
+             
                 
                 
                 return
@@ -58,7 +58,7 @@ class CollectionViewDetailExpneseCell: UICollectionViewCell {
                         self.cache.setObject(image, forKey: cacheKey)
                         self.userImageView?.image = image
                         self.userNameLabel?.text = user.fullName
-                           print("\(user.fullName)")
+                          
                     }
                 }
             }
@@ -70,7 +70,7 @@ class CollectionViewDetailExpneseCell: UICollectionViewCell {
             
             self.userImageView?.image = UIImage(systemName: "\(string.lowercased()).circle")
             self.userNameLabel?.text = user.fullName
-               print("\(user.fullName)")
+              
         }
         
         
