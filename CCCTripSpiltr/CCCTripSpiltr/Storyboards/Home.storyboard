@@ -883,6 +883,7 @@
                         <outlet property="paidByCollectionView" destination="nfa-Tl-oRA" id="dEk-ag-F2Z"/>
                         <outlet property="receiptImageView" destination="hAO-ae-825" id="IwH-fA-FkO"/>
                         <outlet property="receiptLabel" destination="CoC-nY-mRc" id="MPP-hm-1LZ"/>
+                        <outlet property="usedByCollectionView" destination="yzc-h9-5g1" id="nmq-OR-Kh0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8A-XG-prx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

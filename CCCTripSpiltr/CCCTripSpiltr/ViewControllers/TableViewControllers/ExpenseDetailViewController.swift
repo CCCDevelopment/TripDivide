@@ -31,7 +31,7 @@ class ExpenseDetailViewController: UIViewController {
         super.viewWillAppear(animated)
       
         updatePaidData(on: paidBy)
-//        updateUsedData(on: usedBy)
+        updateUsedData(on: usedBy)
     }
     
     enum Section {
@@ -77,7 +77,7 @@ class ExpenseDetailViewController: UIViewController {
     
     func configureUsedByDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: usedByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailUsedByCell", for: indexpath) as! CollectionViewDetailExpneseCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailUsedByCell", for: indexpath) as! CollectionViewDetailUsedByCell
             
             
             cell.getUser(for: userID)
