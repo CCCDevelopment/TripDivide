@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExpenseDetailViewController: UIViewController {
+class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
     var expense: Expense?
     var paidBy: [String] = []
@@ -119,11 +119,23 @@ class ExpenseDetailViewController: UIViewController {
         
     }
     
+//    func centerItemsInCollectionView(cellWidth: Double, numberOfItems: Double, spaceBetweenCell: Double, collectionView: UICollectionView) -> UIEdgeInsets {
+//        let totalWidth = cellWidth * numberOfItems
+//        let totalSpacingWidth = spaceBetweenCell * (numberOfItems - 1)
+//        let leftInset = (collectionView.frame.width - CGFloat(totalWidth + totalSpacingWidth)) / 2
+//        let rightInset = leftInset
+//        return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
+//    }
+    
 }
 
 extension ExpenseDetailViewController: UICollectionViewDelegate {
     
 }
+
+
+
+
 // Template for Removing from Diffable Data Source:
 //extension ContactListViewController {
 //    func remove(_ contact: Contact, animate: Bool = true) {

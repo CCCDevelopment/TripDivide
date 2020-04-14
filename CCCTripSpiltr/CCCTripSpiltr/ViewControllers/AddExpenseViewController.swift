@@ -7,18 +7,21 @@
 //
 
 import UIKit
+import Photos
 
-class AddExpenseViewController: UIViewController {
+class AddExpenseViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var trip: Trip?
     var expense = Expense(name: "", cost: 0.0, paidBy: [:], usedBy: [:])
-    
+    var imagePicker: ImagePicker!
+    var image: UIImage!
     
 
     @IBOutlet weak var paidByCollectionView: UICollectionView!
     @IBOutlet weak var paidByButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var costTextField: UITextField!
+    @IBOutlet weak var receiptImageView: UIImageView!
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     var dataSource: UICollectionViewDiffableDataSource<Section, String>!
@@ -36,7 +39,7 @@ class AddExpenseViewController: UIViewController {
         paidByCollectionView.delegate = self
         configureDataSource()
         costTextField.addTarget(self, action: #selector(myTextFieldDidChange), for: .editingChanged)
-        
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -102,6 +105,16 @@ class AddExpenseViewController: UIViewController {
         
         
     }
+    
+    
+    
+    @IBAction func addReceiptButtonTapped(_ sender: Any) {
+    
+        self.imagePicker.present(from: self.view)
+        
+    }
+    
+    
     
     @IBAction func splitOptionsButtonTapped(_ sender: Any) {
         
@@ -221,5 +234,15 @@ extension String {
 
 extension AddExpenseViewController: UICollectionViewDelegate {
 
+    
+}
+
+extension AddExpenseViewController: ImagePickerDelegate {
+    
+    func didSelect(image: UIImage?) {
+        self.image = image
+        self.receiptImageView.image = image
+    }
+    
     
 }
