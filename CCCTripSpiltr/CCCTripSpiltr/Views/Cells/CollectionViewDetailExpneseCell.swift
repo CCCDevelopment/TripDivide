@@ -17,6 +17,10 @@ class CollectionViewDetailExpneseCell: UICollectionViewCell {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     
+    override func layoutSubviews() {
+        userImageView.layer.cornerRadius = 10
+    }
+    
     func getUser(for userID: String) {
         NetworkController.shared.getUser(for: userID) { (user, error) in
             if let error = error {

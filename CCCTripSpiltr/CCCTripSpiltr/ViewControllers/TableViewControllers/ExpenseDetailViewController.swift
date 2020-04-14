@@ -144,6 +144,8 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
         UIImage().downloadImage(from: receipt) { (image) in
             DispatchQueue.main.async {
                 self.receiptImageView.image = image
+                
+        
                 }
             }
         }

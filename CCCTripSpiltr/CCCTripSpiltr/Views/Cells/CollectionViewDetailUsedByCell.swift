@@ -17,6 +17,11 @@ class CollectionViewDetailUsedByCell: UICollectionViewCell {
         
         @IBOutlet weak var userImageView: UIImageView!
         @IBOutlet weak var userNameLabel: UILabel!
+    
+    
+    override func layoutSubviews() {
+        userImageView.layer.cornerRadius = 10
+    }
         
         func getUser(for userID: String) {
             NetworkController.shared.getUser(for: userID) { (user, error) in
@@ -45,9 +50,7 @@ class CollectionViewDetailUsedByCell: UICollectionViewCell {
                 if let image = self.cache.object(forKey: cacheKey) {
                     self.userImageView?.image = image
                     self.userNameLabel?.text = user.fullName
-                 
-                    
-                    
+                
                     return
                 }
                 
@@ -67,16 +70,10 @@ class CollectionViewDetailUsedByCell: UICollectionViewCell {
                 
                 guard let string = user.fullName.first else { return }
          
-                
-                
                 self.userImageView?.image = UIImage(systemName: "\(string.lowercased()).circle")
                 self.userNameLabel?.text = user.fullName
                   
             }
-            
-            
         }
-        
-        
     }
 

@@ -12,9 +12,14 @@ class TripUserAvatarCell: UICollectionViewCell {
     
     var avatarImage: UIImage!
 
-    
      
     @IBOutlet weak var avatarImagetwoView: UIImageView!
+    
+    
+    override func layoutSubviews() {
+        
+        avatarImagetwoView.layer.cornerRadius = 10
+    }
     
     
     func updateImageView(user: User) {
