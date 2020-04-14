@@ -14,11 +14,12 @@ class ExpenseDetailViewController: UIViewController {
     var paidBy: [String] = []
     var usedBy: [String] = []
     var dataSource: UICollectionViewDiffableDataSource<Section, String>!
+    var otherDataSource: UICollectionViewDiffableDataSource<Section, String>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        paidByCollectionView.delegate = self
-        usedByCollectionView.delegate = self
+//        paidByCollectionView.delegate = self
+//        usedByCollectionView.delegate = self
         getPaidByUsers()
         getUsedByUsers()
         configurePaidByDataSource()
@@ -32,6 +33,7 @@ class ExpenseDetailViewController: UIViewController {
       
         updatePaidData(on: paidBy)
         updateUsedData(on: usedBy)
+        
     }
     
     enum Section {
@@ -59,7 +61,7 @@ class ExpenseDetailViewController: UIViewController {
             usedBy.append(user)
         }
                   
-       
+      
         
     }
     
@@ -76,7 +78,7 @@ class ExpenseDetailViewController: UIViewController {
     }
     
     func configureUsedByDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: usedByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
+        otherDataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: usedByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailUsedByCell", for: indexpath) as! CollectionViewDetailUsedByCell
             
             
@@ -100,7 +102,7 @@ class ExpenseDetailViewController: UIViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(usedBy)
         DispatchQueue.main.async {
-            self.dataSource.apply(snapshot, animatingDifferences: true)
+            self.otherDataSource.apply(snapshot, animatingDifferences: true)
         }
     }
     
@@ -117,24 +119,16 @@ class ExpenseDetailViewController: UIViewController {
         
     }
     
-    //    func configureUsedByDataSource() {
-    //          dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: usedByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
-    //              let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailExpneseCell", for: indexpath) as! CollectionViewDetailExpneseCell
-    //
-    //
-    //              cell.getUser(for: userID)
-    //
-    //
-    //
-    //              return cell
-    //
-    //          })
-    //
-    //      }
-    
-    
 }
 
 extension ExpenseDetailViewController: UICollectionViewDelegate {
     
 }
+// Template for Removing from Diffable Data Source:
+//extension ContactListViewController {
+//    func remove(_ contact: Contact, animate: Bool = true) {
+//        let snapshot = dataSource.snapshot()
+//        snapshot.deleteItems([contact])
+//        dataSource.apply(snapshot, animatingDifferences: animate)
+//    }
+//}
