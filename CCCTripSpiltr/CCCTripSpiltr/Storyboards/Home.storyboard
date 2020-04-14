@@ -737,8 +737,8 @@
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="73" id="m22-uJ-t5X"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thomas R Murphy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDh-wR-OHz">
-                                                            <rect key="frame" x="8" y="89" width="141" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Thomas R Murphy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDh-wR-OHz">
+                                                            <rect key="frame" x="14" y="89" width="141" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="SDh-wR-OHz" secondAttribute="height" multiplier="20:3" id="A5y-OV-XmS"/>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="cRB-cE-8w6"/>
@@ -800,7 +800,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewDetailExpneseCell" id="lHN-WO-ERT" customClass="CollectionViewDetailExpneseCell" customModule="CCCTripSpiltr" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewDetailUsedByCell" id="lHN-WO-ERT" customClass="CollectionViewDetailUsedByCell" customModule="CCCTripSpiltr" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="5" width="155" height="110"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Lvi-0d-zjV">
@@ -850,8 +850,8 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="155" height="110"/>
                                         <connections>
-                                            <outlet property="userImageView" destination="tVp-Pf-0Rn" id="tV6-Yk-l1K"/>
-                                            <outlet property="userNameLabel" destination="V5e-Ih-gVd" id="d7d-Mk-x87"/>
+                                            <outlet property="userImageView" destination="tVp-Pf-0Rn" id="oEn-lT-BOH"/>
+                                            <outlet property="userNameLabel" destination="V5e-Ih-gVd" id="cFI-6i-9Im"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -883,7 +883,6 @@
                         <outlet property="paidByCollectionView" destination="nfa-Tl-oRA" id="dEk-ag-F2Z"/>
                         <outlet property="receiptImageView" destination="hAO-ae-825" id="IwH-fA-FkO"/>
                         <outlet property="receiptLabel" destination="CoC-nY-mRc" id="MPP-hm-1LZ"/>
-                        <outlet property="usedByCollectionView" destination="yzc-h9-5g1" id="sSp-Sq-iC3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8A-XG-prx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

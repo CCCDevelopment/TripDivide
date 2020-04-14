@@ -65,7 +65,7 @@ class CollectionViewDetailExpneseCell: UICollectionViewCell {
         } else {
             
             guard let string = user.fullName.first else { return }
-            print(string)
+          
             
             
             self.userImageView?.image = UIImage(systemName: "\(string.lowercased()).circle")
