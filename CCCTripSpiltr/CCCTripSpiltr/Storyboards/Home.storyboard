@@ -698,7 +698,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20.5" id="LXY-kw-LpQ"/>
                                 </constraints>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hAO-ae-825">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hAO-ae-825">
                                 <rect key="frame" x="128" y="614" width="159" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -889,6 +889,7 @@
                     <navigationItem key="navigationItem" title="Expense" id="i4t-gS-dhv">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="XFF-gR-zcY">
                             <connections>
+                                <action selector="editButtonTapped:" destination="jA9-eU-9er" id="5qv-Ts-DUY"/>
                                 <segue destination="hTd-Nr-Dg6" kind="show" identifier="EditExpenseSegue" id="aZi-jp-Xvr"/>
                             </connections>
                         </barButtonItem>
@@ -1035,9 +1036,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YLN-sX-4wd">
+                                <rect key="frame" x="111" y="633" width="192" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="On8-po-MAF"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WE5-2g-o6J">
+                                <rect key="frame" x="180" y="595" width="54" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="XXK-Pw-SIU"/>
+                                </constraints>
+                                <state key="normal" title="Receipt"/>
+                                <connections>
+                                    <action selector="addReceiptButtonTapped:" destination="hTd-Nr-Dg6" eventType="touchUpInside" id="bVA-yv-lOC"/>
+                                    <action selector="addReceiptButtonTapped:" destination="EYH-y3-Ja7" eventType="touchUpInside" id="eFr-oX-TFT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="LzN-Xn-gw0" firstAttribute="trailing" secondItem="WE5-2g-o6J" secondAttribute="trailing" constant="180" id="074-vq-AhX"/>
+                            <constraint firstItem="YLN-sX-4wd" firstAttribute="bottom" secondItem="LzN-Xn-gw0" secondAttribute="bottom" id="0pt-fb-AJQ"/>
                             <constraint firstItem="72y-iD-R5P" firstAttribute="leading" secondItem="LzN-Xn-gw0" secondAttribute="leading" constant="16" id="1hC-BQ-o9Y"/>
                             <constraint firstItem="LzN-Xn-gw0" firstAttribute="trailing" secondItem="x5a-nr-o4j" secondAttribute="trailing" constant="135" id="1zE-Nv-JiC"/>
                             <constraint firstItem="72y-iD-R5P" firstAttribute="top" secondItem="x5a-nr-o4j" secondAttribute="bottom" constant="8" id="5Fg-84-70h"/>
@@ -1048,8 +1068,11 @@
                             <constraint firstItem="x5a-nr-o4j" firstAttribute="leading" secondItem="LzN-Xn-gw0" secondAttribute="leading" constant="135" id="MqJ-Ji-fIW"/>
                             <constraint firstItem="LzN-Xn-gw0" firstAttribute="trailing" secondItem="72y-iD-R5P" secondAttribute="trailing" constant="16" id="Mre-YK-Xzo"/>
                             <constraint firstItem="7zY-Nv-030" firstAttribute="top" secondItem="72y-iD-R5P" secondAttribute="bottom" constant="20" id="PrM-WL-OoI"/>
+                            <constraint firstItem="WE5-2g-o6J" firstAttribute="leading" secondItem="LzN-Xn-gw0" secondAttribute="leading" constant="180" id="TwR-JD-jI8"/>
+                            <constraint firstItem="YLN-sX-4wd" firstAttribute="top" secondItem="WE5-2g-o6J" secondAttribute="bottom" constant="8" id="ULx-cB-4L2"/>
                             <constraint firstItem="1M0-LR-lMf" firstAttribute="leading" secondItem="LzN-Xn-gw0" secondAttribute="leading" constant="16" id="UaE-9C-JeE"/>
                             <constraint firstItem="1M0-LR-lMf" firstAttribute="top" secondItem="7zY-Nv-030" secondAttribute="bottom" constant="16" id="WOi-8D-oCz"/>
+                            <constraint firstItem="YLN-sX-4wd" firstAttribute="leading" secondItem="LzN-Xn-gw0" secondAttribute="leading" constant="111" id="ank-vZ-hNi"/>
                             <constraint firstItem="Oyk-HT-3Zv" firstAttribute="leading" secondItem="LzN-Xn-gw0" secondAttribute="leading" constant="131" id="bWd-3a-yBl"/>
                             <constraint firstItem="Oyk-HT-3Zv" firstAttribute="top" secondItem="LzN-Xn-gw0" secondAttribute="top" id="gar-eL-bVw"/>
                             <constraint firstItem="x5a-nr-o4j" firstAttribute="top" secondItem="IGj-FH-qBU" secondAttribute="bottom" constant="8" id="lMF-16-kQb"/>
@@ -1057,6 +1080,7 @@
                             <constraint firstItem="LzN-Xn-gw0" firstAttribute="trailing" secondItem="JAt-fg-Xp1" secondAttribute="trailing" constant="143" id="q1H-u1-M93"/>
                             <constraint firstItem="IGj-FH-qBU" firstAttribute="leading" secondItem="LzN-Xn-gw0" secondAttribute="leading" constant="16" id="q2Z-fj-tLk"/>
                             <constraint firstItem="JAt-fg-Xp1" firstAttribute="leading" secondItem="LzN-Xn-gw0" secondAttribute="leading" constant="143" id="qq3-cT-TJG"/>
+                            <constraint firstItem="LzN-Xn-gw0" firstAttribute="trailing" secondItem="YLN-sX-4wd" secondAttribute="trailing" constant="111" id="tt9-Gc-070"/>
                             <constraint firstItem="LzN-Xn-gw0" firstAttribute="trailing" secondItem="7zY-Nv-030" secondAttribute="trailing" constant="16" id="vOX-6V-Ble"/>
                             <constraint firstItem="LzN-Xn-gw0" firstAttribute="trailing" secondItem="Oyk-HT-3Zv" secondAttribute="trailing" constant="129.5" id="vi3-4d-N6C"/>
                         </constraints>
@@ -1074,6 +1098,7 @@
                         <outlet property="expenseCostTextField" destination="72y-iD-R5P" id="UUc-Hd-6RJ"/>
                         <outlet property="expenseNameTextField" destination="IGj-FH-qBU" id="uJ0-b9-oSz"/>
                         <outlet property="expenseParticipantCollectionView" destination="1M0-LR-lMf" id="sEx-yy-izy"/>
+                        <outlet property="receiptImageView" destination="YLN-sX-4wd" id="ijy-kh-tZH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jWA-nP-nR0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

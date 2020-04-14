@@ -13,9 +13,11 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     var expense: Expense?
     var paidBy: [String] = []
     var usedBy: [String] = []
+    
     var dataSource: UICollectionViewDiffableDataSource<Section, String>!
     var otherDataSource: UICollectionViewDiffableDataSource<Section, String>!
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
 //        paidByCollectionView.delegate = self
@@ -25,7 +27,7 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
         configurePaidByDataSource()
         configureUsedByDataSource()
         configureUI()
-        
+        configureTapGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,36 +41,62 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     enum Section {
         case main
     }
-    
+     
     @IBOutlet weak var paidByCollectionView: UICollectionView!
     @IBOutlet weak var usedByCollectionView: UICollectionView!
     @IBOutlet weak var receiptImageView: UIImageView!
     @IBOutlet weak var expenseCostLabel: UILabel!
     @IBOutlet weak var receiptLabel: UILabel!
     
+    @objc func exitImageDetail() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @objc func tapHandler() {
+        
+        let vc = UIViewController()
+        let imageView = UIImageView(frame: vc.view.frame)
+//        let nc = UINavigationController(rootViewController: vc)
+//        let exitButton = UIBarButtonItem(barButtonSystemItem: .close, target: vc, action: #selector(self.exitImageDetail))
+//
+//        vc.navigationItem.rightBarButtonItem = exitButton
+        
+        
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = receiptImageView.image
+
+        vc.view.addSubview(imageView)
+        //Change back to present NC if we still want to go the NavController way ...
+        present(vc, animated: true, completion: nil)
+         
+    }
+    
+    func configureTapGesture() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapHandler))
+        receiptImageView.isUserInteractionEnabled = true
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        receiptImageView.addGestureRecognizer(tapGestureRecognizer)
+        
+    }
+    
     func getPaidByUsers() {
         
         for user in (expense?.paidBy.keys)! {
             paidBy.append(user)
         }
-        
-       
-    }
+  }
     
     func getUsedByUsers() {
         
         for user in (expense?.usedBy.keys)! {
             usedBy.append(user)
         }
-                  
-      
-        
     }
     
     func configurePaidByDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: paidByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailExpneseCell", for: indexpath) as! CollectionViewDetailExpneseCell
-            
             
             cell.getUser(for: userID)
             return cell
@@ -80,7 +108,6 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     func configureUsedByDataSource() {
         otherDataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: usedByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailUsedByCell", for: indexpath) as! CollectionViewDetailUsedByCell
-            
             
             cell.getUser(for: userID)
             return cell
@@ -109,14 +136,31 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     
     func configureUI() {
         guard let expense = expense else { return }
-        
         let cost = String(expense.cost).currencyInputFormatting()
-        
         self.expenseCostLabel?.text = cost
-        
         self.title = "\(expense.name)"
         
-        
+        if let receipt = expense.receipt {
+        UIImage().downloadImage(from: receipt) { (image) in
+            DispatchQueue.main.async {
+                self.receiptImageView.image = image
+                }
+            }
+        }
+    }
+   
+    @IBAction func editButtonTapped(_ sender: Any) {
+    
+        performSegue(withIdentifier: "EditExpenseSegue", sender: sender)
+    
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EditExpenseSegue" {
+            let destinationVC = segue.destination as! EditExpenseViewController
+            destinationVC.expense = self.expense
+            
+        }
     }
     
 //    func centerItemsInCollectionView(cellWidth: Double, numberOfItems: Double, spaceBetweenCell: Double, collectionView: UICollectionView) -> UIEdgeInsets {
