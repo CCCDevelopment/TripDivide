@@ -12,7 +12,7 @@ import Photos
 class AddExpenseViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var trip: Trip?
-    var expense = Expense(name: "", cost: 0.0, paidBy: [:], usedBy: [:])
+    var expense = Expense(name: "", receipt: nil, cost: 0.0, paidBy: [:], usedBy: [:])
     var imagePicker: ImagePicker!
     var image: UIImage!
     
@@ -80,7 +80,8 @@ class AddExpenseViewController: UIViewController, UIImagePickerControllerDelegat
     @IBAction func saveButtonPressed(_ sender: Any) {
         guard let tripID = trip?.id else { return }
         view.showLoadingView()
-        NetworkController.shared.createExpense(expense: expense, tripID: tripID) { [weak self ](error) in
+        
+        NetworkController.shared.uploadExpense(image: image, expense: expense, tripID: tripID) { [weak self ](error) in
             guard let self = self else { return }
             self.view.dismissLoadingView()
             if let error = error {
@@ -89,6 +90,7 @@ class AddExpenseViewController: UIViewController, UIImagePickerControllerDelegat
             
             self.navigationController?.popViewController(animated: true)
         }
+    
     }
     
     @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {

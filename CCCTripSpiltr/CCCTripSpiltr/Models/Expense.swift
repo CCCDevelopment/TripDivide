@@ -17,16 +17,16 @@ class Expense {
     var cost: Double
     var paidBy: [String: Double]
     var usedBy: [String: Double]
-//    var reciept: String?
+    var receipt: String?
     
-    init(id: String = UUID().uuidString, date: Date = Date(), name: String, cost: Double, paidBy: [String: Double], usedBy: [String: Double]) {
+    init(id: String = UUID().uuidString, date: Date = Date(), name: String, receipt: String?, cost: Double, paidBy: [String: Double], usedBy: [String: Double]) {
         self.id = id
         self.date = date
         self.name = name
         self.cost = cost
         self.paidBy = paidBy
         self.usedBy = usedBy
-//        self.reciept = recipet
+        self.receipt = receipt
     }
     
     init(from dictionary: [String: Any]) {
@@ -37,12 +37,12 @@ class Expense {
         self.cost = dictionary["cost"] as! Double
         self.paidBy = dictionary["paidBy"] as! [String: Double]
         self.usedBy = dictionary["usedBy"] as! [String: Double]
-//        self.reciept = dictionary["reciept"] as? String
+        self.receipt = dictionary["receipt"] as? String
         
     }
     
     func dictionaryRep() -> [String : Any?] {
-        return ["id": id, "date": date, "name": name, "cost": cost, "paidBy": paidBy, "usedBy": usedBy]
+        return ["id": id, "date": date, "name": name, "cost": cost, "paidBy": paidBy, "usedBy": usedBy, "receipt": receipt as Any]
     }
     
 }
