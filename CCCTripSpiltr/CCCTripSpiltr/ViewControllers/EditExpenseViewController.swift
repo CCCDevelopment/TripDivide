@@ -10,7 +10,7 @@ import UIKit
 import Photos
 
 class EditExpenseViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     var trip: Trip?
     var expense: Expense?
     var imagePicker: ImagePicker!
@@ -28,10 +28,29 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-      self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        
+        
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         configureUI()
-        print(expense?.name)
+        configureTextFields()
+    }
+    
+    func configureTextFields() {
+        
+        expenseNameTextField.delegate = self
+        expenseCostTextField.delegate = self
+    expenseCostTextField.addTarget(self, action: #selector(myTextFieldDidChange), for: .editingChanged)
+        
+        
+        
+        
+    }
+    
+    @objc func myTextFieldDidChange(_ textField: UITextField) {
+        
+        if let amountString = textField.text?.currencyInputFormatting() {
+            textField.text = amountString
+        }
     }
     
     
@@ -41,7 +60,7 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
         
         guard let expense = expense else { return }
         
-        expenseCostTextField?.text = String(expense.cost)
+        expenseCostTextField?.text = "$" + String(expense.cost)
         expenseNameTextField?.text = expense.name
         
         if let receipt = expense.receipt {
@@ -52,7 +71,7 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
             }
         }
         
-    
+        
         
     }
     
@@ -66,11 +85,11 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func addReceiptButtonTapped(_ sender: Any) {
-       
-           self.imagePicker.present(from: self.view)
-           
-       }
-
+        
+        self.imagePicker.present(from: self.view)
+        
+    }
+    
     @IBAction func saveButtonTapped(_ sender: Any) {
         
         guard let tripID = trip?.id else { return }
@@ -87,10 +106,20 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
+    func updateExpense() {
+        let name = expenseNameTextField.text ?? ""
+        
+        
+        let cost = expenseNameTextField.text?.convertCurrencyToDouble() ?? 0.0
+        
+        expense!.name = name
+        expense!.cost = cost
+    }
+    
 }
 
 extension EditExpenseViewController: UICollectionViewDelegate {
-
+    
     
 }
 
@@ -98,9 +127,28 @@ extension EditExpenseViewController: ImagePickerDelegate {
     
     func didSelect(image: UIImage?) {
         self.image = image
-       
+        
         
     }
     
     
+}
+
+extension EditExpenseViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        if textField == expenseCostTextField {
+            textField.text = textField.text?.currencyInputFormatting()
+        }
+        updateExpense()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == expenseCostTextField {
+            textField.text = textField.text?.currencyInputFormatting()
+        }
+        updateExpense()
+    }
 }
