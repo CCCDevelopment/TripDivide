@@ -18,14 +18,14 @@ class TripDetailTableViewController: UITableViewController {
     }
     var trip: Trip? {
         didSet {
-            
             userAvatarCollectionView.reloadData()
-            
         }
         
         
     }
-    var tripTotal: Double = 0.0
+    var tripTotal: Double! {
+            getTripTotal()
+    }
     
     
     
@@ -39,22 +39,17 @@ class TripDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         userAvatarCollectionView.delegate = self
         userAvatarCollectionView.dataSource = self
-        
-        //        tableView.reloadData()
+
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-         self.tripTotal = 0.0
         userAvatarCollectionView.register(ExpenseAvatarCell.self, forCellWithReuseIdentifier: "ExpenseAvatarCell")
         getTrip()
-        //        tableView.reloadData()
+     
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-       
-    }
     
     @IBOutlet weak var tripImageView: UIImageView!
     @IBOutlet weak var costLabel: UILabel!
@@ -77,7 +72,17 @@ class TripDetailTableViewController: UITableViewController {
         }
     }
     
-    
+    func getTripTotal() -> Double {
+        guard let trip = trip else { return 0.0 }
+        var total: Double = 0.0
+        if trip.expenses.count == 0 { return total } else {
+        for expense in trip.expenses {
+            
+            total += expense.cost
+            }
+        return total
+        }
+    }
     
     func configureViews () {
         guard let trip = trip else { return }
@@ -95,16 +100,13 @@ class TripDetailTableViewController: UITableViewController {
         } else {
             self.tripImageView.image = Constants.Images.defaultTrip
         }
-        
-        for expense in trip.expenses {
-            self.tripTotal += expense.cost
-        }
+
         
         
-        if trip.expenses.count == 0 {
-            costLabel.text = String("$0.00")
+        if tripTotal == 0.0 {
+            costLabel.text = "$0.00"
         } else {
-            costLabel.text = String(self.tripTotal).currencyInputFormatting()
+        costLabel.text = String(tripTotal).currencyInputFormatting()
         }
         
         
