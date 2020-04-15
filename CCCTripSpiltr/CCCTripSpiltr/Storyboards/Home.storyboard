@@ -1000,6 +1000,7 @@
                                         </segments>
                                         <connections>
                                             <action selector="segmentedControlChanged:" destination="EYH-y3-Ja7" eventType="valueChanged" id="gZN-lk-RRE"/>
+                                            <action selector="segmentedControllChanged:" destination="hTd-Nr-Dg6" eventType="valueChanged" id="FJi-6Z-wD3"/>
                                         </connections>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvJ-U4-8iv">

@@ -13,8 +13,16 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
     
     var trip: Trip?
     var expense: Expense?
+    var expenseID: String {
+        getExpenseID(for: expense!)
+    }
     var imagePicker: ImagePicker!
     var image: UIImage!
+    var dataSource: UICollectionViewDiffableDataSource<Section, String>!
+    
+    enum Section {
+        case main
+    }
     
     @IBOutlet weak var expenseNameTextField: UITextField!
     @IBOutlet weak var expenseCostTextField: UITextField!
@@ -29,10 +37,40 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        expenseParticipantCollectionView.delegate = self
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         configureUI()
         configureTextFields()
+    }
+   
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    
+        switch editExpenseSegmentedControll.selectedSegmentIndex {
+        case 0:
+            updateData(on: Array(expense!.paidBy.keys).sorted())
+        case 1:
+            updateData(on: Array(expense!.usedBy.keys).sorted())
+        default:
+            break
+        }
+    }
+    
+    
+    
+    
+    
+    
+    //will not need this ... but I took the time to write it out so ...
+    func getExpenseID(for expense: Expense) -> String {
+        var expenseID: String = ""
+        
+        guard let expense = self.expense else { return "" }
+        
+        expenseID = expense.id
+        
+        return expenseID
+        
     }
     
     func configureTextFields() {
@@ -55,9 +93,6 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
     
     
     func configureUI() {
-        
-        
-        
         guard let expense = expense else { return }
         
         expenseCostTextField?.text = "$" + String(expense.cost)
@@ -70,15 +105,41 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
                 }
             }
         }
+    }
+    
+    
+    
+    @IBAction func segmentedControllChanged(_ sender: Any) {
+        
+        switch editExpenseSegmentedControll.selectedSegmentIndex {
+        case 0:
+            updateData(on: Array(expense!.paidBy.keys).sorted())
+        case 1:
+            updateData(on: Array(expense!.usedBy.keys).sorted())
+        default:
+            break
+        }
         
         
         
     }
     
-    
-    
-    
     @IBAction func actionButtonTapped(_ sender: Any) {
+        var vc = SelectFriendsForExpenseVC(selectType: .paidBy)
+        
+        switch editExpenseSegmentedControll.selectedSegmentIndex {
+        case 0:
+            vc = SelectFriendsForExpenseVC(selectType: .paidBy)
+        case 1:
+            vc = SelectFriendsForExpenseVC(selectType: .usedBy)
+            
+        default:
+            break
+        }
+        
+        vc.trip = trip
+        vc.expense = expense
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func splitOptionsButtonTapped(_ sender: Any) {
@@ -116,22 +177,25 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
         expense!.cost = cost
     }
     
+    func updateData(on friendIDs: [String]) {
+           var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+           snapshot.appendSections([.main])
+           snapshot.appendItems(friendIDs)
+           DispatchQueue.main.async {
+               self.dataSource.apply(snapshot, animatingDifferences: true)
+           }
+       }
+    
 }
 
 extension EditExpenseViewController: UICollectionViewDelegate {
     
-    
 }
 
 extension EditExpenseViewController: ImagePickerDelegate {
-    
     func didSelect(image: UIImage?) {
         self.image = image
-        
-        
     }
-    
-    
 }
 
 extension EditExpenseViewController: UITextFieldDelegate {
@@ -152,3 +216,4 @@ extension EditExpenseViewController: UITextFieldDelegate {
         updateExpense()
     }
 }
+
