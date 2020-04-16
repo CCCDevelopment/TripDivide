@@ -40,6 +40,7 @@ class AddExpenseViewController: UIViewController, UIImagePickerControllerDelegat
         configureDataSource()
         costTextField.addTarget(self, action: #selector(myTextFieldDidChange), for: .editingChanged)
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {

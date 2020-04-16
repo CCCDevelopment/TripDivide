@@ -53,7 +53,7 @@ class NetworkController {
 
         let storageRef = storage.reference()
         let imagesFolderRef = storageRef.child("images").child("receiptImages")
-        let imageURLRef = imagesFolderRef.child("\(UUID().uuidString).jpg")
+        let imageURLRef = imagesFolderRef.child("\(expense.id).jpg")
         imageURLRef.putData( imageData, metadata: nil) { (_, error) in
             
             imageURLRef.downloadURL { (url, error) in

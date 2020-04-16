@@ -18,7 +18,7 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
     }
     var imagePicker: ImagePicker!
     var image: UIImage!
-    var dataSource: UICollectionViewDiffableDataSource<Section, String>!
+    var dataSource: UICollectionViewDiffableDataSource<Section, String>?
     
     enum Section {
         case main
@@ -44,6 +44,7 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
     }
    
     override func viewWillAppear(_ animated: Bool) {
+        configureDataSource()
         super.viewWillAppear(animated)
     
         switch editExpenseSegmentedControll.selectedSegmentIndex {
@@ -167,22 +168,22 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
-    func updateExpense() {
-        let name = expenseNameTextField.text ?? ""
-        
-        
-        let cost = expenseNameTextField.text?.convertCurrencyToDouble() ?? 0.0
-        
-        expense!.name = name
-        expense!.cost = cost
-    }
+//    func updateExpense() {
+//        let name = expenseNameTextField.text ?? ""
+//
+//
+//        let cost = expenseNameTextField.text?.convertCurrencyToDouble() ?? 0.0
+//
+//        expense!.name = name
+//        expense!.cost = cost
+//    }
     
     func updateData(on friendIDs: [String]) {
            var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
            snapshot.appendSections([.main])
            snapshot.appendItems(friendIDs)
            DispatchQueue.main.async {
-               self.dataSource.apply(snapshot, animatingDifferences: true)
+               self.dataSource?.apply(snapshot, animatingDifferences: true)
            }
        }
     
@@ -205,15 +206,30 @@ extension EditExpenseViewController: UITextFieldDelegate {
         if textField == expenseCostTextField {
             textField.text = textField.text?.currencyInputFormatting()
         }
-        updateExpense()
+//        updateExpense()
         return true
+    }
+    
+    func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: expenseParticipantCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseAvatarCell", for: indexpath) as! ExpenseAvatarCell
+
+            
+            cell.getUser(for: userID)
+            
+                        
+
+            return cell
+      
+        })
+    
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == expenseCostTextField {
             textField.text = textField.text?.currencyInputFormatting()
         }
-        updateExpense()
+//        updateExpense()
     }
 }
 
