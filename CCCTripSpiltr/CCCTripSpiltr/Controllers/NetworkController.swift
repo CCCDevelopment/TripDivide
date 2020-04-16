@@ -23,6 +23,8 @@ enum CCCError: String {
     case uploadingImageError = "Error uploading image"
     case creatingExpenseError = "Error creating expense"
     case updatingUserError = "Error updating user"
+    case updatingExpenseError = "Error updating expense"
+    case gettingExpensesError = "Error getting expenses"
 }
 
 class NetworkController {
@@ -33,6 +35,58 @@ class NetworkController {
     let storage = Storage.storage()
     static let shared = NetworkController()
     let cache = NSCache<NSString, UIImage>()
+    
+    func getExpense(for id: String, expenseID: String, completion: @escaping (Expense?, CCCError?) -> Void) {
+        let expenseRef = db.collection("trips")
+        
+        let expenseDocumentRef = expenseRef.document(id).collection("expenses").document(expenseID)
+        
+        expenseDocumentRef.getDocument { (document, _) in
+            if let document = document, document.exists {
+                guard let data = document.data() else { return }
+                let expense = Expense(from: data)
+                completion(expense, nil)
+            } else {
+                completion(nil, .noData)
+            }
+        }
+        
+    }
+    
+    func getExpenses(with tripID: String,completion: @escaping (CCCError?, [String]?) -> Void) {
+        let ref = db.collection("trips")
+        
+        let documentrRef = ref.document(tripID).collection("expenses")
+        
+        documentrRef.getDocuments { (snapshot, error) in
+            if let _ = error {
+                completion(.gettingExpensesError, nil)
+            }
+            
+            guard let snapshot = snapshot else { return }
+            var expenseIDs = [String]()
+            for doc in snapshot.documents {
+                let expenseID = doc.documentID
+                expenseIDs.append(expenseID)
+            }
+            completion(nil, expenseIDs)
+        }
+        
+        
+        
+    }
+    
+    func updateExpense(with tripID: String, expense: Expense, completion: @escaping (CCCError?) -> Void) {
+        let ref = db.collection("trips")
+        
+        ref.document(tripID).collection("expenses").document(expense.id).setData(expense.dictionaryRep() as [String : Any]) { (error) in
+            if let _ = error {
+                completion(.updatingExpenseError)
+                return
+            }
+        }
+    }
+    
     
     
     func uploadExpense(image: UIImage?, expense: Expense, tripID: String, completion: @escaping (CCCError?) -> Void) {
@@ -83,8 +137,8 @@ class NetworkController {
     func createExpense(expense: Expense, tripID: String, imageURL: String?, completion: @escaping (CCCError?) -> Void) {
         let expense = expense
         expense.receipt = imageURL
-        let ref = self.db.collection("trips").document(tripID)
-        ref.updateData(["expenses": FieldValue.arrayUnion([expense.dictionaryRep()])]) { (error) in
+        let ref = self.db.collection("trips")
+        ref.document(tripID).collection("expenses").document(expense.id).setData(expense.dictionaryRep() as [String : Any]) { (error) in
             
             if let _ = error {
                 completion(CCCError.creatingExpenseError)

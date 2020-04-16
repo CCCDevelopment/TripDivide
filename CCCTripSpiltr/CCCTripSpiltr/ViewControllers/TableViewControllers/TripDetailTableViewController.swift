@@ -20,11 +20,16 @@ class TripDetailTableViewController: UITableViewController {
         didSet {
             userAvatarCollectionView.reloadData()
         }
-        
-        
     }
+    
+    var expenseIDs: [String]? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     var tripTotal: Double! {
-            getTripTotal()
+        getTripTotal()
     }
     
     
@@ -47,7 +52,12 @@ class TripDetailTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         userAvatarCollectionView.register(ExpenseAvatarCell.self, forCellWithReuseIdentifier: "ExpenseAvatarCell")
         getTrip()
-     
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        getExpenseIDs()
     }
     
     
@@ -56,6 +66,22 @@ class TripDetailTableViewController: UITableViewController {
     @IBOutlet weak var borrowedLabel: UILabel!
     @IBOutlet weak var owedLabel: UILabel!
     @IBOutlet weak var userAvatarCollectionView: UICollectionView!
+    
+    func getExpenseIDs() {
+        guard let trip = trip else { return }
+        
+        NetworkController.shared.getExpenses(with: trip.id) { (error, expenseIDs) in
+            if let error = error {
+                NSLog(error.rawValue)
+            }
+            
+            guard let expenseIDs = expenseIDs else { return }
+            
+            self.expenseIDs = expenseIDs
+        }
+        
+        
+    }
     
     func getTrip() {
         guard let tripID = tripID else { return }
@@ -120,21 +146,21 @@ class TripDetailTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let trip = trip else { return 1 }
-        return trip.expenses.count
+        guard let expenseIDs = expenseIDs else { return 1 }
+        return expenseIDs.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath) as! DetailExpenseTableViewCell
+        guard let expenseIDs = expenseIDs,
+            let tripID = tripID else { return UITableViewCell() }
+        cell.expenseID = expenseIDs[indexPath.row]
+        cell.tripID = tripID
         
-        guard let trip = trip else {
-            return DetailExpenseTableViewCell()
-        }
-        
-        let tripExpense = trip.expenses[indexPath.row]
-        cell.experienceNameLabel.text = tripExpense.name
-        print(tripExpense.cost)
-        cell.experienceCostLabel.text = String(tripExpense.cost).currencyInputFormatting()
+//        let tripExpense = trip.expenses[indexPath.row]
+//        cell.experienceNameLabel.text = tripExpense.name
+//        print(tripExpense.cost)
+//        cell.experienceCostLabel.text = String(tripExpense.cost).currencyInputFormatting()
         
         return cell
     }
@@ -173,7 +199,12 @@ class TripDetailTableViewController: UITableViewController {
         } else if segue.identifier == "ViewExpenseDetailSegue" {
             let destinationVC = segue.destination as? ExpenseDetailViewController
             if let indexPath = tableView.indexPathForSelectedRow {
-                destinationVC?.expense = trip?.expenses[indexPath.row]
+                
+                let cell = tableView.cellForRow(at: indexPath) as! DetailExpenseTableViewCell
+                
+                let expenseID = cell.expenseID
+                
+                destinationVC?.expenseID = expenseID
                 destinationVC?.trip = self.trip
                 
             }

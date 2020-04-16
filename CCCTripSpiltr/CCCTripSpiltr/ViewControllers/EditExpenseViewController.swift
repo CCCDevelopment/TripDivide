@@ -169,15 +169,18 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         
-        guard let tripID = trip?.id else { return }
-        view.showLoadingView()
+        guard let tripID = trip?.id,
+            let expense = expense else { return }
         
-        NetworkController.shared.uploadExpense(image: image, expense: expense!, tripID: tripID) { [weak self ](error) in
-            guard let self = self else { return }
-            self.view.dismissLoadingView()
+        
+        NetworkController.shared.updateExpense(with: tripID, expense: expense) { (error) in
+            
+           
+            
             if let error = error {
                 NSLog(error.rawValue)
             }
+        
             
             self.navigationController?.popViewController(animated: true)
         }

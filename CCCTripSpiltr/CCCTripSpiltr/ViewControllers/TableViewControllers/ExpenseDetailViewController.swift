@@ -10,6 +10,7 @@ import UIKit
 
 class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
+    var expenseID: String?
     var expense: Expense?
     var paidBy: [String] = []
     var usedBy: [String] = []
@@ -22,8 +23,7 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
         super.viewDidLoad()
 //        paidByCollectionView.delegate = self
 //        usedByCollectionView.delegate = self
-        getPaidByUsers()
-        getUsedByUsers()
+        
         configurePaidByDataSource()
         configureUsedByDataSource()
         configureUI()
@@ -33,8 +33,7 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
       
-        updatePaidData(on: paidBy)
-        updateUsedData(on: usedBy)
+        getExpense()
         
     }
     
@@ -70,6 +69,23 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
         //Change back to present NC if we still want to go the NavController way ...
         present(vc, animated: true, completion: nil)
          
+    }
+    
+    func getExpense() {
+        guard let expenseID = expenseID,
+            let trip = trip else { return }
+        
+        NetworkController.shared.getExpense(for: trip.id, expenseID: expenseID) { (expense, error) in
+            if let error = error {
+                NSLog(error.rawValue)
+                return
+            }
+            self.expense = expense
+            self.getPaidByUsers()
+            self.getUsedByUsers()
+            self.updatePaidData(on: self.paidBy)
+            self.updateUsedData(on: self.usedBy)
+        }
     }
     
     func configureTapGesture() {

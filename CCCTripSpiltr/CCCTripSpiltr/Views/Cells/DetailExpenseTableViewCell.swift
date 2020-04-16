@@ -11,11 +11,33 @@ import UIKit
 class DetailExpenseTableViewCell: UITableViewCell {
 
 
-   
+    var tripID: String?  {
+           didSet{
+               configureViews()
+           }
+       }
+    var expenseID: String?
     
     @IBOutlet weak var experienceNameLabel: UILabel!
     @IBOutlet weak var experienceCostLabel: UILabel!
     @IBOutlet weak var recipetImageView: UIImageView!
+    
+    func configureViews() {
+        guard let tripID = tripID,
+            let expenseID = expenseID else { return }
+        NetworkController.shared.getExpense(for: tripID, expenseID: expenseID) { [weak self] (expense, error) in
+            guard let self = self else { return }
+            
+            if let error = error {
+                NSLog(error.rawValue)
+            }
+            guard let expense = expense else { return }
+            self.experienceNameLabel.text = expense.name
+            self.experienceCostLabel.text = String(expense.cost).currencyInputFormatting()
+        }
+        
+       
+    }
     
     
     
