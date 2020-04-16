@@ -13,7 +13,7 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     var expense: Expense?
     var paidBy: [String] = []
     var usedBy: [String] = []
-    
+    var trip: Trip?
     var dataSource: UICollectionViewDiffableDataSource<Section, String>!
     var otherDataSource: UICollectionViewDiffableDataSource<Section, String>!
     
@@ -161,7 +161,7 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
         if segue.identifier == "EditExpenseSegue" {
             let destinationVC = segue.destination as! EditExpenseViewController
             destinationVC.expense = self.expense
-            
+            destinationVC.trip = self.trip
         }
     }
     

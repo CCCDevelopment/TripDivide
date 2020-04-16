@@ -1008,8 +1008,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <state key="normal" image="arrow.right.circle" catalog="system"/>
                                         <connections>
-                                            <action selector="actionButtonTapped:" destination="hTd-Nr-Dg6" eventType="touchUpInside" id="yOa-tL-a7A"/>
-                                            <action selector="paidByButtonTapped:" destination="EYH-y3-Ja7" eventType="touchUpInside" id="PGt-Jb-2Mo"/>
+                                            <action selector="actionButtonTapped:" destination="hTd-Nr-Dg6" eventType="touchUpInside" id="TIM-8R-8rz"/>
                                         </connections>
                                     </button>
                                 </subviews>

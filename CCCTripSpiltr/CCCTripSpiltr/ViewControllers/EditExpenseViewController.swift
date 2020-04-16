@@ -41,6 +41,7 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         configureUI()
         configureTextFields()
+        
     }
    
     override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +79,7 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
         
         expenseNameTextField.delegate = self
         expenseCostTextField.delegate = self
-    expenseCostTextField.addTarget(self, action: #selector(myTextFieldDidChange), for: .editingChanged)
+        expenseCostTextField.addTarget(self, action: #selector(myTextFieldDidChange), for: .editingChanged)
         
         
         
@@ -92,6 +93,20 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
+    func configureDataSource() {
+           dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: expenseParticipantCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
+               let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseAvatarCell", for: indexpath) as! ExpenseAvatarCell
+
+               
+               cell.getUser(for: userID)
+               
+                           
+
+               return cell
+         
+           })
+       
+       }
     
     func configureUI() {
         guard let expense = expense else { return }
@@ -210,20 +225,7 @@ extension EditExpenseViewController: UITextFieldDelegate {
         return true
     }
     
-    func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: expenseParticipantCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseAvatarCell", for: indexpath) as! ExpenseAvatarCell
-
-            
-            cell.getUser(for: userID)
-            
-                        
-
-            return cell
-      
-        })
-    
-    }
+   
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == expenseCostTextField {

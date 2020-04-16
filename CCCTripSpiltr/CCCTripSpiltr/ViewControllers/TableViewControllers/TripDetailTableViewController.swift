@@ -173,6 +173,8 @@ class TripDetailTableViewController: UITableViewController {
             let destinationVC = segue.destination as? ExpenseDetailViewController
             if let indexPath = tableView.indexPathForSelectedRow {
                 destinationVC?.expense = trip?.expenses[indexPath.row]
+                destinationVC?.trip = self.trip
+                
             }
             
             }
