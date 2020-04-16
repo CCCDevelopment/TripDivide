@@ -106,6 +106,7 @@ class TripDetailTableViewController: UITableViewController {
         if tripTotal == 0.0 {
             costLabel.text = "$0.00"
         } else {
+            guard let tripTotal = tripTotal else {return}
         costLabel.text = String(tripTotal).currencyInputFormatting()
         }
         
