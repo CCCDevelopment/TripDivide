@@ -9,6 +9,8 @@
 import UIKit
 
 class User {
+
+    
     let id: String
     var username: String
     var fullName: String

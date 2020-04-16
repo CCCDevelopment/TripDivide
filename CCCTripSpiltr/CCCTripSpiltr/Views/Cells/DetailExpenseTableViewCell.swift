@@ -27,9 +27,7 @@ class DetailExpenseTableViewCell: UITableViewCell {
         contentView.layer.borderColor = UIColor.systemGray4.cgColor
         contentView.backgroundColor = UIColor.systemGray6
     
-//       recipetImageView.layer.cornerRadius = 10
-//       recipetImageView.layer.borderWidth = 0.5
-//       recipetImageView.layer.borderColor = UIColor.tertiarySystemFill.cgColor
+
     }
    
     

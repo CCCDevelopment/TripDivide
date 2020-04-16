@@ -10,7 +10,8 @@ import UIKit
 
 class TripCell: UITableViewCell {
 
-
+ let cache = NetworkController.shared.cache
+    
     @IBOutlet weak var tripImageView: UIImageView!
     @IBOutlet weak var tripNameLabel: UILabel!
     @IBOutlet weak var friendsCountLabel: UILabel!
@@ -51,9 +52,17 @@ class TripCell: UITableViewCell {
             self.tripNameLabel.minimumScaleFactor = 0.5
             
             if let image = trip.imageURL {
+                let cacheKey = NSString(string: tripID)
+                
+                if let image = self.cache.object(forKey: cacheKey) {
+                    self.tripImageView.image = image
+                    return
+                }
+                
                 UIImage().downloadImage(from: image) { (tripImage) in
                     guard let tripImage = tripImage else { return }
-                    
+                    self.cache.setObject(tripImage, forKey: cacheKey)
+                    print("Cache Money")
                     DispatchQueue.main.async {
                         self.tripImageView.image = tripImage
                         

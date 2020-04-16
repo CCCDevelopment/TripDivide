@@ -12,13 +12,17 @@
 		4446A375242E775400F22D90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4446A374242E775400F22D90 /* Assets.xcassets */; };
 		4446A378242E775400F22D90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4446A376242E775400F22D90 /* LaunchScreen.storyboard */; };
 		4446A38B242EBE5A00F22D90 /* TripSplitr.mov in Resources */ = {isa = PBXBuildFile; fileRef = 4446A38A242EBE5900F22D90 /* TripSplitr.mov */; };
+		444772382444E6F100A1FF1A /* CollectionViewDetailExpneseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444772372444E6F100A1FF1A /* CollectionViewDetailExpneseCell.swift */; };
+		4447723A2445326B00A1FF1A /* CollectionViewDetailUsedByCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444772392445326B00A1FF1A /* CollectionViewDetailUsedByCell.swift */; };
+		4447723C2446488D00A1FF1A /* EditExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447723B2446488D00A1FF1A /* EditExpenseViewController.swift */; };
 		444C6144243528960021D9F8 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C6143243528960021D9F8 /* ImagePickerController.swift */; };
 		444C6148243667CE0021D9F8 /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C6147243667CE0021D9F8 /* AddExpenseViewController.swift */; };
 		444C614C24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C614B24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift */; };
 		44697CD42433AA3600252764 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44697CD32433AA3600252764 /* AddFriendViewController.swift */; };
 		44697CD62433AB4600252764 /* CCCBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44697CD52433AB4600252764 /* CCCBodyLabel.swift */; };
-		44C579AD243D4393006FA3CC /* DetailExpenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C579AC243D4393006FA3CC /* DetailExpenceTableViewCell.swift */; };
+		44C579AD243D4393006FA3CC /* DetailExpenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C579AC243D4393006FA3CC /* DetailExpenseTableViewCell.swift */; };
 		44C579AF243D4898006FA3CC /* ExpenseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C579AE243D4898006FA3CC /* ExpenseDetailViewController.swift */; };
+		44DABC83243FD3C100DA15FC /* TripUserAvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DABC82243FD3C100DA15FC /* TripUserAvatarCell.swift */; };
 		84A0506868C4B3290DB9BCF3 /* Pods_CCCTripSpiltr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */; };
 		D11847BC243656C600E6949B /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11847BB243656C600E6949B /* Expense.swift */; };
 		D1254B592435131C00B9CB53 /* CreateTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1254B582435131C00B9CB53 /* CreateTripViewController.swift */; };
@@ -60,13 +64,17 @@
 		4446A379242E775400F22D90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4446A380242E77C300F22D90 /* CCCTripSpiltr */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CCCTripSpiltr; sourceTree = "<group>"; };
 		4446A38A242EBE5900F22D90 /* TripSplitr.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = TripSplitr.mov; sourceTree = "<group>"; };
+		444772372444E6F100A1FF1A /* CollectionViewDetailExpneseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDetailExpneseCell.swift; sourceTree = "<group>"; };
+		444772392445326B00A1FF1A /* CollectionViewDetailUsedByCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDetailUsedByCell.swift; sourceTree = "<group>"; };
+		4447723B2446488D00A1FF1A /* EditExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseViewController.swift; sourceTree = "<group>"; };
 		444C6143243528960021D9F8 /* ImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
 		444C6147243667CE0021D9F8 /* AddExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
 		444C614B24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendsForExpenseVC.swift; sourceTree = "<group>"; };
 		44697CD32433AA3600252764 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		44697CD52433AB4600252764 /* CCCBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCBodyLabel.swift; sourceTree = "<group>"; };
-		44C579AC243D4393006FA3CC /* DetailExpenceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailExpenceTableViewCell.swift; sourceTree = "<group>"; };
+		44C579AC243D4393006FA3CC /* DetailExpenseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailExpenseTableViewCell.swift; sourceTree = "<group>"; };
 		44C579AE243D4898006FA3CC /* ExpenseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewController.swift; sourceTree = "<group>"; };
+		44DABC82243FD3C100DA15FC /* TripUserAvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripUserAvatarCell.swift; sourceTree = "<group>"; };
 		755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCCTripSpiltr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F57F70D23EE51C97C50C70 /* Pods-CCCTripSpiltr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCCTripSpiltr.debug.xcconfig"; path = "Target Support Files/Pods-CCCTripSpiltr/Pods-CCCTripSpiltr.debug.xcconfig"; sourceTree = "<group>"; };
 		D11847BB243656C600E6949B /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
@@ -158,6 +166,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		444772362444E66900A1FF1A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D1E33DF42432A4890077D4C6 /* FriendCell.swift */,
+				D196AA0E24341D1F00E5B156 /* TripCell.swift */,
+				D1D14D8A2437D5F70091092E /* ExpenseAvatarCell.swift */,
+				44C579AC243D4393006FA3CC /* DetailExpenseTableViewCell.swift */,
+				44DABC82243FD3C100DA15FC /* TripUserAvatarCell.swift */,
+				444772372444E6F100A1FF1A /* CollectionViewDetailExpneseCell.swift */,
+				444772392445326B00A1FF1A /* CollectionViewDetailUsedByCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		444C6149243675AE0021D9F8 /* AuthViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +251,7 @@
 				D1254B582435131C00B9CB53 /* CreateTripViewController.swift */,
 				444C6143243528960021D9F8 /* ImagePickerController.swift */,
 				444C6147243667CE0021D9F8 /* AddExpenseViewController.swift */,
+				4447723B2446488D00A1FF1A /* EditExpenseViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -263,14 +286,11 @@
 		D1E33DF32432A4500077D4C6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D1E33DF42432A4890077D4C6 /* FriendCell.swift */,
-				D196AA0E24341D1F00E5B156 /* TripCell.swift */,
-				D1E33DF72432A7090077D4C6 /* CCCAvatarImageView.swift */,
+				444772362444E66900A1FF1A /* Cells */,
 				D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */,
+				D1E33DF72432A7090077D4C6 /* CCCAvatarImageView.swift */,
 				44697CD52433AB4600252764 /* CCCBodyLabel.swift */,
 				D1F5E6172433CDAC008F3E72 /* CCCTextView.swift */,
-				D1D14D8A2437D5F70091092E /* ExpenseAvatarCell.swift */,
-				44C579AC243D4393006FA3CC /* DetailExpenceTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -418,17 +438,20 @@
 				D1D01CF7242EB45A00B606C1 /* Trip.swift in Sources */,
 				444C6148243667CE0021D9F8 /* AddExpenseViewController.swift in Sources */,
 				D1D14D8D2437D82C0091092E /* UserInfoViewController.swift in Sources */,
+				44DABC83243FD3C100DA15FC /* TripUserAvatarCell.swift in Sources */,
 				4446A36E242E775100F22D90 /* SceneDelegate.swift in Sources */,
-				44C579AD243D4393006FA3CC /* DetailExpenceTableViewCell.swift in Sources */,
+				44C579AD243D4393006FA3CC /* DetailExpenseTableViewCell.swift in Sources */,
 				D1E33DF82432A7090077D4C6 /* CCCAvatarImageView.swift in Sources */,
 				444C614C24367B1E0021D9F8 /* SelectFriendsForExpenseVC.swift in Sources */,
 				44C579AF243D4898006FA3CC /* ExpenseDetailViewController.swift in Sources */,
 				D1F5E6182433CDAC008F3E72 /* CCCTextView.swift in Sources */,
 				D1BB611B242E858300B90E29 /* LoginViewController.swift in Sources */,
+				444772382444E6F100A1FF1A /* CollectionViewDetailExpneseCell.swift in Sources */,
 				D1BB611A242E858300B90E29 /* AuthenticationViewController.swift in Sources */,
 				D196AA0F24341D1F00E5B156 /* TripCell.swift in Sources */,
 				D1E33DFA2432A8140077D4C6 /* CCCTitleLabel.swift in Sources */,
 				D1BB6115242E857A00B90E29 /* SignUpViewController.swift in Sources */,
+				4447723C2446488D00A1FF1A /* EditExpenseViewController.swift in Sources */,
 				D1D14D8B2437D5F70091092E /* ExpenseAvatarCell.swift in Sources */,
 				44697CD42433AA3600252764 /* AddFriendViewController.swift in Sources */,
 				D167703D24355E9800D041DE /* TripDetailTableViewController.swift in Sources */,
@@ -436,6 +459,7 @@
 				D11847BC243656C600E6949B /* Expense.swift in Sources */,
 				D1E33DF52432A4890077D4C6 /* FriendCell.swift in Sources */,
 				D1D01D04242EC54700B606C1 /* User.swift in Sources */,
+				4447723A2445326B00A1FF1A /* CollectionViewDetailUsedByCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

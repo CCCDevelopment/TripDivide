@@ -11,6 +11,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 
+ 
 
 enum CCCError: String {
     case creatingUserError = "Error creating user"
@@ -31,10 +32,57 @@ class NetworkController {
     let db = Firestore.firestore()
     let storage = Storage.storage()
     static let shared = NetworkController()
+    let cache = NSCache<NSString, UIImage>()
     
     
-    func createExpense(expense: Expense, tripID: String, completion: @escaping (CCCError?) -> Void) {
+    func uploadExpense(image: UIImage?, expense: Expense, tripID: String, completion: @escaping (CCCError?) -> Void) {
         
+        guard let image = image,
+            let imageData = image.jpegData(compressionQuality: 0.75) else {
+                
+                
+                self.createExpense(expense: expense, tripID: tripID, imageURL: nil) { (error) in
+                    if let _ = error {
+                        completion(.creatingTripError)
+                        return
+                    }
+                    completion(nil)
+                }
+            return
+        }
+
+        let storageRef = storage.reference()
+        let imagesFolderRef = storageRef.child("images").child("receiptImages")
+        let imageURLRef = imagesFolderRef.child("\(expense.id).jpg")
+        imageURLRef.putData( imageData, metadata: nil) { (_, error) in
+            
+            imageURLRef.downloadURL { (url, error) in
+                
+                if let _ = error {
+                    completion(.uploadingImageError)
+                    return
+                }
+                
+                guard let downloadURL = url else {
+                    completion(.uploadingImageError)
+                    return
+                }
+                
+
+                self.createExpense(expense: expense, tripID: tripID, imageURL: downloadURL.absoluteString) { (error) in
+                    if let _ = error {
+                        completion(.creatingTripError)
+                        return
+                    }
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
+    func createExpense(expense: Expense, tripID: String, imageURL: String?, completion: @escaping (CCCError?) -> Void) {
+        let expense = expense
+        expense.receipt = imageURL
         let ref = self.db.collection("trips").document(tripID)
         ref.updateData(["expenses": FieldValue.arrayUnion([expense.dictionaryRep()])]) { (error) in
             

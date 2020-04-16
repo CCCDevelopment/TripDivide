@@ -11,23 +11,45 @@ import UIKit
 class TripDetailTableViewController: UITableViewController {
     
     
-    var tripID: String?
-    var trip: Trip?
-    var tripTotal: Double = 0.0
-    var expenses: [Expense] = []
+    var tripID: String? {
+        didSet {
+            getTrip()
+        }
+    }
+    var trip: Trip? {
+        didSet {
+            userAvatarCollectionView.reloadData()
+        }
+        
+        
+    }
+    var tripTotal: Double! {
+            getTripTotal()
+    }
+    
+    
     
     @IBOutlet weak var containerView: UIView!
     
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.reloadData()
-        getTrip()
-    }
+        userAvatarCollectionView.delegate = self
+        userAvatarCollectionView.dataSource = self
 
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        userAvatarCollectionView.register(ExpenseAvatarCell.self, forCellWithReuseIdentifier: "ExpenseAvatarCell")
+        getTrip()
+     
     }
+    
     
     @IBOutlet weak var tripImageView: UIImageView!
     @IBOutlet weak var costLabel: UILabel!
@@ -50,36 +72,47 @@ class TripDetailTableViewController: UITableViewController {
         }
     }
     
+    func getTripTotal() -> Double {
+        guard let trip = trip else { return 0.0 }
+        var total: Double = 0.0
+        if trip.expenses.count == 0 { return total } else {
+        for expense in trip.expenses {
+            
+            total += expense.cost
+            }
+        return total
+        }
+    }
+    
     func configureViews () {
         guard let trip = trip else { return }
-        containerView.showLoadingView()
+        
         if let image = trip.imageURL {
             UIImage().downloadImage(from: image) { (tripImage) in
+
                 guard let tripImage = tripImage
                     else { return }
                 
-            DispatchQueue.main.async {
-                self.containerView.dismissLoadingView()
-                self.tripImageView.image = tripImage
+                DispatchQueue.main.async {
+                    self.tripImageView.image = tripImage
                 }
             }
         } else {
-            self.containerView.dismissLoadingView()
             self.tripImageView.image = Constants.Images.defaultTrip
         }
-      
-        for expense in trip.expenses {
-            self.tripTotal += expense.cost
-            }
+
         
-        if trip.expenses.count == 0 {
-            costLabel.text = String("$0.00")
+        
+        if tripTotal == 0.0 {
+            costLabel.text = "$0.00"
         } else {
-        costLabel.text = String(self.tripTotal).currencyInputFormatting()
+        costLabel.text = String(tripTotal).currencyInputFormatting()
         }
+        
         
         self.title = trip.name
         tableView.reloadData()
+        
     }
     
     // MARK: - Table view data source
@@ -97,9 +130,10 @@ class TripDetailTableViewController: UITableViewController {
             return DetailExpenseTableViewCell()
         }
         
-        let tripExpenses = trip.expenses[indexPath.row]
-        cell.experienceNameLabel.text = tripExpenses.name
-        cell.experienceCostLabel.text = String(tripExpenses.cost).currencyInputFormatting()
+        let tripExpense = trip.expenses[indexPath.row]
+        cell.experienceNameLabel.text = tripExpense.name
+        print(tripExpense.cost)
+        cell.experienceCostLabel.text = String(tripExpense.cost).currencyInputFormatting()
         
         return cell
     }
@@ -123,7 +157,9 @@ class TripDetailTableViewController: UITableViewController {
         }    
     }
     
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+    }
     
     
     // MARK: - Navigation
@@ -135,11 +171,48 @@ class TripDetailTableViewController: UITableViewController {
             destinationVC?.trip = trip
         } else if segue.identifier == "ViewExpenseDetailSegue" {
             let destinationVC = segue.destination as? ExpenseDetailViewController
-            destinationVC?.trip = trip
+            if let indexPath = tableView.indexPathForSelectedRow {
+                destinationVC?.expense = trip?.expenses[indexPath.row]
+            }
+            
+            }
         }
         
         
+    
+    
+    
+}
+
+extension TripDetailTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        trip?.users.count ?? 1
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseAvatarCell", for: indexPath) as! ExpenseAvatarCell
+        
+        guard let trip = trip else {
+            print("NotGettingATrip")
+            return cell
+        }
+        
+        //How can I get userID's from here?
+        
+        let userID = trip.users[indexPath.item]
+        
+        NetworkController.shared.getUser(for: userID) { (user, error) in
+            if let error = error {
+                NSLog(error.rawValue)
+                return
+            }
+            
+            if let user = user {
+                
+                cell.updateImageView(user: user)
+            }
+            
+        }
+        return cell
+    }
 }

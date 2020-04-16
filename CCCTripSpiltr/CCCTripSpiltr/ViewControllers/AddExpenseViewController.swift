@@ -7,34 +7,53 @@
 //
 
 import UIKit
+import Photos
 
-class AddExpenseViewController: UIViewController {
+class AddExpenseViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var trip: Trip?
-    var expense = Expense(name: "", cost: 0.0, paidBy: [:], usedBy: [:])
+    var expense = Expense(name: "", receipt: nil, cost: 0.0, paidBy: [:], usedBy: [:])
+    var imagePicker: ImagePicker!
+    var image: UIImage!
     
-    
-    @IBOutlet weak var usedByCollectionView: UICollectionView!
+
     @IBOutlet weak var paidByCollectionView: UICollectionView!
-    @IBOutlet weak var usedByButton: UIButton!
     @IBOutlet weak var paidByButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var addRecieptImageView: UIImageView!
     @IBOutlet weak var costTextField: UITextField!
+    @IBOutlet weak var receiptImageView: UIImageView!
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    var dataSource: UICollectionViewDiffableDataSource<Section, String>!
+
+    
+    
+    enum Section {
+        case main
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameTextField.delegate = self
         costTextField.delegate = self
         paidByCollectionView.delegate = self
-        paidByCollectionView.dataSource = self
+        configureDataSource()
         costTextField.addTarget(self, action: #selector(myTextFieldDidChange), for: .editingChanged)
-        
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+
     }
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            updateData(on: Array(expense.paidBy.keys).sorted())
+        case 1:
+            updateData(on: Array(expense.usedBy.keys).sorted())
+        default:
+            break
+        }
+    }
     
     
     @objc func myTextFieldDidChange(_ textField: UITextField) {
@@ -62,7 +81,8 @@ class AddExpenseViewController: UIViewController {
     @IBAction func saveButtonPressed(_ sender: Any) {
         guard let tripID = trip?.id else { return }
         view.showLoadingView()
-        NetworkController.shared.createExpense(expense: expense, tripID: tripID) { [weak self ](error) in
+        
+        NetworkController.shared.uploadExpense(image: image, expense: expense, tripID: tripID) { [weak self ](error) in
             guard let self = self else { return }
             self.view.dismissLoadingView()
             if let error = error {
@@ -71,13 +91,33 @@ class AddExpenseViewController: UIViewController {
             
             self.navigationController?.popViewController(animated: true)
         }
+    
     }
     
-    @IBAction func segmentedControlChanged(_ sender: Any) {
+    @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
         
-        paidByCollectionView.reloadData()
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            updateData(on: Array(expense.paidBy.keys).sorted())
+        case 1:
+            updateData(on: Array(expense.usedBy.keys).sorted())
+        default:
+            break
+        }
+        
+        
         
     }
+    
+    
+    
+    @IBAction func addReceiptButtonTapped(_ sender: Any) {
+    
+        self.imagePicker.present(from: self.view)
+        
+    }
+    
+    
     
     @IBAction func splitOptionsButtonTapped(_ sender: Any) {
         
@@ -107,6 +147,32 @@ class AddExpenseViewController: UIViewController {
         vc.expense = expense
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: paidByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseAvatarCell", for: indexpath) as! ExpenseAvatarCell
+
+            
+            cell.getUser(for: userID)
+            
+                        
+
+            return cell
+      
+        })
+    
+    }
+    
+    
+    func updateData(on friendIDs: [String]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(friendIDs)
+        DispatchQueue.main.async {
+            self.dataSource.apply(snapshot, animatingDifferences: true)
+        }
+    }
+
     
     
     
@@ -169,58 +235,17 @@ extension String {
     }
 }
 
-extension AddExpenseViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            return Array(expense.paidBy).count
-        case 1:
-            return Array(expense.usedBy).count
-        default:
-            return 0
-            
-        }
-        
-        
+extension AddExpenseViewController: UICollectionViewDelegate {
+
+    
+}
+
+extension AddExpenseViewController: ImagePickerDelegate {
+    
+    func didSelect(image: UIImage?) {
+        self.image = image
+        self.receiptImageView.image = image
     }
     
-    
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseAvatarCell", for: indexPath) as! ExpenseAvatarCell
-        if collectionView == paidByCollectionView {
-            
-            
-            var userIDArray = [String]()
-            
-            switch segmentedControl.selectedSegmentIndex {
-            case 0:
-                userIDArray = Array(expense.paidBy.keys).sorted()
-            case 1:
-                userIDArray = Array(expense.usedBy.keys).sorted()
-            default:
-                break
-                
-            }
-            let userID = userIDArray[indexPath.item]
-            
-            NetworkController.shared.getUser(for: userID) { (user, error) in
-                if let error = error {
-                    NSLog(error.rawValue)
-                    return
-                }
-                
-                if let user = user {
-                    
-                    cell.updateImageView(user: user)
-                }
-                
-            }
-            return cell
-        } else {
-            return UICollectionViewCell()
-        }
-    }
     
 }
