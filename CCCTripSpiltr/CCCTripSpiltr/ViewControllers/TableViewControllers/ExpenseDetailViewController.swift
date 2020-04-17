@@ -23,17 +23,17 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
         super.viewDidLoad()
 //        paidByCollectionView.delegate = self
 //        usedByCollectionView.delegate = self
-        
-        configurePaidByDataSource()
-        configureUsedByDataSource()
         configureUI()
         configureTapGesture()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
       
         getExpense()
+        configurePaidByDataSource()
+        configureUsedByDataSource()
         
     }
     
@@ -80,11 +80,11 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
                 NSLog(error.rawValue)
                 return
             }
+            self.title = expense?.name
             self.expense = expense
             self.getPaidByUsers()
             self.getUsedByUsers()
-            self.updatePaidData(on: self.paidBy)
-            self.updateUsedData(on: self.usedBy)
+            
         }
     }
     
@@ -97,17 +97,22 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     }
     
     func getPaidByUsers() {
-        
+            var paidByArray = [String]()
         for user in (expense?.paidBy.keys)! {
-            paidBy.append(user)
+            paidByArray.append(user)
         }
+        self.paidBy = paidByArray
+        self.updatePaidData(on: self.paidBy)
+
   }
     
     func getUsedByUsers() {
-        
+        var usedByArray = [String]()
         for user in (expense?.usedBy.keys)! {
-            usedBy.append(user)
+            usedByArray.append(user)
         }
+        self.usedBy = usedByArray
+        self.updateUsedData(on: self.usedBy)
     }
     
     func configurePaidByDataSource() {

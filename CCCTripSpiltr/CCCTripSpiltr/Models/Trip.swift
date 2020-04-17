@@ -43,12 +43,12 @@ class Trip {
         
         let date = dictionary["startDate"] as! Timestamp
         self.startDate = date.dateValue()
-        let dictArray = dictionary["expenses"] as! [[String: Any]]
-        var expenseArray = [Expense]()
-        for dict in dictArray {
-            let expense = Expense(from: dict)
-            expenseArray.append(expense)
-        }
+//        let dictArray = dictionary["expenses"] as! [[String: Any]]
+//        var expenseArray = [Expense]()
+//        for dict in dictArray {
+//            let expense = Expense(from: dict)
+//            expenseArray.append(expense)
+//        }
 
 //        self.expenses = expenseArray
     }

@@ -44,13 +44,13 @@ class TripDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         userAvatarCollectionView.delegate = self
         userAvatarCollectionView.dataSource = self
-
+        userAvatarCollectionView.register(ExpenseAvatarCell.self, forCellWithReuseIdentifier: "ExpenseAvatarCell")
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userAvatarCollectionView.register(ExpenseAvatarCell.self, forCellWithReuseIdentifier: "ExpenseAvatarCell")
+        
         getTrip()
         
         
