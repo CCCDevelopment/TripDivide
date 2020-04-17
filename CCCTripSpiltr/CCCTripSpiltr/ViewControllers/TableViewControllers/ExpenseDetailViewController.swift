@@ -75,7 +75,7 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
         guard let expenseID = expenseID,
             let trip = trip else { return }
         
-        NetworkController.shared.getExpense(for: trip.id, expenseID: expenseID) { (expense, error) in
+        NetworkController.shared.getExpense( expenseID: expenseID) { (expense, error) in
             if let error = error {
                 NSLog(error.rawValue)
                 return

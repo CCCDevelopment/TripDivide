@@ -60,6 +60,7 @@ class AddExpenseViewController: UIViewController, UIImagePickerControllerDelegat
         
         if let amountString = textField.text?.currencyInputFormatting() {
             textField.text = amountString
+
         }
     }
     

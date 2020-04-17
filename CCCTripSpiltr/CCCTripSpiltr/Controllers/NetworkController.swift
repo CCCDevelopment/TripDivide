@@ -36,12 +36,10 @@ class NetworkController {
     static let shared = NetworkController()
     let cache = NSCache<NSString, UIImage>()
     
-    func getExpense(for id: String, expenseID: String, completion: @escaping (Expense?, CCCError?) -> Void) {
-        let expenseRef = db.collection("trips")
+    func getExpense( expenseID: String, completion: @escaping (Expense?, CCCError?) -> Void) {
+        let expenseRef = db.collection("expenses").document(expenseID)
         
-        let expenseDocumentRef = expenseRef.document(id).collection("expenses").document(expenseID)
-        
-        expenseDocumentRef.getDocument { (document, _) in
+        expenseRef.getDocument { (document, _) in
             if let document = document, document.exists {
                 guard let data = document.data() else { return }
                 let expense = Expense(from: data)
@@ -54,11 +52,9 @@ class NetworkController {
     }
     
     func getExpenses(with tripID: String,completion: @escaping (CCCError?, [String]?) -> Void) {
-        let ref = db.collection("trips")
+        let ref = db.collection("expenses")
         
-        let documentrRef = ref.document(tripID).collection("expenses")
-        
-        documentrRef.getDocuments { (snapshot, error) in
+        ref.getDocuments { (snapshot, error) in
             if let _ = error {
                 completion(.gettingExpensesError, nil)
             }
@@ -76,18 +72,37 @@ class NetworkController {
         
     }
     
-    func updateExpense(with tripID: String, expense: Expense, completion: @escaping (CCCError?) -> Void) {
-        let ref = db.collection("trips")
+//    func deleteUpdateExpense(expense: Expense, completion: @escaping (CCCError?) -> Void) {
+//
+//        let ref = db.collection("expenses")
+//
+//        ref.document(expense.id).delete()
+//
+//        updateExpense(expense: expense) { (error) in
+//            if let error = error {
+//                completion(error)
+//            }
+//        }
+//
+//    }
+    
+    
+    
+    
+    func updateExpense(expense: Expense, completion: @escaping (CCCError?) -> Void) {
+        let ref = db.collection("expenses")
+    
+
         
-        ref.document(tripID).collection("expenses").document(expense.id).setData(expense.dictionaryRep() as [String : Any]) { (error) in
+        ref.document(expense.id).setData(expense.dictionaryRep(), completion: { (error) in
             if let _ = error {
-                completion(.updatingExpenseError)
+                completion(CCCError.updatingExpenseError)
                 return
             }
-        }
+            completion(nil)
+        })
+
     }
-    
-    
     
     func uploadExpense(image: UIImage?, expense: Expense, tripID: String, completion: @escaping (CCCError?) -> Void) {
         
@@ -137,8 +152,8 @@ class NetworkController {
     func createExpense(expense: Expense, tripID: String, imageURL: String?, completion: @escaping (CCCError?) -> Void) {
         let expense = expense
         expense.receipt = imageURL
-        let ref = self.db.collection("trips")
-        ref.document(tripID).collection("expenses").document(expense.id).setData(expense.dictionaryRep() as [String : Any]) { (error) in
+        let ref = self.db.collection("expenses")
+            ref.document(expense.id).setData(expense.dictionaryRep()) { (error) in
             
             if let _ = error {
                 completion(CCCError.creatingExpenseError)
@@ -146,14 +161,11 @@ class NetworkController {
             }
             
             completion(nil)
-            
         }
-
-        
+   
     }
     
-    
-    
+
     
     func uploadTrip(image: UIImage?,name: String, friendIds: [String], completion: @escaping (CCCError?) -> Void) {
         
@@ -338,7 +350,7 @@ class NetworkController {
         let ref = db.collection("users")
         ref.document(user.id).setData(user.dictionaryRep(), completion: { (error) in
             if let _ = error {
-                completion(CCCError.updatingUserError)
+                completion(CCCError.updatingExpenseError)
                 return
             }
             completion(nil)

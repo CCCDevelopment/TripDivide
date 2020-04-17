@@ -101,13 +101,13 @@ class TripDetailTableViewController: UITableViewController {
     func getTripTotal() -> Double {
         guard let trip = trip else { return 0.0 }
         var total: Double = 0.0
-        if trip.expenses.count == 0 { return total } else {
-        for expense in trip.expenses {
-            
-            total += expense.cost
-            }
-        return total
-        }
+//        if trip.expenses.count == 0 { return total } else {
+//        for expense in trip.expenses {
+//
+//            total += expense.cost
+//            }
+        return 12
+//        }
     }
     
     func configureViews () {

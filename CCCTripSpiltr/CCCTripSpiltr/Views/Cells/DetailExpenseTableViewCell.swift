@@ -25,7 +25,7 @@ class DetailExpenseTableViewCell: UITableViewCell {
     func configureViews() {
         guard let tripID = tripID,
             let expenseID = expenseID else { return }
-        NetworkController.shared.getExpense(for: tripID, expenseID: expenseID) { [weak self] (expense, error) in
+        NetworkController.shared.getExpense( expenseID: expenseID) { [weak self] (expense, error) in
             guard let self = self else { return }
             
             if let error = error {

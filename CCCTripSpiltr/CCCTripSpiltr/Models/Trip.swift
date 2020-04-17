@@ -18,9 +18,9 @@ class Trip {
     let createdBy: String
     var imageURL: String?
     let startDate: Date
-    var expenses: [Expense]
+//    var expenses: [Expense]
 
-    init(id: String = UUID().uuidString, users: [String] = [], isComplete: Bool = false, name: String, totalCost: Double = 0.00, createdBy: String, image: String?, startDate: Date = Date(), expenses: [Expense] = []){
+    init(id: String = UUID().uuidString, users: [String] = [], isComplete: Bool = false, name: String, totalCost: Double = 0.00, createdBy: String, image: String?, startDate: Date = Date()){
         self.id = id
         self.users = [createdBy]
         self.isComplete = isComplete
@@ -29,7 +29,7 @@ class Trip {
         self.createdBy = createdBy
         self.imageURL = image
         self.startDate = startDate
-        self.expenses = expenses
+//        self.expenses = expenses
     }
     
     init(from dictionary: [String: Any]) {
@@ -50,11 +50,11 @@ class Trip {
             expenseArray.append(expense)
         }
 
-        self.expenses = expenseArray
+//        self.expenses = expenseArray
     }
     
     func dictionaryRep() -> [String : Any] {
-        let dictionary: [String : Any] = ["id": id, "users" : users, "isComplete" : isComplete, "name" : name, "totalCost" : totalCost , "createdBy": createdBy, "imageURL": imageURL as Any, "startDate": startDate, "expenses": expenses]
+        let dictionary: [String : Any] = ["id": id, "users" : users, "isComplete" : isComplete, "name" : name, "totalCost" : totalCost , "createdBy": createdBy, "imageURL": imageURL as Any, "startDate": startDate]
         return dictionary
     }
 }

@@ -167,16 +167,33 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
         
     }
     
-    @IBAction func saveButtonTapped(_ sender: Any) {
+    func splitCost() {
         
+        var paidByDict = [String: Double]()
+        var usedByDict = [String: Double]()
+        guard let usedByArray = expense?.usedBy.keys,
+            let paidByArray = expense?.paidBy.keys,
+            let expense = expense else { return }
+        for userID in Array(paidByArray) {
+                paidByDict[userID] = expense.cost / Double(paidByArray.count)
+            }
+        expense.paidBy = paidByDict
+        
+        
+
+        for userID in Array(usedByArray) {
+               usedByDict[userID] = expense.cost / Double(usedByArray.count)
+            }
+        expense.usedBy = usedByDict
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        splitCost()
         guard let tripID = trip?.id,
             let expense = expense else { return }
         
-        
-        NetworkController.shared.updateExpense(with: tripID, expense: expense) { (error) in
-            
-           
-            
+        NetworkController.shared.updateExpense(expense: expense) { (error) in
+  
             if let error = error {
                 NSLog(error.rawValue)
             }
@@ -184,17 +201,18 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
             
             self.navigationController?.popViewController(animated: true)
         }
+
     }
     
-//    func updateExpense() {
-//        let name = expenseNameTextField.text ?? ""
-//
-//
-//        let cost = expenseNameTextField.text?.convertCurrencyToDouble() ?? 0.0
-//
-//        expense!.name = name
-//        expense!.cost = cost
-//    }
+    func updateExpense() {
+        let name = expenseNameTextField.text ?? ""
+
+
+        let cost = expenseCostTextField.text?.convertCurrencyToDouble() ?? 0.0
+
+        expense!.name = name
+        expense!.cost = cost
+    }
     
     func updateData(on friendIDs: [String]) {
            var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
@@ -224,17 +242,17 @@ extension EditExpenseViewController: UITextFieldDelegate {
         if textField == expenseCostTextField {
             textField.text = textField.text?.currencyInputFormatting()
         }
-//        updateExpense()
+        updateExpense()
         return true
     }
     
-   
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
         if textField == expenseCostTextField {
             textField.text = textField.text?.currencyInputFormatting()
         }
-//        updateExpense()
+        updateExpense()
     }
 }
 
