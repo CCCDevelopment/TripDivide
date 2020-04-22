@@ -21,6 +21,7 @@
 		44697CD42433AA3600252764 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44697CD32433AA3600252764 /* AddFriendViewController.swift */; };
 		44697CD62433AB4600252764 /* CCCBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44697CD52433AB4600252764 /* CCCBodyLabel.swift */; };
 		4484D330244FE21900D96D50 /* AddFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4484D32F244FE21900D96D50 /* AddFriendCell.swift */; };
+		4484D3322450AD5300D96D50 /* AddFriendToTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4484D3312450AD5300D96D50 /* AddFriendToTripViewController.swift */; };
 		44C579AD243D4393006FA3CC /* DetailExpenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C579AC243D4393006FA3CC /* DetailExpenseTableViewCell.swift */; };
 		44C579AF243D4898006FA3CC /* ExpenseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C579AE243D4898006FA3CC /* ExpenseDetailViewController.swift */; };
 		44DABC83243FD3C100DA15FC /* TripUserAvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DABC82243FD3C100DA15FC /* TripUserAvatarCell.swift */; };
@@ -74,6 +75,7 @@
 		44697CD32433AA3600252764 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		44697CD52433AB4600252764 /* CCCBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCBodyLabel.swift; sourceTree = "<group>"; };
 		4484D32F244FE21900D96D50 /* AddFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendCell.swift; sourceTree = "<group>"; };
+		4484D3312450AD5300D96D50 /* AddFriendToTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendToTripViewController.swift; sourceTree = "<group>"; };
 		44C579AC243D4393006FA3CC /* DetailExpenseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailExpenseTableViewCell.swift; sourceTree = "<group>"; };
 		44C579AE243D4898006FA3CC /* ExpenseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewController.swift; sourceTree = "<group>"; };
 		44DABC82243FD3C100DA15FC /* TripUserAvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripUserAvatarCell.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				444C6143243528960021D9F8 /* ImagePickerController.swift */,
 				444C6147243667CE0021D9F8 /* AddExpenseViewController.swift */,
 				4447723B2446488D00A1FF1A /* EditExpenseViewController.swift */,
+				4484D3312450AD5300D96D50 /* AddFriendToTripViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				D1F5E6182433CDAC008F3E72 /* CCCTextView.swift in Sources */,
 				D1BB611B242E858300B90E29 /* LoginViewController.swift in Sources */,
 				444772382444E6F100A1FF1A /* CollectionViewDetailExpneseCell.swift in Sources */,
+				4484D3322450AD5300D96D50 /* AddFriendToTripViewController.swift in Sources */,
 				D1BB611A242E858300B90E29 /* AuthenticationViewController.swift in Sources */,
 				D196AA0F24341D1F00E5B156 /* TripCell.swift in Sources */,
 				D1E33DFA2432A8140077D4C6 /* CCCTitleLabel.swift in Sources */,
