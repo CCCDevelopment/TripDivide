@@ -10,9 +10,7 @@ import UIKit
 import Firebase
 
 class SelectFriendsCollectionViewController: UIViewController {
-    
-    
-    
+
     var collectionView: UICollectionView!
     var friends = [String]()
     var selectedFriends = [String]()
@@ -26,9 +24,10 @@ class SelectFriendsCollectionViewController: UIViewController {
         configureViewController()
         collectionView.delegate = self
         collectionView.dataSource = self
+        
     }
     
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getFriends()
@@ -122,7 +121,8 @@ extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // TODO: Have to create a new view to pop up and allow us to add someone. And update the TripUsers:
         if indexPath.item == 0 {
-            let vc = AddFriendToTripViewController()
+            let vc = AddGuestToTripViewController()
+            vc.delegate = self
             present(vc, animated: true, completion: nil)
          
             return
@@ -142,7 +142,7 @@ extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         
         if indexPath.item == 0 {
-            let vc = AddFriendToTripViewController()
+            let vc = AddGuestToTripViewController()
             present(vc, animated: true, completion: nil)
             return
         } else {
@@ -159,4 +159,11 @@ extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICol
     }
 }
 
+extension SelectFriendsCollectionViewController: AddGuestToTripDelegate {
+    func guestCreated(id: String) {
+        friends.append(id)
+        collectionView.reloadData()
 
+    
+    }
+}

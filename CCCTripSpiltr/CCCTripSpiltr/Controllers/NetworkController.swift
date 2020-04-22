@@ -271,6 +271,16 @@ class NetworkController {
             
         }
         
+    func createGuest(fullName: String, completion: @escaping (String?,CCCError?) -> Void) {
+
+        let user = User(id: UUID().uuidString, username: "guest", fullName: fullName, avatar: nil, email: "guest@tripdivide.com")
+        self.db.collection("users").document(user.id).setData(user.dictionaryRep()) { (error) in
+            if error != nil {
+                completion(nil,.savingError)
+            }
+        }
+        completion(user.id, nil)
+    }
         
         func createUser(email: String, password: String, fullName: String, username: String, completion: @escaping (CCCError?) -> Void) {
             let email = email.lowercased()

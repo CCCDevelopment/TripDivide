@@ -9,8 +9,13 @@
 import UIKit
 import Photos
 
-class AddFriendToTripViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerDelegate{
+protocol AddGuestToTripDelegate {
+    func guestCreated(id: String)
+}
 
+
+class AddGuestToTripViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerDelegate{
+    var delegate: AddGuestToTripDelegate?
 let containerView = UIView()
 let padding: CGFloat = 20
 let titleLabel = CCCTitleLabel(textAlignment: .center, fontSize: 20)
@@ -25,7 +30,7 @@ var currentUser: User!
 let stackView = UIStackView()
 var avatarImage: UIImage!
 var buttonTitle = "Close"
-var addButtonTitle = "Add Friend"
+var addButtonTitle = "Add Guest"
 var viewTitle = "Friend Info"
 override func viewDidLoad() {
     super.viewDidLoad()
@@ -53,60 +58,30 @@ func updateViews() {
     nameTextField.placeholder = "Full Name"
     usernameTextField.placeholder = "Username"
 
-//    NetworkController.shared.getCurrentUser { (user, error) in
-//        if let error = error {
-//            NSLog(error.rawValue)
-//            return
-//        }
-//
-//        self.currentUser = user
-//
-//        self.nameTextField.text = user?.fullName
-//        self.usernameTextField.text = user?.username
-//
-//        if let imageURL = user?.avatar {
-//            self.setImage(imageURL: imageURL)
-//        }
-//
-//    }
-}
-
-//func setImage(imageURL: String) {
-//    avatarImage = UIImage()
-//    avatarImage.downloadImage(from: imageURL) { (image) in
-//        if let image = image {
-//            DispatchQueue.main.async {
-//                self.avatarImageView.image = image
-//            }
-//        } else {
-//            self.avatarImage = nil
-//        }
-//    }
-//}
-
+    }
 
 func configureStackView() {
     
     nameTextField.layer.borderWidth = 0.8
     nameTextField.layer.borderColor = UIColor.systemGray3.cgColor
-    usernameTextField.layer.borderWidth = 0.8
-    usernameTextField.layer.borderColor = UIColor.systemGray3.cgColor
+  //  usernameTextField.layer.borderWidth = 0.8
+  //  usernameTextField.layer.borderColor = UIColor.systemGray3.cgColor
     
     nameTextField.layer.cornerRadius = 10
-    usernameTextField.layer.cornerRadius = 10
+ //   usernameTextField.layer.cornerRadius = 10
 
     nameTextField.textAlignment = .center
-    usernameTextField.textAlignment = .center
+ //   usernameTextField.textAlignment = .center
     
     nameTextField.translatesAutoresizingMaskIntoConstraints = false
-    usernameTextField.translatesAutoresizingMaskIntoConstraints = false
+  ///  usernameTextField.translatesAutoresizingMaskIntoConstraints = false
     
     
     stackView.axis = .vertical
     stackView.distribution = .fillEqually
     stackView.spacing = 8
     stackView.addArrangedSubview(nameTextField)
-    stackView.addArrangedSubview(usernameTextField)
+//    stackView.addArrangedSubview(usernameTextField)
     
     containerView.addSubview(stackView)
     stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -229,7 +204,18 @@ func configureActionButtons() {
     }
     
     @objc func updateUser() {
-        dismissVC()
+        guard let fullName = nameTextField.text,
+            !fullName.isEmpty else { return }
+        NetworkController.shared.createGuest(fullName: fullName) { [weak self] (id, error) in
+            guard let self = self else { return }
+            if let error = error {
+                NSLog(error.rawValue)
+            }
+            
+            guard let id = id else { return }
+            self.dismiss(animated: true, completion: nil)
+            self.delegate?.guestCreated(id: id)
+        }
     }
 
 }
