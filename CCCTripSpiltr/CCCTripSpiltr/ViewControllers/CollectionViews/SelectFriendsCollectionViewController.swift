@@ -120,7 +120,7 @@ extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        // TODO: Have to create a new view to pop up and allow us to add someone. And update the TripUsers:
         if indexPath.item == 0 {return} else {
         let userID = friends[indexPath.item - 1]
         let cell = collectionView.cellForItem(at: indexPath)
