@@ -65,6 +65,7 @@ class SelectFriendsCollectionViewController: UIViewController {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FriendCell.self, forCellWithReuseIdentifier: FriendCell.reuseID)
+        collectionView.register(AddFriendCell.self, forCellWithReuseIdentifier: "AddFriendCell")
         collectionView.allowsMultipleSelection = true
         
     }
@@ -86,43 +87,66 @@ class SelectFriendsCollectionViewController: UIViewController {
 
 
 extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+      return 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return friends.count
+        return friends.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if indexPath.item == 0 {
+            
+            guard let firstCell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddFriendCell", for:  indexPath) as? AddFriendCell else{
+                return UICollectionViewCell()
+            }
+            return firstCell
+        } else {
+        
+        
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCell.reuseID, for: indexPath) as? FriendCell else {
             return UICollectionViewCell() }
         
-        let friendID = friends[indexPath.row]
+        let friendID = friends[indexPath.row - 1]
 
         cell.set(userID: friendID)
         
         return cell
+        }
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let userID = friends[indexPath.item]
+        
+        if indexPath.item == 0 {return} else {
+        let userID = friends[indexPath.item - 1]
         let cell = collectionView.cellForItem(at: indexPath)
+        
+       
         if selectedFriends.contains(userID) {
             return
         }
         cell?.contentView.backgroundColor = .systemTeal
         selectedFriends.append(userID)
-        
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let userID = friends[indexPath.item]
+        
+        if indexPath.item == 0 {return} else {
+        let userID = friends[indexPath.item - 1]
         let cell = collectionView.cellForItem(at: indexPath)
-
+        
+        
         if selectedFriends.contains(userID) {
             selectedFriends.remove(at: selectedFriends.firstIndex(of: userID)!)
         }
         cell?.contentView.backgroundColor = nil
         
-
+        }
     }
 }
 
