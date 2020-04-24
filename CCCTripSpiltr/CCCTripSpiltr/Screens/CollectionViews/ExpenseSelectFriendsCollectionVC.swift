@@ -15,7 +15,7 @@ enum SelectFriendsType {
 }
 
 
-class SelectFriendsForExpenseVC: UIViewController {
+class ExpenseSelectFriendsCollectionVC: UIViewController {
     
     
     var friends = [String]()
@@ -135,7 +135,7 @@ class SelectFriendsForExpenseVC: UIViewController {
     }
     
     
-    extension SelectFriendsForExpenseVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    extension ExpenseSelectFriendsCollectionVC: UICollectionViewDelegate, UICollectionViewDataSource {
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             return friends.count
         }

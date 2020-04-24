@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sll-Ne-CBb">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Create Trip View Controller-->
+        <!--Add TripVC-->
         <scene sceneID="e9W-Ws-ZB3">
             <objects>
-                <viewController id="sSI-2F-kmA" customClass="CreateTripViewController" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="sSI-2F-kmA" customClass="AddTripVC" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nJI-4u-RnD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,7 +101,7 @@
         <!--Trips-->
         <scene sceneID="Z2u-jK-EnF">
             <objects>
-                <tableViewController id="mZp-ur-OqI" customClass="TripsTableViewController" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="mZp-ur-OqI" customClass="TripsTableVC" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1Wa-Kx-OcV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -128,7 +128,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.3.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="cwx-RF-uCG">
-                                            <rect key="frame" x="118" y="60.000000000000007" width="43" height="39.666666666666664"/>
+                                            <rect key="frame" x="118" y="59.5" width="43" height="40"/>
                                             <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="43" id="KF3-KW-VEE"/>
@@ -136,7 +136,7 @@
                                             </constraints>
                                         </imageView>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dollarsign.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Dq3-Sv-ZTW">
-                                            <rect key="frame" x="238.66666666666663" y="62.000000000000007" width="35" height="34.666666666666664"/>
+                                            <rect key="frame" x="238.5" y="61.5" width="35" height="35"/>
                                             <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="35" id="kQX-Pp-Fzb"/>
@@ -144,7 +144,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999,999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvt-P4-5e1">
-                                            <rect key="frame" x="292.66666666666669" y="67" width="101.33333333333331" height="26"/>
+                                            <rect key="frame" x="292.5" y="67" width="101.5" height="26"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="26" id="L1O-ZO-gAl"/>
                                             </constraints>
@@ -153,7 +153,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyX-5O-9dM">
-                                            <rect key="frame" x="169" y="60" width="40.666666666666657" height="40"/>
+                                            <rect key="frame" x="169" y="60" width="40.5" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="iX7-cF-bIg"/>
                                             </constraints>
@@ -219,10 +219,10 @@
             </objects>
             <point key="canvasLocation" x="5078.2608695652179" y="105.80357142857143"/>
         </scene>
-        <!--Trip Detail Table View Controller-->
+        <!--Trip Detail TableVC-->
         <scene sceneID="to8-9F-oQM">
             <objects>
-                <tableViewController id="AB8-ru-iWg" customClass="TripDetailTableViewController" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="AB8-ru-iWg" customClass="TripDetailTableVC" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="b9A-rd-dxj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -240,25 +240,25 @@
                                     </constraints>
                                 </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="L36-Vg-DWQ">
-                                    <rect key="frame" x="144" y="8" width="244.66666666666663" height="95"/>
+                                    <rect key="frame" x="144" y="8" width="244.5" height="95.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2DD-hn-EyW">
-                                            <rect key="frame" x="0.0" y="0.0" width="112" height="95"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="112" height="95.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Total Cost:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vva-aD-r94">
-                                                    <rect key="frame" x="0.0" y="0.0" width="101.33333333333333" height="26.333333333333332"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="101.5" height="26.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Borrowed:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ard-aj-oGC">
-                                                    <rect key="frame" x="0.0" y="34.333333333333336" width="97.666666666666671" height="26.333333333333336"/>
+                                                    <rect key="frame" x="0.0" y="34.5" width="98" height="26.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Owed:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxV-ka-bvx">
-                                                    <rect key="frame" x="0.0" y="68.666666666666671" width="62.666666666666664" height="26.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="69" width="63" height="26.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -266,22 +266,22 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wp4-AR-2aC">
-                                            <rect key="frame" x="120" y="0.0" width="124.66666666666669" height="95"/>
+                                            <rect key="frame" x="120" y="0.0" width="124.5" height="95.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$100,000.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAD-jJ-5bl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="124.66666666666667" height="26.333333333333332"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="124.5" height="26.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$100,000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6td-vX-Tvh">
-                                                    <rect key="frame" x="0.0" y="34.333333333333336" width="98" height="26.333333333333336"/>
+                                                    <rect key="frame" x="0.0" y="34.5" width="98" height="26.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$100,000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fb-KW-vBb">
-                                                    <rect key="frame" x="0.0" y="68.666666666666671" width="98" height="26.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="69" width="98" height="26.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -307,7 +307,7 @@
                                     </collectionViewFlowLayout>
                                     <cells>
                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseAvatarCell" id="rtp-lV-FDw" customClass="TripUserAvatarCell" customModule="CCCTripSpiltr" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="7.666666666666667" width="70" height="70"/>
+                                            <rect key="frame" x="0.0" y="7.5" width="70" height="70"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="mwB-Dp-ehv">
                                                 <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -362,7 +362,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpenseCell" rowHeight="80" id="y1C-Af-Dbw" customClass="DetailExpenseTableViewCell" customModule="CCCTripSpiltr" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpenseCell" rowHeight="80" id="y1C-Af-Dbw" customClass="ExpenseDetailTableViewCell" customModule="CCCTripSpiltr" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="257" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y1C-Af-Dbw" id="pKo-sZ-cr2">
@@ -436,13 +436,13 @@
         <!--Add Expense-->
         <scene sceneID="YbV-ma-xST">
             <objects>
-                <viewController title="Add Expense" id="EYH-y3-Ja7" customClass="AddExpenseViewController" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add Expense" id="EYH-y3-Ja7" customClass="AddExpenseVC" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ktu-0D-imy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Vincenzo's Pizza" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SZ4-wO-DNu">
-                                <rect key="frame" x="16" y="168.66666666666666" width="382" height="34"/>
+                                <rect key="frame" x="16" y="168.5" width="382" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="SAl-EU-QJi"/>
                                 </constraints>
@@ -450,7 +450,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uED-kH-0hF">
-                                <rect key="frame" x="130" y="140" width="153.66666666666663" height="20.666666666666657"/>
+                                <rect key="frame" x="130" y="140" width="153.5" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="FfS-di-0Zo"/>
                                 </constraints>
@@ -459,7 +459,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Cost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkd-QN-WlF">
-                                <rect key="frame" x="135" y="210.66666666666666" width="144" height="20.333333333333343"/>
+                                <rect key="frame" x="135" y="210.5" width="144" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="5PW-u0-qtA"/>
                                 </constraints>
@@ -489,7 +489,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseAvatarCell" id="zCL-dT-sad" customClass="ExpenseAvatarCell" customModule="CCCTripSpiltr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="7.666666666666667" width="70" height="70"/>
+                                        <rect key="frame" x="0.0" y="7.5" width="70" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lxg-2f-BNN">
                                             <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -529,7 +529,7 @@
                                 <rect key="frame" x="16" y="293" width="382" height="32"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yOA-Rg-sDB">
-                                        <rect key="frame" x="0.0" y="0.0" width="348.33333333333331" height="33"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="348" height="33"/>
                                         <segments>
                                             <segment title="Paid By"/>
                                             <segment title="Used By"/>
@@ -539,7 +539,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dg9-Gi-XXQ">
-                                        <rect key="frame" x="362.33333333333331" y="0.0" width="19.666666666666686" height="32"/>
+                                        <rect key="frame" x="362" y="0.0" width="20" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <state key="normal" image="arrow.right.circle" catalog="system"/>
                                         <connections>
@@ -631,22 +631,22 @@
         <!--Expense-->
         <scene sceneID="pnS-QO-2zz">
             <objects>
-                <viewController id="jA9-eU-9er" customClass="ExpenseDetailViewController" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jA9-eU-9er" customClass="ExpenseDetailVC" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xmh-0O-cFH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="71" translatesAutoresizingMaskIntoConstraints="NO" id="c7E-BQ-1rQ">
-                                <rect key="frame" x="76" y="160" width="262.66666666666669" height="20.666666666666657"/>
+                                <rect key="frame" x="76" y="160" width="262.5" height="20.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Cost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VLM-hd-cxr">
-                                        <rect key="frame" x="0.0" y="0.0" width="105" height="20.666666666666668"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="105" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100,000.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKn-jU-LEz">
-                                        <rect key="frame" x="176" y="0.0" width="86.666666666666686" height="20.666666666666668"/>
+                                        <rect key="frame" x="176" y="0.0" width="86.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -690,7 +690,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewDetailExpneseCell" id="v3P-m8-J8R" customClass="CollectionViewDetailExpneseCell" customModule="CCCTripSpiltr" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewDetailExpneseCell" id="v3P-m8-J8R" customClass="ExpenseDetailPaidByCollectionViewCell" customModule="CCCTripSpiltr" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="5" width="155" height="110"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Lab-0B-TZB">
@@ -770,7 +770,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewDetailUsedByCell" id="lHN-WO-ERT" customClass="CollectionViewDetailUsedByCell" customModule="CCCTripSpiltr" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewDetailUsedByCell" id="lHN-WO-ERT" customClass="ExpenseDetailUsedByCollectionViewCell" customModule="CCCTripSpiltr" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="5" width="155" height="110"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Lvi-0d-zjV">
@@ -865,16 +865,16 @@
             </objects>
             <point key="canvasLocation" x="6050.7246376811599" y="1263.6160714285713"/>
         </scene>
-        <!--Edit Expense View Controller-->
+        <!--Edit ExpenseVC-->
         <scene sceneID="1mI-SC-p2w">
             <objects>
-                <viewController id="hTd-Nr-Dg6" customClass="EditExpenseViewController" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hTd-Nr-Dg6" customClass="EditExpenseVC" customModule="CCCTripSpiltr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IZx-zk-S2m">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Vincenzo's Pizza" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IGj-FH-qBU">
-                                <rect key="frame" x="16" y="168.66666666666666" width="382" height="34"/>
+                                <rect key="frame" x="16" y="168.5" width="382" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="PvW-Nz-QDA"/>
                                 </constraints>
@@ -882,7 +882,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oyk-HT-3Zv">
-                                <rect key="frame" x="131" y="140" width="153.66666666666663" height="20.666666666666657"/>
+                                <rect key="frame" x="131" y="140" width="153.5" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="sYU-tR-ppJ"/>
                                 </constraints>
@@ -912,7 +912,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseAvatarCell" id="lyc-9f-q1a" customClass="ExpenseAvatarCell" customModule="CCCTripSpiltr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="7.666666666666667" width="70" height="70"/>
+                                        <rect key="frame" x="0.0" y="7.5" width="70" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="oWX-9q-gj8">
                                             <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -952,7 +952,7 @@
                                 <rect key="frame" x="16" y="293" width="382" height="32"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="keD-Dj-3AJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="348.33333333333331" height="33"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="348" height="33"/>
                                         <segments>
                                             <segment title="Paid By"/>
                                             <segment title="Used By"/>
@@ -963,7 +963,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvJ-U4-8iv">
-                                        <rect key="frame" x="362.33333333333331" y="0.0" width="19.666666666666686" height="32"/>
+                                        <rect key="frame" x="362" y="0.0" width="20" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <state key="normal" image="arrow.right.circle" catalog="system"/>
                                         <connections>
@@ -987,7 +987,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Cost" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x5a-nr-o4j">
-                                <rect key="frame" x="135" y="210.66666666666666" width="144" height="20.333333333333343"/>
+                                <rect key="frame" x="135" y="210.5" width="144" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="fdg-JF-Zz8"/>
                                 </constraints>

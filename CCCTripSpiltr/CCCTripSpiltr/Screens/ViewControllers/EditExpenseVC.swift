@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class EditExpenseViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var trip: Trip?
     var expense: Expense?
@@ -141,13 +141,13 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func actionButtonTapped(_ sender: Any) {
-        var vc = SelectFriendsForExpenseVC(selectType: .paidBy)
+        var vc = ExpenseSelectFriendsCollectionVC(selectType: .paidBy)
         
         switch editExpenseSegmentedControll.selectedSegmentIndex {
         case 0:
-            vc = SelectFriendsForExpenseVC(selectType: .paidBy)
+            vc = ExpenseSelectFriendsCollectionVC(selectType: .paidBy)
         case 1:
-            vc = SelectFriendsForExpenseVC(selectType: .usedBy)
+            vc = ExpenseSelectFriendsCollectionVC(selectType: .usedBy)
             
         default:
             break
@@ -225,17 +225,17 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
     
 }
 
-extension EditExpenseViewController: UICollectionViewDelegate {
+extension EditExpenseVC: UICollectionViewDelegate {
     
 }
 
-extension EditExpenseViewController: ImagePickerDelegate {
+extension EditExpenseVC: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
         self.image = image
     }
 }
 
-extension EditExpenseViewController: UITextFieldDelegate {
+extension EditExpenseVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()

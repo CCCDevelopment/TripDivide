@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailExpenseTableViewCell: UITableViewCell {
+class ExpenseDetailTableViewCell: UITableViewCell {
 
 
     var tripID: String?  {

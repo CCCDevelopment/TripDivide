@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SelectFriendsCollectionViewController: UIViewController {
+class TripsSelectFriendsCollectionVC: UIViewController {
 
     var collectionView: UICollectionView!
     var friends = [String]()
@@ -64,7 +64,7 @@ class SelectFriendsCollectionViewController: UIViewController {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FriendCell.self, forCellWithReuseIdentifier: FriendCell.reuseID)
-        collectionView.register(AddFriendCell.self, forCellWithReuseIdentifier: "AddFriendCell")
+        collectionView.register(GuestCell.self, forCellWithReuseIdentifier: "AddFriendCell")
         collectionView.allowsMultipleSelection = true
         
     }
@@ -85,7 +85,7 @@ class SelectFriendsCollectionViewController: UIViewController {
 }
 
 
-extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension TripsSelectFriendsCollectionVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
       return 1
@@ -99,7 +99,7 @@ extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICol
         
         if indexPath.item == 0 {
             
-            guard let firstCell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddFriendCell", for:  indexPath) as? AddFriendCell else{
+            guard let firstCell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddFriendCell", for:  indexPath) as? GuestCell else{
                 return UICollectionViewCell()
             }
             return firstCell
@@ -121,7 +121,7 @@ extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // TODO: Have to create a new view to pop up and allow us to add someone. And update the TripUsers:
         if indexPath.item == 0 {
-            let vc = AddGuestToTripViewController()
+            let vc = AddGuestVC()
             vc.delegate = self
             present(vc, animated: true, completion: nil)
          
@@ -142,7 +142,7 @@ extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         
         if indexPath.item == 0 {
-            let vc = AddGuestToTripViewController()
+            let vc = AddGuestVC()
             present(vc, animated: true, completion: nil)
             return
         } else {
@@ -159,7 +159,7 @@ extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICol
     }
 }
 
-extension SelectFriendsCollectionViewController: AddGuestToTripDelegate {
+extension TripsSelectFriendsCollectionVC: AddGuestToTripDelegate {
     func guestCreated(id: String) {
         friends.append(id)
         collectionView.reloadData()

@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class AddExpenseViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var trip: Trip?
     var expense = Expense(name: "", receipt: nil, cost: 0.0, paidBy: [:], usedBy: [:])
@@ -125,13 +125,13 @@ class AddExpenseViewController: UIViewController, UIImagePickerControllerDelegat
     }
     @IBAction func paidByButtonTapped(_ sender: Any) {
         
-        var vc = SelectFriendsForExpenseVC(selectType: .paidBy)
+        var vc = ExpenseSelectFriendsCollectionVC(selectType: .paidBy)
         
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            vc = SelectFriendsForExpenseVC(selectType: .paidBy)
+            vc = ExpenseSelectFriendsCollectionVC(selectType: .paidBy)
         case 1:
-            vc = SelectFriendsForExpenseVC(selectType: .usedBy)
+            vc = ExpenseSelectFriendsCollectionVC(selectType: .usedBy)
             
         default:
             break
@@ -143,7 +143,7 @@ class AddExpenseViewController: UIViewController, UIImagePickerControllerDelegat
         
     }
     @IBAction func usedByButtonTapped(_ sender: Any) {
-        let vc = SelectFriendsForExpenseVC(selectType: .usedBy)
+        let vc = ExpenseSelectFriendsCollectionVC(selectType: .usedBy)
         vc.trip = trip
         vc.expense = expense
         navigationController?.pushViewController(vc, animated: true)
@@ -180,7 +180,7 @@ class AddExpenseViewController: UIViewController, UIImagePickerControllerDelegat
 }
 
 
-extension AddExpenseViewController: UITextFieldDelegate {
+extension AddExpenseVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
@@ -236,12 +236,12 @@ extension String {
     }
 }
 
-extension AddExpenseViewController: UICollectionViewDelegate {
+extension AddExpenseVC: UICollectionViewDelegate {
 
     
 }
 
-extension AddExpenseViewController: ImagePickerDelegate {
+extension AddExpenseVC: ImagePickerDelegate {
     
     func didSelect(image: UIImage?) {
         self.image = image

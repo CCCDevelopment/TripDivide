@@ -9,7 +9,7 @@
 import UIKit
 
 
-class AddFriendCell: UICollectionViewCell {
+class GuestCell: UICollectionViewCell {
    
     static let reuseID = "AddFriendCell"
     let avatarImageView = CCCAvatarImageView(frame: .zero)

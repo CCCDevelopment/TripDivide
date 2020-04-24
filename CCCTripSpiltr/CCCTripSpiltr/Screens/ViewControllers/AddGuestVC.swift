@@ -14,7 +14,7 @@ protocol AddGuestToTripDelegate {
 }
 
 
-class AddGuestToTripViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerDelegate{
+class AddGuestVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerDelegate{
     var delegate: AddGuestToTripDelegate?
 let containerView = UIView()
 let padding: CGFloat = 20

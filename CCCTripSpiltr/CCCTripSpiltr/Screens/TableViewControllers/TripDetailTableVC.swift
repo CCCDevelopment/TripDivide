@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TripDetailTableViewController: UITableViewController {
+class TripDetailTableVC: UITableViewController {
     
     
     var tripID: String? {
@@ -151,7 +151,7 @@ class TripDetailTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath) as! DetailExpenseTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath) as! ExpenseDetailTableViewCell
         guard let expenseIDs = expenseIDs,
             let tripID = tripID else { return UITableViewCell() }
         cell.expenseID = expenseIDs[indexPath.row]
@@ -194,13 +194,13 @@ class TripDetailTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddExpenseSegue" {
-            let destinationVC = segue.destination as? AddExpenseViewController
+            let destinationVC = segue.destination as? AddExpenseVC
             destinationVC?.trip = trip
         } else if segue.identifier == "ViewExpenseDetailSegue" {
-            let destinationVC = segue.destination as? ExpenseDetailViewController
+            let destinationVC = segue.destination as? ExpenseDetailVC
             if let indexPath = tableView.indexPathForSelectedRow {
                 
-                let cell = tableView.cellForRow(at: indexPath) as! DetailExpenseTableViewCell
+                let cell = tableView.cellForRow(at: indexPath) as! ExpenseDetailTableViewCell
                 
                 let expenseID = cell.expenseID
                 
@@ -218,7 +218,7 @@ class TripDetailTableViewController: UITableViewController {
     
 }
 
-extension TripDetailTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension TripDetailTableVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         trip?.users.count ?? 1
     }

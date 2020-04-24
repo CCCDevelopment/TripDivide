@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlowLayout {
+class ExpenseDetailVC: UIViewController, UICollectionViewDelegateFlowLayout {
     
     var expenseID: String?
     var expense: Expense?
@@ -117,7 +117,7 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     
     func configurePaidByDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: paidByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailExpneseCell", for: indexpath) as! CollectionViewDetailExpneseCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailExpneseCell", for: indexpath) as! ExpenseDetailPaidByCollectionViewCell
             
             cell.getUser(for: userID)
             return cell
@@ -128,7 +128,7 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     
     func configureUsedByDataSource() {
         otherDataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: usedByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailUsedByCell", for: indexpath) as! CollectionViewDetailUsedByCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailUsedByCell", for: indexpath) as! ExpenseDetailUsedByCollectionViewCell
             
             cell.getUser(for: userID)
             return cell
@@ -180,7 +180,7 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditExpenseSegue" {
-            let destinationVC = segue.destination as! EditExpenseViewController
+            let destinationVC = segue.destination as! EditExpenseVC
             destinationVC.expense = self.expense
             destinationVC.trip = self.trip
         }
@@ -196,7 +196,7 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     
 }
 
-extension ExpenseDetailViewController: UICollectionViewDelegate {
+extension ExpenseDetailVC: UICollectionViewDelegate {
     
 }
 
