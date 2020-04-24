@@ -91,7 +91,10 @@ class AddExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
             }
             
             self.navigationController?.popViewController(animated: true)
+            
         }
+        
+        
     
     }
     

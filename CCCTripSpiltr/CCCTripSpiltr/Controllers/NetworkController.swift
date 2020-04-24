@@ -20,6 +20,7 @@ enum CCCError: String {
     case creatingTripError = "Error creating trip"
     case addingFriendError = "Error adding friend"
     case addingTripError = "Error adding trip"
+    case addingExpenseError = "Error adding Expense"
     case uploadingImageError = "Error uploading image"
     case creatingExpenseError = "Error creating expense"
     case updatingUserError = "Error updating user"
@@ -51,41 +52,18 @@ class NetworkController {
         
     }
     
-    func getExpenses(with tripID: String,completion: @escaping (CCCError?, [String]?) -> Void) {
-        let ref = db.collection("expenses")
+
+    
+    func addExpenseTo(tripID: String, expenseID: String, completion: @escaping (CCCError?) -> Void) {
         
-        ref.getDocuments { (snapshot, error) in
+
+        db.collection("trips").document(tripID).updateData(["expenses": FieldValue.arrayUnion([expenseID])]) { (error) in
             if let _ = error {
-                completion(.gettingExpensesError, nil)
+                completion(CCCError.addingExpenseError)
             }
-            
-            guard let snapshot = snapshot else { return }
-            var expenseIDs = [String]()
-            for doc in snapshot.documents {
-                let expenseID = doc.documentID
-                expenseIDs.append(expenseID)
-            }
-            completion(nil, expenseIDs)
+            completion(nil)
         }
-        
-        
-        
     }
-    
-//    func deleteUpdateExpense(expense: Expense, completion: @escaping (CCCError?) -> Void) {
-//
-//        let ref = db.collection("expenses")
-//
-//        ref.document(expense.id).delete()
-//
-//        updateExpense(expense: expense) { (error) in
-//            if let error = error {
-//                completion(error)
-//            }
-//        }
-//
-//    }
-    
     
     
     
@@ -159,11 +137,16 @@ class NetworkController {
                 completion(CCCError.creatingExpenseError)
                 return
             }
-            
+                self.addExpenseTo(tripID: tripID, expenseID: expense.id) { (error) in
+                    completion(error)
+                }
             completion(nil)
+                
         }
    
     }
+    
+    
     
 
     

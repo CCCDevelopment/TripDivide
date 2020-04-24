@@ -57,7 +57,7 @@ class TripDetailTableVC: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        getExpenseIDs()
+        tableView.reloadData()
     }
     
     
@@ -67,21 +67,7 @@ class TripDetailTableVC: UITableViewController {
     @IBOutlet weak var owedLabel: UILabel!
     @IBOutlet weak var userAvatarCollectionView: UICollectionView!
     
-    func getExpenseIDs() {
-        guard let trip = trip else { return }
-        
-        NetworkController.shared.getExpenses(with: trip.id) { (error, expenseIDs) in
-            if let error = error {
-                NSLog(error.rawValue)
-            }
-            
-            guard let expenseIDs = expenseIDs else { return }
-            
-            self.expenseIDs = expenseIDs
-        }
-        
-        
-    }
+
     
     func getTrip() {
         guard let tripID = tripID else { return }
@@ -146,15 +132,14 @@ class TripDetailTableVC: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let expenseIDs = expenseIDs else { return 1 }
-        return expenseIDs.count
+        guard let trip = trip else { return 1 }
+        return trip.expenses.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath) as! ExpenseDetailTableViewCell
-        guard let expenseIDs = expenseIDs,
-            let tripID = tripID else { return UITableViewCell() }
-        cell.expenseID = expenseIDs[indexPath.row]
+        guard let trip = trip else { return UITableViewCell() }
+        cell.expenseID = trip.expenses[indexPath.row]
         cell.tripID = tripID
         
 //        let tripExpense = trip.expenses[indexPath.row]
