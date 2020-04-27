@@ -14,9 +14,6 @@ class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     var trip: Trip?
     var expense: Expense?
     var oldTotal: Double?
-    var expenseID: String {
-        getExpenseID(for: expense!)
-    }
     var imagePicker: ImagePicker!
     var image: UIImage! {
         didSet {
@@ -65,23 +62,6 @@ class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         }
     }
     
-    
-    
-    
-    
-    
-    //will not need this ... but I took the time to write it out so ...
-    func getExpenseID(for expense: Expense) -> String {
-        var expenseID: String = ""
-        
-        guard let expense = self.expense else { return "" }
-        
-        expenseID = expense.id
-        
-        return expenseID
-        
-    }
-    
     func configureTextFields() {
         
         expenseNameTextField.delegate = self
@@ -118,7 +98,12 @@ class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     func configureUI() {
         guard let expense = expense else { return }
         
-        expenseCostTextField?.text = "$" + String(expense.cost)
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currency
+        if let formattedExpenseAmount = formatter.string(from: expense.cost as NSNumber) {
+            self.expenseCostTextField.text = "\(formattedExpenseAmount)"
+        }
         expenseNameTextField?.text = expense.name
         
         if let receipt = expense.receipt {
