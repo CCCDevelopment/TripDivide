@@ -206,7 +206,7 @@ class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     
     func updateExpense() {
         let name = expenseNameTextField.text ?? ""
-
+        
 
         let cost = expenseCostTextField.text?.convertCurrencyToDouble() ?? 0.0
 

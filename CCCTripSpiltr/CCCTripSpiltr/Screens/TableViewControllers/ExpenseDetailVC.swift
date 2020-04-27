@@ -21,9 +21,7 @@ class ExpenseDetailVC: UIViewController, UICollectionViewDelegateFlowLayout {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        paidByCollectionView.delegate = self
-//        usedByCollectionView.delegate = self
-        configureUI()
+//        configureUI()
         configureTapGesture()
         
     }
@@ -84,9 +82,29 @@ class ExpenseDetailVC: UIViewController, UICollectionViewDelegateFlowLayout {
             self.expense = expense
             self.getPaidByUsers()
             self.getUsedByUsers()
-            
+            self.expenseCostLabel.text = String(expense!.cost).currencyInputFormatting()
+            if let receipt = expense?.receipt {
+                UIImage().downloadImage(from: receipt) { (image) in
+                    DispatchQueue.main.async {
+                        self.receiptImageView?.image = image
+                    }
+                }
+            }
         }
     }
+    
+//    func configureUI() {
+//        guard let expense = expense else { return }
+//
+//        self.expenseCostLabel.text = String(expense.cost).currencyInputFormatting()
+//        if let receipt = expense.receipt {
+//            UIImage().downloadImage(from: receipt) { (image) in
+//                DispatchQueue.main.async {
+//                    self.receiptImageView?.image = image
+//                }
+//            }
+//        }
+//    }
     
     func configureTapGesture() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapHandler))
@@ -155,22 +173,6 @@ class ExpenseDetailVC: UIViewController, UICollectionViewDelegateFlowLayout {
     }
     
     
-    func configureUI() {
-        guard let expense = expense else { return }
-        let cost = String(expense.cost).currencyInputFormatting()
-        self.expenseCostLabel?.text = cost
-        self.title = "\(expense.name)"
-        
-        if let receipt = expense.receipt {
-        UIImage().downloadImage(from: receipt) { (image) in
-            DispatchQueue.main.async {
-                self.receiptImageView.image = image
-                
-        
-                }
-            }
-        }
-    }
    
     @IBAction func editButtonTapped(_ sender: Any) {
     
