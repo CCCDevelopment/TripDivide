@@ -95,8 +95,8 @@ class TripDetailTableVC: UITableViewController {
         } else {
             self.tripImageView.image = Constants.Images.defaultTrip
         }
-
         
+        tripImageView.layer.cornerRadius = 10
         
         if trip.totalCost == 0.0 {
             costLabel.text = "$0.00"
