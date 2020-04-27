@@ -83,7 +83,7 @@ class AddExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         guard let tripID = trip?.id else { return }
         view.showLoadingView()
         
-        NetworkController.shared.uploadExpense(image: image, expense: expense, tripID: tripID) { [weak self ](error) in
+        NetworkController.shared.uploadExpense(image: image, expense: expense, oldTotal: nil, tripID: tripID) { [weak self ](error) in
             guard let self = self else { return }
             self.view.dismissLoadingView()
             if let error = error {

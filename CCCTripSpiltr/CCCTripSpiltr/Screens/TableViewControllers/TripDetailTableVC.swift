@@ -101,8 +101,16 @@ class TripDetailTableVC: UITableViewController {
         if trip.totalCost == 0.0 {
             costLabel.text = "$0.00"
         } else {
-        let tripTotal = trip.totalCost
-        costLabel.text = String(tripTotal).currencyInputFormatting()
+            
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current 
+        formatter.numberStyle = .currency
+            if let formattedTripAmount = formatter.string(from: trip.totalCost as NSNumber) {
+            self.costLabel.text = "\(formattedTripAmount)"
+        }
+            
+        
+       
         }
         
         

@@ -13,11 +13,18 @@ class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     
     var trip: Trip?
     var expense: Expense?
+    var oldTotal: Double?
     var expenseID: String {
         getExpenseID(for: expense!)
     }
     var imagePicker: ImagePicker!
-    var image: UIImage!
+    var image: UIImage! {
+        didSet {
+            DispatchQueue.main.async {
+                self.receiptImageView.image = self.image
+            }
+        }
+    }
     var dataSource: UICollectionViewDiffableDataSource<Section, String>?
     
     enum Section {
@@ -116,6 +123,7 @@ class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         
         if let receipt = expense.receipt {
             UIImage().downloadImage(from: receipt) { (image) in
+                self.image = image
                 DispatchQueue.main.async {
                     self.receiptImageView?.image = image
                 }
@@ -190,28 +198,39 @@ class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     @IBAction func saveButtonTapped(_ sender: Any) {
         splitCost()
         guard let tripID = trip?.id,
-            let expense = expense else { return }
+            let expense = expense
+            else { return }
         
-        NetworkController.shared.updateExpense(expense: expense) { (error) in
-  
-            if let error = error {
-                NSLog(error.rawValue)
-            }
-        
-            
-            self.navigationController?.popViewController(animated: true)
-        }
+        NetworkController.shared.uploadExpense(image: image, expense: expense, oldTotal: oldTotal, tripID: tripID) {(error) in
 
+            if let error = error {
+                    NSLog(error.rawValue)
+                }
+            
+                
+                self.navigationController?.popViewController(animated: true)
+        }
     }
+        
+//        NetworkController.shared.updateExpense(expense: expense) { (error) in
+//
+//            if let error = error {
+//                NSLog(error.rawValue)
+//            }
+//
+//
+//            self.navigationController?.popViewController(animated: true)
+//        }
+//
+//    }
     
     func updateExpense() {
         let name = expenseNameTextField.text ?? ""
-        
-
         let cost = expenseCostTextField.text?.convertCurrencyToDouble() ?? 0.0
 
         expense!.name = name
         expense!.cost = cost
+        
     }
     
     func updateData(on friendIDs: [String]) {
@@ -222,7 +241,6 @@ class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                self.dataSource?.apply(snapshot, animatingDifferences: true)
            }
        }
-    
 }
 
 extension EditExpenseVC: UICollectionViewDelegate {
@@ -233,6 +251,7 @@ extension EditExpenseVC: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
         self.image = image
     }
+    
 }
 
 extension EditExpenseVC: UITextFieldDelegate {

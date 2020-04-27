@@ -33,7 +33,13 @@ class ExpenseDetailTableViewCell: UITableViewCell {
             }
             guard let expense = expense else { return }
             self.experienceNameLabel.text = expense.name
-            self.experienceCostLabel.text = String(expense.cost).currencyInputFormatting()
+            let formatter = NumberFormatter()
+            formatter.locale = Locale.current
+            formatter.numberStyle = .currency
+            if let formattedExpenseAmount = formatter.string(from: expense.cost as NSNumber) {
+                self.experienceCostLabel.text = "\(formattedExpenseAmount)"
+            }
+            
         }
         
        

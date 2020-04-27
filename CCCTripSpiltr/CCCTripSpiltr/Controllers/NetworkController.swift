@@ -54,8 +54,10 @@ class NetworkController {
     
     
     
-    func addExpenseTo(tripID: String, expense: Expense, completion: @escaping (CCCError?) -> Void) {
-        
+    func addExpenseTo(tripID: String, expense: Expense, oldTotal: Double?, completion: @escaping (CCCError?) -> Void) {
+        if let oldTotal = oldTotal {
+            db.collection("trips").document(tripID).updateData(["totalCost" : FieldValue.increment(-oldTotal)])
+        }
         db.collection("trips").document(tripID).updateData(["totalCost" : FieldValue.increment(expense.cost)])
         
         
@@ -63,8 +65,18 @@ class NetworkController {
             if let _ = error {
                 completion(CCCError.addingExpenseError)
             }
+            
+            
+            
+            
+            
+            
+            
+            
             completion(nil)
         }
+        
+        
     }
     
     
@@ -86,13 +98,13 @@ class NetworkController {
         
     }
     
-    func uploadExpense(image: UIImage?, expense: Expense, tripID: String, completion: @escaping (CCCError?) -> Void) {
+    func uploadExpense(image: UIImage?, expense: Expense, oldTotal: Double?, tripID: String, completion: @escaping (CCCError?) -> Void) {
         
         guard let image = image,
             let imageData = image.jpegData(compressionQuality: 0.75) else {
                 
                 
-                self.createExpense(expense: expense, tripID: tripID, imageURL: nil) { (error) in
+                self.createExpense(expense: expense, oldTotal: oldTotal, tripID: tripID, imageURL: nil) { (error) in
                     if let _ = error {
                         completion(.creatingTripError)
                         return
@@ -120,7 +132,7 @@ class NetworkController {
                 }
                 
                 
-                self.createExpense(expense: expense, tripID: tripID, imageURL: downloadURL.absoluteString) { (error) in
+                self.createExpense(expense: expense, oldTotal: oldTotal, tripID: tripID, imageURL: downloadURL.absoluteString) { (error) in
                     if let _ = error {
                         completion(.creatingTripError)
                         return
@@ -131,8 +143,9 @@ class NetworkController {
         }
     }
     
-    func createExpense(expense: Expense, tripID: String, imageURL: String?, completion: @escaping (CCCError?) -> Void) {
+    func createExpense(expense: Expense, oldTotal: Double?, tripID: String, imageURL: String?, completion: @escaping (CCCError?) -> Void) {
         let expense = expense
+        
         expense.receipt = imageURL
         let ref = self.db.collection("expenses")
         ref.document(expense.id).setData(expense.dictionaryRep()) { (error) in
@@ -141,7 +154,7 @@ class NetworkController {
                 completion(CCCError.creatingExpenseError)
                 return
             }
-            self.addExpenseTo(tripID: tripID, expense: expense) { (error) in
+            self.addExpenseTo(tripID: tripID, expense: expense, oldTotal: oldTotal) { (error) in
                 completion(error)
             }
             completion(nil)

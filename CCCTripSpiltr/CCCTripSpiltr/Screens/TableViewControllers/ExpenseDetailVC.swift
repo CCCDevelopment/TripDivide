@@ -78,11 +78,17 @@ class ExpenseDetailVC: UIViewController, UICollectionViewDelegateFlowLayout {
                 NSLog(error.rawValue)
                 return
             }
+            
             self.title = expense?.name
             self.expense = expense
             self.getPaidByUsers()
             self.getUsedByUsers()
-            self.expenseCostLabel.text = String(expense!.cost).currencyInputFormatting()
+            let formatter = NumberFormatter()
+            formatter.locale = Locale.current
+            formatter.numberStyle = .currency
+            if let formattedExpenseAmount = formatter.string(from: expense?.cost as NSNumber? ?? 0.00) {
+                self.expenseCostLabel.text = "\(formattedExpenseAmount)"
+            }
             if let receipt = expense?.receipt {
                 UIImage().downloadImage(from: receipt) { (image) in
                     DispatchQueue.main.async {
@@ -185,6 +191,7 @@ class ExpenseDetailVC: UIViewController, UICollectionViewDelegateFlowLayout {
             let destinationVC = segue.destination as! EditExpenseVC
             destinationVC.expense = self.expense
             destinationVC.trip = self.trip
+            destinationVC.oldTotal = self.expense?.cost
         }
     }
     
