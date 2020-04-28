@@ -214,7 +214,8 @@ class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                           NSLog(error.rawValue)
                       }
                   }
-            self.popBack(toControllerType: TripsTableVC.self)
+            self.popBack(toControllerType: TripDetailTableVC.self)
+
         }))
         
         areYouSureAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
