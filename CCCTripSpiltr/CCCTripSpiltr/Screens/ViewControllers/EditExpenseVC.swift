@@ -203,13 +203,25 @@ class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         guard let tripId = trip?.id,
             let expense = expense else { return }
         
-        NetworkController.shared.deleteExpense(tripID: tripId, expense: expense, expenseID: expense.id, oldTotal: oldTotal) { (error) in
-            if let error = error {
-                NSLog(error.rawValue)
-            }
-        }
-        self.popBack(toControllerType: TripsTableVC.self)
+      
         
+        let areYouSureAlert = UIAlertController(title: "Delete Expense", message: "Deleting an expense cannot be undone.", preferredStyle: UIAlertController.Style.alert)
+        
+        areYouSureAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+            
+            NetworkController.shared.deleteExpense(tripID: tripId, expense: expense, expenseID: expense.id, oldTotal: self.oldTotal) { (error) in
+                      if let error = error {
+                          NSLog(error.rawValue)
+                      }
+                  }
+            self.popBack(toControllerType: TripsTableVC.self)
+        }))
+        
+        areYouSureAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        present(areYouSureAlert, animated: true, completion: nil)
     }
     
     func popBack<T: UIViewController>(toControllerType: T.Type) {

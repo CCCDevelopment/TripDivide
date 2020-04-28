@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4404AE9B2458971000E1008E /* CCCAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404AE9A2458971000E1008E /* CCCAlertVC.swift */; };
+		4404AE9D2458988500E1008E /* CCCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4404AE9C2458988500E1008E /* CCCButton.swift */; };
 		4446A36C242E775100F22D90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446A36B242E775100F22D90 /* AppDelegate.swift */; };
 		4446A36E242E775100F22D90 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446A36D242E775100F22D90 /* SceneDelegate.swift */; };
 		4446A375242E775400F22D90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4446A374242E775400F22D90 /* Assets.xcassets */; };
@@ -58,6 +60,8 @@
 
 /* Begin PBXFileReference section */
 		211F170669F28666354D42AC /* Pods-CCCTripSpiltr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCCTripSpiltr.release.xcconfig"; path = "Target Support Files/Pods-CCCTripSpiltr/Pods-CCCTripSpiltr.release.xcconfig"; sourceTree = "<group>"; };
+		4404AE9A2458971000E1008E /* CCCAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCAlertVC.swift; sourceTree = "<group>"; };
+		4404AE9C2458988500E1008E /* CCCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCCButton.swift; sourceTree = "<group>"; };
 		4446A368242E775100F22D90 /* CCCTripSpiltr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCCTripSpiltr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4446A36B242E775100F22D90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4446A36D242E775100F22D90 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -233,6 +237,8 @@
 			isa = PBXGroup;
 			children = (
 				D1E33DF92432A8140077D4C6 /* CCCTitleLabel.swift */,
+				4404AE9C2458988500E1008E /* CCCButton.swift */,
+				4404AE9A2458971000E1008E /* CCCAlertVC.swift */,
 				D1E33DF72432A7090077D4C6 /* CCCAvatarImageView.swift */,
 				44697CD52433AB4600252764 /* CCCBodyLabel.swift */,
 				D1F5E6172433CDAC008F3E72 /* CCCTextView.swift */,
@@ -482,6 +488,7 @@
 				D1BB6111242E855D00B90E29 /* Utilities.swift in Sources */,
 				D167703B24354BDD00D041DE /* UIImage+Ext.swift in Sources */,
 				D1254B5B2435197A00B9CB53 /* TripsSelectFriendsCollectionVC.swift in Sources */,
+				4404AE9B2458971000E1008E /* CCCAlertVC.swift in Sources */,
 				D1D01CF7242EB45A00B606C1 /* Trip.swift in Sources */,
 				444C6148243667CE0021D9F8 /* AddExpenseVC.swift in Sources */,
 				D1D14D8D2437D82C0091092E /* UserInfoVC.swift in Sources */,
@@ -492,6 +499,7 @@
 				444C614C24367B1E0021D9F8 /* ExpenseSelectFriendsCollectionVC.swift in Sources */,
 				44C579AF243D4898006FA3CC /* ExpenseDetailVC.swift in Sources */,
 				D1F5E6182433CDAC008F3E72 /* CCCTextView.swift in Sources */,
+				4404AE9D2458988500E1008E /* CCCButton.swift in Sources */,
 				D1BB611B242E858300B90E29 /* LoginViewController.swift in Sources */,
 				444772382444E6F100A1FF1A /* ExpenseDetailPaidByCollectionViewCell.swift in Sources */,
 				4484D3322450AD5300D96D50 /* AddGuestVC.swift in Sources */,
