@@ -34,6 +34,7 @@ class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     @IBOutlet weak var expenseParticipantCollectionView: UICollectionView!
     @IBOutlet weak var receiptImageView: UIImageView!
     
+    @IBOutlet weak var deleteExpenseButton: UIButton!
     
     
     
@@ -197,17 +198,18 @@ class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         }
     }
         
-//        NetworkController.shared.updateExpense(expense: expense) { (error) in
-//
-//            if let error = error {
-//                NSLog(error.rawValue)
-//            }
-//
-//
-//            self.navigationController?.popViewController(animated: true)
-//        }
-//
-//    }
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+        
+        guard let tripId = trip?.id,
+            let expense = expense else { return }
+        
+        NetworkController.shared.deleteExpense(tripID: tripId, expense: expense, expenseID: expense.id, oldTotal: oldTotal) { (error) in
+            if let error = error {
+                NSLog(error.rawValue)
+            }
+        }
+        
+    }
     
     func updateExpense() {
         let name = expenseNameTextField.text ?? ""

@@ -26,6 +26,7 @@ enum CCCError: String {
     case updatingUserError = "Error updating user"
     case updatingExpenseError = "Error updating expense"
     case gettingExpensesError = "Error getting expenses"
+    case deletingExpenseError = "Error deleting expense"
 }
 
 class NetworkController {
@@ -37,7 +38,7 @@ class NetworkController {
     static let shared = NetworkController()
     let cache = NSCache<NSString, UIImage>()
     
-    func getExpense( expenseID: String, completion: @escaping (Expense?, CCCError?) -> Void) {
+    func getExpense(expenseID: String, completion: @escaping (Expense?, CCCError?) -> Void) {
         let expenseRef = db.collection("expenses").document(expenseID)
         
         expenseRef.getDocument { (document, _) in
@@ -52,7 +53,21 @@ class NetworkController {
         
     }
     
-    
+    func deleteExpense(tripID: String, expense: Expense, expenseID: String, oldTotal: Double?, completion: @escaping (CCCError?) -> Void) {
+        if let oldTotal = oldTotal {
+            db.collection("trips").document(tripID).updateData(["totalCost" : FieldValue.increment(-oldTotal)])
+        }
+        db.collection("trips").document(tripID).updateData(["expenses": FieldValue.arrayRemove([expense.id])])
+            
+        let expenseRef = db.collection("expenses").document(expenseID)
+            expenseRef.delete() { (error) in
+            if let _ = error {
+                completion(CCCError.deletingExpenseError)
+            } else {
+                completion(nil)
+            }
+        }
+    }
     
     func addExpenseTo(tripID: String, expense: Expense, oldTotal: Double?, completion: @escaping (CCCError?) -> Void) {
         if let oldTotal = oldTotal {
@@ -65,18 +80,8 @@ class NetworkController {
             if let _ = error {
                 completion(CCCError.addingExpenseError)
             }
-            
-            
-            
-            
-            
-            
-            
-            
             completion(nil)
         }
-        
-        
     }
     
     
@@ -85,9 +90,6 @@ class NetworkController {
     
     func updateExpense(expense: Expense, completion: @escaping (CCCError?) -> Void) {
         let ref = db.collection("expenses")
-        
-        
-        
         ref.document(expense.id).setData(expense.dictionaryRep(), completion: { (error) in
             if let _ = error {
                 completion(CCCError.updatingExpenseError)
