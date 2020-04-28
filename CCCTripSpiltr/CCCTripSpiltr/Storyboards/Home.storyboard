@@ -623,14 +623,11 @@
                         <viewLayoutGuide key="safeArea" id="uaY-z1-aNZ"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Expense" id="mey-nk-D4Z">
-                        <rightBarButtonItems>
-                            <barButtonItem title="Item" id="uxe-7Z-LH8"/>
-                            <barButtonItem systemItem="save" id="foS-kw-HCe">
-                                <connections>
-                                    <action selector="saveButtonPressed:" destination="EYH-y3-Ja7" id="emC-Db-Whr"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="foS-kw-HCe">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="EYH-y3-Ja7" id="emC-Db-Whr"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="costTextField" destination="gkH-Z5-ZlU" id="KMC-ku-gKO"/>

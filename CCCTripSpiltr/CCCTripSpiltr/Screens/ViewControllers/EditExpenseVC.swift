@@ -208,8 +208,22 @@ class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                 NSLog(error.rawValue)
             }
         }
+        self.popBack(toControllerType: TripsTableVC.self)
         
     }
+    
+    func popBack<T: UIViewController>(toControllerType: T.Type) {
+        if var viewControllers: [UIViewController] = self.navigationController?.viewControllers {
+            viewControllers = viewControllers.reversed()
+            for currentViewController in viewControllers {
+                if currentViewController .isKind(of: toControllerType) {
+                    self.navigationController?.popToViewController(currentViewController, animated: true)
+                    break
+                }
+            }
+        }
+    }
+    
     
     func updateExpense() {
         let name = expenseNameTextField.text ?? ""
