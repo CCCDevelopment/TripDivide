@@ -28,6 +28,7 @@ class FriendsCollectionVC: UIViewController {
 //        collectionView.dataSource =
         configureDataSource()
         getFriends()
+        
     }
     
 
@@ -72,6 +73,7 @@ class FriendsCollectionVC: UIViewController {
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
+        title = "Friends"
         navigationController?.navigationBar.prefersLargeTitles = true
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
