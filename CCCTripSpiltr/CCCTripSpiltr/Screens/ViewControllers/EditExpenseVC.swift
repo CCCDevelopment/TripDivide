@@ -9,15 +9,19 @@
 import UIKit
 import Photos
 
-class EditExpenseViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditExpenseVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var trip: Trip?
     var expense: Expense?
-    var expenseID: String {
-        getExpenseID(for: expense!)
-    }
+    var oldTotal: Double?
     var imagePicker: ImagePicker!
-    var image: UIImage!
+    var image: UIImage! {
+        didSet {
+            DispatchQueue.main.async {
+                self.receiptImageView.image = self.image
+            }
+        }
+    }
     var dataSource: UICollectionViewDiffableDataSource<Section, String>?
     
     enum Section {
@@ -30,6 +34,7 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var expenseParticipantCollectionView: UICollectionView!
     @IBOutlet weak var receiptImageView: UIImageView!
     
+    @IBOutlet weak var deleteExpenseButton: UIButton!
     
     
     
@@ -56,23 +61,6 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
         default:
             break
         }
-    }
-    
-    
-    
-    
-    
-    
-    //will not need this ... but I took the time to write it out so ...
-    func getExpenseID(for expense: Expense) -> String {
-        var expenseID: String = ""
-        
-        guard let expense = self.expense else { return "" }
-        
-        expenseID = expense.id
-        
-        return expenseID
-        
     }
     
     func configureTextFields() {
@@ -111,11 +99,17 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
     func configureUI() {
         guard let expense = expense else { return }
         
-        expenseCostTextField?.text = "$" + String(expense.cost)
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currency
+        if let formattedExpenseAmount = formatter.string(from: expense.cost as NSNumber) {
+            self.expenseCostTextField.text = "\(formattedExpenseAmount)"
+        }
         expenseNameTextField?.text = expense.name
         
         if let receipt = expense.receipt {
             UIImage().downloadImage(from: receipt) { (image) in
+                self.image = image
                 DispatchQueue.main.async {
                     self.receiptImageView?.image = image
                 }
@@ -141,13 +135,13 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func actionButtonTapped(_ sender: Any) {
-        var vc = SelectFriendsForExpenseVC(selectType: .paidBy)
+        var vc = ExpenseSelectFriendsCollectionVC(selectType: .paidBy)
         
         switch editExpenseSegmentedControll.selectedSegmentIndex {
         case 0:
-            vc = SelectFriendsForExpenseVC(selectType: .paidBy)
+            vc = ExpenseSelectFriendsCollectionVC(selectType: .paidBy)
         case 1:
-            vc = SelectFriendsForExpenseVC(selectType: .usedBy)
+            vc = ExpenseSelectFriendsCollectionVC(selectType: .usedBy)
             
         default:
             break
@@ -167,31 +161,91 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
         
     }
     
-    @IBAction func saveButtonTapped(_ sender: Any) {
+    func splitCost() {
         
-        guard let tripID = trip?.id else { return }
-        view.showLoadingView()
-        
-        NetworkController.shared.uploadExpense(image: image, expense: expense!, tripID: tripID) { [weak self ](error) in
-            guard let self = self else { return }
-            self.view.dismissLoadingView()
-            if let error = error {
-                NSLog(error.rawValue)
+        var paidByDict = [String: Double]()
+        var usedByDict = [String: Double]()
+        guard let usedByArray = expense?.usedBy.keys,
+            let paidByArray = expense?.paidBy.keys,
+            let expense = expense else { return }
+        for userID in Array(paidByArray) {
+                paidByDict[userID] = expense.cost / Double(paidByArray.count)
             }
+        expense.paidBy = paidByDict
+        
+        
+
+        for userID in Array(usedByArray) {
+               usedByDict[userID] = expense.cost / Double(usedByArray.count)
+            }
+        expense.usedBy = usedByDict
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        splitCost()
+        guard let tripID = trip?.id,
+            let expense = expense
+            else { return }
+        
+        NetworkController.shared.uploadExpense(image: image, expense: expense, oldTotal: oldTotal, tripID: tripID) {(error) in
+
+            if let error = error {
+                    NSLog(error.rawValue)
+                }
             
-            self.navigationController?.popViewController(animated: true)
+                
+                self.navigationController?.popViewController(animated: true)
+        }
+    }
+        
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+        
+        guard let tripId = trip?.id,
+            let expense = expense else { return }
+        
+      
+        
+        let areYouSureAlert = UIAlertController(title: "Delete Expense", message: "Deleting an expense cannot be undone.", preferredStyle: UIAlertController.Style.alert)
+        
+        areYouSureAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+            
+            NetworkController.shared.deleteExpense(tripID: tripId, expense: expense, expenseID: expense.id, oldTotal: self.oldTotal) { (error) in
+                      if let error = error {
+                          NSLog(error.rawValue)
+                      }
+                  }
+            self.popBack(toControllerType: TripDetailTableVC.self)
+
+        }))
+        
+        areYouSureAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        present(areYouSureAlert, animated: true, completion: nil)
+    }
+    
+    func popBack<T: UIViewController>(toControllerType: T.Type) {
+        if var viewControllers: [UIViewController] = self.navigationController?.viewControllers {
+            viewControllers = viewControllers.reversed()
+            for currentViewController in viewControllers {
+                if currentViewController .isKind(of: toControllerType) {
+                    self.navigationController?.popToViewController(currentViewController, animated: true)
+                    break
+                }
+            }
         }
     }
     
-//    func updateExpense() {
-//        let name = expenseNameTextField.text ?? ""
-//
-//
-//        let cost = expenseNameTextField.text?.convertCurrencyToDouble() ?? 0.0
-//
-//        expense!.name = name
-//        expense!.cost = cost
-//    }
+    
+    func updateExpense() {
+        let name = expenseNameTextField.text ?? ""
+        let cost = expenseCostTextField.text?.convertCurrencyToDouble() ?? 0.0
+
+        expense!.name = name
+        expense!.cost = cost
+        
+    }
     
     func updateData(on friendIDs: [String]) {
            var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
@@ -201,37 +255,37 @@ class EditExpenseViewController: UIViewController, UIImagePickerControllerDelega
                self.dataSource?.apply(snapshot, animatingDifferences: true)
            }
        }
+}
+
+extension EditExpenseVC: UICollectionViewDelegate {
     
 }
 
-extension EditExpenseViewController: UICollectionViewDelegate {
-    
-}
-
-extension EditExpenseViewController: ImagePickerDelegate {
+extension EditExpenseVC: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
         self.image = image
     }
+    
 }
 
-extension EditExpenseViewController: UITextFieldDelegate {
+extension EditExpenseVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
         if textField == expenseCostTextField {
             textField.text = textField.text?.currencyInputFormatting()
         }
-//        updateExpense()
+        updateExpense()
         return true
     }
     
-   
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
         if textField == expenseCostTextField {
             textField.text = textField.text?.currencyInputFormatting()
         }
-//        updateExpense()
+        updateExpense()
     }
 }
 

@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlowLayout {
+class ExpenseDetailVC: UIViewController, UICollectionViewDelegateFlowLayout {
     
+    var expenseID: String?
     var expense: Expense?
     var paidBy: [String] = []
     var usedBy: [String] = []
@@ -20,21 +21,17 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        paidByCollectionView.delegate = self
-//        usedByCollectionView.delegate = self
-        getPaidByUsers()
-        getUsedByUsers()
-        configurePaidByDataSource()
-        configureUsedByDataSource()
-        configureUI()
+//        configureUI()
         configureTapGesture()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
       
-        updatePaidData(on: paidBy)
-        updateUsedData(on: usedBy)
+        getExpense()
+        configurePaidByDataSource()
+        configureUsedByDataSource()
         
     }
     
@@ -72,6 +69,49 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
          
     }
     
+    func getExpense() {
+        guard let expenseID = expenseID,
+            let trip = trip else { return }
+        
+        NetworkController.shared.getExpense( expenseID: expenseID) { (expense, error) in
+            if let error = error {
+                NSLog(error.rawValue)
+                return
+            }
+            
+            self.title = expense?.name
+            self.expense = expense
+            self.getPaidByUsers()
+            self.getUsedByUsers()
+            let formatter = NumberFormatter()
+            formatter.locale = Locale.current
+            formatter.numberStyle = .currency
+            if let formattedExpenseAmount = formatter.string(from: expense?.cost as NSNumber? ?? 0.00) {
+                self.expenseCostLabel.text = "\(formattedExpenseAmount)"
+            }
+            if let receipt = expense?.receipt {
+                UIImage().downloadImage(from: receipt) { (image) in
+                    DispatchQueue.main.async {
+                        self.receiptImageView?.image = image
+                    }
+                }
+            }
+        }
+    }
+    
+//    func configureUI() {
+//        guard let expense = expense else { return }
+//
+//        self.expenseCostLabel.text = String(expense.cost).currencyInputFormatting()
+//        if let receipt = expense.receipt {
+//            UIImage().downloadImage(from: receipt) { (image) in
+//                DispatchQueue.main.async {
+//                    self.receiptImageView?.image = image
+//                }
+//            }
+//        }
+//    }
+    
     func configureTapGesture() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapHandler))
         receiptImageView.isUserInteractionEnabled = true
@@ -81,22 +121,27 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     }
     
     func getPaidByUsers() {
-        
+            var paidByArray = [String]()
         for user in (expense?.paidBy.keys)! {
-            paidBy.append(user)
+            paidByArray.append(user)
         }
+        self.paidBy = paidByArray
+        self.updatePaidData(on: self.paidBy)
+
   }
     
     func getUsedByUsers() {
-        
+        var usedByArray = [String]()
         for user in (expense?.usedBy.keys)! {
-            usedBy.append(user)
+            usedByArray.append(user)
         }
+        self.usedBy = usedByArray
+        self.updateUsedData(on: self.usedBy)
     }
     
     func configurePaidByDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: paidByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailExpneseCell", for: indexpath) as! CollectionViewDetailExpneseCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailExpneseCell", for: indexpath) as! ExpenseDetailPaidByCollectionViewCell
             
             cell.getUser(for: userID)
             return cell
@@ -107,7 +152,7 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     
     func configureUsedByDataSource() {
         otherDataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: usedByCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailUsedByCell", for: indexpath) as! CollectionViewDetailUsedByCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailUsedByCell", for: indexpath) as! ExpenseDetailUsedByCollectionViewCell
             
             cell.getUser(for: userID)
             return cell
@@ -134,22 +179,6 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     }
     
     
-    func configureUI() {
-        guard let expense = expense else { return }
-        let cost = String(expense.cost).currencyInputFormatting()
-        self.expenseCostLabel?.text = cost
-        self.title = "\(expense.name)"
-        
-        if let receipt = expense.receipt {
-        UIImage().downloadImage(from: receipt) { (image) in
-            DispatchQueue.main.async {
-                self.receiptImageView.image = image
-                
-        
-                }
-            }
-        }
-    }
    
     @IBAction func editButtonTapped(_ sender: Any) {
     
@@ -159,9 +188,10 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditExpenseSegue" {
-            let destinationVC = segue.destination as! EditExpenseViewController
+            let destinationVC = segue.destination as! EditExpenseVC
             destinationVC.expense = self.expense
             destinationVC.trip = self.trip
+            destinationVC.oldTotal = self.expense?.cost
         }
     }
     
@@ -175,7 +205,7 @@ class ExpenseDetailViewController: UIViewController, UICollectionViewDelegateFlo
     
 }
 
-extension ExpenseDetailViewController: UICollectionViewDelegate {
+extension ExpenseDetailVC: UICollectionViewDelegate {
     
 }
 

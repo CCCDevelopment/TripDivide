@@ -8,12 +8,11 @@
 
 import UIKit
 
-class CollectionViewDetailExpneseCell: UICollectionViewCell {
+class ExpenseDetailPaidByCollectionViewCell: UICollectionViewCell {
     
     let cache = NetworkController.shared.cache
     var avatarImage: UIImage!
 
-    
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     

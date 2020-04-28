@@ -46,7 +46,12 @@ class TripCell: UITableViewCell {
             
             self.tripNameLabel?.text = trip.name
             self.friendsCountLabel?.text = String(trip.users.count)
-            self.tripCostLabel?.text = String(trip.totalCost)
+            let formatter = NumberFormatter()
+            formatter.locale = Locale.current // Change this to another locale if you want to force a specific locale, otherwise this is redundant as the current locale is the default already
+            formatter.numberStyle = .currency
+            if let formattedTripAmount = formatter.string(from: trip.totalCost as NSNumber) {
+                self.tripCostLabel.text = "\(formattedTripAmount)"
+            }
             
             self.tripNameLabel.adjustsFontSizeToFitWidth = true
             self.tripNameLabel.minimumScaleFactor = 0.5
@@ -62,7 +67,6 @@ class TripCell: UITableViewCell {
                 UIImage().downloadImage(from: image) { (tripImage) in
                     guard let tripImage = tripImage else { return }
                     self.cache.setObject(tripImage, forKey: cacheKey)
-                    print("Cache Money")
                     DispatchQueue.main.async {
                         self.tripImageView.image = tripImage
                         

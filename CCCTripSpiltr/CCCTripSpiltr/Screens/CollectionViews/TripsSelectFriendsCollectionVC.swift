@@ -9,10 +9,8 @@
 import UIKit
 import Firebase
 
-class SelectFriendsCollectionViewController: UIViewController {
-    
-    
-    
+class TripsSelectFriendsCollectionVC: UIViewController {
+
     var collectionView: UICollectionView!
     var friends = [String]()
     var selectedFriends = [String]()
@@ -26,9 +24,10 @@ class SelectFriendsCollectionViewController: UIViewController {
         configureViewController()
         collectionView.delegate = self
         collectionView.dataSource = self
+        
     }
     
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getFriends()
@@ -65,6 +64,7 @@ class SelectFriendsCollectionViewController: UIViewController {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FriendCell.self, forCellWithReuseIdentifier: FriendCell.reuseID)
+        collectionView.register(GuestCell.self, forCellWithReuseIdentifier: "AddFriendCell")
         collectionView.allowsMultipleSelection = true
         
     }
@@ -85,45 +85,85 @@ class SelectFriendsCollectionViewController: UIViewController {
 }
 
 
-extension SelectFriendsCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension TripsSelectFriendsCollectionVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+      return 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return friends.count
+        return friends.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if indexPath.item == 0 {
+            
+            guard let firstCell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddFriendCell", for:  indexPath) as? GuestCell else{
+                return UICollectionViewCell()
+            }
+            return firstCell
+        } else {
+        
+        
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCell.reuseID, for: indexPath) as? FriendCell else {
             return UICollectionViewCell() }
         
-        let friendID = friends[indexPath.row]
+        let friendID = friends[indexPath.row - 1]
 
         cell.set(userID: friendID)
         
         return cell
+        }
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let userID = friends[indexPath.item]
+        // TODO: Have to create a new view to pop up and allow us to add someone. And update the TripUsers:
+        if indexPath.item == 0 {
+            let vc = AddGuestVC()
+            vc.delegate = self
+            present(vc, animated: true, completion: nil)
+         
+            return
+        } else {
+        let userID = friends[indexPath.item - 1]
         let cell = collectionView.cellForItem(at: indexPath)
+        
+       
         if selectedFriends.contains(userID) {
             return
         }
         cell?.contentView.backgroundColor = .systemTeal
         selectedFriends.append(userID)
-        
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let userID = friends[indexPath.item]
+        
+        if indexPath.item == 0 {
+            let vc = AddGuestVC()
+            present(vc, animated: true, completion: nil)
+            return
+        } else {
+        let userID = friends[indexPath.item - 1]
         let cell = collectionView.cellForItem(at: indexPath)
-
+        
+        
         if selectedFriends.contains(userID) {
             selectedFriends.remove(at: selectedFriends.firstIndex(of: userID)!)
         }
         cell?.contentView.backgroundColor = nil
         
-
+        }
     }
 }
 
+extension TripsSelectFriendsCollectionVC: AddGuestToTripDelegate {
+    func guestCreated(id: String) {
+        friends.append(id)
+        collectionView.reloadData()
 
+    
+    }
+}

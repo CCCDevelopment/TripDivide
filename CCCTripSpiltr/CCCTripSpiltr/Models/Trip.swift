@@ -18,9 +18,9 @@ class Trip {
     let createdBy: String
     var imageURL: String?
     let startDate: Date
-    var expenses: [Expense]
+    var expenses: [String]
 
-    init(id: String = UUID().uuidString, users: [String] = [], isComplete: Bool = false, name: String, totalCost: Double = 0.00, createdBy: String, image: String?, startDate: Date = Date(), expenses: [Expense] = []){
+    init(id: String = UUID().uuidString, users: [String] = [], isComplete: Bool = false, name: String, totalCost: Double = 0.00, createdBy: String, image: String?, startDate: Date = Date(), expenses: [String] = []){
         self.id = id
         self.users = [createdBy]
         self.isComplete = isComplete
@@ -43,14 +43,7 @@ class Trip {
         
         let date = dictionary["startDate"] as! Timestamp
         self.startDate = date.dateValue()
-        let dictArray = dictionary["expenses"] as! [[String: Any]]
-        var expenseArray = [Expense]()
-        for dict in dictArray {
-            let expense = Expense(from: dict)
-            expenseArray.append(expense)
-        }
-
-        self.expenses = expenseArray
+        self.expenses = dictionary["expenses"] as! [String]
     }
     
     func dictionaryRep() -> [String : Any] {

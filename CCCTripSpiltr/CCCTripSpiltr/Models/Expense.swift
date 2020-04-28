@@ -11,15 +11,15 @@ import Firebase
 
 class Expense {
     
-    var id: String
-    var date: Date
+    let id: String
+    var date: String
     var name: String
     var cost: Double
     var paidBy: [String: Double]
     var usedBy: [String: Double]
     var receipt: String?
     
-    init(id: String = UUID().uuidString, date: Date = Date(), name: String, receipt: String?, cost: Double, paidBy: [String: Double], usedBy: [String: Double]) {
+    init(id: String = UUID().uuidString, date: String = "\(Date())", name: String, receipt: String?, cost: Double, paidBy: [String: Double], usedBy: [String: Double]) {
         self.id = id
         self.date = date
         self.name = name
@@ -31,8 +31,8 @@ class Expense {
     
     init(from dictionary: [String: Any]) {
         self.id = dictionary["id"] as! String
-        let timeStamp = dictionary["date"] as! Timestamp
-        self.date = timeStamp.dateValue()
+
+        self.date = dictionary["date"] as! String
         self.name = dictionary["name"] as! String
         self.cost = dictionary["cost"] as! Double
         self.paidBy = dictionary["paidBy"] as! [String: Double]
@@ -41,7 +41,7 @@ class Expense {
         
     }
     
-    func dictionaryRep() -> [String : Any?] {
+    func dictionaryRep() -> [String : Any] {
         return ["id": id, "date": date, "name": name, "cost": cost, "paidBy": paidBy, "usedBy": usedBy, "receipt": receipt as Any]
     }
     

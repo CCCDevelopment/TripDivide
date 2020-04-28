@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewDetailUsedByCell: UICollectionViewCell {
+class ExpenseDetailUsedByCollectionViewCell: UICollectionViewCell {
 
         
         let cache = NetworkController.shared.cache

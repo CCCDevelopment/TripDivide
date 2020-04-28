@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerDelegate{
+class UserInfoVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerDelegate{
 
     let containerView = UIView()
     let padding: CGFloat = 20

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TripDetailTableViewController: UITableViewController {
+class TripDetailTableVC: UITableViewController {
     
     
     var tripID: String? {
@@ -20,14 +20,13 @@ class TripDetailTableViewController: UITableViewController {
         didSet {
             userAvatarCollectionView.reloadData()
         }
-        
-        
-    }
-    var tripTotal: Double! {
-            getTripTotal()
     }
     
-    
+    var expenseIDs: [String]? {
+        didSet {
+            tableView.reloadData()
+        }
+    }    
     
     @IBOutlet weak var containerView: UIView!
     
@@ -39,15 +38,20 @@ class TripDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         userAvatarCollectionView.delegate = self
         userAvatarCollectionView.dataSource = self
-
+        userAvatarCollectionView.register(ExpenseAvatarCell.self, forCellWithReuseIdentifier: "ExpenseAvatarCell")
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userAvatarCollectionView.register(ExpenseAvatarCell.self, forCellWithReuseIdentifier: "ExpenseAvatarCell")
+        
         getTrip()
-     
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
     
     
@@ -56,6 +60,8 @@ class TripDetailTableViewController: UITableViewController {
     @IBOutlet weak var borrowedLabel: UILabel!
     @IBOutlet weak var owedLabel: UILabel!
     @IBOutlet weak var userAvatarCollectionView: UICollectionView!
+    
+
     
     func getTrip() {
         guard let tripID = tripID else { return }
@@ -72,17 +78,6 @@ class TripDetailTableViewController: UITableViewController {
         }
     }
     
-    func getTripTotal() -> Double {
-        guard let trip = trip else { return 0.0 }
-        var total: Double = 0.0
-        if trip.expenses.count == 0 { return total } else {
-        for expense in trip.expenses {
-            
-            total += expense.cost
-            }
-        return total
-        }
-    }
     
     func configureViews () {
         guard let trip = trip else { return }
@@ -100,14 +95,22 @@ class TripDetailTableViewController: UITableViewController {
         } else {
             self.tripImageView.image = Constants.Images.defaultTrip
         }
-
         
+        tripImageView.layer.cornerRadius = 10
         
-        if tripTotal == 0.0 {
+        if trip.totalCost == 0.0 {
             costLabel.text = "$0.00"
         } else {
-            guard let tripTotal = tripTotal else {return}
-        costLabel.text = String(tripTotal).currencyInputFormatting()
+            
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current 
+        formatter.numberStyle = .currency
+            if let formattedTripAmount = formatter.string(from: trip.totalCost as NSNumber) {
+            self.costLabel.text = "\(formattedTripAmount)"
+        }
+            
+        
+       
         }
         
         
@@ -125,16 +128,15 @@ class TripDetailTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath) as! DetailExpenseTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath) as! ExpenseDetailTableViewCell
+        guard let trip = trip else { return UITableViewCell() }
+        cell.expenseID = trip.expenses[indexPath.row]
+        cell.tripID = tripID
         
-        guard let trip = trip else {
-            return DetailExpenseTableViewCell()
-        }
-        
-        let tripExpense = trip.expenses[indexPath.row]
-        cell.experienceNameLabel.text = tripExpense.name
-        print(tripExpense.cost)
-        cell.experienceCostLabel.text = String(tripExpense.cost).currencyInputFormatting()
+//        let tripExpense = trip.expenses[indexPath.row]
+//        cell.experienceNameLabel.text = tripExpense.name
+//        print(tripExpense.cost)
+//        cell.experienceCostLabel.text = String(tripExpense.cost).currencyInputFormatting()
         
         return cell
     }
@@ -150,12 +152,13 @@ class TripDetailTableViewController: UITableViewController {
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        
+        
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
             
-        }    
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -168,12 +171,17 @@ class TripDetailTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddExpenseSegue" {
-            let destinationVC = segue.destination as? AddExpenseViewController
+            let destinationVC = segue.destination as? AddExpenseVC
             destinationVC?.trip = trip
         } else if segue.identifier == "ViewExpenseDetailSegue" {
-            let destinationVC = segue.destination as? ExpenseDetailViewController
+            let destinationVC = segue.destination as? ExpenseDetailVC
             if let indexPath = tableView.indexPathForSelectedRow {
-                destinationVC?.expense = trip?.expenses[indexPath.row]
+                
+                let cell = tableView.cellForRow(at: indexPath) as! ExpenseDetailTableViewCell
+                
+                let expenseID = cell.expenseID
+                
+                destinationVC?.expenseID = expenseID
                 destinationVC?.trip = self.trip
                 
             }
@@ -187,7 +195,7 @@ class TripDetailTableViewController: UITableViewController {
     
 }
 
-extension TripDetailTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension TripDetailTableVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         trip?.users.count ?? 1
     }

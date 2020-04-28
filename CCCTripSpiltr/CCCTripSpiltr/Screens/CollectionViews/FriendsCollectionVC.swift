@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendsCollectionViewController: UIViewController {
+class FriendsCollectionVC: UIViewController {
     
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, String>!
@@ -83,7 +83,7 @@ class FriendsCollectionViewController: UIViewController {
     
     @IBAction func editUserbuttonPressed(_ sender: Any) {
         
-        let vc = UserInfoViewController()
+        let vc = UserInfoVC()
         present(vc, animated: true, completion: nil)
     }
     
@@ -105,7 +105,7 @@ class FriendsCollectionViewController: UIViewController {
 }
 
 
-extension FriendsCollectionViewController: UICollectionViewDelegate {
+extension FriendsCollectionVC: UICollectionViewDelegate {
 //    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return friends.count
 //    }
@@ -122,7 +122,7 @@ extension FriendsCollectionViewController: UICollectionViewDelegate {
 //    }
 }
 
-extension FriendsCollectionViewController: AddFriendVCDelegate {
+extension FriendsCollectionVC: AddFriendVCDelegate {
     func friendAdded() {
         getFriends()
     }

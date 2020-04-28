@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class TripsTableViewController: UITableViewController {
+class TripsTableVC: UITableViewController {
     
     
     var trips: [String] = []
@@ -73,7 +73,7 @@ class TripsTableViewController: UITableViewController {
         let trip = trips[indexPath.row]
         
         if segue.identifier == "TripDetailSegue" {
-            let destinatioVC = segue.destination as? TripDetailTableViewController
+            let destinatioVC = segue.destination as? TripDetailTableVC
             destinatioVC?.tripID = trip
         }
         
