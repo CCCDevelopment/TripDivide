@@ -244,8 +244,114 @@
                                 <state key="normal" backgroundImage="trash.circle.fill" catalog="system"/>
                                 <connections>
                                     <action selector="deleteButtonTapped:" destination="hTd-Nr-Dg6" eventType="touchUpInside" id="cjn-Ct-54U"/>
+                                    <action selector="deleteTripButtonTapped:" destination="guZ-CI-0LP" eventType="touchUpInside" id="3as-0H-ksA"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trip Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZK8-4e-Hbo">
+                                <rect key="frame" x="20" y="140" width="67" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8fW-EH-jRe">
+                                <rect key="frame" x="20" y="179" width="374" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9E-Ya-fWE">
+                                <rect key="frame" x="20" y="247" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZrM-DA-2V7">
+                                <rect key="frame" x="166" y="414" width="82" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit Friends"/>
+                                <connections>
+                                    <action selector="editFriendsButtonTapped:" destination="guZ-CI-0LP" eventType="touchUpInside" id="77q-dV-ON0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQC-e4-4zh">
+                                <rect key="frame" x="154" y="463" width="106" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Trip Completed"/>
+                                <connections>
+                                    <action selector="tripCompletedButtonTapped:" destination="guZ-CI-0LP" eventType="touchUpInside" id="lOA-BM-kYM"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c93-DZ-HBg">
+                                <rect key="frame" x="20" y="286" width="374" height="120"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="hH3-eK-QYq"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EDv-xJ-5NV">
+                                    <size key="itemSize" width="155" height="110"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewDetailExpneseCell" id="3eL-6v-h6w" customClass="ExpenseDetailPaidByCollectionViewCell" customModule="CCCTripSpiltr" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="5" width="155" height="110"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="HaI-Sl-K9d">
+                                            <rect key="frame" x="0.0" y="0.0" width="155" height="110"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7KL-8L-xVy">
+                                                    <rect key="frame" x="0.0" y="0.0" width="155" height="110"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4nb-Jq-xBr">
+                                                            <rect key="frame" x="41" y="8" width="73" height="73"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="73" id="QeH-K8-WmS"/>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="73" id="g0T-2O-H9Z"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thomas R Murphy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EP1-zm-9Rd">
+                                                            <rect key="frame" x="8" y="89" width="141" height="21"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="21" id="JxX-4f-K8s"/>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="V7N-JV-Nsb"/>
+                                                                <constraint firstAttribute="width" secondItem="EP1-zm-9Rd" secondAttribute="height" multiplier="20:3" id="qzD-9y-XV2"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="EP1-zm-9Rd" firstAttribute="leading" secondItem="7KL-8L-xVy" secondAttribute="leading" constant="8" id="Caq-oG-6N8"/>
+                                                        <constraint firstAttribute="trailing" secondItem="EP1-zm-9Rd" secondAttribute="trailing" constant="6" id="TeJ-qM-M3Z"/>
+                                                        <constraint firstAttribute="trailing" secondItem="4nb-Jq-xBr" secondAttribute="trailing" constant="41" id="fxF-l2-yKx"/>
+                                                        <constraint firstAttribute="width" secondItem="7KL-8L-xVy" secondAttribute="height" multiplier="31:22" id="oQw-YY-zwk"/>
+                                                        <constraint firstItem="EP1-zm-9Rd" firstAttribute="top" secondItem="4nb-Jq-xBr" secondAttribute="bottom" constant="8" id="q2w-5o-QtN"/>
+                                                        <constraint firstItem="4nb-Jq-xBr" firstAttribute="top" secondItem="7KL-8L-xVy" secondAttribute="top" constant="8" id="qXd-EP-KeP"/>
+                                                        <constraint firstItem="4nb-Jq-xBr" firstAttribute="leading" secondItem="7KL-8L-xVy" secondAttribute="leading" constant="41" id="qh2-Nh-4Ba"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="7KL-8L-xVy" secondAttribute="bottom" id="0G8-jR-Uld"/>
+                                                <constraint firstAttribute="trailing" secondItem="7KL-8L-xVy" secondAttribute="trailing" id="6b6-S2-SFX"/>
+                                                <constraint firstItem="7KL-8L-xVy" firstAttribute="top" secondItem="HaI-Sl-K9d" secondAttribute="top" id="e02-HM-6EB"/>
+                                                <constraint firstItem="7KL-8L-xVy" firstAttribute="leading" secondItem="HaI-Sl-K9d" secondAttribute="leading" id="pbE-ya-GQC"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="155" height="110"/>
+                                        <connections>
+                                            <outlet property="userImageView" destination="4nb-Jq-xBr" id="swR-ba-qVi"/>
+                                            <outlet property="userNameLabel" destination="EP1-zm-9Rd" id="P8J-v9-Hy7"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -256,12 +362,20 @@
                         <viewLayoutGuide key="safeArea" id="vev-xG-j91"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ijz-LS-fQL">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="pWt-q7-v4Z"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="pWt-q7-v4Z">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="guZ-CI-0LP" id="DSN-Hu-9oC"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tripFriendsCollectionView" destination="c93-DZ-HBg" id="hLF-Md-ezN"/>
+                        <outlet property="tripTitleTextField" destination="8fW-EH-jRe" id="uvE-L4-Eok"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZYk-S9-G2Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5107" y="897"/>
+            <point key="canvasLocation" x="5105.7971014492759" y="896.65178571428567"/>
         </scene>
         <!--Trip Detail TableVC-->
         <scene sceneID="to8-9F-oQM">
