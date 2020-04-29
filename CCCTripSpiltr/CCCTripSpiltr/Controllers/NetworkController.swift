@@ -38,6 +38,33 @@ class NetworkController {
     static let shared = NetworkController()
     let cache = NSCache<NSString, UIImage>()
     
+    
+    func getCurrentTripInfo(with tripID: String, completion: @escaping ((Double?, Double?)) -> Void) {
+        
+        getTrip(for: tripID) { (trip, error) in
+            if let error = error {
+                NSLog(error.rawValue)
+                return
+            }
+            
+            guard let trip = trip else { return }
+            
+            
+            for expenseID in trip.expenses {
+                self.getExpense(expenseID: expenseID) { (expense, error) in
+                    if let error = error {
+                        NSLog(error.rawValue)
+                        return
+                    }
+                    
+                    
+                }
+            }
+        }
+    }
+    
+    
+    
     func getExpense(expenseID: String, completion: @escaping (Expense?, CCCError?) -> Void) {
         let expenseRef = db.collection("expenses").document(expenseID)
         
@@ -58,9 +85,9 @@ class NetworkController {
             db.collection("trips").document(tripID).updateData(["totalCost" : FieldValue.increment(-oldTotal)])
         }
         db.collection("trips").document(tripID).updateData(["expenses": FieldValue.arrayRemove([expense.id])])
-            
+        
         let expenseRef = db.collection("expenses").document(expenseID)
-            expenseRef.delete() { (error) in
+        expenseRef.delete() { (error) in
             if let _ = error {
                 completion(CCCError.deletingExpenseError)
             } else {

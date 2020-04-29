@@ -15,6 +15,13 @@ protocol AddFriendVCDelegate {
 
 class AddFriendVC: UIViewController {
     
+    
+    func getCurrentUser() {
+        let currentUserId = Auth.auth().currentUser?.uid
+        
+        
+    }
+    
     let containerView = UIView()
     let titleLabel = CCCTitleLabel(textAlignment: .center, fontSize: 20)
     let emailTextField = CCCTextField()

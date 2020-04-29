@@ -19,6 +19,7 @@ class TripDetailTableVC: UITableViewController {
     var trip: Trip? {
         didSet {
             userAvatarCollectionView.reloadData()
+            getTripInfo()
         }
     }
     
@@ -31,9 +32,14 @@ class TripDetailTableVC: UITableViewController {
     }    
     
     @IBOutlet weak var containerView: UIView!
+
     
-    
-    
+    func getTripInfo() {
+        guard let tripID = tripID else { return }
+        NetworkController.shared.getCurrentTripInfo(with: tripID) { (_) in
+            print("done")
+        }
+    }
     
     
     override func viewDidLoad() {

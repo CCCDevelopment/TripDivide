@@ -34,6 +34,9 @@ class TripsTableVC: UITableViewController {
         
     }
     
+    
+    
+    
     func getTrips() {
         NetworkController.shared.getCurrentUser { [weak self] (user, error) in
             guard let self = self else { return }
