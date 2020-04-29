@@ -10,21 +10,39 @@ import UIKit
 
 class TripEditVC: UIViewController {
 
+    var tripID: String?
+    
+    var trip: Trip?
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+       
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getTrip()
+        
     }
-    */
-
+    
+    func configureUI() {
+        guard let trip = trip else { return }
+        self.title = trip.name
+    }
+    
+    func getTrip() {
+        
+        guard let tripID = tripID else { return }
+        NetworkController.shared.getTrip(for: tripID) { [weak self] (trip, error) in
+            guard let self = self else { return }
+            if let error = error {
+                NSLog(error.rawValue)
+            }
+            guard let trip = trip else { return }
+            self.trip = trip
+            self.configureUI()
+        }
+    }
 }

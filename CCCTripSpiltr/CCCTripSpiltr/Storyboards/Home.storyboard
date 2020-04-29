@@ -235,10 +235,29 @@
                     <view key="view" contentMode="scaleToFill" id="ROj-ex-4q6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bIQ-mP-xjN">
+                                <rect key="frame" x="182" y="752.5" width="50" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="F3W-U1-Kon"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="trash.circle.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="deleteButtonTapped:" destination="hTd-Nr-Dg6" eventType="touchUpInside" id="cjn-Ct-54U"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="vev-xG-j91" firstAttribute="trailing" secondItem="bIQ-mP-xjN" secondAttribute="trailing" constant="182" id="1S2-Vs-wrA"/>
+                            <constraint firstItem="bIQ-mP-xjN" firstAttribute="leading" secondItem="vev-xG-j91" secondAttribute="leading" constant="182" id="duk-pq-ah7"/>
+                            <constraint firstItem="vev-xG-j91" firstAttribute="bottom" secondItem="bIQ-mP-xjN" secondAttribute="bottom" constant="11" id="wn7-CK-MMk"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="vev-xG-j91"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Ijz-LS-fQL"/>
+                    <navigationItem key="navigationItem" id="Ijz-LS-fQL">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="pWt-q7-v4Z"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZYk-S9-G2Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

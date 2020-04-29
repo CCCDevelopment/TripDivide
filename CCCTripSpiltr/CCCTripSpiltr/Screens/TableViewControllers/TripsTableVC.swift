@@ -14,7 +14,7 @@ class TripsTableVC: UITableViewController {
     
     
     var trips: [String] = []
-    
+    var editTrip: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,14 +74,24 @@ class TripsTableVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let editButton = UIContextualAction(style: .normal, title: "Edit") { (action, view, actionPerformed) in
+            self.editTrip = self.trips[indexPath.row]
             self.performSegue(withIdentifier: "EditTripVCSegue", sender: self)
+            
         }
         editButton.backgroundColor = .systemYellow
+     
         return UISwipeActionsConfiguration(actions: [editButton])
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "EditTripVCSegue" {
+                   let destinationVC = segue.destination as? TripEditVC
+                   destinationVC?.tripID = editTrip
+                   
+               }
+        
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let trip = trips[indexPath.row]
         
@@ -89,6 +99,8 @@ class TripsTableVC: UITableViewController {
             let destinatioVC = segue.destination as? TripDetailTableVC
             destinatioVC?.tripID = trip
         }
+        
+       
         
     }
 
