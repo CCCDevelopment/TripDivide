@@ -68,6 +68,19 @@ class TripsTableVC: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let editButton = UIContextualAction(style: .normal, title: "Edit") { (action, view, actionPerformed) in
+            self.performSegue(withIdentifier: "EditTripVCSegue", sender: self)
+        }
+        editButton.backgroundColor = .systemYellow
+        return UISwipeActionsConfiguration(actions: [editButton])
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let trip = trips[indexPath.row]

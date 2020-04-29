@@ -27,6 +27,8 @@
 		44C579AD243D4393006FA3CC /* ExpenseDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C579AC243D4393006FA3CC /* ExpenseDetailTableViewCell.swift */; };
 		44C579AF243D4898006FA3CC /* ExpenseDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C579AE243D4898006FA3CC /* ExpenseDetailVC.swift */; };
 		44DABC83243FD3C100DA15FC /* TripUserAvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DABC82243FD3C100DA15FC /* TripUserAvatarCell.swift */; };
+		44DC395B2459139000EA5518 /* ExpenseSplitCostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DC395A2459139000EA5518 /* ExpenseSplitCostVC.swift */; };
+		44DC395D2459155400EA5518 /* TripEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DC395C2459155400EA5518 /* TripEditVC.swift */; };
 		84A0506868C4B3290DB9BCF3 /* Pods_CCCTripSpiltr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */; };
 		D11847BC243656C600E6949B /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11847BB243656C600E6949B /* Expense.swift */; };
 		D1254B592435131C00B9CB53 /* AddTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1254B582435131C00B9CB53 /* AddTripVC.swift */; };
@@ -83,6 +85,8 @@
 		44C579AC243D4393006FA3CC /* ExpenseDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailTableViewCell.swift; sourceTree = "<group>"; };
 		44C579AE243D4898006FA3CC /* ExpenseDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailVC.swift; sourceTree = "<group>"; };
 		44DABC82243FD3C100DA15FC /* TripUserAvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripUserAvatarCell.swift; sourceTree = "<group>"; };
+		44DC395A2459139000EA5518 /* ExpenseSplitCostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSplitCostVC.swift; sourceTree = "<group>"; };
+		44DC395C2459155400EA5518 /* TripEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripEditVC.swift; sourceTree = "<group>"; };
 		755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCCTripSpiltr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F57F70D23EE51C97C50C70 /* Pods-CCCTripSpiltr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCCTripSpiltr.debug.xcconfig"; path = "Target Support Files/Pods-CCCTripSpiltr/Pods-CCCTripSpiltr.debug.xcconfig"; sourceTree = "<group>"; };
 		D11847BB243656C600E6949B /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
@@ -256,6 +260,8 @@
 				444C6147243667CE0021D9F8 /* AddExpenseVC.swift */,
 				4447723B2446488D00A1FF1A /* EditExpenseVC.swift */,
 				4484D3312450AD5300D96D50 /* AddGuestVC.swift */,
+				44DC395A2459139000EA5518 /* ExpenseSplitCostVC.swift */,
+				44DC395C2459155400EA5518 /* TripEditVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -480,12 +486,14 @@
 				4484D330244FE21900D96D50 /* GuestCell.swift in Sources */,
 				D1F5E6132432C4EF008F3E72 /* UIView+Ext.swift in Sources */,
 				D1D01D02242EC09400B606C1 /* NetworkController.swift in Sources */,
+				44DC395B2459139000EA5518 /* ExpenseSplitCostVC.swift in Sources */,
 				D1BB6113242E856100B90E29 /* Constants.swift in Sources */,
 				D1B83BB02432979300BC9BB6 /* FriendsCollectionVC.swift in Sources */,
 				444C6144243528960021D9F8 /* ImagePickerController.swift in Sources */,
 				D1254B592435131C00B9CB53 /* AddTripVC.swift in Sources */,
 				4446A36C242E775100F22D90 /* AppDelegate.swift in Sources */,
 				D1BB6111242E855D00B90E29 /* Utilities.swift in Sources */,
+				44DC395D2459155400EA5518 /* TripEditVC.swift in Sources */,
 				D167703B24354BDD00D041DE /* UIImage+Ext.swift in Sources */,
 				D1254B5B2435197A00B9CB53 /* TripsSelectFriendsCollectionVC.swift in Sources */,
 				4404AE9B2458971000E1008E /* CCCAlertVC.swift in Sources */,
