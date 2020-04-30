@@ -41,8 +41,17 @@ class TripEditVC: UIViewController, UICollectionViewDelegateFlowLayout {
     
     @IBAction func saveButtonTapped(_ sender: Any) {
     }
+
     @IBAction func editFriendsButtonTapped(_ sender: Any) {
-    }
+        let vc = TripEditFriendsCollectionVC()
+       
+        vc.trip = trip
+        navigationController?.pushViewController(vc, animated: true)
+        
+        
+        
+           }
+    
     @IBAction func tripCompletedButtonTapped(_ sender: Any) {
     }
     @IBAction func deleteTripButtonTapped(_ sender: Any) {
@@ -51,7 +60,7 @@ class TripEditVC: UIViewController, UICollectionViewDelegateFlowLayout {
     // Need to set up a new cell for Collection view!
     func configureFriendsDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: tripFriendsCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewDetailExpneseCell", for: indexpath) as! ExpenseDetailPaidByCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TripEditCollectionViewCell", for: indexpath) as! TripEditCollectionViewCell
             
             cell.getUser(for: userID)
             return cell

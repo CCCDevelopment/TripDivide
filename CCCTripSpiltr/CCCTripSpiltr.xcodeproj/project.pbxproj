@@ -29,6 +29,8 @@
 		44DABC83243FD3C100DA15FC /* TripUserAvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DABC82243FD3C100DA15FC /* TripUserAvatarCell.swift */; };
 		44DC395B2459139000EA5518 /* ExpenseSplitCostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DC395A2459139000EA5518 /* ExpenseSplitCostVC.swift */; };
 		44DC395D2459155400EA5518 /* TripEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DC395C2459155400EA5518 /* TripEditVC.swift */; };
+		44DC395F245B5E7400EA5518 /* TripEditCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DC395E245B5E7400EA5518 /* TripEditCollectionViewCell.swift */; };
+		44EF2849245B646B003DF0E4 /* TripEditFriendsCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EF2848245B646B003DF0E4 /* TripEditFriendsCollectionVC.swift */; };
 		84A0506868C4B3290DB9BCF3 /* Pods_CCCTripSpiltr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */; };
 		D11847BC243656C600E6949B /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11847BB243656C600E6949B /* Expense.swift */; };
 		D1254B592435131C00B9CB53 /* AddTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1254B582435131C00B9CB53 /* AddTripVC.swift */; };
@@ -87,6 +89,8 @@
 		44DABC82243FD3C100DA15FC /* TripUserAvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripUserAvatarCell.swift; sourceTree = "<group>"; };
 		44DC395A2459139000EA5518 /* ExpenseSplitCostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSplitCostVC.swift; sourceTree = "<group>"; };
 		44DC395C2459155400EA5518 /* TripEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripEditVC.swift; sourceTree = "<group>"; };
+		44DC395E245B5E7400EA5518 /* TripEditCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripEditCollectionViewCell.swift; sourceTree = "<group>"; };
+		44EF2848245B646B003DF0E4 /* TripEditFriendsCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripEditFriendsCollectionVC.swift; sourceTree = "<group>"; };
 		755E612F52E7A5ED258D1027 /* Pods_CCCTripSpiltr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCCTripSpiltr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F57F70D23EE51C97C50C70 /* Pods-CCCTripSpiltr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCCTripSpiltr.debug.xcconfig"; path = "Target Support Files/Pods-CCCTripSpiltr/Pods-CCCTripSpiltr.debug.xcconfig"; sourceTree = "<group>"; };
 		D11847BB243656C600E6949B /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
@@ -233,6 +237,7 @@
 			children = (
 				D196AA0E24341D1F00E5B156 /* TripCell.swift */,
 				44DABC82243FD3C100DA15FC /* TripUserAvatarCell.swift */,
+				44DC395E245B5E7400EA5518 /* TripEditCollectionViewCell.swift */,
 			);
 			path = TripCells;
 			sourceTree = "<group>";
@@ -302,6 +307,7 @@
 				D1254B5A2435197A00B9CB53 /* TripsSelectFriendsCollectionVC.swift */,
 				444C614B24367B1E0021D9F8 /* ExpenseSelectFriendsCollectionVC.swift */,
 				D1B83BAF2432979300BC9BB6 /* FriendsCollectionVC.swift */,
+				44EF2848245B646B003DF0E4 /* TripEditFriendsCollectionVC.swift */,
 			);
 			path = CollectionViews;
 			sourceTree = "<group>";
@@ -497,6 +503,7 @@
 				D167703B24354BDD00D041DE /* UIImage+Ext.swift in Sources */,
 				D1254B5B2435197A00B9CB53 /* TripsSelectFriendsCollectionVC.swift in Sources */,
 				4404AE9B2458971000E1008E /* CCCAlertVC.swift in Sources */,
+				44EF2849245B646B003DF0E4 /* TripEditFriendsCollectionVC.swift in Sources */,
 				D1D01CF7242EB45A00B606C1 /* Trip.swift in Sources */,
 				444C6148243667CE0021D9F8 /* AddExpenseVC.swift in Sources */,
 				D1D14D8D2437D82C0091092E /* UserInfoVC.swift in Sources */,
@@ -522,6 +529,7 @@
 				D1BB6119242E858300B90E29 /* TripsTableVC.swift in Sources */,
 				D11847BC243656C600E6949B /* Expense.swift in Sources */,
 				D1E33DF52432A4890077D4C6 /* FriendCell.swift in Sources */,
+				44DC395F245B5E7400EA5518 /* TripEditCollectionViewCell.swift in Sources */,
 				D1D01D04242EC54700B606C1 /* User.swift in Sources */,
 				4447723A2445326B00A1FF1A /* ExpenseDetailUsedByCollectionViewCell.swift in Sources */,
 			);
