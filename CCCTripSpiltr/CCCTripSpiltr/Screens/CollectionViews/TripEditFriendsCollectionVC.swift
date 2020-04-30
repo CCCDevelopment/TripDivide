@@ -83,6 +83,9 @@ class TripEditFriendsCollectionVC: UIViewController {
     
     @objc func saveButtonTapped() {
         
+        guard let trip = trip else { return }
+        
+        
         
         //                var dictionary = [String: Double]()
         //                switch selectType {
