@@ -53,11 +53,60 @@ class TripEditVC: UIViewController, UICollectionViewDelegateFlowLayout {
            }
     
     @IBAction func tripCompletedButtonTapped(_ sender: Any) {
-    }
+        
+        guard let trip = trip else { return }
+        
+        let tripCompletedAlert = UIAlertController(title: "Complete Trip", message: "Pressing OK will mark this Trip as complete.", preferredStyle: UIAlertController.Style.alert)
+        
+        tripCompletedAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+       
+            trip.isComplete = !trip.isComplete
+            print(trip.isComplete)
+            
+            // Have to make a network call to toggle trip.isComplete
+            
+            self.popBack(toControllerType: TripsTableVC.self)
+        }))
+        
+        tripCompletedAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            
+            present(tripCompletedAlert, animated: true, completion: nil)
+        }
+        
+        
+    
     @IBAction func deleteTripButtonTapped(_ sender: Any) {
+    let areYouSureAlert = UIAlertController(title: "Delete Expense", message: "Deleting an expense cannot be undone.", preferredStyle: UIAlertController.Style.alert)
+        
+        areYouSureAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+        // TODO: Delet Trip and all Expenses associted with trip.
+            
+            self.popBack(toControllerType: TripsTableVC.self)
+        }))
+        
+        areYouSureAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            
+            present(areYouSureAlert, animated: true, completion: nil)
+        }
+        
+    
+    func popBack<T: UIViewController>(toControllerType: T.Type) {
+        if var viewControllers: [UIViewController] = self.navigationController?.viewControllers {
+            viewControllers = viewControllers.reversed()
+            for currentViewController in viewControllers {
+                if currentViewController .isKind(of: toControllerType) {
+                    self.navigationController?.popToViewController(currentViewController, animated: true)
+                    break
+                }
+            }
+        }
     }
     
-    // Need to set up a new cell for Collection view!
+    
     func configureFriendsDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: tripFriendsCollectionView, cellProvider: { (collectionView, indexpath, userID) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TripEditCollectionViewCell", for: indexpath) as! TripEditCollectionViewCell
