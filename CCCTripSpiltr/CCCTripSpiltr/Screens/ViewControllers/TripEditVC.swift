@@ -78,7 +78,7 @@ class TripEditVC: UIViewController, UICollectionViewDelegateFlowLayout {
         
     
     @IBAction func deleteTripButtonTapped(_ sender: Any) {
-    let areYouSureAlert = UIAlertController(title: "Delete Expense", message: "Deleting an expense cannot be undone.", preferredStyle: UIAlertController.Style.alert)
+    let areYouSureAlert = UIAlertController(title: "Delete Expense", message: "Deleting a trip cannot be undone.", preferredStyle: UIAlertController.Style.alert)
         
         areYouSureAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
         // TODO: Delet Trip and all Expenses associted with trip.
