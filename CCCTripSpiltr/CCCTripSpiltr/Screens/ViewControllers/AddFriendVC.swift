@@ -180,7 +180,7 @@ extension AddFriendVC: UITextFieldDelegate {
                 
                 
             } else {
-                self.avatarImageView.image = Constants.Images.placeholderImage
+                self.avatarImageView.image = nil
             }
         }
         }

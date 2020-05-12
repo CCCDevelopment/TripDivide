@@ -193,7 +193,35 @@ class NetworkController {
     }
     
     
-    
+    func calculateOwed(expenseIDs: [String], completion: @escaping (Double?, Double?, CCCError?) -> Void) {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        
+        var amountPaid = 0.0
+        var amountOwed = 0.0
+        
+        var count = 0
+        for id in expenseIDs {
+            count += 1
+            getExpense(expenseID: id) { (expense, error) in
+                if let error = error {
+                    completion(nil, nil, error)
+                }
+                guard let expense = expense else { return }
+                
+                if let paidValue = expense.paidBy[userID] {
+                    amountPaid += paidValue
+                }
+                
+                if let usedValue = expense.usedBy[userID] {
+                    amountOwed += usedValue
+                }
+                
+                if count == expenseIDs.count {
+                    completion(amountPaid, amountOwed, nil)
+                }
+            }
+        }
+    }
     
     
     func uploadTrip(image: UIImage?,name: String, friendIds: [String], completion: @escaping (CCCError?) -> Void) {
@@ -259,14 +287,16 @@ class NetworkController {
                 return
             }
             
+            for id in trip.users{
             
-            self.addTrip(to: userID, tripID: trip.id) { (error) in
-                if let _ = error {
-                    completion(.addingTripError)
-                    return
+                self.addTrip(to: id, tripID: trip.id) { (error) in
+                    if let _ = error {
+                        completion(.addingTripError)
+                        return
+                    }
+                    
+                    completion(nil)
                 }
-                
-                completion(nil)
             }
         }
     }

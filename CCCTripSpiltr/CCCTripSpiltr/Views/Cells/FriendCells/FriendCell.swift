@@ -65,7 +65,8 @@ class FriendCell: UICollectionViewCell {
                     }
                
                     } else {
-                        self.avatarImageView.image = Constants.Images.placeholderImage
+                            guard let letter = self.nameLabel.text?.first else { return }
+                        self.avatarImageView.image = UIImage(systemName: String(letter))
                     }
             }
         }

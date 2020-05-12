@@ -20,6 +20,8 @@ class TripDetailTableVC: UITableViewController {
         didSet {
             userAvatarCollectionView.reloadData()
             getTripInfo()
+            
+            
         }
     }
     
@@ -33,13 +35,6 @@ class TripDetailTableVC: UITableViewController {
     
     @IBOutlet weak var containerView: UIView!
 
-    
-    func getTripInfo() {
-        guard let tripID = tripID else { return }
-        NetworkController.shared.getCurrentTripInfo(with: tripID) { (_) in
-            print("done")
-        }
-    }
     
     
     override func viewDidLoad() {
@@ -62,11 +57,31 @@ class TripDetailTableVC: UITableViewController {
         tableView.reloadData()
     }
     
+    func getTripInfo() {
+        guard let expenseIDs = trip?.expenses else { return }
+        
+        NetworkController.shared.calculateOwed(expenseIDs: expenseIDs) { (paid, used, error) in
+            if let error = error {
+                NSLog(error.rawValue)
+            }
+            guard let paid = paid,
+                let used = used else { return }
+            
+            self.usedLabel?.text = "$\(used)"
+            self.paidLabel?.text = "$\(paid)"
+        }
+        
+        
+    }
+    
+    
+
+    
     
     @IBOutlet weak var tripImageView: UIImageView!
     @IBOutlet weak var costLabel: UILabel!
-    @IBOutlet weak var borrowedLabel: UILabel!
-    @IBOutlet weak var owedLabel: UILabel!
+    @IBOutlet weak var paidLabel: UILabel!
+    @IBOutlet weak var usedLabel: UILabel!
     @IBOutlet weak var userAvatarCollectionView: UICollectionView!
     
 
