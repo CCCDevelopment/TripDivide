@@ -19,8 +19,13 @@ class TripDetailTableVC: UITableViewController {
     var trip: Trip? {
         didSet {
             userAvatarCollectionView.reloadData()
+            getTripInfo()
+            
+            
         }
     }
+    
+    var expense: Expense?
     
     var expenseIDs: [String]? {
         didSet {
@@ -29,9 +34,7 @@ class TripDetailTableVC: UITableViewController {
     }    
     
     @IBOutlet weak var containerView: UIView!
-    
-    
-    
+
     
     
     override func viewDidLoad() {
@@ -54,11 +57,31 @@ class TripDetailTableVC: UITableViewController {
         tableView.reloadData()
     }
     
+    func getTripInfo() {
+        guard let expenseIDs = trip?.expenses else { return }
+        
+        NetworkController.shared.calculateOwed(expenseIDs: expenseIDs) { (paid, used, error) in
+            if let error = error {
+                NSLog(error.rawValue)
+            }
+            guard let paid = paid,
+                let used = used else { return }
+            
+            self.usedLabel?.text = "$\(used)"
+            self.paidLabel?.text = "$\(paid)"
+        }
+        
+        
+    }
+    
+    
+
+    
     
     @IBOutlet weak var tripImageView: UIImageView!
     @IBOutlet weak var costLabel: UILabel!
-    @IBOutlet weak var borrowedLabel: UILabel!
-    @IBOutlet weak var owedLabel: UILabel!
+    @IBOutlet weak var paidLabel: UILabel!
+    @IBOutlet weak var usedLabel: UILabel!
     @IBOutlet weak var userAvatarCollectionView: UICollectionView!
     
 
@@ -146,20 +169,34 @@ class TripDetailTableVC: UITableViewController {
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        return false
     }
     
     
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        
-        
-        if editingStyle == .delete {
-            
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
+//    // Override to support editing the table view.
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//
+//        guard let trip = trip else { return }
+//        let tripExpense = trip.expenses[indexPath.row]
+//
+//
+//            NetworkController.shared.getExpense(expenseID: tripExpense) { [weak self] (expense, error) in
+//                if let error = error {
+//                    NSLog(error.rawValue)
+//                }
+//                guard let self = self else { return }
+//                self.expense = expense
+//            }
+//
+//        guard let expense = expense else { return }
+//
+//        if editingStyle == .delete {
+//            NetworkController.shared.deleteExpense(tripID: trip.id, expense: expense, expenseID: tripExpense, oldTotal: expense.cost) { (error) in
+//                if let error = error { NSLog(error.rawValue)}
+//            }
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        }
+//    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        

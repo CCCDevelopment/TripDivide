@@ -38,6 +38,33 @@ class NetworkController {
     static let shared = NetworkController()
     let cache = NSCache<NSString, UIImage>()
     
+    
+    func getCurrentTripInfo(with tripID: String, completion: @escaping ((Double?, Double?)) -> Void) {
+        
+        getTrip(for: tripID) { (trip, error) in
+            if let error = error {
+                NSLog(error.rawValue)
+                return
+            }
+            
+            guard let trip = trip else { return }
+            
+            
+            for expenseID in trip.expenses {
+                self.getExpense(expenseID: expenseID) { (expense, error) in
+                    if let error = error {
+                        NSLog(error.rawValue)
+                        return
+                    }
+                    
+                    
+                }
+            }
+        }
+    }
+    
+    
+    
     func getExpense(expenseID: String, completion: @escaping (Expense?, CCCError?) -> Void) {
         let expenseRef = db.collection("expenses").document(expenseID)
         
@@ -58,9 +85,9 @@ class NetworkController {
             db.collection("trips").document(tripID).updateData(["totalCost" : FieldValue.increment(-oldTotal)])
         }
         db.collection("trips").document(tripID).updateData(["expenses": FieldValue.arrayRemove([expense.id])])
-            
+        
         let expenseRef = db.collection("expenses").document(expenseID)
-            expenseRef.delete() { (error) in
+        expenseRef.delete() { (error) in
             if let _ = error {
                 completion(CCCError.deletingExpenseError)
             } else {
@@ -166,7 +193,35 @@ class NetworkController {
     }
     
     
-    
+    func calculateOwed(expenseIDs: [String], completion: @escaping (Double?, Double?, CCCError?) -> Void) {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        
+        var amountPaid = 0.0
+        var amountOwed = 0.0
+        
+        var count = 0
+        for id in expenseIDs {
+            count += 1
+            getExpense(expenseID: id) { (expense, error) in
+                if let error = error {
+                    completion(nil, nil, error)
+                }
+                guard let expense = expense else { return }
+                
+                if let paidValue = expense.paidBy[userID] {
+                    amountPaid += paidValue
+                }
+                
+                if let usedValue = expense.usedBy[userID] {
+                    amountOwed += usedValue
+                }
+                
+                if count == expenseIDs.count {
+                    completion(amountPaid, amountOwed, nil)
+                }
+            }
+        }
+    }
     
     
     func uploadTrip(image: UIImage?,name: String, friendIds: [String], completion: @escaping (CCCError?) -> Void) {
@@ -232,14 +287,16 @@ class NetworkController {
                 return
             }
             
+            for id in trip.users{
             
-            self.addTrip(to: userID, tripID: trip.id) { (error) in
-                if let _ = error {
-                    completion(.addingTripError)
-                    return
+                self.addTrip(to: id, tripID: trip.id) { (error) in
+                    if let _ = error {
+                        completion(.addingTripError)
+                        return
+                    }
+                    
+                    completion(nil)
                 }
-                
-                completion(nil)
             }
         }
     }

@@ -70,8 +70,9 @@ class ExpenseDetailVC: UIViewController, UICollectionViewDelegateFlowLayout {
     }
     
     func getExpense() {
-        guard let expenseID = expenseID,
-            let trip = trip else { return }
+        guard let expenseID = expenseID
+//            let trip = trip
+        else { return }
         
         NetworkController.shared.getExpense( expenseID: expenseID) { (expense, error) in
             if let error = error {

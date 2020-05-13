@@ -57,18 +57,13 @@ class UserInfoVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             }
             
             self.currentUser = user
-            
             self.nameTextField.text = user?.fullName
             self.usernameTextField.text = user?.username
             
             if let imageURL = user?.avatar {
                 self.setImage(imageURL: imageURL)
             }
-            
         }
-        
-        
-        
     }
     
     func setImage(imageURL: String) {
