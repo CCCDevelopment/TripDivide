@@ -36,6 +36,9 @@ class NetworkController {
     let db = Firestore.firestore()
     let storage = Storage.storage()
     static let shared = NetworkController()
+    
+    var offlineExpenseQueue = 0
+    
     let cache = NSCache<NSString, UIImage>()
     
     
@@ -177,6 +180,7 @@ class NetworkController {
         
         expense.receipt = imageURL
         let ref = self.db.collection("expenses")
+        offlineExpenseQueue += 1
         ref.document(expense.id).setData(expense.dictionaryRep()) { (error) in
             
             if let _ = error {
@@ -186,6 +190,8 @@ class NetworkController {
             self.addExpenseTo(tripID: tripID, expense: expense, oldTotal: oldTotal) { (error) in
                 completion(error)
             }
+            self.offlineExpenseQueue -= 1
+            NotificationCenter.default.post(name: .expenseUploaded, object: self)
             completion(nil)
             
         }

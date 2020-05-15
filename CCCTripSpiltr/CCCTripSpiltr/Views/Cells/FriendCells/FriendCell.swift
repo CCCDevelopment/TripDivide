@@ -56,20 +56,24 @@ class FriendCell: UICollectionViewCell {
             self.avatarImageView.image = image
             return
         }
-                avatarImage.downloadImage(from: imageURL) { [weak self] (image) in
-                    guard let self = self else { return }
-                        if let image = image {
-                            DispatchQueue.main.async {
-                            self.cache.setObject(image, forKey: cacheKey)
-                            self.avatarImageView.image = image
+        avatarImage.downloadImage(from: imageURL) { [weak self] (image) in
+            DispatchQueue.main.async {
+                
+                
+                guard let self = self else { return }
+                if let image = image {
+                    DispatchQueue.main.async {
+                        self.cache.setObject(image, forKey: cacheKey)
+                        self.avatarImageView.image = image
                     }
-               
-                    } else {
-                            guard let letter = self.nameLabel.text?.first else { return }
-                        self.avatarImageView.image = UIImage(systemName: String(letter))
-                    }
+                    
+                } else {
+                    guard let letter = self.nameLabel.text?.first else { return }
+                    self.avatarImageView.image = UIImage(systemName: String(letter))
+                }
             }
         }
+    }
     
     
     

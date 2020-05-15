@@ -38,6 +38,7 @@
 		D127F8362432695B000721F9 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D127F8352432695B000721F9 /* Home.storyboard */; };
 		D127F838243270A8000721F9 /* Authenticate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D127F837243270A8000721F9 /* Authenticate.storyboard */; };
 		D127F83A24327239000721F9 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D127F83924327239000721F9 /* Friends.storyboard */; };
+		D15FD1BA246F2012002ECE48 /* Notfications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15FD1B9246F2012002ECE48 /* Notfications.swift */; };
 		D167703B24354BDD00D041DE /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167703A24354BDD00D041DE /* UIImage+Ext.swift */; };
 		D167703D24355E9800D041DE /* TripDetailTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167703C24355E9800D041DE /* TripDetailTableVC.swift */; };
 		D196AA0F24341D1F00E5B156 /* TripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D196AA0E24341D1F00E5B156 /* TripCell.swift */; };
@@ -99,6 +100,7 @@
 		D127F8352432695B000721F9 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		D127F837243270A8000721F9 /* Authenticate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authenticate.storyboard; sourceTree = "<group>"; };
 		D127F83924327239000721F9 /* Friends.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
+		D15FD1B9246F2012002ECE48 /* Notfications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notfications.swift; sourceTree = "<group>"; };
 		D167703A24354BDD00D041DE /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		D167703C24355E9800D041DE /* TripDetailTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailTableVC.swift; sourceTree = "<group>"; };
 		D196AA0E24341D1F00E5B156 /* TripCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCell.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				D1D01D00242EC07000B606C1 /* Controllers */,
 				D1BB6110242E855D00B90E29 /* Utilities.swift */,
 				D1BB6112242E856100B90E29 /* Constants.swift */,
+				D15FD1B9246F2012002ECE48 /* Notfications.swift */,
 				D1D01CF5242EB43F00B606C1 /* Models */,
 				D1E33DF32432A4500077D4C6 /* Views */,
 				D1D01CF4242E9D5900B606C1 /* Screens */,
@@ -301,6 +304,13 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		D15FD1BC246F26B7002ECE48 /* Navigation Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Navigation Controller";
+			sourceTree = "<group>";
+		};
 		D167703E2435623400D041DE /* CollectionViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,6 +328,7 @@
 				D167703E2435623400D041DE /* CollectionViews */,
 				444C6149243675AE0021D9F8 /* AuthViewControllers */,
 				444C614A2436760D0021D9F8 /* TableViewControllers */,
+				D15FD1BC246F26B7002ECE48 /* Navigation Controller */,
 				44EDFBF4245395C200ED0CFA /* ViewControllers */,
 			);
 			path = Screens;
@@ -525,6 +536,7 @@
 				4447723C2446488D00A1FF1A /* EditExpenseVC.swift in Sources */,
 				D1D14D8B2437D5F70091092E /* ExpenseAvatarCell.swift in Sources */,
 				44697CD42433AA3600252764 /* AddFriendVC.swift in Sources */,
+				D15FD1BA246F2012002ECE48 /* Notfications.swift in Sources */,
 				D167703D24355E9800D041DE /* TripDetailTableVC.swift in Sources */,
 				D1BB6119242E858300B90E29 /* TripsTableVC.swift in Sources */,
 				D11847BC243656C600E6949B /* Expense.swift in Sources */,
@@ -669,7 +681,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MRFGYP27L5;
+				DEVELOPMENT_TEAM = F2KHAE3YT5;
 				INFOPLIST_FILE = CCCTripSpiltr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -688,7 +700,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MRFGYP27L5;
+				DEVELOPMENT_TEAM = F2KHAE3YT5;
 				INFOPLIST_FILE = CCCTripSpiltr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -35,10 +35,11 @@ class TripDetailTableVC: UITableViewController {
     
     @IBOutlet weak var containerView: UIView!
 
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(expenseUploaded), name: .expenseUploaded, object: nil)
         userAvatarCollectionView.delegate = self
         userAvatarCollectionView.dataSource = self
         userAvatarCollectionView.register(ExpenseAvatarCell.self, forCellWithReuseIdentifier: "ExpenseAvatarCell")
@@ -55,6 +56,12 @@ class TripDetailTableVC: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         tableView.reloadData()
+    }
+    
+    @objc func expenseUploaded() {
+        print("trip was uploaded")
+        getTrip()
+        
     }
     
     func getTripInfo() {
